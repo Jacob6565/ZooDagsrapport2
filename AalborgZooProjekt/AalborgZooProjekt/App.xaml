@@ -12,9 +12,9 @@
 
     <Application.Resources>
         <!--Global View Model Locator-->
-        <vm:ViewModelLocator x:Key="Locator"
-                             d:IsDataSource="True" />
-        <ResourceDictionary x:Key="ResourceDictionary">
+        <!--<vm:ViewModelLocator x:Key="Locator"
+                             d:IsDataSource="True" />-->
+        <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
