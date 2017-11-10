@@ -7,9 +7,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-        Height="300"
-        Width="300"
-        Title="MVVM Light Application">
+        Height="768"
+        Width="1024"
+        Title="Aalborg Zoo Rapporteringssystem" MinWidth="1024" MinHeight="768">
     <!--DataContext="{Binding Main, Source={StaticResource Locator}}"-->
 
     <Window.Resources>
@@ -21,6 +21,15 @@
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="685*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="800*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
 
         <TextBlock FontSize="36"
                    FontWeight="Bold"
@@ -28,8 +37,68 @@
                    Text="{Binding WelcomeTitle}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />
-        <Controls:ToggleSwitchButton Content="Button" HorizontalAlignment="Left" Margin="111,226,0,0" VerticalAlignment="Top" Width="75"/>
+                   TextWrapping="Wrap" Grid.Column="1" Margin="309,292.5,490,344" Grid.Row="1" />
+
+        <TabControl MinHeight="600" MinWidth="800" Margin="2,10,10,30" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <TabItem Header="Foder" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Grid Background="#FFE5E5E5">
+                    <Label MinHeight="30" MinWidth="190" Content="{Binding Department, StringFormat='{}{0}'}" Margin="10,10,0,0" FontSize="16" FontWeight="Bold" Grid.RowSpan="3"/>
+                    <Label MinHeight="30" MinWidth="190" Width="465" Content="Bestillingsliste" HorizontalAlignment="Right" Margin="0,10,-3,31" FontSize="16" FontWeight="Bold"/>
+
+                    <TabControl Margin="10,50,0,54" MinWidth="304" MaxWidth="600" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Width="auto" HorizontalAlignment="Left">
+                        <TabItem Header="Foder" Padding="20,0">
+                            <TabItem.Style>
+                                <Style>
+                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
+                                </Style>
+                            </TabItem.Style>
+                            <DataGrid HorizontalContentAlignment="Right" Height="523" VerticalAlignment="Top"/>
+                        </TabItem>
+
+                        <TabItem Header="Kraftfoder" Padding="20,0">
+                            <TabItem.Style>
+                                <Style>
+                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
+                                </Style>
+                            </TabItem.Style>
+                            <DataGrid/>
+                        </TabItem>
+
+                        <TabItem Header="Andet" Padding="20,0">
+                            <TabItem.Style>
+                                <Style>
+                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
+                                </Style>
+                            </TabItem.Style>
+                            <DataGrid/>
+                        </TabItem>
+                    </TabControl>
+
+                    <DataGrid MinHeight="182" MinWidth="452" MaxHeight="300" Margin="336,418,10,54" HorizontalContentAlignment="Right"/>
+                    <DataGrid MinHeight="182" MinWidth="452" MaxHeight="300" Margin="336,72,10,276" HorizontalContentAlignment="Right"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Dyr" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+            <TabItem Header="Praktiske Opgaver" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+        </TabControl>
+
+        <ListBox HorizontalAlignment="Stretch" MinHeight="600" MinWidth="190" Width="auto" Margin="10,0,0,34" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+
+        <TextBlock MinHeight="43" MinWidth="190" Height="auto" Width="auto" Margin="10" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
+            <TextBlock.Style>
+                <Style>
+                    <Setter Property="TextBlock.FontSize" Value="20"/>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
     </Grid>
 </Controls:MetroWindow>
