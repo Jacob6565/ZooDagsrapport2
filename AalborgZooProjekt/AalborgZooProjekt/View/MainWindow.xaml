@@ -42,22 +42,24 @@
                    HorizontalAlignment="Center"
                    TextWrapping="Wrap" Grid.Column="1" Margin="70,95,238,146" Grid.Row="1" Height="48" Width="0" />
 
-        <TabControl MinHeight="600" MinWidth="800" Margin="10,10,10,8" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
-            <TabItem Header="Foder" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <TabControl Margin="10,10,10,8" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <TabItem Header="Foder">
                 <Grid Background="#FFE5E5E5" Margin="0,0,10,0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="25*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="45*"/>
+                        <RowDefinition Height="389*"/>
+                        <RowDefinition Height="85*"/>
+                        <RowDefinition Height="83*"/>
+                        <RowDefinition Height="22*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.5*"/>
                     </Grid.ColumnDefinitions>
 
                     <Label MinHeight="30" MinWidth="190" Content="{Binding Department, StringFormat='{}{0}'}" Margin="10,10,10,0" FontSize="16" FontWeight="Bold"/>
 
-                    <TabControl Margin="10,0,10,10" Grid.Row="1">
+                    <TabControl Margin="10,0,0,0" Grid.Row="1">
                         <TabItem Header="Foder" Padding="20,0">
                             <TabItem.Style>
                                 <Style>
@@ -87,44 +89,81 @@
                         </TabItem>
                     </TabControl>
 
-                    <Grid Grid.ColumnSpan="2" Grid.RowSpan="3">
+                    <Grid Grid.ColumnSpan="2" Grid.RowSpan="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="195*"/>
+                            <RowDefinition Height="199*"/>
+                            <RowDefinition Height="86*"/>
+                            <RowDefinition Height="84*"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1.5*"/>
                         </Grid.ColumnDefinitions>
-                        <Label MinHeight="30" MinWidth="190" Content="Bestillingsliste" Margin="15,10,10,0" FontSize="16" FontWeight="Bold" Grid.Column="1"/>
+                        <Label Content="Bestillingsliste" Margin="10,10,15,0" FontSize="16" FontWeight="Bold" Grid.Column="1"/>
 
-                        <DataGrid Margin="10" Grid.Column="1" Grid.Row="1"/>
-                        <DataGrid Margin="10" Grid.Column="1" Grid.Row="2"/>
+                        <DataGrid Margin="10,5,10,0" Grid.Column="1" Grid.Row="1"/>
+                        <DataGrid Margin="10,5,10,0" Grid.Column="1" Grid.Row="2"/>
+
+                        <Grid x:Name="ExpanderGrid" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" Margin="10,5" IsExpanded="False" Grid.Row="0">
+                                <Grid>
+                                    <TextBox x:Name="BemærkningerExpanderTextbox" TextWrapping="WrapWithOverflow" VerticalScrollBarVisibility="Auto">
+
+                                    </TextBox>
+                                </Grid>
+                            </Expander>
+
+                            <Expander x:Name="MedarbejderExpander" Header="Medarbejder" Margin="10,5" IsExpanded="False" Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="0"/>
+                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="1"/>
+                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="2"/>
+                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="3"/>
+
+                                </Grid>
+                            </Expander>
+                        </Grid>
                     </Grid>
+
                 </Grid>
+
             </TabItem>
 
-            <TabItem Header="Dyr" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <TabItem Header="Dyr">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
 
-            <TabItem Header="Praktiske Opgaver" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <TabItem Header="Praktiske Opgaver">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-
         </TabControl>
 
-        <ListBox HorizontalAlignment="Stretch" MinHeight="600" MinWidth="190" Width="auto" Margin="10,0,0,10" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="2"/>
+        <ListBox Margin="10,0" Grid.RowSpan="2" Grid.Row="1"/>
 
-        <TextBlock MinHeight="43" MinWidth="190" Height="auto" Width="auto" Margin="10,10,0,315" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}" Grid.RowSpan="2">
+        <TextBlock Margin="10,0" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}" Grid.Column="0">
             <TextBlock.Style>
                 <Style>
                     <Setter Property="TextBlock.FontSize" Value="20"/>
                 </Style>
             </TextBlock.Style>
         </TextBlock>
+        <StatusBar x:Name="BottomStatusBar" Grid.ColumnSpan="2" Margin="10,0,0,0" Grid.Column="1" Grid.Row="3">
+            <TextBlock Name="StatusbarText"/>
+        </StatusBar>
 
     </Grid>
 </Controls:MetroWindow>

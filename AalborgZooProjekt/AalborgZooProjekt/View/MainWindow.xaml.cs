@@ -3,6 +3,7 @@ using AalborgZooProjekt.ViewModel;
 using MahApps.Metro.Controls;
 using System.Windows.Threading;
 using System;
+using System.Windows.Controls;
 
 namespace AalborgZooProjekt
 {
@@ -12,6 +13,7 @@ namespace AalborgZooProjekt
     public partial class MainWindow : MetroWindow
     {
         DispatcherTimer Timer = new DispatcherTimer();
+        GridLength[] expanderGridHeight;
 
         public DateTime Time
         {
@@ -35,6 +37,7 @@ namespace AalborgZooProjekt
         public MainWindow()
         {
             InitializeComponent();
+
             Closing += (s, e) => ViewModelLocator.Cleanup();
 
             this.DataContext = this;
@@ -42,6 +45,41 @@ namespace AalborgZooProjekt
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
 
+            expanderGridHeight = new GridLength[ExpanderGrid.RowDefinitions.Count];
+            expanderGridHeight[0] = ExpanderGrid.RowDefinitions[0].Height;
+            expanderGridHeight[1] = ExpanderGrid.RowDefinitions[1].Height;
+            ExpandedOrCollapsed(BemærkningerExpander);
+            ExpandedOrCollapsed(MedarbejderExpander);
+
+            BemærkningerExpander.Expanded += ExpandedOrCollapsed;
+            BemærkningerExpander.Collapsed += ExpandedOrCollapsed;
+            MedarbejderExpander.Expanded += ExpandedOrCollapsed;
+            MedarbejderExpander.Collapsed += ExpandedOrCollapsed;
+
+            StatusbarText.Text = "I love ass";
+        }
+
+        void ExpandedOrCollapsed(object sender, RoutedEventArgs e)
+        {
+            ExpandedOrCollapsed(sender as Expander);
+        }
+
+        void ExpandedOrCollapsed(Expander expander)
+        {
+            var rowIndex = Grid.GetRow(expander);
+            var row = ExpanderGrid.RowDefinitions[rowIndex];
+
+            if (expander.IsExpanded)
+            {
+                row.Height = expanderGridHeight[rowIndex];
+                row.MinHeight = 50;
+            }
+            else
+            {
+                expanderGridHeight[rowIndex] = row.Height;
+                row.Height = GridLength.Auto;
+                row.MinHeight = 0;
+            }
         }
 
         private void TimerClick(object sender, EventArgs e)
