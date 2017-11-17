@@ -1,0 +1,38 @@
+﻿<Window x:Class="AalborgZooProjekt.View.OfficeWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AalborgZooProjekt.View"
+        mc:Ignorable="d"
+        Title="Window1" Height="750" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="top_btn_1" Content="Oversigt" Grid.Row="0" Grid.Column="0" Margin="10,10,5,0" VerticalAlignment="Top" Height="80"/>
+            <Button x:Name="top_btn_2" Content="Foderbestillinger" Grid.Row="0" Grid.Column="1" Margin="5,10,5,0" Height="80" VerticalAlignment="Top"/>
+            <Button x:Name="top_btn_3" Content="Praktiske Opgaver" Grid.Row="0" Grid.Column="2" Margin="5,10,10,0" Height="80" Padding="0" VerticalAlignment="Top"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <!--  -->
+            <StackPanel>
+                <Label Background="#FFA29696" Width="50" Margin="221,0" />
+                <Rectangle Margin="50" Height="50" Stroke="Black"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
