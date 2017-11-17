@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AalborgZooProjekt.Model;
 using System.IO;
+using System.Text;
 
 namespace AalborgZooProjekt
 {
@@ -15,13 +16,22 @@ namespace AalborgZooProjekt
             set { _dummyFood = value; }
         }
 
+        public List<DummyOrder> DummyOrderList { get; set; } = new List<DummyOrder>();
+
         public DummyViewModel()
         {
-            string[] lines = File.ReadAllLines("../../DummyProducts.txt");
+            string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                _dummyFood.Add(new DummyProduct() { Name = product });
+                DummyFoodList.Add(new DummyProduct(product));
             }
+            lines = File.ReadAllLines("../../DummyOrders.txt");
+            foreach (string orders in lines)
+            {
+                DummyOrderList.Add(new DummyOrder(orders));
+            }
+
+
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public class DummyProduct
+    public class DummyOrder
     {
         private string _name;
 
@@ -15,18 +15,11 @@ namespace AalborgZooProjekt.Model
             get { return _name; }
             set { _name = value; }
         }
-        private string _unit;
 
-        public string Unit
-        {
-            get { return _unit; }
-            set { _unit = value; }
-        }
 
-        public DummyProduct(string name)
+        public DummyOrder(string name)
         {
             Name = name;
-            Unit = "kg";
         }
     }
 }

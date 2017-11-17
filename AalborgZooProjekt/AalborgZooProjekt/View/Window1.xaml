@@ -8,15 +8,7 @@
         Title="Window1" Height="300" Width="300"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
-        <ListView HorizontalAlignment="Left" Height="248" Margin="6,7,0,0" VerticalAlignment="Top" Width="272" ItemsSource="{Binding DummyFoodList}" SelectionChanged="ListView_SelectionChanged">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+        <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}">
+        </DataGrid>
     </Grid>
 </Window>
