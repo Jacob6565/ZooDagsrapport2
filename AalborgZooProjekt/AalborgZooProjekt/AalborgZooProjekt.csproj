@@ -83,17 +83,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AalborgZoo.Designer.cs">
+    <Compile Include="Database\AalborgZoo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AalborgZoo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AalborgZoo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AalborgZoo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Database\Department.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Design\DesignDataService.cs" />
+    <Compile Include="Database\Employee.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Database\Order.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Orderlist.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Product.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Shopper.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Shoppinglist.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Database\Zookeeper.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -129,11 +163,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="AalborgZoo.edmx">
+    <EntityDeploy Include="Database\AalborgZoo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AalborgZoo.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="AalborgZoo.edmx.diagram">
+    <None Include="Database\AalborgZoo.edmx.diagram">
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -145,6 +179,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\AalborgZoo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
+      <DependentUpon>AalborgZoo.edmx</DependentUpon>
+    </Content>
+    <Content Include="Database\AalborgZoo.edmx.sql" />
+    <Content Include="Database\AalborgZoo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AalborgZoo.cs</LastGenOutput>
+      <DependentUpon>AalborgZoo.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
