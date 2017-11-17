@@ -68,11 +68,17 @@
                                     <Setter Property="TextBlock.FontSize" Value="14"></Setter>
                                 </Style>
                             </TabItem.Style>
-                            <DataGrid ItemsSource="{Binding DummyFoodList}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                            <Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
+                                <ListView HorizontalAlignment="Left" Height="248" Margin="6,7,0,0" VerticalAlignment="Top" Width="272" ItemsSource="{Binding DummyFoodList}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Grid>
                         </TabItem>
 
                         <TabItem Header="Kraftfoder" Padding="20,0">
