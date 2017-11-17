@@ -164,7 +164,13 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <Button Content="{Binding Name}"/>
+                        <Button>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                                <Image Source="/AalborgZooProjekt;component/Banana icon.png" Width="15" Height="15"/>
+                            </StackPanel>
+                        </Button>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

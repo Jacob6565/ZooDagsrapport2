@@ -116,7 +116,6 @@
     <Compile Include="Model\DummyOrder.cs" />
     <Compile Include="Model\DummyProduct.cs" />
     <Compile Include="Model\IDataService.cs" />
-    <Compile Include="Model\IProduct.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
@@ -197,6 +196,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="wrench icon.png" />
+    <Resource Include="Wheat Icon 2.png" />
+    <Resource Include="Banana icon.png" />
     <Content Include="Database\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
