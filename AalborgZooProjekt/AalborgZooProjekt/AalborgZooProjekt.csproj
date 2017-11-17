@@ -98,7 +98,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Database\database_firewall_rules.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Department.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\OrderLine.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
@@ -109,9 +115,6 @@
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Database\Order.cs">
-      <DependentUpon>AalborgZoo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Orderlist.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Product.cs">

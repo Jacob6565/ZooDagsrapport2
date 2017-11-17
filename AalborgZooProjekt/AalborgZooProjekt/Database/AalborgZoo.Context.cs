@@ -27,9 +27,10 @@ namespace AalborgZooProjekt.Database
     
         public virtual DbSet<Employee> EmployeeSet { get; set; }
         public virtual DbSet<Shoppinglist> ShoppinglistSet { get; set; }
-        public virtual DbSet<Orderlist> OrderlistSet { get; set; }
         public virtual DbSet<Order> OrderSet { get; set; }
+        public virtual DbSet<OrderLine> OrderLineSet { get; set; }
         public virtual DbSet<Product> ProductSet { get; set; }
         public virtual DbSet<Department> DepartmentSet { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

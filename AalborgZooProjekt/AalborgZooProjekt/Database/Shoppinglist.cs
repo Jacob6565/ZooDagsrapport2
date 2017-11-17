@@ -17,13 +17,13 @@ namespace AalborgZooProjekt.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Shoppinglist()
         {
-            this.Orderlists = new HashSet<Orderlist>();
+            this.Orderlists = new HashSet<Order>();
         }
     
         public int Id { get; set; }
     
         public virtual Shopper Shopper { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orderlist> Orderlists { get; set; }
+        public virtual ICollection<Order> Orderlists { get; set; }
     }
 }

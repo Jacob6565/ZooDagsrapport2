@@ -14,11 +14,21 @@ namespace AalborgZooProjekt.Database
     
     public partial class Order
     {
-        public int Id { get; set; }
-        public int OrderlistId { get; set; }
-        public int ProductId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.Orders = new HashSet<OrderLine>();
+        }
     
-        public virtual Orderlist Orderlist { get; set; }
-        public virtual Product Product { get; set; }
+        public int Id { get; set; }
+        public int ShoppinglistId { get; set; }
+        public int ZookeeperId { get; set; }
+        public int DepartmentId { get; set; }
+    
+        public virtual Shoppinglist Shoppinglist { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderLine> Orders { get; set; }
+        public virtual Zookeeper Zookeeper { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

@@ -12,10 +12,13 @@ namespace AalborgZooProjekt.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class OrderLine
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int OrderlistId { get; set; }
+        public int ProductId { get; set; }
+    
+        public virtual Order Orderlist { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

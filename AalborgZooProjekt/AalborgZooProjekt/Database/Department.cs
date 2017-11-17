@@ -19,7 +19,7 @@ namespace AalborgZooProjekt.Database
         {
             this.Zookeepers = new HashSet<Zookeeper>();
             this.Products = new HashSet<Product>();
-            this.Orderlists = new HashSet<Orderlist>();
+            this.Orderlists = new HashSet<Order>();
         }
     
         public int Id { get; set; }
@@ -29,6 +29,6 @@ namespace AalborgZooProjekt.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orderlist> Orderlists { get; set; }
+        public virtual ICollection<Order> Orderlists { get; set; }
     }
 }
