@@ -39,6 +39,7 @@ namespace AalborgZooProjekt.ViewModel
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DummyViewModel>();
         }
 
         /// <summary>
@@ -52,6 +53,13 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+        public DummyViewModel Tester
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DummyViewModel>();
             }
         }
 

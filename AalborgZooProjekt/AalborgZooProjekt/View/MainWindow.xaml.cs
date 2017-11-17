@@ -56,7 +56,8 @@ namespace AalborgZooProjekt
             MedarbejderExpander.Expanded += ExpandedOrCollapsed;
             MedarbejderExpander.Collapsed += ExpandedOrCollapsed;
 
-            StatusbarText.Text = "I love ass";
+            //Todo impl dis :3
+            StatusbarText.Text = "STATUS?";
         }
 
         void ExpandedOrCollapsed(object sender, RoutedEventArgs e)

@@ -9,8 +9,8 @@
         mc:Ignorable="d ignore"
         Height="768"
         Width="1024"
-        Title="Aalborg Zoo Rapporteringssystem" MinWidth="1024" MinHeight="768">
-    <!--DataContext="{Binding Main, Source={StaticResource Locator}}"-->
+        Title="Aalborg Zoo Rapporteringssystem" MinWidth="1024" MinHeight="768"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -68,7 +68,10 @@
                                     <Setter Property="TextBlock.FontSize" Value="14"></Setter>
                                 </Style>
                             </TabItem.Style>
-                            <DataGrid>
+                            <DataGrid ItemsSource="{Binding DummyFoodList}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                </DataGrid.Columns>
                             </DataGrid>
                         </TabItem>
 
