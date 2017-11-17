@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -52,7 +58,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -74,7 +83,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\AalborgZoo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AalborgZoo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AalborgZoo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AalborgZoo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AalborgZoo.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\database_firewall_rules.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Department.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\OrderLine.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Design\DesignDataService.cs" />
+    <Compile Include="Database\Employee.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\DummyProduct.cs" />
@@ -82,10 +118,25 @@
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
+    <Compile Include="Database\Order.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Product.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Shopper.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Shoppinglist.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Zookeeper.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +177,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Database\AalborgZoo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AalborgZoo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\AalborgZoo.edmx.diagram">
+      <DependentUpon>AalborgZoo.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -135,6 +193,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\AalborgZoo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
+      <DependentUpon>AalborgZoo.edmx</DependentUpon>
+    </Content>
+    <Content Include="Database\AalborgZoo.edmx.sql" />
+    <Content Include="Database\AalborgZoo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AalborgZoo.cs</LastGenOutput>
+      <DependentUpon>AalborgZoo.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
