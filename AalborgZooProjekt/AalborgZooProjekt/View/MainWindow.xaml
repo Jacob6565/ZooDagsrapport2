@@ -59,7 +59,11 @@
                         <ColumnDefinition Width="115*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label MinHeight="30" MinWidth="190" Content="{Binding Department, StringFormat='{}{0}'}" Margin="10,10,10,0" FontSize="16" FontWeight="Bold"/>
+                    <Viewbox>
+                        <TextBlock Text="{Binding Department, StringFormat='{}{0}'}" />
+                    </Viewbox>
+                    
+                    <!--<Label MinHeight="30" MinWidth="190" Content="{Binding Department, StringFormat='{}{0}'}" Margin="10,10,10,0" FontSize="16" FontWeight="Bold"/>-->
 
                     <TabControl Margin="10,0,0,0" Grid.Row="1">
                         <TabItem Header="Foder" Padding="20,0">
