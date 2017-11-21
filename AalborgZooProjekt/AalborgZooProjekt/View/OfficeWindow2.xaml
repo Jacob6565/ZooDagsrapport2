@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AalborgZooProjekt.View"
         mc:Ignorable="d"
-        Title="Window1" Height="750" Width="500">
+        Title="Kontor - Foderbestillinger" Height="500" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -26,12 +26,24 @@
             <Button x:Name="top_btn_3" Content="Praktiske Opgaver" Grid.Row="0" Grid.Column="2" Margin="5,10,10,0" Height="80" Padding="0" VerticalAlignment="Top"/>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,0,25" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
             <!--  -->
-            <StackPanel>
-                <Label Background="#FFA29696" Width="50" Margin="221,0" />
-                <Rectangle Margin="50" Height="50" Stroke="Black"/>
-            </StackPanel>
+
+            <Border BorderBrush="Black" BorderThickness="1" Margin="10,20,10,10" Height="179" Padding="0" Grid.Column="1" VerticalAlignment="Top" >
+                <StackPanel Grid.Column="1">
+                    <TextBlock Margin="10,0" Height="33" VerticalAlignment="Top" TextAlignment="Center" FontSize="24" Text="Ubehandlede bemærkninger"/>
+                    <Expander x:Name="expander" Header="Afrika" Margin="15,5,15,0" Padding="5" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Height="111">
+                        <Grid Background="#FFE5E5E5"/>
+                    </Expander>
+                </StackPanel>
+            </Border>
+
+
         </Grid>
 
     </Grid>
