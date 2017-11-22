@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AalborgZooProjekt.View"
         mc:Ignorable="d"
-        Title="Kontor - Foderbestillinger" Height="750" Width="1000">
+        Title="Kontor - Foderbestillinger" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>
             <RowDefinition Height="200"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
@@ -52,23 +51,31 @@
 
         <Grid Grid.Row="2">
 
-            <!--
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
-            -->
 
-            <TabControl x:Name="tabControl" Grid.Column="1" Margin="85,10" Height="209" Width="827">
+            <TabControl x:Name="tabControl" Margin="5,5,5,10" Height="209" Grid.Column="1" VerticalAlignment="Top">
                 <TabItem Header="Samlet">
-                    <Grid Background="#FFE5E5E5" Margin="5,0,5,5" Height="174" HorizontalAlignment="Left" Width="808"/>
+                    <Grid Background="White" Margin="5,0,5,5" Height="174" VerticalAlignment="Top">
+                        <DataGrid x:Name="dataGrid" VerticalAlignment="Top" RenderTransformOrigin="-3.833,-6.231" Height="164">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
+                                <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
+                                <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
+                                <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
                 </TabItem>
                 <TabItem Header="Frugt">
-                    <Grid Background="#FFE5E5E5"/>
+                    <Grid Background="White"/>
                 </TabItem>
                 <TabItem Header="Kraftfoder">
-                    <Grid Background="#FFE5E5E5"/>
+                    <Grid Background="White"/>
                 </TabItem>
             </TabControl>
 
