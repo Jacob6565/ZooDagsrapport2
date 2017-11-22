@@ -39,8 +39,8 @@
                     <Expander x:Name="expander"  Margin="15,5,15,10" Padding="5" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Height="95" VerticalContentAlignment="Top" VerticalAlignment="Top">
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                                <TextBlock Margin="5,0" Width="693" VerticalAlignment="Top">Afrika</TextBlock>
-                                <CheckBox VerticalAlignment="Center" Margin="5,0" HorizontalContentAlignment="Right"/>
+                                <TextBlock Margin="5,0" VerticalAlignment="Top">Afrika</TextBlock>
+                                <CheckBox VerticalAlignment="Top" Margin="5,0" HorizontalContentAlignment="Right" HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Expander.Header>
                         <Grid Background="#FFE5E5E5"/>
@@ -60,7 +60,7 @@
             <TabControl x:Name="tabControl" Margin="5,5,5,10" Height="209" Grid.Column="1" VerticalAlignment="Top">
                 <TabItem Header="Samlet">
                     <Grid Background="White" Margin="5,0,5,5" Height="174" VerticalAlignment="Top">
-                        <DataGrid x:Name="dataGrid" VerticalAlignment="Top" RenderTransformOrigin="-3.833,-6.231" Height="164">
+                        <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" RenderTransformOrigin="-3.833,-6.231" Height="164">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
                                 <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
@@ -69,14 +69,35 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-
                 </TabItem>
+                
                 <TabItem Header="Frugt">
-                    <Grid Background="White"/>
+                    <Grid Background="White" Margin="5,0,5,5" Height="174" VerticalAlignment="Top">
+                        <DataGrid x:Name="dataGrid_fruit" VerticalAlignment="Top" RenderTransformOrigin="-3.833,-6.231" Height="164">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
+                                <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
+                                <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
+                                <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </TabItem>
+                
+                
                 <TabItem Header="Kraftfoder">
-                    <Grid Background="White"/>
+                    <Grid Background="White" Margin="5,0,5,5" Height="174" VerticalAlignment="Top">
+                        <DataGrid x:Name="dataGrid_compound_feed" VerticalAlignment="Top" RenderTransformOrigin="-3.833,-6.231" Height="164">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
+                                <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
+                                <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
+                                <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </TabItem>
+                
             </TabControl>
 
 
