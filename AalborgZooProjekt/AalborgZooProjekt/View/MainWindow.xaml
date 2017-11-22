@@ -23,148 +23,31 @@
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="159*"/>
-            <RowDefinition Height="170*"/>
-            <RowDefinition Height="29"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="1*" MinWidth="150"/>
-            <ColumnDefinition Width="1*" MinWidth="150"/>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="Purple"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap" Grid.Column="1" Margin="118,110,285,160" Grid.Row="1" Height="48" Width="0" />
+        <TextBlock Margin="10" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}" Grid.Column="0">
+            <TextBlock.Style>
+                <Style>
+                    <Setter Property="TextBlock.FontSize" Value="20"/>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
-        <TabControl Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
-            <TabItem Header="Foder">
-                <Grid Background="#FFE5E5E5" Margin="0,0,10,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="45*"/>
-                        <RowDefinition Height="389*"/>
-                        <RowDefinition Height="81*"/>
-                        <RowDefinition Height="80*"/>
-                        <RowDefinition Height="29*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="308*"/>
-                        <ColumnDefinition Width="231*"/>
-                        <ColumnDefinition Width="116*"/>
-                        <ColumnDefinition Width="115*"/>
-                    </Grid.ColumnDefinitions>
+        <Button Content="Nuværende Bestilling" 
+                Margin="5,0"
+                Grid.Row="1" Grid.RowSpan="2" 
+                Height="40" 
+                VerticalAlignment="Top"/>
 
-                    <Viewbox>
-                        <TextBlock Text="{Binding Department, StringFormat='{}{0}'}" />
-                    </Viewbox>
-                    
-                    <!--<Label MinHeight="30" MinWidth="190" Content="{Binding Department, StringFormat='{}{0}'}" Margin="10,10,10,0" FontSize="16" FontWeight="Bold"/>-->
-
-                    <TabControl Margin="10,0,0,0" Grid.Row="1">
-                        <TabItem Header="Foder" Padding="20,0">
-                            <TabItem.Style>
-                                <Style>
-                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
-                                </Style>
-                            </TabItem.Style>
-                            <Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
-                                <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}">
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-
-                        <TabItem Header="Kraftfoder" Padding="20,0">
-                            <TabItem.Style>
-                                <Style>
-                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
-                                </Style>
-                            </TabItem.Style>
-                            <DataGrid/>
-                        </TabItem>
-
-                        <TabItem Header="Andet" Padding="20,0">
-                            <TabItem.Style>
-                                <Style>
-                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
-                                </Style>
-                            </TabItem.Style>
-                            <DataGrid/>
-                        </TabItem>
-                    </TabControl>
-
-                    <Grid Grid.ColumnSpan="4" Grid.RowSpan="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="202*"/>
-                            <RowDefinition Height="206*"/>
-                            <RowDefinition Height="85*"/>
-                            <RowDefinition Height="77*"/>
-                            <RowDefinition Height="35"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1.5*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Bestillingsliste" Margin="10,10,15,0" FontSize="16" FontWeight="Bold" Grid.Column="1"/>
-
-                        <DataGrid Margin="10,5,10,0" Grid.Column="1" Grid.Row="1"/>
-                        <DataGrid Margin="10,5,10,0" Grid.Column="1" Grid.Row="2"/>
-
-                        <Grid x:Name="ExpanderGrid" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" Margin="10,5" Grid.Row="0">
-                                <Grid>
-                                    <TextBox x:Name="BemærkningerExpanderTextbox" TextWrapping="WrapWithOverflow" VerticalScrollBarVisibility="Auto">
-
-                                    </TextBox>
-                                </Grid>
-                            </Expander>
-
-                            <Expander x:Name="MedarbejderExpander" Header="Medarbejder" Margin="10,5" Grid.Row="1">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="0"/>
-                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="1"/>
-                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="2"/>
-                                    <Button MaxHeight="30" MaxWidth="170" Margin="5,2" Grid.Column="3"/>
-
-                                </Grid>
-                            </Expander>
-                        </Grid>
-                    </Grid>
-                    <Button Content="Gem" Grid.Row="4" Grid.Column="2"/>
-                    <Button Content="Bestil" Grid.Row="4" Grid.Column="3"/>
-
-
-                </Grid>
-
-            </TabItem>
-
-            <TabItem Header="Dyr">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-
-            <TabItem Header="Praktiske Opgaver">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
-
-        <Button Grid.Row="1" Grid.RowSpan="2" Content="Nuværende Bestilling" Height="40" VerticalAlignment="Top"/>
-        <ListBox  Margin="10,50,5,10" Grid.RowSpan="2" Grid.Row="1" ItemsSource="{Binding Tester.DummyOrderList, Source={StaticResource Locator}}">
+        <ListBox  Margin="5,50,5,10" 
+                  Grid.Row="1" Grid.RowSpan="2" 
+                  ItemsSource="{Binding Tester.DummyOrderList, Source={StaticResource Locator}}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -174,23 +57,171 @@
                                 <Image Source="/AalborgZooProjekt;component/Banana icon.png" Width="15" Height="15"/>
                             </StackPanel>
                         </Button>
-
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock Margin="10" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}" Grid.Column="0">
-            <TextBlock.Style>
-                <Style>
-                    <Setter Property="TextBlock.FontSize" Value="20"/>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-      
-        <StatusBar x:Name="BottomStatusBar" Grid.ColumnSpan="4" Grid.Row="3">
+        <TabControl Margin="0,10,10,0"
+                    Grid.Column="1"
+                    Grid.Row="0" Grid.RowSpan="3">
+
+            <TabItem Header="Foder">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+
+                        <Viewbox Margin="10,5,0,5"
+                             HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding Department, StringFormat='{}{0}'}" />
+                        </Viewbox>
+
+                        <TabControl Margin="10,0,0,0"
+                                Grid.Row="1">
+                            <TabItem Header="Foder"
+                                 Padding="20,0">
+                                <TabItem.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.FontSize" Value="14"></Setter>
+                                    </Style>
+                                </TabItem.Style>
+                                <Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
+                                    <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}">
+                                    </DataGrid>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Kraftfoder"
+                                     Padding="20,0">
+                                <TabItem.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.FontSize" Value="14"></Setter>
+                                    </Style>
+                                </TabItem.Style>
+                                <!--<Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
+                                    <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}">
+                                    </DataGrid>
+                                </Grid>-->
+                            </TabItem>
+
+                        </TabControl>
+
+
+
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+
+                        <Viewbox Margin="10,5,0,5"
+                             Grid.Column="1"
+                             HorizontalAlignment="Left">
+                            <TextBlock Text="Bestillingsliste"/>
+                        </Viewbox>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <DataGrid Margin="10,0,10,0"
+                              Grid.Row="0"
+                              Grid.Column="1" Grid.ColumnSpan="3"/>
+
+                            <GridSplitter Height="10"
+                                      Grid.Row="1"
+                                      HorizontalAlignment="Stretch"/>
+
+                            <DataGrid Margin="10,0,10,0"
+                              Grid.Row="2"
+                              Grid.Column="1" Grid.ColumnSpan="3"/>
+                        </Grid>
+
+
+                    </Grid>
+
+                    <Grid x:Name="ExpanderGrid" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="227*"/>
+                            <RowDefinition Height="114*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" Margin="10,10,10,122" Grid.Row="1">
+                            <Grid>
+                                <TextBox x:Name="BemærkningerExpanderTextbox" TextWrapping="WrapWithOverflow" VerticalScrollBarVisibility="Auto">
+
+                                </TextBox>
+                            </Grid>
+                        </Expander>
+
+                        <Expander x:Name="MedarbejderExpander" Header="Medarbejder" Margin="10,111,10,10" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox Content="Medarbejder 1" Grid.Column="0"/>
+                                <CheckBox Content="Medarbejder 2" Grid.Column="1"/>
+                                <CheckBox Content="Medarbejder 3" Grid.Column="2"/>
+                                <CheckBox Content="Medarbejder 4" Grid.Column="3"/>
+
+                            </Grid>
+                        </Expander>
+                    </Grid>
+
+
+
+                    <!--
+
+                    
+
+                    <Button Content="Gem" Margin="0,0,10,0" Grid.Row="5" Grid.Column="2"/>
+                    <Button Content="Bestil" Margin="0,0,10,0" Grid.Row="5" Grid.Column="3"/>-->
+
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Dyr">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+            <TabItem Header="Praktiske Opgaver">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+
+
+
+        </TabControl>
+
+        <StatusBar x:Name="BottomStatusBar" 
+                   Grid.ColumnSpan="4" 
+                   Grid.Row="3">
             <TextBlock Name="StatusbarText"/>
         </StatusBar>
 
     </Grid>
+
+
 </Controls:MetroWindow>
