@@ -10,7 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>
             <RowDefinition Height="200"/>
-            <RowDefinition Height="85"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
@@ -39,9 +39,9 @@
                     <TextBlock Margin="10,0" Height="33" VerticalAlignment="Top" TextAlignment="Center" FontSize="24" Text="Ubehandlede bemærkninger"/>
                     <Expander x:Name="expander"  Margin="15,5,15,10" Padding="5" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Height="95" VerticalContentAlignment="Top" VerticalAlignment="Top">
                         <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                 <TextBlock Margin="5,0" Width="693" VerticalAlignment="Top">Afrika</TextBlock>
-                                <CheckBox VerticalAlignment="Center" Margin="5,0" HorizontalContentAlignment="Right" Width="40.3" HorizontalAlignment="Right"/>
+                                <CheckBox VerticalAlignment="Center" Margin="5,0" HorizontalContentAlignment="Right"/>
                             </StackPanel>
                         </Expander.Header>
                         <Grid Background="#FFE5E5E5"/>
@@ -51,17 +51,28 @@
         </Grid>
 
         <Grid Grid.Row="2">
+
+            <!--
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
+            -->
 
-            <Button x:Name="all_btn" Content="Samlet" Margin="10,50,5,5" VerticalAlignment="Top" Height="25" Width="150" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Button x:Name="fruit_btn" Content="Frugt" Margin="165,50,0,5" VerticalAlignment="Top" Height="25" HorizontalAlignment="Left" Width="150" Grid.Column="1"/>
-            <Button x:Name="compound_feed_btn" Content="Kraftfoder" Margin="320,50,0,5" VerticalAlignment="Top" RenderTransformOrigin="0.715,-3.54" Height="25" HorizontalAlignment="Left" Width="150" Grid.Column="1"/>
+            <TabControl x:Name="tabControl" Grid.Column="1" Margin="85,10" Height="209" Width="827">
+                <TabItem Header="Samlet">
+                    <Grid Background="#FFE5E5E5" Margin="5,0,5,5" Height="174" HorizontalAlignment="Left" Width="808"/>
+                </TabItem>
+                <TabItem Header="Frugt">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Header="Kraftfoder">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
 
-            <Label x:Name="label" Content="Alle bestillinger uge 45" Margin="5,10,10,0" VerticalAlignment="Top" FontSize="24" Height="42" Grid.Column="1" HorizontalContentAlignment="Stretch"/>
+
         </Grid>
 
         <Grid Grid.Row="3">
@@ -71,17 +82,7 @@
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
 
-
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.833,-6.231" Height="217" Width="510" Grid.Column="1">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
-                    <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
-                    <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
-                    <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
         </Grid>
-        
+
     </Grid>
 </Window>
