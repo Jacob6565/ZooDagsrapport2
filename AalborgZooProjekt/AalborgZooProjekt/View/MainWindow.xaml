@@ -167,7 +167,7 @@
                         <Button>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Name}"/>
-                                <Image Source="/AalborgZooProjekt;component/Banana icon.png" Width="15" Height="15"/>
+                                <Image Source="/AalborgZooProjekt;component/Img/Banana icon.png" Width="15" Height="15"/>
                             </StackPanel>
                         </Button>
 
