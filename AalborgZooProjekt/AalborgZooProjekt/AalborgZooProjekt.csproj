@@ -60,8 +60,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -196,9 +198,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="wrench icon.png" />
-    <Resource Include="Wheat Icon 2.png" />
-    <Resource Include="Banana icon.png" />
+    <Resource Include="Img\wrench icon.png" />
+    <Resource Include="Img\Wheat Icon 2.png" />
+    <Resource Include="Img\Banana icon.png" />
     <Content Include="Database\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
@@ -213,6 +215,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
