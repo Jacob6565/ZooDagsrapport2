@@ -115,7 +115,7 @@
                                                 </Style>
                                             </TabItem.Style>
                                             <Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
-                                                <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}">
+                                                <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}" IsReadOnly="True">
                                                 </DataGrid>
                                             </Grid>
                                         </TabItem>
