@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AalborgZooProjekt.View"
         mc:Ignorable="d"
-        Title="Window1" Height="300" Width="300"
+        Title="Window1" Height="600" Width="800"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     
     <Grid>
-        
+        <local:FeedAndRawfeedTab></local:FeedAndRawfeedTab>
     </Grid>
 </Window>

@@ -45,43 +45,43 @@ namespace AalborgZooProjekt
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
 
-            expanderGridHeight = new GridLength[ExpanderGrid.RowDefinitions.Count];
-            expanderGridHeight[0] = ExpanderGrid.RowDefinitions[0].Height;
-            expanderGridHeight[1] = ExpanderGrid.RowDefinitions[1].Height;
-            ExpandedOrCollapsed(BemærkningerExpander);
-            ExpandedOrCollapsed(MedarbejderExpander);
+            //expanderGridHeight = new GridLength[ExpanderGrid.RowDefinitions.Count];
+            //expanderGridHeight[0] = ExpanderGrid.RowDefinitions[0].Height;
+            //expanderGridHeight[1] = ExpanderGrid.RowDefinitions[1].Height;
+            //ExpandedOrCollapsed(BemærkningerExpander);
+            //ExpandedOrCollapsed(MedarbejderExpander);
 
-            BemærkningerExpander.Expanded += ExpandedOrCollapsed;
-            BemærkningerExpander.Collapsed += ExpandedOrCollapsed;
-            MedarbejderExpander.Expanded += ExpandedOrCollapsed;
-            MedarbejderExpander.Collapsed += ExpandedOrCollapsed;
+            //BemærkningerExpander.Expanded += ExpandedOrCollapsed;
+            //BemærkningerExpander.Collapsed += ExpandedOrCollapsed;
+            //MedarbejderExpander.Expanded += ExpandedOrCollapsed;
+            //MedarbejderExpander.Collapsed += ExpandedOrCollapsed;
 
             //Todo impl dis :3
             StatusbarText.Text = "STATUS?";
         }
 
-        void ExpandedOrCollapsed(object sender, RoutedEventArgs e)
-        {
-            ExpandedOrCollapsed(sender as Expander);
-        }
+        //void ExpandedOrCollapsed(object sender, RoutedEventArgs e)
+        //{
+        //    ExpandedOrCollapsed(sender as Expander);
+        //}
 
-        void ExpandedOrCollapsed(Expander expander)
-        {
-            var rowIndex = Grid.GetRow(expander);
-            var row = ExpanderGrid.RowDefinitions[rowIndex];
+        //void ExpandedOrCollapsed(Expander expander)
+        //{
+        //    var rowIndex = Grid.GetRow(expander);
+        //    var row = ExpanderGrid.RowDefinitions[rowIndex];
 
-            if (expander.IsExpanded)
-            {
-                row.Height = expanderGridHeight[rowIndex];
-                row.MinHeight = 50;
-            }
-            else
-            {
-                expanderGridHeight[rowIndex] = row.Height;
-                row.Height = GridLength.Auto;
-                row.MinHeight = 0;
-            }
-        }
+        //    if (expander.IsExpanded)
+        //    {
+        //        row.Height = expanderGridHeight[rowIndex];
+        //        row.MinHeight = 50;
+        //    }
+        //    else
+        //    {
+        //        expanderGridHeight[rowIndex] = row.Height;
+        //        row.Height = GridLength.Auto;
+        //        row.MinHeight = 0;
+        //    }
+        //}
 
         private void TimerClick(object sender, EventArgs e)
         {

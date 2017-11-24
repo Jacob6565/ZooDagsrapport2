@@ -6,7 +6,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        mc:Ignorable="d ignore"
+    xmlns:view="clr-namespace:AalborgZooProjekt.View"
+    mc:Ignorable="d ignore"
         Height="768"
         Width="1024"
         Title="Aalborg Zoo Rapporteringssystem" MinWidth="1024" MinHeight="768"
@@ -36,7 +37,7 @@
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                    <RowDefinition/>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <TextBlock Margin="10" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
@@ -46,29 +47,7 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-
-                <Button Content="Nuværende Bestilling" 
-                        Margin="5,0"
-                        Height="40" 
-                        Grid.Row="1" 
-                        VerticalAlignment="Top"/>
-
-                <ListBox Margin="5,50,5,10"
-                  ItemsSource="{Binding Tester.DummyOrderList, Source={StaticResource Locator}}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <Button>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}"/>
-                                        <Image Source="/AalborgZooProjekt;component/Banana icon.png" Width="15" Height="15"/>
-                                    </StackPanel>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
+                <view:History Grid.Row="1"/>
             </Grid>
 
             <GridSplitter Width="10"
@@ -104,66 +83,9 @@
                                     HorizontalAlignment="Left">
                                         <TextBlock Text="{Binding Department, StringFormat='{}{0}'}" />
                                     </Viewbox>
-
-                                    <TabControl Margin="10,0,0,0"
-                            Grid.Row="1">
-                                        <TabItem Header="Foder"
-                                Padding="20,0">
-                                            <TabItem.Style>
-                                                <Style>
-                                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
-                                                </Style>
-                                            </TabItem.Style>
-                                            <Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
-                                                <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}" IsReadOnly="True">
-                                                </DataGrid>
-                                            </Grid>
-                                        </TabItem>
-
-                                        <TabItem Header="Kraftfoder"
-                                    Padding="20,0">
-                                            <TabItem.Style>
-                                                <Style>
-                                                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
-                                                </Style>
-                                            </TabItem.Style>
-                                            <!--<Grid DataContext="{Binding Tester, Source={StaticResource Locator}}">
-                                <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}">
-                                </DataGrid>
-                            </Grid>-->
-                                        </TabItem>
-
-                                    </TabControl>
+                                    <view:FeedAndRawfeedTab  Grid.Row="1"></view:FeedAndRawfeedTab>
                                 </Grid>
-
-                                <GridSplitter Width="10"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Stretch"/>
-
-                                <Grid Grid.Column="2">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="50"/>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="10"/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-
-                                    <Viewbox Margin="10,5,0,5"
-                                    HorizontalAlignment="Left">
-                                        <TextBlock Text="Bestillingsliste"/>
-                                    </Viewbox>
-
-                                    <DataGrid Margin="0,0,10,0"
-                                    Grid.Row="1"/>
-
-                                    <GridSplitter Height="10"
-                                        Margin="0,0,10,0"
-                                        Grid.Row="2"
-                                        HorizontalAlignment="Stretch"/>
-
-                                    <DataGrid Margin="0,0,10,0"
-                                    Grid.Row="3"/>
-                                </Grid>
+                                <view:OrderList Grid.Column="2"/>
                             </Grid>
 
                             <GridSplitter Grid.Row="1"
