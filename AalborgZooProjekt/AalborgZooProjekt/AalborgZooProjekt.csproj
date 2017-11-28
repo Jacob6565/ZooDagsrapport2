@@ -115,8 +115,9 @@
     </Compile>
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
-    <Compile Include="Model\DummyOrder.cs" />
-    <Compile Include="Model\DummyProduct.cs" />
+    <Compile Include="Model\DummyModel\DummyHistoryEntry.cs" />
+    <Compile Include="Model\DummyModel\DummyOrder.cs" />
+    <Compile Include="Model\DummyModel\DummyProduct.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
@@ -134,6 +135,7 @@
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OfficeDummyViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DepartmentFoodList.xaml.cs">
       <DependentUpon>DepartmentFoodList.xaml</DependentUpon>
