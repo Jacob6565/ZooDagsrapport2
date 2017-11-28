@@ -4,18 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
+             DataContext="{Binding Tester, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <TabControl x:Name="tabControl" Margin="5,5,5,10" Grid.Column="1" VerticalAlignment="Top">
             <TabItem Header="Samlet">
                 <Grid Background="White" Margin="5,0,5,5"  VerticalAlignment="Top">
-                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" >
+                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" ItemsSource="{Binding DummyFoodList}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
+                            <DataGridTextColumn Header="Vare" Binding="{Binding Name}" Width="240*"/>
                             <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
                             <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
-                            <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
+                            <DataGridTemplateColumn Header="Bestilt" Width="60*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <CheckBox/>
+                                            <Button Content="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--Binding="{Binding Ordered}" -->
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -37,9 +48,9 @@
 
             <TabItem Header="Kraftfoder">
                 <Grid Background="White" Margin="5,0,5,5" Height="174" VerticalAlignment="Top">
-                    <DataGrid x:Name="dataGrid_compound_feed" VerticalAlignment="Top">
+                    <DataGrid x:Name="dataGrid_compound_feed" VerticalAlignment="Top" ItemsSource="{Binding DummyFoodList}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
+                            <DataGridTextColumn Header="Vare" Binding="{Binding }" Width="240*"/>
                             <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
                             <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
                             <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
