@@ -24,5 +24,10 @@ namespace AalborgZooProjekt.View
         {
             InitializeComponent();
         }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

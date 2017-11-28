@@ -5,17 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Tester, Source={StaticResource Locator}}">
     <Grid>
         <TabControl x:Name="tabControl" Margin="5,5,5,10" Grid.Column="1" VerticalAlignment="Top">
             <TabItem Header="Samlet">
                 <Grid Background="White" Margin="5,0,5,5"  VerticalAlignment="Top">
-                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" >
+                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding DummyFoodList}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
-                            <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
-                            <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
-                            <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
+                            <DataGridTemplateColumn Header="Vare" MinWidth="400">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Expander Header="{Binding Name}" IsExpanded="True">
+                                            <DataGrid Margin="25,0,0,0" VerticalAlignment="Top" Height="100" ItemsSource="{Binding Unit}" AutoGenerateColumns="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Disabled">
+                                            </DataGrid>
+                                        </Expander>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Antal" MinWidth="50" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Enhed" MinWidth="50"/>
+                            
+                            <DataGridCheckBoxColumn Header="Bestilt" MinWidth="50"/>
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -47,7 +60,6 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-
         </TabControl>
     </Grid>
 </UserControl>
