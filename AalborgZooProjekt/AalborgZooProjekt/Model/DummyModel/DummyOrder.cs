@@ -6,15 +6,26 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model.DummyModel
 {
-    class DummyOrder
+    public class DummyOrder
     {
         public DummyOrder(string good)
         {
             Good = good;
         }
 
-        public string Good;
+        public string Good { get; set; }
 
-        public List<Tuple<string, double>> Orders = new List<Tuple<string, double>>();
+        public List<OrderLine> Orders { get; set; } = new List<OrderLine>();
+    }
+    public class OrderLine
+    {
+        public OrderLine(string unit, double amount)
+        {
+            Unit = unit;
+            Amount = amount;
+        }
+
+        public string Unit { get; set; }
+        public double Amount { get; set; }
     }
 }

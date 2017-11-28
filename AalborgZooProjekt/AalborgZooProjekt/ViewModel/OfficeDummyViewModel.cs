@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.ViewModel
 {
-    class OfficeDummyViewModel
+    public class OfficeDummyViewModel
     {
 
         public List<DummyOrder> OrderList { get; set; } = new List<DummyOrder>();
@@ -33,7 +33,7 @@ namespace AalborgZooProjekt.ViewModel
                     word1 = wordQueue.Dequeue();
                     string word2 = wordQueue.Dequeue();
 
-                    OrderList.Last().Orders.Add(new Tuple<string, double>(word1, Double.Parse(word2)));
+                    OrderList.Last().Orders.Add(new OrderLine(word1, Double.Parse(word2)));
                 }
 
 
