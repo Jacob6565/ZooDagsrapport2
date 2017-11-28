@@ -9,7 +9,7 @@
              mc:Ignorable="d ignore">
 
 
-
+<!--Comments suck-->
     <Application.Resources>
         <!--Global View Model Locator-->
         <ResourceDictionary>
