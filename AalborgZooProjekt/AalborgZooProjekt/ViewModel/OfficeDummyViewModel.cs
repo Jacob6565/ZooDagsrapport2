@@ -24,8 +24,7 @@ namespace AalborgZooProjekt.ViewModel
                 Queue<string> wordQueue = new Queue<string>(words);
 
                 string word1 = wordQueue.Dequeue();
-                if (word1 == "|")
-                    break;
+
                 OrderList.Add(new DummyOrder(word1));
                 
                 while (wordQueue.Count > 1)
