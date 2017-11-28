@@ -16,19 +16,20 @@ namespace AalborgZooProjekt
             set { _dummyFood = value; }
         }
 
-        public List<DummyOrder> DummyOrderList { get; set; } = new List<DummyOrder>();
+        public List<DummyHistoryEntry> DummyHistoryList { get; set; } = new List<DummyHistoryEntry>();
 
         public DummyViewModel()
         {
-            string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
+            string fileAndPath = "../../DummyHistoryEntries.txt";
+            string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             foreach (string product in lines)
             {
                 DummyFoodList.Add(new DummyProduct(product));
             }
-            lines = File.ReadAllLines("../../DummyOrders.txt");
+            lines = File.ReadAllLines(fileAndPath);
             foreach (string orders in lines)
             {
-                DummyOrderList.Add(new DummyOrder(orders));
+                DummyHistoryList.Add(new DummyHistoryEntry(orders));
             }
 
 

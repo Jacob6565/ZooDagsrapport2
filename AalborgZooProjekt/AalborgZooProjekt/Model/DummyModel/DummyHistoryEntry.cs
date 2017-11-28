@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public class DummyOrder
+    public class DummyHistoryEntry
     {
         private string _name;
 
@@ -17,7 +17,7 @@ namespace AalborgZooProjekt.Model
         }
 
 
-        public DummyOrder(string name)
+        public DummyHistoryEntry(string name)
         {
             Name = name;
         }
