@@ -263,6 +263,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="DummyHistoryEntries.txt" />
+    <Resource Include="DummyOrders.txt" />
+    <Resource Include="DummyProducts.txt" />
+    <Resource Include="DummyUnits.txt" />
     <Resource Include="Img\wrench icon.png" />
     <Resource Include="Img\Wheat Icon 2.png" />
     <Resource Include="Img\Banana icon.png" />
