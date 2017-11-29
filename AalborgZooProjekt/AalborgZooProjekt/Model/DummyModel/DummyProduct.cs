@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,7 @@ namespace AalborgZooProjekt.Model
             set { _name = value; }
         }
 
-        private List<Units> _unit = new List<Units>();
-        public  List<Units> Unit
-        {
-            get { return _unit; }
-            set { _unit = value; }
-        }
+        public ObservableCollection<Units> Unit { get; set; } = new ObservableCollection<Units>();
 
         public DummyProduct(string name)
         {

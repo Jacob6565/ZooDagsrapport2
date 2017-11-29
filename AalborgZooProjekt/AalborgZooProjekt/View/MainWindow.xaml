@@ -98,20 +98,20 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-
+                                <StackPanel>
                                 <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" 
                                           Margin="0,2">
                                     <Grid>
-                                        <TextBox x:Name="BemærkningerExpanderTextbox" 
-                                        TextWrapping="WrapWithOverflow" 
-                                        VerticalScrollBarVisibility="Auto"/>
+                                        <TextBox x:Name="BemærkningerExpanderTextbox"
+                                        TextWrapping="Wrap" 
+                                        VerticalScrollBarVisibility="Auto" Height="150"/>
                                     </Grid>
                                 </Expander>
 
                                 <Expander x:Name="MedarbejderExpander" Header="Medarbejder" 
                                           Margin="0,2" 
                                           Grid.Row="1">
-                                    <Grid>
+                                    <Grid Height="75">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
@@ -125,6 +125,7 @@
                                         <CheckBox Content="Medarbejder 4" Grid.Column="3"/>
                                     </Grid>
                                 </Expander>
+                                </StackPanel>
                             </Grid>
 
                             <Grid Grid.Row="3">

@@ -5,33 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding OfficeTester, Source={StaticResource Locator}}">
-    <Grid>
-        <TabControl x:Name="tabControl" Margin="5,5,5,10" Grid.Column="1" VerticalAlignment="Top">
-            <TabItem Header="Samlet">
-                <Grid Background="White" Margin="5,0,5,5"  VerticalAlignment="Top">
-                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding OrderList}">
+        <TabControl x:Name="tabControl" Margin="5,5,5,10" VerticalAlignment="Top"> 
+            <TabItem Header="Samlet" >
+                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding OrderList}" HeadersVisibility="None">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Vare" MinWidth="400">
+                            <DataGridTemplateColumn Header="Vare" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Expander Header="{Binding Good}" IsExpanded="True">
-                                            <DataGrid Margin="25,0,0,0" VerticalAlignment="Top" Height="100" ItemsSource="{Binding Orders}" AutoGenerateColumns="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Disabled">
-                                            </DataGrid>
-                                        </Expander>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                         <TextBlock Text="{Binding Good}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="Enhed og Antal: 15 kg." Foreground="White" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                        <Button Content="Rediger" />
+                                                <Button Content="Bestilt"/>
+                                                <Button Content="+"/>
+                                            </StackPanel>
+                                                </Grid>
+                                            </Expander.Header>
+                                    <DataGrid Margin="25,0,0,0" VerticalAlignment="Top" ItemsSource="{Binding Orders}" 
+                                              AutoGenerateColumns="True" ScrollViewer.CanContentScroll="False"
+                                              VerticalScrollBarVisibility="Disabled" CanUserResizeRows="False" MinRowHeight="18" />
+                                </Expander>
                                     </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--<DataGridTextColumn Header="Antal" MinWidth="50" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Enhed" MinWidth="50"/>-->
-                            
-                            <DataGridCheckBoxColumn Header="Bestilt" MinWidth="50"/>
-
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
 
             <TabItem Header="Frugt">
@@ -61,5 +65,4 @@
                 </Grid>
             </TabItem>
         </TabControl>
-    </Grid>
 </UserControl>

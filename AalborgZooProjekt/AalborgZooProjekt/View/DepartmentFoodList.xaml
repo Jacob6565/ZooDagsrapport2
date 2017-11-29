@@ -5,10 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Tester, Source={StaticResource Locator}}">
     <Grid>
-        <Label x:Name="Test"/>
-        <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}" IsReadOnly="True" Name="dgFoodList">
+        <DataGrid ItemsSource="{Binding DummyFoodList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Vare" Binding="{Binding Name}"/>
+                <DataGridTemplateColumn Header="Antal">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="+" Width="25"/>
+                                <Button Content="-" Width="25"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Enhed">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DataGrid ItemsSource="{Binding Unit}" HeadersVisibility="None"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 
