@@ -15,10 +15,12 @@ namespace AalborgZooProjekt.Database
     public partial class OrderLine
     {
         public int Id { get; set; }
-        public int OrderlistId { get; set; }
-        public int ProductId { get; set; }
+        public string Quantity { get; set; }
+        public string UnitID { get; set; }
+        public int ProductVersionId { get; set; }
+        public int OrderId { get; set; }
     
-        public virtual Order Orderlist { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual ProductVersion ProductVersion { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

@@ -17,12 +17,19 @@ namespace AalborgZooProjekt.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Departments = new HashSet<Department>();
+            this.DepartmentSpecifikProducts = new HashSet<DepartmentSpecifikProduct>();
+            this.ProductVersions = new HashSet<ProductVersion>();
         }
     
         public int Id { get; set; }
+        public string DateCreated { get; set; }
+        public string CreatedByID { get; set; }
+        public string DeletedByID { get; set; }
+        public string DateDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<DepartmentSpecifikProduct> DepartmentSpecifikProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductVersion> ProductVersions { get; set; }
     }
 }

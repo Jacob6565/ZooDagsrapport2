@@ -100,19 +100,46 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\database_firewall_rules.cs">
+    <Compile Include="Database\Department.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Department.cs">
+    <Compile Include="Database\DepartmentChange.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DepartmentSpecifikProduct.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Employee.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Order.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\OrderLine.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Database\Employee.cs">
+    <Compile Include="Database\PasswordChanged.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\Product.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ProductVersion.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Shopper.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ShoppingList.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Unit.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Zookeeper.cs">
+      <DependentUpon>AalborgZoo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\DummyOrder.cs" />
@@ -121,20 +148,7 @@
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
-    <Compile Include="Database\Order.cs">
-      <DependentUpon>AalborgZoo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Product.cs">
-      <DependentUpon>AalborgZoo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Shopper.cs">
-      <DependentUpon>AalborgZoo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Shoppinglist.cs">
-      <DependentUpon>AalborgZoo.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\UtilitiesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DepartmentFoodList.xaml.cs">
       <DependentUpon>DepartmentFoodList.xaml</DependentUpon>
@@ -163,14 +177,8 @@
     <Compile Include="View\Remarks.xaml.cs">
       <DependentUpon>Remarks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Zookeeper.cs">
-      <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Page Include="View\DepartmentFoodList.xaml">
       <SubType>Designer</SubType>
@@ -224,10 +232,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -272,6 +276,14 @@
     <Resource Include="Img\wrench icon.png" />
     <Resource Include="Img\Wheat Icon 2.png" />
     <Resource Include="Img\Banana icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Database\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
@@ -283,12 +295,6 @@
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
