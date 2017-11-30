@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
+             DataContext="{Binding Tester, Source={StaticResource Locator}}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Label x:Name="Test"/>
-        <DataGrid ItemsSource="{Binding Tester.DummyFoodList, Source={StaticResource Locator}}" IsReadOnly="True" Name="dgFoodList">
+        <DataGrid ItemsSource="{Binding DummyFoodList}" IsReadOnly="True" Name="dgFoodList">
         </DataGrid>
     </Grid>
 
