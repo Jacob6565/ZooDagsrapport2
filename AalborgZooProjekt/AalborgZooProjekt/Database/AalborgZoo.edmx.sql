@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/30/2017 13:52:35
+-- Date Created: 11/30/2017 14:01:38
 -- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,95 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_DepartmentSpecifikProductProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartmentSpecifikProductSet] DROP CONSTRAINT [FK_DepartmentSpecifikProductProduct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductProductVersion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProductVersionSet] DROP CONSTRAINT [FK_ProductProductVersion];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductVersionOrderLine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderLineSet] DROP CONSTRAINT [FK_ProductVersionOrderLine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderLineOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderLineSet] DROP CONSTRAINT [FK_OrderLineOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderShoppingList]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderSet] DROP CONSTRAINT [FK_OrderShoppingList];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UnitProductVersion_Unit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UnitProductVersion] DROP CONSTRAINT [FK_UnitProductVersion_Unit];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UnitProductVersion_ProductVersion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UnitProductVersion] DROP CONSTRAINT [FK_UnitProductVersion_ProductVersion];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DepartmentSpecifikProductDepartment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartmentSpecifikProductSet] DROP CONSTRAINT [FK_DepartmentSpecifikProductDepartment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DepartmentZookeeper]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmployeeSet_Zookeeper] DROP CONSTRAINT [FK_DepartmentZookeeper];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DepartmentChangeZookeeper]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartmentChangeSet] DROP CONSTRAINT [FK_DepartmentChangeZookeeper];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ShopperShoppingList]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ShoppingListSet] DROP CONSTRAINT [FK_ShopperShoppingList];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PasswordChangedShopper]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PasswordChangedSet] DROP CONSTRAINT [FK_PasswordChangedShopper];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Zookeeper_inherits_Employee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmployeeSet_Zookeeper] DROP CONSTRAINT [FK_Zookeeper_inherits_Employee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Shopper_inherits_Employee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmployeeSet_Shopper] DROP CONSTRAINT [FK_Shopper_inherits_Employee];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[DepartmentSpecifikProductSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartmentSpecifikProductSet];
+GO
+IF OBJECT_ID(N'[dbo].[ProductSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductSet];
+GO
+IF OBJECT_ID(N'[dbo].[ProductVersionSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductVersionSet];
+GO
+IF OBJECT_ID(N'[dbo].[ShoppingListSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ShoppingListSet];
+GO
+IF OBJECT_ID(N'[dbo].[OrderSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderSet];
+GO
+IF OBJECT_ID(N'[dbo].[OrderLineSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderLineSet];
+GO
+IF OBJECT_ID(N'[dbo].[DepartmentSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartmentSet];
+GO
+IF OBJECT_ID(N'[dbo].[DepartmentChangeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartmentChangeSet];
+GO
+IF OBJECT_ID(N'[dbo].[EmployeeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmployeeSet];
+GO
+IF OBJECT_ID(N'[dbo].[PasswordChangedSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PasswordChangedSet];
+GO
+IF OBJECT_ID(N'[dbo].[UnitSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UnitSet];
+GO
+IF OBJECT_ID(N'[dbo].[EmployeeSet_Zookeeper]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmployeeSet_Zookeeper];
+GO
+IF OBJECT_ID(N'[dbo].[EmployeeSet_Shopper]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmployeeSet_Shopper];
+GO
+IF OBJECT_ID(N'[dbo].[UnitProductVersion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UnitProductVersion];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
