@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AalborgZooProjekt.View
 {
     /// <summary>
-    /// Interaction logic for OfficeOrderList.xaml
+    /// Interaction logic for AllProducts.xaml
     /// </summary>
-    public partial class OfficeOrderList : UserControl
+    public partial class AllProducts : UserControl
     {
-        public OfficeOrderList()
+        public AllProducts()
         {
             InitializeComponent();
         }

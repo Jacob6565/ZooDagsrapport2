@@ -156,6 +156,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OfficeDummyViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AllProducts.xaml.cs">
+      <DependentUpon>AllProducts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DepartmentFoodList.xaml.cs">
       <DependentUpon>DepartmentFoodList.xaml</DependentUpon>
     </Compile>
@@ -192,6 +195,10 @@
     <Compile Include="Database\Zookeeper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
+    <Page Include="View\AllProducts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DepartmentFoodList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

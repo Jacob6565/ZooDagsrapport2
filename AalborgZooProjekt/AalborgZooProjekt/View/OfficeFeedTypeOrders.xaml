@@ -1,4 +1,4 @@
-﻿<Window x:Class="AalborgZooProjekt.View.OfficeFeedTypeOrders"
+﻿<UserControl x:Class="AalborgZooProjekt.View.OfficeFeedTypeOrders"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,33 +7,50 @@
         xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         DataContext="{Binding OfficeTester, Source={StaticResource Locator}}"
-        Title="OfficeFeedTypeOrders">
-    <Grid>
-        <DataGrid ItemsSource="{Binding DepartmentListApples}"  IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Afdeling" Binding="{Binding Department}"/>
-                <DataGridTextColumn Header="Vare" Binding="{Binding Good}"/>
-                <DataGridTemplateColumn Header="Antal og Enhed">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DataGrid ItemsSource="{Binding Orders}" HeadersVisibility="None" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTemplateColumn>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" Width="60"/>
-                                                    <xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
-</Window>
+        Name="officeOrderTypeList">
+
+    <StackPanel VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Æbler" FontSize="24" Height="40" Margin="0,10,0,0" Foreground="DeepSkyBlue" Grid.Row="0"/>
+            <DataGrid ItemsSource="{Binding DepartmentListApples}"  IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False" Grid.Row="1" VerticalScrollBarVisibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Afdeling" Binding="{Binding Department}" Width="*">
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Antal og Enhed" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataGrid ItemsSource="{Binding Orders}" HeadersVisibility="None" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Unit}" Width="60"/>
+                                                        <xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>
+                                                        <Button Content="Remove"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Slet" Width="100"/>
+                    <Button Content="Godkend" Width="100"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </StackPanel>    
+</UserControl>

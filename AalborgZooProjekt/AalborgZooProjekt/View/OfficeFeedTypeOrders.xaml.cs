@@ -17,7 +17,7 @@ namespace AalborgZooProjekt.View
     /// <summary>
     /// Interaction logic for OfficeFeedTypeOrders.xaml
     /// </summary>
-    public partial class OfficeFeedTypeOrders : Window
+    public partial class OfficeFeedTypeOrders : UserControl
     {
         public OfficeFeedTypeOrders()
         {
