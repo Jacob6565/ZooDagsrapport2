@@ -58,21 +58,5 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
-        private RelayCommand _stepper;
-        public RelayCommand Stepper
-        {
-            get
-            {
-                ButtonSpinner spinner = (ButtonSpinner)sender;
-                TextBox txtBox = (TextBox)spinner.Content;
-
-                int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-                if (e.Direction == Microsoft.Windows.Controls.SpinDirection.Increase)
-                    value++;
-                else
-                    value--;
-                txtBox.Text = value.ToString();
-            }
-        }
     }
 }

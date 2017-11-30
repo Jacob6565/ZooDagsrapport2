@@ -50,6 +50,32 @@
                 </Grid>
             </Controls:MetroTabItem>
             <TabItem Header="Foderbestilling">
+                <DataGrid ItemsSource="{Binding DepartmentListApples}"  IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Afdeling" Binding="{Binding Department}"/>
+                        <DataGridTextColumn Header="Vare" Binding="{Binding Good}"/>
+                        <DataGridTemplateColumn Header="Enhed og Antal">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DataGrid ItemsSource="{Binding Orders}" HeadersVisibility="None" AutoGenerateColumns="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding Unit}" Width="60"/>
+                                                            <xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
             <TabItem Header="Praktiskeopgaver">
             </TabItem>
