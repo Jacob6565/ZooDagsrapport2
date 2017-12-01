@@ -13,29 +13,6 @@ namespace AalborgZooProjekt.ViewModel
     {
         
         private readonly IDataService _dataService;
-        /// <summary>
-        /// The <see cref="WelcomeTitle" /> property's name.
-        /// </summary>
-        public const string WelcomeTitlePropertyName = "WelcomeTitle";
-
-        private string _welcomeTitle = string.Empty;
-
-        /// <summary>
-        /// Gets the WelcomeTitle property.
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// </summary>
-        
-        public string WelcomeTitle
-        {           
-            get
-            {
-                return _welcomeTitle;
-            }
-            set
-            {
-                Set(ref _welcomeTitle, value);
-            }
-        }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -51,9 +28,15 @@ namespace AalborgZooProjekt.ViewModel
                         // Report error here
                         return;
                     }
-
-                    WelcomeTitle = item.Title;
                 });
+        }
+
+        public void MakeActive(ProductVersion product)
+        {
+            if (!product.IsActive)
+            {
+                product.IsActive = true;
+            }
         }
 
         ////public override void Cleanup()
