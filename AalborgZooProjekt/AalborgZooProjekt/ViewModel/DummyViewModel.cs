@@ -26,6 +26,7 @@ namespace AalborgZooProjekt
                 Employee emp = new Employee() { Name = "asd", DateHired = "9/11", DateStopped = "00", Id = 2 };
                 context.EmployeeSet.Add(emp);
                 context.SaveChanges();
+                context.Database.Connection.ConnectionString = "";
             }
 
                 string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
