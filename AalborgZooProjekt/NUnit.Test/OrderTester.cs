@@ -12,6 +12,10 @@ namespace NUnit.Test
     [TestFixture]
     public class OrderTester
     {
+        [TestCase()]
+        public void CancelOrder()
+        {
 
+        }
     }
 }
