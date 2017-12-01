@@ -41,6 +41,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exampleish\TemplateTest.cs" />
     <Compile Include="Exampleish\TestThisClass.cs" />
+    <Compile Include="Exampleish\testingtests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
