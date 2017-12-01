@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AalborgZooProjekt.Model;
 using System.IO;
 using System.Text;
+using AalborgZooProjekt.Database;
 
 namespace AalborgZooProjekt
 {
@@ -20,7 +21,14 @@ namespace AalborgZooProjekt
 
         public DummyViewModel()
         {
-            string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
+            using (AalborgZooContainer1 context = new AalborgZooContainer1())
+            {
+                Employee emp = new Employee() { Name = "asd", DateHired = "9/11", DateStopped = "00", Id = 2 };
+                context.EmployeeSet.Add(emp);
+                context.SaveChanges();
+            }
+
+                string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 DummyFoodList.Add(new DummyProduct(product));
