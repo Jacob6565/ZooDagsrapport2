@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public class ProductVersionDummy
+    public class DummyProductVersion
     {
         public bool IsActive { get; set; }
             
-        public ProductVersionDummy(bool isActive)
+        public DummyProductVersion(bool isActive)
         {
             this.IsActive = isActive;
         }
