@@ -145,6 +145,7 @@
     <Compile Include="Model\DummyOrder.cs" />
     <Compile Include="Model\DummyProduct.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Model\ProductVersionDummy.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
