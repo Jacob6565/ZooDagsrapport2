@@ -16,7 +16,9 @@ namespace AalborgZooProjekt.ViewModel
         {
             using (AalborgZooContainer context = new AalborgZooContainer())
             {
-                context.ProductSet.
+                context.EmployeeSet.Add(new Employee() { FirstName = "Tobias", LastName = "Pallumate" });
+                context.SaveChanges();
             }
         }
+    }
 }
