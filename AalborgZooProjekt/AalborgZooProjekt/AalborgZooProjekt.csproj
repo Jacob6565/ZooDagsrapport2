@@ -146,10 +146,11 @@
     <Compile Include="Model\DummyOrder.cs" />
     <Compile Include="Model\DummyProduct.cs" />
     <Compile Include="Model\DummyShopper.cs" />
+    <Compile Include="Model\DummyUnit.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Model\DummyProductVersion.cs" />
     <Compile Include="Model\Order.cs" />
-    <Compile Include="Model\OrderLine.cs" />
+    <Compile Include="Model\DummyOrderLine.cs" />
     <Compile Include="Model\ProductVersion.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>

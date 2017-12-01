@@ -9,10 +9,18 @@ namespace AalborgZooProjekt.Model
     public class DummyProductVersion
     {
         public bool IsActive { get; set; }
-            
+        public DummyUnit Unit { get; set; }
+
         public DummyProductVersion(bool isActive)
         {
             this.IsActive = isActive;
+        }
+
+        public DummyProductVersion(bool isActive, DummyUnit unit)
+        {
+
+            isActive = IsActive;
+            unit = Unit;
         }
 
         public void ActivateProduct()
