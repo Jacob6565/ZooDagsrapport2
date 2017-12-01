@@ -23,5 +23,13 @@ namespace AalborgZooProjekt.Model
             }
         }
 
+        public void DeactivateProduct()
+        {
+            if (IsActive)
+            {
+                IsActive = false;
+            }
+        }
+
     }
 }
