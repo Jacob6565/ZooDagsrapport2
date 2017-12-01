@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    class DummyShopper : DummyEmployee
+    class DummyShopper
     {
 
-        public DummyShopper() : base 
+        public DummyShopper(string username, string password)
         {
-
+            username = Username;
+            password = Password;
         }
 
         private string Username { get; set; }
