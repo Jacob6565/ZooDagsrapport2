@@ -148,6 +148,8 @@
     <Compile Include="Model\DummyShopper.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Model\DummyProductVersion.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\ProductVersion.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
