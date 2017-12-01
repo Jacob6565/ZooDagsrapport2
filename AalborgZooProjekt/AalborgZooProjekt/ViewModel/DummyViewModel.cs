@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using AalborgZooProjekt.Model;
 using System.IO;
 using System.Text;
-using AalborgZooProjekt.Database;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Configuration;
 
 namespace AalborgZooProjekt
 {
@@ -21,15 +23,18 @@ namespace AalborgZooProjekt
 
         public DummyViewModel()
         {
-            using (AalborgZooContainer1 context = new AalborgZooContainer1())
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "aalborgzoo.database.windows.net";
+            builder.UserID = ConfigurationManager.AppSettings["dbUserId"];
+            builder.Password = ConfigurationManager.AppSettings["dbUserPwd"];
+            builder.InitialCatalog = "AalborgZooFoder";
+
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
-                Employee emp = new Employee() { Name = "asd", DateHired = "9/11", DateStopped = "00", Id = 2 };
-                context.EmployeeSet.Add(emp);
-                context.SaveChanges();
-                context.Database.Connection.ConnectionString = "";
+                connection.Open();
             }
 
-                string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
+            string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 DummyFoodList.Add(new DummyProduct(product));
