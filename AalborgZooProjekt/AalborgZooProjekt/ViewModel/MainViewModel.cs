@@ -30,19 +30,5 @@ namespace AalborgZooProjekt.ViewModel
                     }
                 });
         }
-
-        // --------------------------------------
-        // Dyrepasser
-        // --------------------------------------
-
-
-
-
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean up if needed
-
-        ////    base.Cleanup();
-        ////}
     }
 }

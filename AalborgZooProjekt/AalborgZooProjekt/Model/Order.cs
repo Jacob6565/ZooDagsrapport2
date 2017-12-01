@@ -14,13 +14,36 @@ namespace AalborgZooProjekt.Model
         public string DateCreated { get; set; }
         public string Status { get; set; }
 
+        public Order(string note, string dateCreated)
+        {
+            this.DateOrdered = "Not Ordered";
+            this.DateCancelled = "Not Cancelled";
+            this.Note = note;
+            this.DateCreated = dateCreated.ToString();
+            this.Status = "At the office";
+        }
+
+        public Order(string dateCancelled, string note, string dateCreated, string status)
+        {
+            this.DateOrdered = "Not Ordered";
+            this.DateCancelled = dateCancelled;
+            this.Note = note;
+            this.DateCreated = dateCreated.ToString();
+            this.Status = status;
+        }
+
         public Order(string dateOrdered, string dateCancelled, string note, string dateCreated, string status)
         {
             this.DateOrdered = dateOrdered;
             this.DateCancelled = dateCancelled;
             this.Note = note;
-            this.DateCreated = dateCreated;
+            this.DateCreated = dateCreated.ToString();
             this.Status = status;
+        }
+
+        public void CancelOrder()
+        {
+            this.DateCancelled = DateTime.Today.ToString();
         }
     }
 }

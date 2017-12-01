@@ -20,6 +20,7 @@ namespace NUnit.Test
             ProductVersion product = new ProductVersion(active, supplier, today);
 
             MakeActive(product);
+
             Assert.IsTrue(product.IsActive);
         }
 

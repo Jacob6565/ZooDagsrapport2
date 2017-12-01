@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exampleish\ProductVersionDummy_Test.cs" />
+    <Compile Include="OrderLineTester.cs" />
     <Compile Include="OrderTester.cs" />
     <Compile Include="ProductVersionTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
