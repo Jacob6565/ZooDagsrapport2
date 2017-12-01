@@ -13,7 +13,7 @@ namespace NUnit.Test
     {
        
         [Test]
-        public void TestSetProductToActive()
+        public void TestActivateProduct()
         {
             // Arrange
             DummyProductVersion DPV = new DummyProductVersion(false);
@@ -24,6 +24,20 @@ namespace NUnit.Test
             // Assert
             Assert.AreEqual(DPV.IsActive, true);
         }
+
+        [Test]
+        public void TestDeactivateProduct()
+        {
+            // Arrange
+            DummyProductVersion DPV = new DummyProductVersion(true);
+
+            // Act
+            DPV.DeactivateProduct();
+
+            // Assert
+            Assert.AreEqual(DPV.IsActive, false);
+        }
+
 
     }
 }
