@@ -31,14 +31,6 @@ namespace AalborgZooProjekt.ViewModel
                 });
         }
 
-        public void MakeActive(ProductVersion product)
-        {
-            if (!product.IsActive)
-            {
-                product.IsActive = true;
-            }
-        }
-
         // --------------------------------------
         // Dyrepasser
         // --------------------------------------
