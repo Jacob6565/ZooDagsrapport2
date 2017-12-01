@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:AalborgZooProjekt.View"
         mc:Ignorable="d"
         Title="Window1" Height="600" Width="800"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding DB, Source={StaticResource Locator}}">
     
     <Grid>
-        <local:FeedAndRawfeedTab></local:FeedAndRawfeedTab>
+        <DataGrid ItemsSource="{Binding Products}"/>
     </Grid>
 </Window>

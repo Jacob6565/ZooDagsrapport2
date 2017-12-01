@@ -138,6 +138,7 @@
     <Compile Include="Model\DummyModel\DummyOrderDepartment.cs" />
     <Compile Include="Model\DummyModel\DummyProduct.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="ViewModel\DBAalborgZoo.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
