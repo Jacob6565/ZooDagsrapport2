@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public class OrderLine
+    public class DummyOrderLine
     {
         public int Quantity { get; set; }
         public string UnitID { get; set; }

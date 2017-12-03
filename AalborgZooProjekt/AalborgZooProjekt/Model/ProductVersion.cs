@@ -19,11 +19,19 @@ namespace AalborgZooProjekt.Model
             this.DateCreated = dateCreated;
         }
 
-        private void MakeActive(ProductVersion product)
+        public void MakeActive(ProductVersion product)
         {
             if (!product.IsActive)
             {
                 product.IsActive = true;
+            }
+        }
+
+        public void DeactivateProduct(ProductVersion product)
+        {
+            if (product.IsActive)
+            {
+                product.IsActive = false;
             }
         }
     }
