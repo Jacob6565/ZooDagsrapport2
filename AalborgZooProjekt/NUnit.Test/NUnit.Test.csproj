@@ -37,6 +37,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DepartmentTester.cs" />
     <Compile Include="Exampleish\ProductVersionDummy_Test.cs" />
     <Compile Include="OrderLineTester.cs" />
     <Compile Include="OrderTester.cs" />

@@ -19,17 +19,21 @@ namespace NUnit.Test
             string today = DateTime.Today.ToString();
             ProductVersion product = new ProductVersion(active, supplier, today);
 
-            MakeActive(product);
+            product.MakeActive(product);
 
             Assert.IsTrue(product.IsActive);
         }
 
-        private void MakeActive(ProductVersion product)
+        [TestCase(true, "Frugt Karl")]
+        [TestCase(false, "Frugt Karl")]
+        public void TestDeactivate(bool active, string supplier)
         {
-            if (!product.IsActive)
-            {
-                product.IsActive = true;
-            }
+            string today = DateTime.Today.ToString();
+            ProductVersion product = new ProductVersion(active, supplier, today);
+
+            product.DeactivateProduct(product);
+
+            Assert.IsFalse(product.IsActive);
         }
     }
 }

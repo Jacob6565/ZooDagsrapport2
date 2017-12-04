@@ -8,17 +8,7 @@ namespace AalborgZooProjekt.Model
 {
     public class DummyOrderLine
     {
-
-        public DummyOrderLine(DummyProductVersion productVersion, int quantity, string unitID)
-        {
-            //productVersion.Unit = 
-        }
-
         public int Quantity { get; set; }
         public string UnitID { get; set; }
-
-
-
-
     }
 }

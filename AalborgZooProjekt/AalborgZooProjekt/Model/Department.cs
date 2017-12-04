@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public class OrderLine
+    public class Department
     {
-        public int Quantity { get; set; }
-        public string UnitID { get; set; }
+        public string Name { get; set; }
+        public string DateCreated { get; set; }
+        public string DateDeleted { get; set; }
     }
 }

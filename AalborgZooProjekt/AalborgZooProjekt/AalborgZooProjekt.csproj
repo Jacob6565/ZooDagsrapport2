@@ -142,6 +142,7 @@
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
+    <Compile Include="Model\Department.cs" />
     <Compile Include="Model\DummyEmployee.cs" />
     <Compile Include="Model\DummyOrder.cs" />
     <Compile Include="Model\DummyProduct.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\DummyOrderLine.cs" />
     <Compile Include="Model\ProductVersion.cs" />
+    <Compile Include="Model\DummyShoppingList.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
