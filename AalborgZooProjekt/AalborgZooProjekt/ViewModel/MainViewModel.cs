@@ -30,5 +30,11 @@ namespace AalborgZooProjekt.ViewModel
                     }
                 });
         }
+
+
+
+
+
+
     }
 }
