@@ -17,5 +17,12 @@ namespace AalborgZooProjekt.Model
 
         private string Username { get; set; }
         private string Password { get; set; }
+
+
+        public void SaveShoppingList()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

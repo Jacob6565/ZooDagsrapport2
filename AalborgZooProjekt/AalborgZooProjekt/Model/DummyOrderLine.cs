@@ -10,6 +10,7 @@ namespace AalborgZooProjekt.Model
     {
         public int Quantity { get; set; }
         public string UnitID { get; set; }
-
+        public int ProductVersionID {get;set;}
+        public int OrderID { get; set; }
     }
 }
