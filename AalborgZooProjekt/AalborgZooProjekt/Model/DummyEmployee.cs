@@ -10,9 +10,9 @@ namespace AalborgZooProjekt.Model
     {
         public DummyEmployee(string dateHired, string name, string dateStopped)
         {
-            dateHired = DateHired;
-            name = Name;
-            dateStopped = DateStopped;
+            DateHired = dateHired;
+            Name = name;
+            DateStopped = dateStopped;
         }
 
 

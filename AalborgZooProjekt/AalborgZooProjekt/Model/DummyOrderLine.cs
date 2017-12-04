@@ -10,5 +10,6 @@ namespace AalborgZooProjekt.Model
     {
         public int Quantity { get; set; }
         public string UnitID { get; set; }
+
     }
 }

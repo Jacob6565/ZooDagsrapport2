@@ -11,8 +11,8 @@ namespace AalborgZooProjekt.Model
 
         public DummyShopper(string username, string password)
         {
-            username = Username;
-            password = Password;
+            Username = username;
+            Password = password;
         }
 
         private string Username { get; set; }
