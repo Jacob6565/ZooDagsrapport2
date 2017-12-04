@@ -46,6 +46,7 @@
     <Compile Include="Exampleish\TemplateTest.cs" />
     <Compile Include="Exampleish\TestThisClass.cs" />
     <Compile Include="Exampleish\testingtests.cs" />
+    <Compile Include="UnitTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

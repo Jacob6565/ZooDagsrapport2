@@ -12,7 +12,8 @@ namespace AalborgZooProjekt.Model
 
         public DummyUnit(string name)
         {
-            name = Name;
+            Name = name;
         }
+
     }
 }

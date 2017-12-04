@@ -16,11 +16,9 @@ namespace AalborgZooProjekt.Model
             this.IsActive = isActive;
         }
 
-        public DummyProductVersion(bool isActive, DummyUnit unit)
+        public DummyProductVersion(DummyUnit unit)
         {
-
-            isActive = IsActive;
-            unit = Unit;
+            Unit = unit;
         }
 
         public void ActivateProduct()
@@ -37,6 +35,11 @@ namespace AalborgZooProjekt.Model
             {
                 IsActive = false;
             }
+        }
+
+        public void RemoveUnit(DummyProductVersion product)
+        {
+            product.Unit.Name = string.Empty;
         }
 
     }
