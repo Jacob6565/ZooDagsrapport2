@@ -19,6 +19,9 @@ namespace AalborgZooProjekt.Model
         private string Password { get; set; }
 
 
+        /// <summary>
+        /// Send the instance of the class ShoppingList to the database
+        /// </summary>
         public void SaveShoppingList()
         {
             throw new NotImplementedException();

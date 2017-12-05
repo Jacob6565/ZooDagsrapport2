@@ -8,14 +8,19 @@ namespace AalborgZooProjekt.Model
 {
     public class DummyShoppingList
     {
+        public DummyShoppingList(string createdByID, string dateordered, string datecreated, string status)
+        {
+            CreatedByID = createdByID;
+            DateOrdered = dateordered;
+            DateCreated = datecreated;
+            Status = status;
+        }
+
+
         public string CreatedByID { get; set; }
         public string DateOrdered { get; set; }
         public string DateCreated { get; set; }
-        public string Status { get; set; }
+        public string Status      { get; set; }
 
-        /*public DummyShoppingList(string datecreated)
-        {
-            DateCreated = datecreated;
-        }*/
     }
 }
