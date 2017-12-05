@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Database;
 
 namespace AalborgZooProjekt.ViewModel
 {
     interface IShopperViewModel
     {
-        void ActivateProduct();
-        void DeActivateProduct();
-        void RemoveUnitFromProduct(DummyProductVersion product);
+        void ActivateProduct(Product product);
+        void DeActivateProduct(Product product);
+        void RemoveUnitFromProduct(Product product);
         void RemoveOrderLine();
         void SaveShoppingList();
         void GetDepartmentSpecificProducts();
