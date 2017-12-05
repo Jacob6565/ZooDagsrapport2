@@ -8,5 +8,11 @@ namespace AalborgZooProjekt.ViewModel
 {
     interface ILoginViewModel
     {
+        /*
+        void LoginCheck();
+        void Login();
+        void StartZookeeperView();
+        void StartShopperView();
+        */
     }
 }
