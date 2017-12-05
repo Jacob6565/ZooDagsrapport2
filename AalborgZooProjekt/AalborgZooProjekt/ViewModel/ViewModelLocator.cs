@@ -40,6 +40,8 @@ namespace AalborgZooProjekt.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DummyViewModel>();
+            SimpleIoc.Default.Register<OfficeDummyViewModel>();
+            SimpleIoc.Default.Register<DBAalborgZoo>();
         }
 
         /// <summary>
@@ -60,6 +62,20 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<DummyViewModel>();
+            }
+        }
+        public OfficeDummyViewModel OfficeTester
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<OfficeDummyViewModel>();
+            }
+        }
+        public DBAalborgZoo DB
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DBAalborgZoo>();
             }
         }
 
