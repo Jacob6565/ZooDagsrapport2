@@ -6,126 +6,183 @@
     <edmx:StorageModels>
     <Schema Namespace="AalborgZoo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="AalborgZooStoreContainer">
-    <EntitySet Name="EmployeeSet" EntityType="AalborgZoo.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ShoppinglistSet" EntityType="AalborgZoo.Store.ShoppinglistSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DepartmentSpecifikProductSet" EntityType="AalborgZoo.Store.DepartmentSpecifikProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductSet" EntityType="AalborgZoo.Store.ProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductVersionSet" EntityType="AalborgZoo.Store.ProductVersionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ShoppingListSet" EntityType="AalborgZoo.Store.ShoppingListSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="OrderSet" EntityType="AalborgZoo.Store.OrderSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="OrderLineSet" EntityType="AalborgZoo.Store.OrderLineSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProductSet" EntityType="AalborgZoo.Store.ProductSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DepartmentSet" EntityType="AalborgZoo.Store.DepartmentSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="database_firewall_rules" EntityType="AalborgZoo.Store.database_firewall_rules" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="EmployeeSet_Shopper" EntityType="AalborgZoo.Store.EmployeeSet_Shopper" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DepartmentChangeSet" EntityType="AalborgZoo.Store.DepartmentChangeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeSet" EntityType="AalborgZoo.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PasswordChangedSet" EntityType="AalborgZoo.Store.PasswordChangedSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UnitSet" EntityType="AalborgZoo.Store.UnitSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="EmployeeSet_Zookeeper" EntityType="AalborgZoo.Store.EmployeeSet_Zookeeper" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="DepartmentProduct" EntityType="AalborgZoo.Store.DepartmentProduct" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="ShoppinglistShopper" Association="AalborgZoo.Store.ShoppinglistShopper">
-      <End Role="Shoppinglist" EntitySet="ShoppinglistSet" />
-      <End Role="Shopper" EntitySet="EmployeeSet_Shopper" />
-    </AssociationSet>
-    <AssociationSet Name="OrderlistShoppinglist" Association="AalborgZoo.Store.OrderlistShoppinglist">
-      <End Role="Orderlist" EntitySet="OrderSet" />
-      <End Role="Shoppinglist" EntitySet="ShoppinglistSet" />
-    </AssociationSet>
-    <AssociationSet Name="OrderOrderlist" Association="AalborgZoo.Store.OrderOrderlist">
-      <End Role="Order" EntitySet="OrderLineSet" />
-      <End Role="Orderlist" EntitySet="OrderSet" />
-    </AssociationSet>
-    <AssociationSet Name="OrderlistZookeeper" Association="AalborgZoo.Store.OrderlistZookeeper">
-      <End Role="Orderlist" EntitySet="OrderSet" />
-      <End Role="Zookeeper" EntitySet="EmployeeSet_Zookeeper" />
-    </AssociationSet>
-    <AssociationSet Name="ProductOrder" Association="AalborgZoo.Store.ProductOrder">
+    <EntitySet Name="EmployeeSet_Shopper" EntityType="AalborgZoo.Store.EmployeeSet_Shopper" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UnitProductVersion" EntityType="AalborgZoo.Store.UnitProductVersion" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="DepartmentSpecifikProductProduct" Association="AalborgZoo.Store.DepartmentSpecifikProductProduct">
+      <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
       <End Role="Product" EntitySet="ProductSet" />
-      <End Role="Order" EntitySet="OrderLineSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProductProductVersion" Association="AalborgZoo.Store.ProductProductVersion">
+      <End Role="Product" EntitySet="ProductSet" />
+      <End Role="ProductVersion" EntitySet="ProductVersionSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProductVersionOrderLine" Association="AalborgZoo.Store.ProductVersionOrderLine">
+      <End Role="ProductVersion" EntitySet="ProductVersionSet" />
+      <End Role="OrderLine" EntitySet="OrderLineSet" />
+    </AssociationSet>
+    <AssociationSet Name="OrderLineOrder" Association="AalborgZoo.Store.OrderLineOrder">
+      <End Role="OrderLine" EntitySet="OrderLineSet" />
+      <End Role="Order" EntitySet="OrderSet" />
+    </AssociationSet>
+    <AssociationSet Name="OrderShoppingList" Association="AalborgZoo.Store.OrderShoppingList">
+      <End Role="Order" EntitySet="OrderSet" />
+      <End Role="ShoppingList" EntitySet="ShoppingListSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UnitProductVersion_Unit" Association="AalborgZoo.Store.FK_UnitProductVersion_Unit">
+      <End Role="Unit" EntitySet="UnitSet" />
+      <End Role="UnitProductVersion" EntitySet="UnitProductVersion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UnitProductVersion_ProductVersion" Association="AalborgZoo.Store.FK_UnitProductVersion_ProductVersion">
+      <End Role="ProductVersion" EntitySet="ProductVersionSet" />
+      <End Role="UnitProductVersion" EntitySet="UnitProductVersion" />
+    </AssociationSet>
+    <AssociationSet Name="DepartmentSpecifikProductDepartment" Association="AalborgZoo.Store.DepartmentSpecifikProductDepartment">
+      <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
+      <End Role="Department" EntitySet="DepartmentSet" />
     </AssociationSet>
     <AssociationSet Name="DepartmentZookeeper" Association="AalborgZoo.Store.DepartmentZookeeper">
       <End Role="Department" EntitySet="DepartmentSet" />
       <End Role="Zookeeper" EntitySet="EmployeeSet_Zookeeper" />
     </AssociationSet>
-    <AssociationSet Name="FK_DepartmentProduct_Department" Association="AalborgZoo.Store.FK_DepartmentProduct_Department">
-      <End Role="Department" EntitySet="DepartmentSet" />
-      <End Role="DepartmentProduct" EntitySet="DepartmentProduct" />
+    <AssociationSet Name="DepartmentChangeZookeeper" Association="AalborgZoo.Store.DepartmentChangeZookeeper">
+      <End Role="DepartmentChange" EntitySet="DepartmentChangeSet" />
+      <End Role="Zookeeper" EntitySet="EmployeeSet_Zookeeper" />
     </AssociationSet>
-    <AssociationSet Name="FK_DepartmentProduct_Product" Association="AalborgZoo.Store.FK_DepartmentProduct_Product">
-      <End Role="Product" EntitySet="ProductSet" />
-      <End Role="DepartmentProduct" EntitySet="DepartmentProduct" />
+    <AssociationSet Name="ShopperShoppingList" Association="AalborgZoo.Store.ShopperShoppingList">
+      <End Role="Shopper" EntitySet="EmployeeSet_Shopper" />
+      <End Role="ShoppingList" EntitySet="ShoppingListSet" />
     </AssociationSet>
-    <AssociationSet Name="DepartmentOrderlist" Association="AalborgZoo.Store.DepartmentOrderlist">
-      <End Role="Department" EntitySet="DepartmentSet" />
-      <End Role="Orderlist" EntitySet="OrderSet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Shopper_inherits_Employee" Association="AalborgZoo.Store.FK_Shopper_inherits_Employee">
-      <End Role="Employee" EntitySet="EmployeeSet" />
+    <AssociationSet Name="PasswordChangedShopper" Association="AalborgZoo.Store.PasswordChangedShopper">
+      <End Role="PasswordChanged" EntitySet="PasswordChangedSet" />
       <End Role="Shopper" EntitySet="EmployeeSet_Shopper" />
     </AssociationSet>
     <AssociationSet Name="FK_Zookeeper_inherits_Employee" Association="AalborgZoo.Store.FK_Zookeeper_inherits_Employee">
       <End Role="Employee" EntitySet="EmployeeSet" />
       <End Role="Zookeeper" EntitySet="EmployeeSet_Zookeeper" />
     </AssociationSet>
+    <AssociationSet Name="FK_Shopper_inherits_Employee" Association="AalborgZoo.Store.FK_Shopper_inherits_Employee">
+      <End Role="Employee" EntitySet="EmployeeSet" />
+      <End Role="Shopper" EntitySet="EmployeeSet_Shopper" />
+    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="EmployeeSet">
+  <EntityType Name="DepartmentSpecifikProductSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ShoppinglistSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Shopper_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="OrderSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ShoppinglistId" Type="int" Nullable="false" />
-    <Property Name="ZookeeperId" Type="int" Nullable="false" />
-    <Property Name="DepartmentId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="OrderLineSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OrderlistId" Type="int" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedByID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DeletedByID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateDeleted" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductVersionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsActive" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Supplier" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedByID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShoppingListSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreatedByID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShopperId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderedByID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateOrdered" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCancelled" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DeletedByID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShoppingListId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="OrderLineSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UnitID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProductVersionId" Type="int" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DepartmentSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateDeleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="database_firewall_rules">
-    <Key>
-      <PropertyRef Name="id" />
-      <PropertyRef Name="name" />
-      <PropertyRef Name="start_ip_address" />
-      <PropertyRef Name="end_ip_address" />
-      <PropertyRef Name="create_date" />
-      <PropertyRef Name="modify_date" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="start_ip_address" Type="varchar" Nullable="false" MaxLength="45" />
-    <Property Name="end_ip_address" Type="varchar" Nullable="false" MaxLength="45" />
-    <Property Name="create_date" Type="datetime" Nullable="false" />
-    <Property Name="modify_date" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="EmployeeSet_Shopper">
+  <EntityType Name="DepartmentChangeSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateChanged" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ZookeeperID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ZookeeperId1" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EmployeeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateHired" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateStopped" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PasswordChangedSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateChanged" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShopperId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UnitSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="EmployeeSet_Zookeeper">
     <Key>
@@ -134,71 +191,91 @@
     <Property Name="DepartmentId" Type="int" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="DepartmentProduct">
+  <EntityType Name="EmployeeSet_Shopper">
     <Key>
-      <PropertyRef Name="Departments_Id" />
-      <PropertyRef Name="Products_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Departments_Id" Type="int" Nullable="false" />
-    <Property Name="Products_Id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="ShoppinglistShopper">
-    <End Role="Shoppinglist" Type="AalborgZoo.Store.ShoppinglistSet" Multiplicity="*" />
-    <End Role="Shopper" Type="AalborgZoo.Store.EmployeeSet_Shopper" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Shopper">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Shoppinglist">
-        <PropertyRef Name="Shopper_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="OrderlistShoppinglist">
-    <End Role="Orderlist" Type="AalborgZoo.Store.OrderSet" Multiplicity="*" />
-    <End Role="Shoppinglist" Type="AalborgZoo.Store.ShoppinglistSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Shoppinglist">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Orderlist">
-        <PropertyRef Name="ShoppinglistId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="OrderOrderlist">
-    <End Role="Order" Type="AalborgZoo.Store.OrderLineSet" Multiplicity="*" />
-    <End Role="Orderlist" Type="AalborgZoo.Store.OrderSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Orderlist">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="OrderlistId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="OrderlistZookeeper">
-    <End Role="Orderlist" Type="AalborgZoo.Store.OrderSet" Multiplicity="*" />
-    <End Role="Zookeeper" Type="AalborgZoo.Store.EmployeeSet_Zookeeper" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Zookeeper">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Orderlist">
-        <PropertyRef Name="ZookeeperId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ProductOrder">
+  <EntityType Name="UnitProductVersion">
+    <Key>
+      <PropertyRef Name="Unit_Id" />
+      <PropertyRef Name="ProductVersion_Id" />
+    </Key>
+    <Property Name="Unit_Id" Type="int" Nullable="false" />
+    <Property Name="ProductVersion_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="DepartmentSpecifikProductProduct">
+    <End Role="DepartmentSpecifikProduct" Type="AalborgZoo.Store.DepartmentSpecifikProductSet" Multiplicity="*" />
     <End Role="Product" Type="AalborgZoo.Store.ProductSet" Multiplicity="1" />
-    <End Role="Order" Type="AalborgZoo.Store.OrderLineSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Order">
+      <Dependent Role="DepartmentSpecifikProduct">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductProductVersion">
+    <End Role="Product" Type="AalborgZoo.Store.ProductSet" Multiplicity="1" />
+    <End Role="ProductVersion" Type="AalborgZoo.Store.ProductVersionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductVersion">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductVersionOrderLine">
+    <End Role="ProductVersion" Type="AalborgZoo.Store.ProductVersionSet" Multiplicity="1" />
+    <End Role="OrderLine" Type="AalborgZoo.Store.OrderLineSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductVersion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderLine">
+        <PropertyRef Name="ProductVersionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderLineOrder">
+    <End Role="OrderLine" Type="AalborgZoo.Store.OrderLineSet" Multiplicity="*" />
+    <End Role="Order" Type="AalborgZoo.Store.OrderSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderLine">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderShoppingList">
+    <End Role="Order" Type="AalborgZoo.Store.OrderSet" Multiplicity="*" />
+    <End Role="ShoppingList" Type="AalborgZoo.Store.ShoppingListSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ShoppingListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DepartmentSpecifikProductDepartment">
+    <End Role="DepartmentSpecifikProduct" Type="AalborgZoo.Store.DepartmentSpecifikProductSet" Multiplicity="*" />
+    <End Role="Department" Type="AalborgZoo.Store.DepartmentSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DepartmentSpecifikProduct">
+        <PropertyRef Name="DepartmentId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -214,53 +291,63 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DepartmentOrderlist">
-    <End Role="Department" Type="AalborgZoo.Store.DepartmentSet" Multiplicity="1" />
-    <End Role="Orderlist" Type="AalborgZoo.Store.OrderSet" Multiplicity="*" />
+  <Association Name="DepartmentChangeZookeeper">
+    <End Role="DepartmentChange" Type="AalborgZoo.Store.DepartmentChangeSet" Multiplicity="*" />
+    <End Role="Zookeeper" Type="AalborgZoo.Store.EmployeeSet_Zookeeper" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="Department">
+      <Principal Role="Zookeeper">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Orderlist">
-        <PropertyRef Name="DepartmentId" />
+      <Dependent Role="DepartmentChange">
+        <PropertyRef Name="ZookeeperId1" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DepartmentProduct_Department">
-    <End Role="Department" Type="AalborgZoo.Store.DepartmentSet" Multiplicity="1" />
-    <End Role="DepartmentProduct" Type="AalborgZoo.Store.DepartmentProduct" Multiplicity="*" />
+  <Association Name="ShopperShoppingList">
+    <End Role="Shopper" Type="AalborgZoo.Store.EmployeeSet_Shopper" Multiplicity="1" />
+    <End Role="ShoppingList" Type="AalborgZoo.Store.ShoppingListSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Department">
+      <Principal Role="Shopper">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="DepartmentProduct">
-        <PropertyRef Name="Departments_Id" />
+      <Dependent Role="ShoppingList">
+        <PropertyRef Name="ShopperId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DepartmentProduct_Product">
-    <End Role="DepartmentProduct" Type="AalborgZoo.Store.DepartmentProduct" Multiplicity="*" />
-    <End Role="Product" Type="AalborgZoo.Store.ProductSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DepartmentProduct">
-        <PropertyRef Name="Products_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Shopper_inherits_Employee">
-    <End Role="Employee" Type="AalborgZoo.Store.EmployeeSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+  <Association Name="PasswordChangedShopper">
+    <End Role="PasswordChanged" Type="AalborgZoo.Store.PasswordChangedSet" Multiplicity="*" />
     <End Role="Shopper" Type="AalborgZoo.Store.EmployeeSet_Shopper" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="Employee">
+      <Principal Role="Shopper">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Shopper">
+      <Dependent Role="PasswordChanged">
+        <PropertyRef Name="ShopperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UnitProductVersion_Unit">
+    <End Role="Unit" Type="AalborgZoo.Store.UnitSet" Multiplicity="1" />
+    <End Role="UnitProductVersion" Type="AalborgZoo.Store.UnitProductVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
         <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UnitProductVersion">
+        <PropertyRef Name="Unit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UnitProductVersion_ProductVersion">
+    <End Role="UnitProductVersion" Type="AalborgZoo.Store.UnitProductVersion" Multiplicity="*" />
+    <End Role="ProductVersion" Type="AalborgZoo.Store.ProductVersionSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ProductVersion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UnitProductVersion">
+        <PropertyRef Name="ProductVersion_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -278,166 +365,293 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Shopper_inherits_Employee">
+    <End Role="Employee" Type="AalborgZoo.Store.EmployeeSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Shopper" Type="AalborgZoo.Store.EmployeeSet_Shopper" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shopper">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AalborgZoo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="AalborgZooContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="EmployeeSet" EntityType="AalborgZoo.Employee" />
-          <EntitySet Name="ShoppinglistSet" EntityType="AalborgZoo.Shoppinglist" />
-          <AssociationSet Name="ShoppinglistShopper" Association="AalborgZoo.ShoppinglistShopper">
-            <End Role="Shoppinglist" EntitySet="ShoppinglistSet" />
-            <End Role="Shopper" EntitySet="EmployeeSet" />
-          </AssociationSet>
-          <EntitySet Name="OrderSet" EntityType="AalborgZoo.Order" />
-          <AssociationSet Name="OrderlistShoppinglist" Association="AalborgZoo.OrderlistShoppinglist">
-            <End Role="Orderlist" EntitySet="OrderSet" />
-            <End Role="Shoppinglist" EntitySet="ShoppinglistSet" />
-          </AssociationSet>
-          <EntitySet Name="OrderLineSet" EntityType="AalborgZoo.OrderLine" />
-          <AssociationSet Name="OrderOrderlist" Association="AalborgZoo.OrderOrderlist">
-            <End Role="Order" EntitySet="OrderLineSet" />
-            <End Role="Orderlist" EntitySet="OrderSet" />
-          </AssociationSet>
-          <AssociationSet Name="OrderlistZookeeper" Association="AalborgZoo.OrderlistZookeeper">
-            <End Role="Orderlist" EntitySet="OrderSet" />
-            <End Role="Zookeeper" EntitySet="EmployeeSet" />
-          </AssociationSet>
+        <EntityContainer Name="AalborgZooContainer1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DepartmentSpecifikProductSet" EntityType="AalborgZoo.DepartmentSpecifikProduct" />
           <EntitySet Name="ProductSet" EntityType="AalborgZoo.Product" />
-          <AssociationSet Name="ProductOrder" Association="AalborgZoo.ProductOrder">
-            <End Role="Product" EntitySet="ProductSet" />
-            <End Role="Order" EntitySet="OrderLineSet" />
-          </AssociationSet>
+          <EntitySet Name="ProductVersionSet" EntityType="AalborgZoo.ProductVersion" />
+          <EntitySet Name="ShoppingListSet" EntityType="AalborgZoo.ShoppingList" />
+          <EntitySet Name="OrderSet" EntityType="AalborgZoo.Order" />
+          <EntitySet Name="OrderLineSet" EntityType="AalborgZoo.OrderLine" />
           <EntitySet Name="DepartmentSet" EntityType="AalborgZoo.Department" />
+          <EntitySet Name="DepartmentChangeSet" EntityType="AalborgZoo.DepartmentChange" />
+          <EntitySet Name="EmployeeSet" EntityType="AalborgZoo.Employee" />
+          <EntitySet Name="PasswordChangedSet" EntityType="AalborgZoo.PasswordChanged" />
+          <EntitySet Name="UnitSet" EntityType="AalborgZoo.Unit" />
+          <AssociationSet Name="DepartmentSpecifikProductProduct" Association="AalborgZoo.DepartmentSpecifikProductProduct">
+            <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
+            <End Role="Product" EntitySet="ProductSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductProductVersion" Association="AalborgZoo.ProductProductVersion">
+            <End Role="Product" EntitySet="ProductSet" />
+            <End Role="ProductVersion" EntitySet="ProductVersionSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductVersionOrderLine" Association="AalborgZoo.ProductVersionOrderLine">
+            <End Role="ProductVersion" EntitySet="ProductVersionSet" />
+            <End Role="OrderLine" EntitySet="OrderLineSet" />
+          </AssociationSet>
+          <AssociationSet Name="OrderLineOrder" Association="AalborgZoo.OrderLineOrder">
+            <End Role="OrderLine" EntitySet="OrderLineSet" />
+            <End Role="Order" EntitySet="OrderSet" />
+          </AssociationSet>
+          <AssociationSet Name="OrderShoppingList" Association="AalborgZoo.OrderShoppingList">
+            <End Role="Order" EntitySet="OrderSet" />
+            <End Role="ShoppingList" EntitySet="ShoppingListSet" />
+          </AssociationSet>
+          <AssociationSet Name="UnitProductVersion" Association="AalborgZoo.UnitProductVersion">
+            <End Role="Unit" EntitySet="UnitSet" />
+            <End Role="ProductVersion" EntitySet="ProductVersionSet" />
+          </AssociationSet>
+          <AssociationSet Name="DepartmentSpecifikProductDepartment" Association="AalborgZoo.DepartmentSpecifikProductDepartment">
+            <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
+            <End Role="Department" EntitySet="DepartmentSet" />
+          </AssociationSet>
           <AssociationSet Name="DepartmentZookeeper" Association="AalborgZoo.DepartmentZookeeper">
             <End Role="Department" EntitySet="DepartmentSet" />
             <End Role="Zookeeper" EntitySet="EmployeeSet" />
           </AssociationSet>
-          <AssociationSet Name="DepartmentProduct" Association="AalborgZoo.DepartmentProduct">
-            <End Role="Department" EntitySet="DepartmentSet" />
-            <End Role="Product" EntitySet="ProductSet" />
+          <AssociationSet Name="DepartmentChangeZookeeper" Association="AalborgZoo.DepartmentChangeZookeeper">
+            <End Role="DepartmentChange" EntitySet="DepartmentChangeSet" />
+            <End Role="Zookeeper" EntitySet="EmployeeSet" />
           </AssociationSet>
-          <AssociationSet Name="DepartmentOrderlist" Association="AalborgZoo.DepartmentOrderlist">
-            <End Role="Department" EntitySet="DepartmentSet" />
-            <End Role="Orderlist" EntitySet="OrderSet" />
+          <AssociationSet Name="ShopperShoppingList" Association="AalborgZoo.ShopperShoppingList">
+            <End Role="Shopper" EntitySet="EmployeeSet" />
+            <End Role="ShoppingList" EntitySet="ShoppingListSet" />
           </AssociationSet>
-          <EntitySet Name="database_firewall_rules" EntityType="AalborgZoo.database_firewall_rules" />
+          <AssociationSet Name="PasswordChangedShopper" Association="AalborgZoo.PasswordChangedShopper">
+            <End Role="PasswordChanged" EntitySet="PasswordChangedSet" />
+            <End Role="Shopper" EntitySet="EmployeeSet" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Employee">
+        <EntityType Name="DepartmentSpecifikProduct">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" />
-          <Property Name="LastName" Type="String" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Shopper" BaseType="AalborgZoo.Employee" >
-          <NavigationProperty Name="Shoppinglists" Relationship="AalborgZoo.ShoppinglistShopper" FromRole="Shopper" ToRole="Shoppinglist" />
-        </EntityType>
-        <EntityType Name="Zookeeper" BaseType="AalborgZoo.Employee" >
-          <NavigationProperty Name="Orderlists" Relationship="AalborgZoo.OrderlistZookeeper" FromRole="Zookeeper" ToRole="Orderlist" />
-          <NavigationProperty Name="Department" Relationship="AalborgZoo.DepartmentZookeeper" FromRole="Zookeeper" ToRole="Department" />
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Shoppinglist">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Shopper" Relationship="AalborgZoo.ShoppinglistShopper" FromRole="Shoppinglist" ToRole="Shopper" />
-          <NavigationProperty Name="Orderlists" Relationship="AalborgZoo.OrderlistShoppinglist" FromRole="Shoppinglist" ToRole="Orderlist" />
-        </EntityType>
-        <Association Name="ShoppinglistShopper">
-          <End Type="AalborgZoo.Shoppinglist" Role="Shoppinglist" Multiplicity="*" />
-          <End Type="AalborgZoo.Shopper" Role="Shopper" Multiplicity="1" />
-        </Association>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Shoppinglist" Relationship="AalborgZoo.OrderlistShoppinglist" FromRole="Orderlist" ToRole="Shoppinglist" />
-          <Property Name="ShoppinglistId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Orders" Relationship="AalborgZoo.OrderOrderlist" FromRole="Orderlist" ToRole="Order" />
-          <NavigationProperty Name="Zookeeper" Relationship="AalborgZoo.OrderlistZookeeper" FromRole="Orderlist" ToRole="Zookeeper" />
-          <Property Name="ZookeeperId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Department" Relationship="AalborgZoo.DepartmentOrderlist" FromRole="Orderlist" ToRole="Department" />
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="OrderlistShoppinglist">
-          <End Type="AalborgZoo.Order" Role="Orderlist" Multiplicity="*" />
-          <End Type="AalborgZoo.Shoppinglist" Role="Shoppinglist" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Shoppinglist">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Orderlist">
-              <PropertyRef Name="ShoppinglistId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="OrderLine">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Orderlist" Relationship="AalborgZoo.OrderOrderlist" FromRole="Order" ToRole="Orderlist" />
-          <Property Name="OrderlistId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="AalborgZoo.ProductOrder" FromRole="Order" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="DepartmentSpecifikProduct" ToRole="Product" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="AalborgZoo.DepartmentSpecifikProductDepartment" FromRole="DepartmentSpecifikProduct" ToRole="Department" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="OrderOrderlist">
-          <End Type="AalborgZoo.OrderLine" Role="Order" Multiplicity="*" />
-          <End Type="AalborgZoo.Order" Role="Orderlist" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Orderlist">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="OrderlistId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="OrderlistZookeeper">
-          <End Type="AalborgZoo.Order" Role="Orderlist" Multiplicity="*" />
-          <End Type="AalborgZoo.Zookeeper" Role="Zookeeper" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Zookeeper">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Orderlist">
-              <PropertyRef Name="ZookeeperId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Departments" Relationship="AalborgZoo.DepartmentProduct" FromRole="Product" ToRole="Department" />
+          <Property Name="DateCreated" Type="String" Nullable="false" />
+          <Property Name="CreatedByID" Type="String" Nullable="false" />
+          <Property Name="DeletedByID" Type="String" Nullable="false" />
+          <Property Name="DateDeleted" Type="String" Nullable="false" />
+          <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="Product" ToRole="DepartmentSpecifikProduct" />
+          <NavigationProperty Name="ProductVersions" Relationship="AalborgZoo.ProductProductVersion" FromRole="Product" ToRole="ProductVersion" />
         </EntityType>
-        <Association Name="ProductOrder">
-          <End Type="AalborgZoo.Product" Role="Product" Multiplicity="1" />
-          <End Type="AalborgZoo.OrderLine" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="ProductVersion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="String" Nullable="false" />
+          <Property Name="Supplier" Type="String" Nullable="false" />
+          <Property Name="CreatedByID" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="String" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="AalborgZoo.ProductProductVersion" FromRole="ProductVersion" ToRole="Product" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderLines" Relationship="AalborgZoo.ProductVersionOrderLine" FromRole="ProductVersion" ToRole="OrderLine" />
+          <NavigationProperty Name="Unit" Relationship="AalborgZoo.UnitProductVersion" FromRole="ProductVersion" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="ShoppingList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedByID" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="AalborgZoo.OrderShoppingList" FromRole="ShoppingList" ToRole="Order" />
+          <NavigationProperty Name="Shopper" Relationship="AalborgZoo.ShopperShoppingList" FromRole="ShoppingList" ToRole="Shopper" />
+          <Property Name="ShopperId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentID" Type="String" Nullable="false" />
+          <Property Name="OrderedByID" Type="String" Nullable="false" />
+          <Property Name="DateOrdered" Type="String" Nullable="false" />
+          <Property Name="DateCancelled" Type="String" Nullable="false" />
+          <Property Name="Note" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="String" Nullable="false" />
+          <Property Name="DeletedByID" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <NavigationProperty Name="OrderLines" Relationship="AalborgZoo.OrderLineOrder" FromRole="Order" ToRole="OrderLine" />
+          <NavigationProperty Name="ShoppingList" Relationship="AalborgZoo.OrderShoppingList" FromRole="Order" ToRole="ShoppingList" />
+          <Property Name="ShoppingListId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="OrderLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="String" Nullable="false" />
+          <Property Name="UnitID" Type="String" Nullable="false" />
+          <NavigationProperty Name="ProductVersion" Relationship="AalborgZoo.ProductVersionOrderLine" FromRole="OrderLine" ToRole="ProductVersion" />
+          <Property Name="ProductVersionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="AalborgZoo.OrderLineOrder" FromRole="OrderLine" ToRole="Order" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="String" Nullable="false" />
+          <Property Name="DateDeleted" Type="String" Nullable="false" />
+          <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductDepartment" FromRole="Department" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="Zookeepers" Relationship="AalborgZoo.DepartmentZookeeper" FromRole="Department" ToRole="Zookeeper" />
-          <NavigationProperty Name="Products" Relationship="AalborgZoo.DepartmentProduct" FromRole="Department" ToRole="Product" />
-          <NavigationProperty Name="Orderlists" Relationship="AalborgZoo.DepartmentOrderlist" FromRole="Department" ToRole="Orderlist" />
         </EntityType>
+        <EntityType Name="Zookeeper" BaseType="AalborgZoo.Employee">
+          <NavigationProperty Name="Department" Relationship="AalborgZoo.DepartmentZookeeper" FromRole="Zookeeper" ToRole="Department" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DepartmentChanges" Relationship="AalborgZoo.DepartmentChangeZookeeper" FromRole="Zookeeper" ToRole="DepartmentChange" />
+        </EntityType>
+        <EntityType Name="DepartmentChange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentID" Type="String" Nullable="false" />
+          <Property Name="DateChanged" Type="String" Nullable="false" />
+          <Property Name="ZookeeperID" Type="String" Nullable="false" />
+          <NavigationProperty Name="Zookeeper" Relationship="AalborgZoo.DepartmentChangeZookeeper" FromRole="DepartmentChange" ToRole="Zookeeper" />
+          <Property Name="ZookeeperId1" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateHired" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="DateStopped" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shopper" BaseType="AalborgZoo.Employee">
+          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="ShoppingLists" Relationship="AalborgZoo.ShopperShoppingList" FromRole="Shopper" ToRole="ShoppingList" />
+          <NavigationProperty Name="PasswordChanges" Relationship="AalborgZoo.PasswordChangedShopper" FromRole="Shopper" ToRole="PasswordChanged" />
+        </EntityType>
+        <EntityType Name="PasswordChanged">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateChanged" Type="String" Nullable="false" />
+          <NavigationProperty Name="Shopper" Relationship="AalborgZoo.PasswordChangedShopper" FromRole="PasswordChanged" ToRole="Shopper" />
+          <Property Name="ShopperId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="ProductVersion" Relationship="AalborgZoo.UnitProductVersion" FromRole="Unit" ToRole="ProductVersion" />
+        </EntityType>
+        <Association Name="DepartmentSpecifikProductProduct">
+          <End Type="AalborgZoo.DepartmentSpecifikProduct" Role="DepartmentSpecifikProduct" Multiplicity="*" />
+          <End Type="AalborgZoo.Product" Role="Product" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentSpecifikProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductProductVersion">
+          <End Type="AalborgZoo.Product" Role="Product" Multiplicity="1" />
+          <End Type="AalborgZoo.ProductVersion" Role="ProductVersion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductVersion">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductVersionOrderLine">
+          <End Type="AalborgZoo.ProductVersion" Role="ProductVersion" Multiplicity="1" />
+          <End Type="AalborgZoo.OrderLine" Role="OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductVersion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="ProductVersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderLineOrder">
+          <End Type="AalborgZoo.OrderLine" Role="OrderLine" Multiplicity="*" />
+          <End Type="AalborgZoo.Order" Role="Order" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderShoppingList">
+          <End Type="AalborgZoo.Order" Role="Order" Multiplicity="*" />
+          <End Type="AalborgZoo.ShoppingList" Role="ShoppingList" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShoppingListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UnitProductVersion">
+          <End Type="AalborgZoo.Unit" Role="Unit" Multiplicity="*" />
+          <End Type="AalborgZoo.ProductVersion" Role="ProductVersion" Multiplicity="*" />
+        </Association>
+        <Association Name="DepartmentSpecifikProductDepartment">
+          <End Type="AalborgZoo.DepartmentSpecifikProduct" Role="DepartmentSpecifikProduct" Multiplicity="*" />
+          <End Type="AalborgZoo.Department" Role="Department" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentSpecifikProduct">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="DepartmentZookeeper">
           <End Type="AalborgZoo.Department" Role="Department" Multiplicity="1" />
           <End Type="AalborgZoo.Zookeeper" Role="Zookeeper" Multiplicity="*" />
@@ -450,55 +664,146 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DepartmentProduct">
-          <End Type="AalborgZoo.Department" Role="Department" Multiplicity="*" />
-          <End Type="AalborgZoo.Product" Role="Product" Multiplicity="*" />
-        </Association>
-        <Association Name="DepartmentOrderlist">
-          <End Type="AalborgZoo.Department" Role="Department" Multiplicity="1" />
-          <End Type="AalborgZoo.Order" Role="Orderlist" Multiplicity="*" />
+        <Association Name="DepartmentChangeZookeeper">
+          <End Type="AalborgZoo.DepartmentChange" Role="DepartmentChange" Multiplicity="*" />
+          <End Type="AalborgZoo.Zookeeper" Role="Zookeeper" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Department">
+            <Principal Role="Zookeeper">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Orderlist">
-              <PropertyRef Name="DepartmentId" />
+            <Dependent Role="DepartmentChange">
+              <PropertyRef Name="ZookeeperId1" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
+        <Association Name="ShopperShoppingList">
+          <End Type="AalborgZoo.Shopper" Role="Shopper" Multiplicity="1" />
+          <End Type="AalborgZoo.ShoppingList" Role="ShoppingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shopper">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingList">
+              <PropertyRef Name="ShopperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PasswordChangedShopper">
+          <End Type="AalborgZoo.PasswordChanged" Role="PasswordChanged" Multiplicity="*" />
+          <End Type="AalborgZoo.Shopper" Role="Shopper" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shopper">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PasswordChanged">
+              <PropertyRef Name="ShopperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="AalborgZooStoreContainer" CdmEntityContainer="AalborgZooContainer">
+  <EntityContainerMapping StorageEntityContainer="AalborgZooStoreContainer" CdmEntityContainer="AalborgZooContainer1">
+    <EntitySetMapping Name="DepartmentSpecifikProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.DepartmentSpecifikProduct)">
+        <MappingFragment StoreEntitySet="DepartmentSpecifikProductSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Product)">
+        <MappingFragment StoreEntitySet="ProductSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+          <ScalarProperty Name="DeletedByID" ColumnName="DeletedByID" />
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductVersionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.ProductVersion)">
+        <MappingFragment StoreEntitySet="ProductVersionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingListSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.ShoppingList)">
+        <MappingFragment StoreEntitySet="ShoppingListSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ShopperId" ColumnName="ShopperId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Order)">
+        <MappingFragment StoreEntitySet="OrderSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="OrderedByID" ColumnName="OrderedByID" />
+          <ScalarProperty Name="DateOrdered" ColumnName="DateOrdered" />
+          <ScalarProperty Name="DateCancelled" ColumnName="DateCancelled" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DeletedByID" ColumnName="DeletedByID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ShoppingListId" ColumnName="ShoppingListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderLineSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.OrderLine)">
+        <MappingFragment StoreEntitySet="OrderLineSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="ProductVersionId" ColumnName="ProductVersionId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartmentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Department)">
+        <MappingFragment StoreEntitySet="DepartmentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartmentChangeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.DepartmentChange)">
+        <MappingFragment StoreEntitySet="DepartmentChangeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
+          <ScalarProperty Name="ZookeeperID" ColumnName="ZookeeperID" />
+          <ScalarProperty Name="ZookeeperId1" ColumnName="ZookeeperId1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EmployeeSet">
       <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Employee)">
         <MappingFragment StoreEntitySet="EmployeeSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Shopper)">
-        <MappingFragment StoreEntitySet="EmployeeSet_Shopper">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateHired" ColumnName="DateHired" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateStopped" ColumnName="DateStopped" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Zookeeper)">
@@ -507,73 +812,37 @@
           <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
         </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ShoppinglistSet">
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Shoppinglist)">
-        <MappingFragment StoreEntitySet="ShoppinglistSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Shopper)">
+        <MappingFragment StoreEntitySet="EmployeeSet_Shopper">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderSet">
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Order)">
-        <MappingFragment StoreEntitySet="OrderSet">
+    <EntitySetMapping Name="PasswordChangedSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.PasswordChanged)">
+        <MappingFragment StoreEntitySet="PasswordChangedSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ShoppinglistId" ColumnName="ShoppinglistId" />
-          <ScalarProperty Name="ZookeeperId" ColumnName="ZookeeperId" />
-          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
+          <ScalarProperty Name="ShopperId" ColumnName="ShopperId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderLineSet">
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.OrderLine)">
-        <MappingFragment StoreEntitySet="OrderLineSet">
+    <EntitySetMapping Name="UnitSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Unit)">
+        <MappingFragment StoreEntitySet="UnitSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="OrderlistId" ColumnName="OrderlistId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProductSet">
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Product)">
-        <MappingFragment StoreEntitySet="ProductSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DepartmentSet">
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.Department)">
-        <MappingFragment StoreEntitySet="DepartmentSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="database_firewall_rules">
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.database_firewall_rules)">
-        <MappingFragment StoreEntitySet="database_firewall_rules">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-          <ScalarProperty Name="create_date" ColumnName="create_date" />
-          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="ShoppinglistShopper" TypeName="AalborgZoo.ShoppinglistShopper" StoreEntitySet="ShoppinglistSet">
-      <EndProperty Name="Shopper">
-        <ScalarProperty Name="Id" ColumnName="Shopper_Id" />
+    <AssociationSetMapping Name="UnitProductVersion" TypeName="AalborgZoo.UnitProductVersion" StoreEntitySet="UnitProductVersion">
+      <EndProperty Name="Unit">
+        <ScalarProperty Name="Id" ColumnName="Unit_Id" />
       </EndProperty>
-      <EndProperty Name="Shoppinglist">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="DepartmentProduct" TypeName="AalborgZoo.DepartmentProduct" StoreEntitySet="DepartmentProduct">
-      <EndProperty Name="Department">
-        <ScalarProperty Name="Id" ColumnName="Departments_Id" />
-      </EndProperty>
-      <EndProperty Name="Product">
-        <ScalarProperty Name="Id" ColumnName="Products_Id" />
+      <EndProperty Name="ProductVersion">
+        <ScalarProperty Name="Id" ColumnName="ProductVersion_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
@@ -592,7 +861,6 @@
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

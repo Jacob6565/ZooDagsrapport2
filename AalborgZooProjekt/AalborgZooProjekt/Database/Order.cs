@@ -17,18 +17,22 @@ namespace AalborgZooProjekt.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.Orders = new HashSet<OrderLine>();
+            this.OrderLines = new HashSet<OrderLine>();
         }
     
         public int Id { get; set; }
-        public int ShoppinglistId { get; set; }
-        public int ZookeeperId { get; set; }
-        public int DepartmentId { get; set; }
+        public string DepartmentID { get; set; }
+        public string OrderedByID { get; set; }
+        public string DateOrdered { get; set; }
+        public string DateCancelled { get; set; }
+        public string Note { get; set; }
+        public string DateCreated { get; set; }
+        public string DeletedByID { get; set; }
+        public string Status { get; set; }
+        public Nullable<int> ShoppingListId { get; set; }
     
-        public virtual Shoppinglist Shoppinglist { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderLine> Orders { get; set; }
-        public virtual Zookeeper Zookeeper { get; set; }
-        public virtual Department Department { get; set; }
+        public virtual ICollection<OrderLine> OrderLines { get; set; }
+        public virtual ShoppingList ShoppingList { get; set; }
     }
 }

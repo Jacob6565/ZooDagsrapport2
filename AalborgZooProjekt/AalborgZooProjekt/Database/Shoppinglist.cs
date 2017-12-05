@@ -12,18 +12,22 @@ namespace AalborgZooProjekt.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Shoppinglist
+    public partial class ShoppingList
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Shoppinglist()
+        public ShoppingList()
         {
-            this.Orderlists = new HashSet<Order>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int Id { get; set; }
+        public string CreatedByID { get; set; }
+        public string DateCreated { get; set; }
+        public string Status { get; set; }
+        public int ShopperId { get; set; }
     
-        public virtual Shopper Shopper { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orderlists { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Shopper Shopper { get; set; }
     }
 }

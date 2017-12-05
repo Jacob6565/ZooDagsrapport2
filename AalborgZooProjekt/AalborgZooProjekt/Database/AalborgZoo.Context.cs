@@ -13,10 +13,10 @@ namespace AalborgZooProjekt.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AalborgZooContainer : DbContext
+    public partial class AalborgZooContainer1 : DbContext
     {
-        public AalborgZooContainer()
-            : base("name=AalborgZooContainer")
+        public AalborgZooContainer1()
+            : base("name=AalborgZooContainer1")
         {
         }
     
@@ -25,12 +25,16 @@ namespace AalborgZooProjekt.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Employee> EmployeeSet { get; set; }
-        public virtual DbSet<Shoppinglist> ShoppinglistSet { get; set; }
+        public virtual DbSet<DepartmentSpecifikProduct> DepartmentSpecifikProductSet { get; set; }
+        public virtual DbSet<Product> ProductSet { get; set; }
+        public virtual DbSet<ProductVersion> ProductVersionSet { get; set; }
+        public virtual DbSet<ShoppingList> ShoppingListSet { get; set; }
         public virtual DbSet<Order> OrderSet { get; set; }
         public virtual DbSet<OrderLine> OrderLineSet { get; set; }
-        public virtual DbSet<Product> ProductSet { get; set; }
         public virtual DbSet<Department> DepartmentSet { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+        public virtual DbSet<DepartmentChange> DepartmentChangeSet { get; set; }
+        public virtual DbSet<Employee> EmployeeSet { get; set; }
+        public virtual DbSet<PasswordChanged> PasswordChangedSet { get; set; }
+        public virtual DbSet<Unit> UnitSet { get; set; }
     }
 }
