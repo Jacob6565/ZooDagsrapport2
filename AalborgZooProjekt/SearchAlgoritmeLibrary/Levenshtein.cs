@@ -1,57 +1,84 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using AalborgZooProjekt.Database;
+using System.Data.Entity;
 
 namespace SearchAlgoritmeLibrary
 {
     public class Levenshtein
     {
+        /// <summary>
+        /// Used to link a variable called distance to a product.
+        /// </summary>
         class TempProduct
         {
-            public string Product;//Product i rigtige tilfælde
-            public int distance;           
+            public Product product;
+            public int distance;
         }
+        /// <summary>
+        /// Stores all the products from the database.
+        /// </summary>
+        List<Product> products = new List<Product>();
 
-        private List<TempProduct> _dummyProducts = new List<TempProduct>();
+        /// <summary>
+        /// Contains all the products with .
+        /// </summary>
+        private List<TempProduct> tempProducts = new List<TempProduct>();
 
-        private List<string> names = new List<string>()
+        /// <summary>
+        /// Reads products from database.
+        /// </summary>
+        private void FetchProductsFromDB()
         {
-            "Æbler",
-            "Pærer",
-            "Agurk",
-            "Banan",
-            "Solsikkekerner",
-            "Havregryn",
-            "Salat",
-            "Grønkål",
-            "Tomater",
-            "Kartofler",
-            "Broccoli",
-        };
-
-        private void makeDummyProducts()
-        {
-            for(int i = 0; i < names.Count; i++)
+            using (var db = new AalborgZooContainer1())
             {
-                _dummyProducts[i].Product = names[i];
-                _dummyProducts[i].distance = 0;
+                //Ved ikke helt om det skal være ProductVersionSet eller ProductSet.               
+                products = db.ProductSet.Select(x => x).ToList();
             }
         }
 
-        public List<string> FindPossibleProducts(string searchString)
+        /// <summary>
+        /// Fills data into the list of TempProducts.
+        /// </summary>
+        private void makeTempProducts()
         {
-            List<string> Products = new List<string>();
-            foreach (TempProduct b in _dummyProducts)
+            for (int i = 0; i < products.Count; i++)
             {
-                b.distance = LevenshteinDistance(searchString, b.Product);
+                tempProducts[i].product = products[i];
+                tempProducts[i].distance = 0;
             }
+        }
+
+        /// <summary>
+        /// Finds products which names reminiscent of the inputstring
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        public List<Product> FindPossibleProducts(string searchString)
+        {
+            //Initialization methods.
+            FetchProductsFromDB();
+            makeTempProducts();
+
+            //Calculates the Levenshtain distance for each products name            
+            foreach (TempProduct b in tempProducts)
+            {
+                b.distance = LevenshteinDistance(searchString, b.product.Name);
+            }
+            //Return the list of products sorted by the Levenshtein distance.
+            return tempProducts.OrderBy(x => x.distance).Select(x => x.product).ToList();
             
-            Products = _dummyProducts.OrderBy(x => x.distance).Select(x => x.Product).ToList();
-            return Products;
         }
 
+        /// <summary>
+        /// Calculates the levenshtein distance between string a and string b
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         private int LevenshteinDistance(string a, string b)
         {
             if (string.IsNullOrEmpty(a))
@@ -102,11 +129,5 @@ namespace SearchAlgoritmeLibrary
 
             return d[d.GetUpperBound(0), d.GetUpperBound(1)];
         }
-
-        private int LookALike()
-        {
-            return 0;
-        }
-
     }
 }

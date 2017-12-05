@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace NUnit.Test.Exampleish
-{   
+{
     [TestFixture]
     class LevenshteinTest
     {
         [Test]
         public void FindPossibleProducts()
         {
+            
             Levenshtein levenshtein = new Levenshtein();
-            Assert.AreEqual("æble", levenshtein.FindPossibleProducts("æb").First());
+            Assert.AreEqual("æble", levenshtein.FindPossibleProducts("æb"));
         }
     }
 }
