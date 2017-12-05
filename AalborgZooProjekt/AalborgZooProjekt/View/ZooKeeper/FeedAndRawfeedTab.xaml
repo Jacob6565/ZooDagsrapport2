@@ -15,7 +15,7 @@
                     </Style>
                 </TabItem.Style>
                 <Grid>
-                    <local:DepartmentFoodList/>
+                    <local:FruitFoodList/>
                 </Grid>
             </TabItem>
 
@@ -26,7 +26,7 @@
                     </Style>
                 </TabItem.Style>
                 <Grid>
-                    <local:DepartmentRawFeed/>
+                    <local:OtherFoodList/>
                 </Grid>
             </TabItem>
 

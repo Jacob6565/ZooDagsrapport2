@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/30/2017 14:01:38
+-- Date Created: 12/05/2017 15:33:53
 -- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
@@ -125,7 +125,8 @@ CREATE TABLE [dbo].[ProductSet] (
     [DateCreated] nvarchar(max)  NOT NULL,
     [CreatedByID] nvarchar(max)  NOT NULL,
     [DeletedByID] nvarchar(max)  NOT NULL,
-    [DateDeleted] nvarchar(max)  NOT NULL
+    [DateDeleted] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 

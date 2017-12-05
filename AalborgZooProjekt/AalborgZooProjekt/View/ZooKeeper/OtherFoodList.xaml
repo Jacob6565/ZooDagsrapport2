@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AalborgZooProjekt.View.DepartmentFoodList"
+﻿<UserControl x:Class="AalborgZooProjekt.View.OtherFoodList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,9 +8,9 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Tester, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid ItemsSource="{Binding DummyFoodList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding DummyOtherFoodList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vare" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Vare" Binding="{Binding Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Antal">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -31,5 +31,4 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-
 </UserControl>

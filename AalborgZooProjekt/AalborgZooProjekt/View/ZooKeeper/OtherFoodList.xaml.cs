@@ -18,9 +18,9 @@ namespace AalborgZooProjekt.View
     /// <summary>
     /// Interaction logic for DepartmentRawFeed.xaml
     /// </summary>
-    public partial class DepartmentRawFeed : UserControl
+    public partial class OtherFoodList : UserControl
     {
-        public DepartmentRawFeed()
+        public OtherFoodList()
         {
             InitializeComponent();
         }
