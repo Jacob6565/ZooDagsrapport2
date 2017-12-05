@@ -43,7 +43,7 @@
                         </Grid.ColumnDefinitions>
 
                         <local:OfficeOrderList Grid.Column="1"/>
-                        <local:OfficeFeedTypeOrders Grid.Column="2"/>
+                        <!--<local:OfficeFeedTypeOrders Grid.Column="2"/>-->
                     </Grid>
                         <Button  Content="Bestil" Width="150" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,100,0"/>
                 </Grid>
@@ -63,7 +63,7 @@
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
                                                             <TextBlock Text="{Binding Unit}" Width="60"/>
-                                                            <xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>
+                                                            <!--<xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>-->
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
