@@ -8,25 +8,11 @@ namespace AalborgZooProjekt.Model
 {
     public class DummyProduct
     {
-        private string _name;
-
-        public string Name
+        public DummyProduct(string product)
         {
-            get { return _name; }
-            set { _name = value; }
-        }
-        private string _unit;
-
-        public string Unit
-        {
-            get { return _unit; }
-            set { _unit = value; }
+            Name = product;
         }
 
-        public DummyProduct(string name)
-        {
-            Name = name;
-            Unit = "kg";
-        }
+        public string Name { get; set; }
     }
 }

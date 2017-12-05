@@ -6,6 +6,8 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
+using AalborgZooProjekt.Database;
+using System.Linq;
 
 namespace AalborgZooProjekt
 {
@@ -23,15 +25,16 @@ namespace AalborgZooProjekt
 
         public DummyViewModel()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "aalborgzoo.database.windows.net";
-            builder.UserID = ConfigurationManager.AppSettings["dbUserId"];
-            builder.Password = ConfigurationManager.AppSettings["dbUserPwd"];
-            builder.InitialCatalog = "AalborgZooFoder";
-
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            using (var db = new AalborgZooContainer1())
             {
-                connection.Open();
+                string name;
+                //The following presents two ways to read the name property of the employee with id 1.
+                //First
+                Employee em = db.EmployeeSet.Where(x => x.Id == 1).First();
+                name = em.Name;
+
+                //Second - oneliner
+                name = db.EmployeeSet.Where(x => x.Id == 1).Select(x => x.Name).First();
             }
 
             string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);

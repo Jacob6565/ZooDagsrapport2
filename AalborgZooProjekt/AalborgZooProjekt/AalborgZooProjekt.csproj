@@ -260,6 +260,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AalborgZoo.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="AppSecretsDontCommit.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Database\AalborgZoo.edmx.diagram">
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </None>
@@ -296,6 +299,11 @@
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
+    <Resource Include="Model\DummyHistoryEntries.txt" />
+    <Resource Include="Model\DummyOrders.txt" />
+    <Resource Include="Model\DummyOrdersDepartment.txt" />
+    <Resource Include="Model\DummyProducts.txt" />
+    <Resource Include="Model\DummyUnits.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

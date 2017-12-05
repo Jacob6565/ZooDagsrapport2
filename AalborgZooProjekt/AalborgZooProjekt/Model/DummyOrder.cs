@@ -8,18 +8,11 @@ namespace AalborgZooProjekt.Model
 {
     public class DummyOrder
     {
-        private string _name;
-
-        public string Name
+        public DummyOrder(string order)
         {
-            get { return _name; }
-            set { _name = value; }
+            Name = order;
         }
 
-
-        public DummyOrder(string name)
-        {
-            Name = name;
-        }
+        public string Name;
     }
 }
