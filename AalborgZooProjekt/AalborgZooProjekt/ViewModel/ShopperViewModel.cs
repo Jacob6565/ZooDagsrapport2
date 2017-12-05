@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 
-
 namespace AalborgZooProjekt.ViewModel
 {
-    class LoginViewModel : ViewModelBase, ILoginViewModel
+    class ShopperViewModel : ViewModelBase, IShopperViewModel
     {
     }
 }
