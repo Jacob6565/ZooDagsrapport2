@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
 using AalborgZooProjekt.Database;
+using System.Linq;
 
 namespace AalborgZooProjekt
 {
@@ -26,17 +27,17 @@ namespace AalborgZooProjekt
         {
             using (var db = new AalborgZooContainer1())
             {
-                Employee employee = new Employee()
-                {
-                    DateHired = "Hej",
-                    DateStopped = "I morgen",
-                    Name = "Mikkel"
-                };
-                db.EmployeeSet.Add(employee);
-                db.SaveChanges();
+                string name;
+                //The following presents two ways to read the name property of the employee with id 1.
+                //First
+                Employee em = db.EmployeeSet.Where(x => x.Id == 1).First();
+                name = em.Name;
+
+                //Second - oneliner
+                name = db.EmployeeSet.Where(x => x.Id == 1).Select(x => x.Name).First();
             }
 
-                string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
+            string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 DummyFoodList.Add(new DummyProduct(product));
