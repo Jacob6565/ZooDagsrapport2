@@ -8,6 +8,13 @@ namespace AalborgZooProjekt.Model
 {
     public class DummyProduct
     {
+
+        public DummyProduct(string name)
+        {
+            Name = name;
+            Unit = "kg";
+        }
+
         private string _name;
 
         public string Name
@@ -23,10 +30,6 @@ namespace AalborgZooProjekt.Model
             set { _unit = value; }
         }
 
-        public DummyProduct(string name)
-        {
-            Name = name;
-            Unit = "kg";
-        }
+
     }
 }
