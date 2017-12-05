@@ -158,8 +158,14 @@
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
+    <Compile Include="ViewModel\ILoginViewModel.cs" />
+    <Compile Include="ViewModel\IShopperViewModel.cs" />
+    <Compile Include="ViewModel\IZookeeperViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ShopperViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\ZookeeperViewModel.cs" />
     <Compile Include="View\DepartmentFoodList.xaml.cs">
       <DependentUpon>DepartmentFoodList.xaml</DependentUpon>
     </Compile>
