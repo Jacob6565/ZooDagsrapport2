@@ -260,6 +260,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AalborgZoo.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="AppSecretsDontCommit.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Database\AalborgZoo.edmx.diagram">
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </None>
@@ -271,7 +274,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Img\wrench icon.png" />

@@ -6,6 +6,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
+using AalborgZooProjekt.Database;
 
 namespace AalborgZooProjekt
 {
@@ -23,18 +24,19 @@ namespace AalborgZooProjekt
 
         public DummyViewModel()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "aalborgzoo.database.windows.net";
-            builder.UserID = ConfigurationManager.AppSettings["dbUserId"];
-            builder.Password = ConfigurationManager.AppSettings["dbUserPwd"];
-            builder.InitialCatalog = "AalborgZooFoder";
-
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            using (var db = new AalborgZooContainer1())
             {
-                connection.Open();
+                Employee employee = new Employee()
+                {
+                    DateHired = "Hej",
+                    DateStopped = "I morgen",
+                    Name = "Mikkel"
+                };
+                db.EmployeeSet.Add(employee);
+                db.SaveChanges();
             }
 
-            string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
+                string[] lines = File.ReadAllLines("../../DummyProducts.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 DummyFoodList.Add(new DummyProduct(product));
