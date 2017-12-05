@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NUnit.Test
+namespace NUnit.Test.Exampleish
 {
     public class TestThisClass
     {

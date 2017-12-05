@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AalborgZooProjekt", "Aalbor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Test", "NUnit.Test\NUnit.Test.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgoritme", "SearchAlgoritme\SearchAlgoritme.csproj", "{67751747-20CC-4103-88F9-7FA55B8D33CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgoritmeLibrary", "SearchAlgoritmeLibrary\SearchAlgoritmeLibrary.csproj", "{F7B41CD2-8603-425A-8815-F8A4046AA64F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67751747-20CC-4103-88F9-7FA55B8D33CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67751747-20CC-4103-88F9-7FA55B8D33CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67751747-20CC-4103-88F9-7FA55B8D33CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67751747-20CC-4103-88F9-7FA55B8D33CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B41CD2-8603-425A-8815-F8A4046AA64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B41CD2-8603-425A-8815-F8A4046AA64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B41CD2-8603-425A-8815-F8A4046AA64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B41CD2-8603-425A-8815-F8A4046AA64F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

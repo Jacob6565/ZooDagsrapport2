@@ -14,7 +14,7 @@ using AalborgZooProjekt.Model;
  */
 
 
-namespace NUnit.Test
+namespace NUnit.Test.Exampleish
 {
     [TestFixture]
     public class TestViewModel

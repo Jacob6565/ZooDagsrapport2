@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 
-namespace AalborgZooProjekt.ViewModel
+namespace SearchAlgoritmeLibrary
 {
-    public class SearchAlgoritme
+    public class Levenshtein
     {
-        class tempProduct
+        class TempProduct
         {
             public string Product;//Product i rigtige tilfælde
-            public int distance;
+            public int distance;           
         }
 
-        private List<tempProduct> _dummyProducts = new List<tempProduct>();
+        private List<TempProduct> _dummyProducts = new List<TempProduct>();
 
         private List<string> names = new List<string>()
         {
@@ -31,22 +31,28 @@ namespace AalborgZooProjekt.ViewModel
             "Broccoli",
         };
 
-        
-       
+        private void makeDummyProducts()
+        {
+            for(int i = 0; i < names.Count; i++)
+            {
+                _dummyProducts[i].Product = names[i];
+                _dummyProducts[i].distance = 0;
+            }
+        }
 
         public List<string> FindPossibleProducts(string searchString)
         {
             List<string> Products = new List<string>();
-            foreach (tempProduct b in _dummyProducts)
+            foreach (TempProduct b in _dummyProducts)
             {
-                b.distance = Levenshtein(searchString, b.Product);
+                b.distance = LevenshteinDistance(searchString, b.Product);
             }
-
-            Products = _dummyProducts.OrderByDescending(x => x.distance).Select(x => x.Product).ToList();
+            
+            Products = _dummyProducts.OrderBy(x => x.distance).Select(x => x.Product).ToList();
             return Products;
         }
 
-        public int Levenshtein(string a, string b)
+        private int LevenshteinDistance(string a, string b)
         {
             if (string.IsNullOrEmpty(a))
             {
@@ -102,10 +108,5 @@ namespace AalborgZooProjekt.ViewModel
             return 0;
         }
 
-        private int SortAfterRelevance()
-        {
-            return 0;
-        }
     }
 }
-
