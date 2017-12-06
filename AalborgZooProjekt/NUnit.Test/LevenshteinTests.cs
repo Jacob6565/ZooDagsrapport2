@@ -13,8 +13,7 @@ namespace NUnit.Test.Exampleish
     {
         [Test]
         public void FindPossibleProducts()
-        {
-            
+        {            
             Levenshtein levenshtein = new Levenshtein();
             Assert.AreEqual("æble", levenshtein.FindPossibleProducts("æb"));
         }
