@@ -84,12 +84,12 @@ namespace AalborgZooProjekt
                     };
                     db.DepartmentSet.Add(dep);
 
-                    DepartmentSpecifikProduct depSP = new DepartmentSpecifikProduct()
+                    DepartmentSpecificProduct depSP = new DepartmentSpecificProduct()
                     {
                         DepartmentId = dep.Id,
                         ProductId = prod.Id,
                     };
-                    db.DepartmentSpecifikProductSet.Add(depSP);
+                    db.DepartmentSpecificProductSet.Add(depSP);
 
                     Zookeeper zookeeper = new Zookeeper()
                     {

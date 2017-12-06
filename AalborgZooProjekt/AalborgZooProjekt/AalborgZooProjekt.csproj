@@ -107,7 +107,7 @@
     <Compile Include="Database\DepartmentChange.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\DepartmentSpecifikProduct.cs">
+    <Compile Include="Database\DepartmentSpecificProduct.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Employee.cs">
