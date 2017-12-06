@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,21 @@ namespace AalborgZooProjekt.View
         public FruitFoodList()
         {
             InitializeComponent();
+        }
+
+        private void PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            Regex regex = new Regex("[^\\d ]+"); //regex that matches disallowed text
+
+            if (text.Contains(' '))
+                return true;
+            else
+                return !regex.IsMatch(text);
         }
     }
 }
