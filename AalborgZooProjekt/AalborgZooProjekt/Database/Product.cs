@@ -26,6 +26,7 @@ namespace AalborgZooProjekt.Database
         public string CreatedByID { get; set; }
         public string DeletedByID { get; set; }
         public string DateDeleted { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepartmentSpecifikProduct> DepartmentSpecifikProducts { get; set; }

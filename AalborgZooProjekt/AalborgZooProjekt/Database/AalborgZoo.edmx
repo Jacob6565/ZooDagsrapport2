@@ -94,6 +94,7 @@
     <Property Name="CreatedByID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DeletedByID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateDeleted" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductVersionSet">
     <Key>
@@ -461,6 +462,7 @@
           <Property Name="DateDeleted" Type="String" Nullable="false" />
           <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="Product" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="ProductVersions" Relationship="AalborgZoo.ProductProductVersion" FromRole="Product" ToRole="ProductVersion" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductVersion">
           <Key>
@@ -723,6 +725,7 @@
           <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
           <ScalarProperty Name="DeletedByID" ColumnName="DeletedByID" />
           <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

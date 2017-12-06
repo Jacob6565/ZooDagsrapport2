@@ -151,19 +151,19 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\DepartmentFoodList.xaml.cs">
-      <DependentUpon>DepartmentFoodList.xaml</DependentUpon>
+    <Compile Include="View\ZooKeeper\FruitFoodList.xaml.cs">
+      <DependentUpon>FruitFoodList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DepartmentRawFeed.xaml.cs">
-      <DependentUpon>DepartmentRawFeed.xaml</DependentUpon>
+    <Compile Include="View\ZooKeeper\OtherFoodList.xaml.cs">
+      <DependentUpon>OtherFoodList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FeedAndRawfeedTab.xaml.cs">
+    <Compile Include="View\ZooKeeper\FeedAndRawfeedTab.xaml.cs">
       <DependentUpon>FeedAndRawfeedTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FeedTab.xaml.cs">
+    <Compile Include="View\ZooKeeper\FeedTab.xaml.cs">
       <DependentUpon>FeedTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\History.xaml.cs">
+    <Compile Include="View\ZooKeeper\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OfficeOrderList.xaml.cs">
@@ -181,27 +181,27 @@
     <Compile Include="View\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\DepartmentFoodList.xaml">
+    <Page Include="View\ZooKeeper\FruitFoodList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DepartmentRawFeed.xaml">
+    <Page Include="View\ZooKeeper\OtherFoodList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FeedAndRawfeedTab.xaml">
+    <Page Include="View\ZooKeeper\FeedAndRawfeedTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FeedTab.xaml">
+    <Page Include="View\ZooKeeper\FeedTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\History.xaml">
+    <Page Include="View\ZooKeeper\History.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\ZooKeeper\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -209,7 +209,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="View\ZooKeeper\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -299,10 +299,11 @@
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
+    <Resource Include="Model\DummyOtherFood.txt" />
     <Resource Include="Model\DummyHistoryEntries.txt" />
     <Resource Include="Model\DummyOrders.txt" />
     <Resource Include="Model\DummyOrdersDepartment.txt" />
-    <Resource Include="Model\DummyProducts.txt" />
+    <Resource Include="Model\DummyFruit.txt" />
     <Resource Include="Model\DummyUnits.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
