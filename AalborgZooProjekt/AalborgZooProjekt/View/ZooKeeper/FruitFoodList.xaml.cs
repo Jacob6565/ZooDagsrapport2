@@ -33,12 +33,34 @@ namespace AalborgZooProjekt.View
 
         private bool IsTextAllowed(string text)
         {
-            Regex regex = new Regex("[^\\d ]+"); //regex that matches disallowed text
+            Regex regex = new Regex("[^\\d]+"); //regex that matches allowed text
 
-            if (text.Contains(' '))
-                return true;
+            return !regex.IsMatch(text);
+        }
+
+        private void Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                    text = Regex.Match(text, "[\\d]+").ToString();
+                    Clipboard.SetData(DataFormats.Text, text);
+                    ApplicationCommands.Paste.Execute(text, (System.Windows.IInputElement) sender);
+                }
+            }
             else
-                return !regex.IsMatch(text);
+            {
+                e.CancelCommand();
+            }
+        }
+
+        private void PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
         }
     }
 }

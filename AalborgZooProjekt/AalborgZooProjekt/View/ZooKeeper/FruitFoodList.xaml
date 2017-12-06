@@ -16,7 +16,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="+" Width="25" Command="{Binding AddAmount}"/>
-                                <TextBox PreviewTextInput="PreviewTextInput" Text="{Binding Amount}" Width="25"/>
+                                <TextBox PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Amount}" Width="25"/>
                                 <Button Content="-" Width="25" Command="{Binding SubtractAmount}"/>
                             </StackPanel>
                         </DataTemplate>
