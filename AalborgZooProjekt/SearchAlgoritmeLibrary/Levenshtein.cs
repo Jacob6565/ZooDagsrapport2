@@ -18,10 +18,11 @@ namespace SearchAlgoritmeLibrary
             public Product product;
             public int distance;
         }
+
         /// <summary>
         /// Stores all the products from the database.
         /// </summary>
-        List<Product> products = new List<Product>();
+        //List<Product> products = new List<Product>();
 
         /// <summary>
         /// Contains all the products with .
@@ -31,7 +32,7 @@ namespace SearchAlgoritmeLibrary
         /// <summary>
         /// Reads products from database.
         /// </summary>
-        private void FetchProductsFromDB()
+        /*private void FetchProductsFromDB()
         {
             using (var db = new AalborgZooContainer1())
             {
@@ -39,16 +40,19 @@ namespace SearchAlgoritmeLibrary
                 products = db.ProductSet.Select(x => x).ToList();
             }
         }
-
+        */
         /// <summary>
         /// Fills data into the list of TempProducts.
         /// </summary>
-        private void makeTempProducts()
+        private void MakeTempProducts(List<Product> products)
         {
             for (int i = 0; i < products.Count; i++)
             {
-                tempProducts[i].product = products[i];
-                tempProducts[i].distance = 0;
+                tempProducts.Add(new TempProduct
+                {
+                    product = products[i],
+                    distance = 0
+                });
             }
         }
 
@@ -57,20 +61,19 @@ namespace SearchAlgoritmeLibrary
         /// </summary>
         /// <param name="searchString"></param>
         /// <returns></returns>
-        public List<Product> FindPossibleProducts(string searchString)
+        public List<Product> FindPossibleProducts(string searchString, List<Product> products)
         {
             //Initialization methods.
-            FetchProductsFromDB();
-            makeTempProducts();
+            //FetchProductsFromDB();
+            MakeTempProducts(products);
 
-            //Calculates the Levenshtain distance for each products name            
+            //Calculates the Levenshtein distance for each products name            
             foreach (TempProduct b in tempProducts)
             {
-                //b.distance = LevenshteinDistance(searchString, b.product.Name);
+                b.distance = LevenshteinDistance(searchString, b.product.Name); 
             }
             //Return the list of products sorted by the Levenshtein distance.
-            return tempProducts.OrderBy(x => x.distance).Select(x => x.product).ToList();
-            
+            return tempProducts.OrderBy(x => x.distance).Select(x => x.product).ToList();            
         }
 
         /// <summary>
@@ -84,7 +87,6 @@ namespace SearchAlgoritmeLibrary
             int cost, min1, min2, min3;
             int [,] d = new int[a.Length + 1, b.Length + 1];
           
-
             if (string.IsNullOrEmpty(a))
             {
                 if (!string.IsNullOrEmpty(b))

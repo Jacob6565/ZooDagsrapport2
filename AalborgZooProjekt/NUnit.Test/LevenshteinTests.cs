@@ -2,8 +2,9 @@
 using System.Text;
 using System.Linq;
 using NUnit.Framework;
-using SearchAlgoritmeLibrary;
 using System.Threading.Tasks;
+using SearchAlgoritmeLibrary;
+using AalborgZooProjekt.Database;
 using System.Collections.Generic;
 
 namespace NUnit.Test.Exampleish
@@ -12,10 +13,30 @@ namespace NUnit.Test.Exampleish
     class LevenshteinTest
     {
         [Test]
-        public void FindPossibleProducts()
+        public void FindPossibleProductsTest()
         {            
             Levenshtein levenshtein = new Levenshtein();
-            Assert.AreEqual("æble", levenshtein.FindPossibleProducts("æb"));
+            List<Product> tempProducts = new List<Product>(5)
+            {
+                new Product()
+                {
+                    Name = "agurk"
+                },
+                new Product()
+                {
+                    Name = "æble"
+                },
+                new Product()
+                {
+                    Name = "banan"
+                },
+                new Product()
+                {
+                    Name = "pærer"
+                }
+            };
+
+            Assert.AreEqual("æble", levenshtein.FindPossibleProducts("æb", tempProducts).First().Name);
         }
     }
 }
