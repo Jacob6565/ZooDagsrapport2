@@ -21,17 +21,17 @@ namespace AalborgZooProjekt.Model
             Unit = unit;
         }
 
-        public void ActivateProduct()
+        public void ActivateProduct(DummyProductVersion product)
         {
-            if (!IsActive)
+            if (!product.IsActive)
             {
                 IsActive = true;
             }
         }
 
-        public void DeactivateProduct()
+        public void DeactivateProduct(DummyProductVersion product)
         {
-            if (IsActive)
+            if (product.IsActive)
             {
                 IsActive = false;
             }
