@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AalborgZooProjekt.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,21 @@ namespace AalborgZooProjekt.Model
         {
             product.ProductVersion.Unit.Name = string.Empty;
         }
+
+        // Hent varer fra database og kopier dem over i en liste = AllProducts listen
+        /*
+        public void GetProducts()
+        {
+            using (var db = new AalborgZooContainer1())
+            {
+                Product product = db.ProductSet.Where(x => x.Id == 1).First();
+                product.ProductVersions.ToList();
+
+            }
+
+
+        }
+        */
 
     }
 }
