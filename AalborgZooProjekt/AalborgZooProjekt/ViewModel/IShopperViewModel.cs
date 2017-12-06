@@ -9,6 +9,7 @@ namespace AalborgZooProjekt.ViewModel
 {
     interface IShopperViewModel
     {
+        
         void ActivateProduct(Product product);
         void DeActivateProduct(Product product);
         void RemoveUnitFromProduct(Product product);
@@ -42,5 +43,6 @@ namespace AalborgZooProjekt.ViewModel
         void ChangeUnitForOrderLine();
         void ChangeProductSupplier();
         void ChangeProductName();
+        
     }
 }

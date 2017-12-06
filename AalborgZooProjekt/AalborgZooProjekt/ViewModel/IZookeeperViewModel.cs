@@ -9,6 +9,7 @@ namespace AalborgZooProjekt.ViewModel
 {
     interface IZookeeperViewModel
     {
+        
         void CancelOrder(Order order);
         void RemoveOrderLine(OrderLine orderLine);
         void RemoveZookeeperFromOrder(Zookeeper zookeeper);
@@ -32,5 +33,6 @@ namespace AalborgZooProjekt.ViewModel
         void ChangeNumberForOrderLines();
         void ChangeDepartmentForZookeeper();
         void ChangeUnitForOrderLine();
+        
     }
 }
