@@ -17,22 +17,22 @@ namespace AalborgZooProjekt.ViewModel
         void SaveComment(Order order, string comment);
         void SaveOrder(Order order);
         Order GetOrderFromHistory();
-        void GetOrderHistory();
-        void GetZookeepers();
-        void GetProducts();
+        void GetOrderHistory(List<Order> orderList);
+        void GetZookeepers(List<Zookeeper> zookeeperList);
+        void GetProducts(List<Product> productList);
         void GetCurrentOrder();
         void CloseProgram();
-        void MakeOrder();
-        void SearchForProduct();
+        void MakeOrder(Order order);
+        void SearchForProduct(List<Product> productList, string search);
         void AddDepartmentSpecificProduct();
-        void AddOrderLine();
-        void AttachZookeeperToOrder();
+        void AddOrderLine(OrderLine orderLine);
+        void AttachZookeeperToOrder(Order order, Zookeeper zookeeper);
         void CheckIfOrderIsAllowedToBeSent();
         void CheckIfOrderIsAllowedToBeFilledOut();
         void CheckIfProductIsActive();
         void ChangeNumberForOrderLines();
         void ChangeDepartmentForZookeeper();
-        void ChangeUnitForOrderLine();
+        void ChangeUnitForOrderLine(Unit unit);
         
     }
 }
