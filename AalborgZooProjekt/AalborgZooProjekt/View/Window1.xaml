@@ -9,6 +9,6 @@
         DataContext="{Binding Tester, Source={StaticResource Locator}}">
     
     <Grid>
-        <DataGrid ItemsSource="{Binding EmployeeList}"/>
+        <DataGrid ItemsSource="{Binding MockTestEmployee}"/>
     </Grid>
 </Window>

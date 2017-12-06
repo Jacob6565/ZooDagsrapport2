@@ -37,4 +37,31 @@ namespace AalborgZooProjekt.Database
         public virtual DbSet<PasswordChanged> PasswordChangedSet { get; set; }
         public virtual DbSet<Unit> UnitSet { get; set; }
     }
+
+    public partial class AalborgZooMock : DbContext
+    {
+        public AalborgZooMock()
+        : base("name=AalborgZooMockContainer")
+        {
+        }
+
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+
+        public virtual DbSet<DepartmentSpecifikProduct> DepartmentSpecifikProductSet { get; set; }
+        public virtual DbSet<Product> ProductSet { get; set; }
+        public virtual DbSet<ProductVersion> ProductVersionSet { get; set; }
+        public virtual DbSet<ShoppingList> ShoppingListSet { get; set; }
+        public virtual DbSet<Order> OrderSet { get; set; }
+        public virtual DbSet<OrderLine> OrderLineSet { get; set; }
+        public virtual DbSet<Department> DepartmentSet { get; set; }
+        public virtual DbSet<DepartmentChange> DepartmentChangeSet { get; set; }
+        public virtual DbSet<Employee> EmployeeSet { get; set; }
+        public virtual DbSet<PasswordChanged> PasswordChangedSet { get; set; }
+        public virtual DbSet<Unit> UnitSet { get; set; }
+    }
 }
