@@ -10,8 +10,8 @@ namespace AalborgZooProjekt.ViewModel
     interface IShopperViewModel
     {
         
-        void ActivateProduct(Product product);
-        void DeActivateProduct(Product product);
+        void ActivateProduct(Product product); 
+        void DeActivateProduct(Product product); 
         void RemoveUnitFromProduct(Product product);
         void RemoveOrderLine();
         void SaveShoppingList();

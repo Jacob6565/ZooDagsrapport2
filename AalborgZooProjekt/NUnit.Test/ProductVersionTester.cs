@@ -36,20 +36,5 @@ namespace NUnit.Test
             Assert.IsFalse(product.IsActive);
         }
 
-        [Test]
-        public void TestRemoveProductUnit()
-        {
-            //Arrange
-            DummyUnit kasse = new DummyUnit("Kasse");
-            DummyProductVersion product = new DummyProductVersion(kasse);
-
-            //Act
-            product.RemoveUnit(product);
-
-            //Assert
-            Assert.IsEmpty(product.Unit.Name);
-
-        }
-
     }
 }

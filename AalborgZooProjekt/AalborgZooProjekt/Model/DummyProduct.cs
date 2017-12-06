@@ -12,7 +12,6 @@ namespace AalborgZooProjekt.Model
         public DummyProduct(string name)
         {
             Name = name;
-            Unit = "kg";
         }
 
         private string _name;
@@ -22,6 +21,8 @@ namespace AalborgZooProjekt.Model
             get { return _name; }
             set { _name = value; }
         }
+
+        /*
         private string _unit;
 
         public string Unit
@@ -29,7 +30,31 @@ namespace AalborgZooProjekt.Model
             get { return _unit; }
             set { _unit = value; }
         }
+        */
 
+        public DummyProductVersion ProductVersion { get; set; }
+
+
+        public void ActivateProduct(DummyProduct product)
+        {
+            if (!product.ProductVersion.IsActive)
+            {
+                product.ProductVersion.IsActive = true;
+            }
+        }
+
+        public void DeactivateProduct(DummyProduct product)
+        {
+            if (product.ProductVersion.IsActive)
+            {
+                product.ProductVersion.IsActive = false;
+            }
+        }
+
+        public void RemoveUnit(DummyProduct product)
+        {
+            product.ProductVersion.Unit.Name = string.Empty;
+        }
 
     }
 }
