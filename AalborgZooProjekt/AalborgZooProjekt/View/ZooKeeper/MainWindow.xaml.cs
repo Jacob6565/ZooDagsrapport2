@@ -13,7 +13,7 @@ namespace AalborgZooProjekt
     public partial class MainWindow : MetroWindow
     {
         DispatcherTimer Timer = new DispatcherTimer();
-        //GridLength[] expanderGridHeight;
+        GridLength[] expanderGridHeight;
 
         public DateTime Time
         {
