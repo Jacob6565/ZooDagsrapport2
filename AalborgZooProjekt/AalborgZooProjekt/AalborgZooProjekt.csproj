@@ -86,58 +86,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Database\AalborgZoo.Context.cs">
+    <Compile Include="Model\AalborgZoo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\AalborgZoo.cs">
+    <Compile Include="Model\AalborgZoo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\AalborgZoo.Designer.cs">
+    <Compile Include="Model\AalborgZoo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\Department.cs">
+    <Compile Include="Model\Department.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\DepartmentChange.cs">
+    <Compile Include="Model\DepartmentChange.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\DepartmentSpecificProduct.cs">
+    <Compile Include="Model\DepartmentSpecificProduct.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Employee.cs">
+    <Compile Include="Model\Employee.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Order.cs">
+    <Compile Include="Model\Order.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\OrderLine.cs">
+    <Compile Include="Model\OrderLine.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\PasswordChanged.cs">
+    <Compile Include="Model\PasswordChanged.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Product.cs">
+    <Compile Include="Model\Product.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\ProductVersion.cs">
+    <Compile Include="Model\ProductVersion.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Shopper.cs">
+    <Compile Include="Model\Shopper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\ShoppingList.cs">
+    <Compile Include="Model\ShoppingList.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Unit.cs">
+    <Compile Include="Model\Unit.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Zookeeper.cs">
+    <Compile Include="Model\Zookeeper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
@@ -151,91 +151,13 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\ZooKeeper\FruitFoodList.xaml.cs">
-      <DependentUpon>FruitFoodList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZooKeeper\OtherFoodList.xaml.cs">
-      <DependentUpon>OtherFoodList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZooKeeper\FeedAndRawfeedTab.xaml.cs">
-      <DependentUpon>FeedAndRawfeedTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZooKeeper\FeedTab.xaml.cs">
-      <DependentUpon>FeedTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZooKeeper\History.xaml.cs">
-      <DependentUpon>History.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\OfficeOrderList.xaml.cs">
-      <DependentUpon>OfficeOrderList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\OfficeView.xaml.cs">
-      <DependentUpon>OfficeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\OrderList.xaml.cs">
-      <DependentUpon>OrderList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Remarks.xaml.cs">
-      <DependentUpon>Remarks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
-    <Page Include="View\ZooKeeper\FruitFoodList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ZooKeeper\OtherFoodList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ZooKeeper\FeedAndRawfeedTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ZooKeeper\FeedTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ZooKeeper\History.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ZooKeeper\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\ZooKeeper\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Skins\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\OfficeOrderList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OfficeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OrderList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Remarks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -256,14 +178,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Database\AalborgZoo.edmx">
+    <EntityDeploy Include="Model\AalborgZoo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AalborgZoo.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="AppSecretsDontCommit.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Database\AalborgZoo.edmx.diagram">
+    <None Include="Model\AalborgZoo.edmx.diagram">
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -288,13 +210,13 @@
     <Folder Include="Commands\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\AalborgZoo.Context.tt">
+    <Content Include="Model\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
-    <Content Include="Database\AalborgZoo.edmx.sql" />
-    <Content Include="Database\AalborgZoo.tt">
+    <Content Include="Model\AalborgZoo.edmx.sql" />
+    <Content Include="Model\AalborgZoo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>

@@ -6,7 +6,6 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
-using AalborgZooProjekt.Database;
 using System.Linq;
 
 namespace AalborgZooProjekt
