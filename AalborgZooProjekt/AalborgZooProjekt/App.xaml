@@ -22,8 +22,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <vm:ViewModelLocator x:Key="Locator"
-                             d:IsDataSource="True" />
+            <!--<vm:ViewModelLocator x:Key="Locator" 
+                                 d:IsDataSource="True" />-->
         </ResourceDictionary>
     </Application.Resources>
 
