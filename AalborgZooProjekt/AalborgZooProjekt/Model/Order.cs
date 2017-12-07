@@ -48,7 +48,7 @@ namespace AalborgZooProjekt.Model
         {
             if (OrderedByID > 1)
                 throw new ZookeeperAllReadyAddedException();
-            if (zookeeper != null)
+            else if (zookeeper != null)
                 OrderedByID = zookeeper.Id;
         }
 
@@ -107,21 +107,20 @@ namespace AalborgZooProjekt.Model
         }
 
         /// <summary>
-        /// 
+        /// Removes orderline from the current order
         /// </summary>
-        /// <returns></returns>
-        public bool IsOrderFilledOut()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <param name="orderLine"></param>
         public void RemoveOrderLine(OrderLine orderLine)
         {
             if (CanOrderBeChanged())
                 OrderLines.Remove(orderLine);
         }
 
-        public void RemoveZookeeperFromOrder(Zookeeper zookeeper)
+        /// <summary>
+        /// Changes the stored OrderedByID to -1 so symbolize no attached Zookeeper
+        /// </summary>
+        /// <param name="zookeeper"></param>
+        public void RemoveZookeeperFromOrder()
         {
             OrderedByID = -1;
         }
@@ -139,11 +138,12 @@ namespace AalborgZooProjekt.Model
         /// <summary>
         /// When the zookeepers send the order to the shopper, it changes the order state
         /// </summary>
-        public void SendOrder()
+        public void SendOrder(ShoppingList shoppingsList)
         {
             Status = _sent;
-            
+
             //MISSING ACTUAL SENDING FUNCTIONALITY 
+            shoppingsList.AddOrder(this);
         }
     }
 }

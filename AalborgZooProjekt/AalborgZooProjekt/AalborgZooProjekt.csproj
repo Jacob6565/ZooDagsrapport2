@@ -159,7 +159,7 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVersion.cs" />
     <Compile Include="Model\Shopper.cs" />
-    <Compile Include="Model\ShopperList.cs" />
+    <Compile Include="Model\ShoppingList.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="App.xaml.cs">
