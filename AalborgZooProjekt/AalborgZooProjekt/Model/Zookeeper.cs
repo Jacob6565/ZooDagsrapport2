@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    partial class Zookeeper
+    public partial class Zookeeper
     {
     }
 }
