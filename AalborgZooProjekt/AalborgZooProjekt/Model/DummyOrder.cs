@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AalborgZooProjekt.Database;
 
 namespace AalborgZooProjekt.Model.DummyModel
 {
@@ -17,9 +18,9 @@ namespace AalborgZooProjekt.Model.DummyModel
 
         public List<OrderLine> Orders { get; set; } = new List<OrderLine>();
     }
-    public class OrderLine
+    public class DummyOrderLine
     {
-        public OrderLine(string unit, double amount)
+        public DummyOrderLine(string unit, double amount)
         {
             Unit = unit;
             Amount = amount;

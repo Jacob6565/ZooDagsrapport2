@@ -11,7 +11,8 @@ namespace AalborgZooProjekt
 {
     public class DummyViewModel : ViewModelBase
     {
-
+        string connectionString = "name=AalborgZooMockContainer";
+        string connectionString1 = "name=AalborgZooContainer1";
         public List<DummyProduct> DummyFoodList { get; set; } = new List<DummyProduct>();
 
         public List<DummyHistoryEntry> DummyHistoryList { get; set; } = new List<DummyHistoryEntry>();
@@ -20,22 +21,30 @@ namespace AalborgZooProjekt
         {
             get
             {
-                using (var db = new AalborgZooMock())
+                using (var db = new AalborgZooContainer1(connectionString))
                 {
-                    return db.EmployeeSet.Select(x => x).ToList();
-                    
+                    return db.EmployeeSet.Select(x => x).ToList();                    
+                }
+            }
+            set
+            {
+                using (var db = new AalborgZooContainer1(connectionString))
+                {
+                    Employee emp = db.EmployeeSet.Where(x => x.Name == "Hans").First();
+                    emp.Name = value.ToString();
+                    db.SaveChanges();
                 }
             }
         }
 
         public DummyViewModel()
         {
-            using (var db = new AalborgZooMock())
-            {
-                Employee emp = new Employee() { Name = "HANS", DateHired = "000", DateStopped = "9/11" };
-                db.EmployeeSet.Add(emp);
-                db.SaveChanges();
-            }
+            //using (var db = new AalborgZooContainer1(connectionString))
+            //{
+            //    Employee emp = new Employee() { Name = "HANS", DateHired = "000", DateStopped = "9/11" };
+            //    db.EmployeeSet.Add(emp);
+            //    db.SaveChanges();
+            //}
             string fileAndPath = "../../DummyProducts.txt";
             string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             foreach (string product in lines)

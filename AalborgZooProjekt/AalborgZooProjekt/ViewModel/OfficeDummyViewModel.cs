@@ -6,13 +6,19 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AalborgZooProjekt.View;
+using AalborgZooProjekt.Database;
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows;
 
 namespace AalborgZooProjekt.ViewModel
 {
     public class OfficeDummyViewModel
     {
-        public List<DummyOrder> OrderList { get; set; } = new List<DummyOrder>();
+        //TODO Vareliste som popup
+        //TODO Når der trykkes bestilt collapser menuen
+
+        public List<OrderLine> OrderList { get; set; } = new List<OrderLine>();
         public List<DummyOrderDepartment> DepartmentListApples { get; set; } = new List<DummyOrderDepartment>();
 
         public OfficeDummyViewModel()
@@ -26,14 +32,14 @@ namespace AalborgZooProjekt.ViewModel
 
                 string word1 = wordQueue.Dequeue();
 
-                OrderList.Add(new DummyOrder(word1));
+                OrderList.Add(new OrderLine() { Order = new Order() { Note = "HEEEY" } });
                 
                 while (wordQueue.Count > 1)
                 {
                     word1 = wordQueue.Dequeue();
                     string word2 = wordQueue.Dequeue();
 
-                    OrderList.Last().Orders.Add(new OrderLine(word2, Double.Parse(word1)));
+                   // OrderList.Last().OrderLines.Add(new OrderLine() {ProductVersion = new ProductVersion() { Product = new Product() { Name = word2 } } word2, Quantity = word1});
                 }
             }
 
@@ -52,10 +58,57 @@ namespace AalborgZooProjekt.ViewModel
                 {
                     string word1 = wordQueue.Dequeue();
                     string word2 = wordQueue.Dequeue();
-                    DepartmentOrder.Orders.Add(new OrderLine(word2, Double.Parse(word1)));
+                  //  DepartmentOrder.Orders.Add(new OrderLine(word2, Double.Parse(word1)));
                 }
                 DepartmentListApples.Add(DepartmentOrder);
+
+                EditOrder = new RelayCommand<object>(EditOrderWindow);
             }
+
+    }
+
+
+
+
+        private RelayCommand<object> _editOrder;
+        /// <summary>
+        /// Gets the MyCommand.
+        /// </summary>
+        public RelayCommand<object> EditOrder
+        {
+            get
+            {
+                return _editOrder;
+                    //?? (_editOrder = new RelayCommand<object>
+                    //(
+                    //    () =>
+                    //    {
+                    //        EditOrderWindow();
+                    //    }
+                    //)
+                    //);
+            }
+            set
+            {
+                _editOrder = value;
+            }
+        }
+        public bool yas(object wee)
+        {
+            return 5 == 5;
+        }
+
+        public void Yas()
+        { }
+
+        public void EditOrderWindow(object context)
+        {
+            OrderLine ol = context as OrderLine;
+            OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
+            orders.SpecifikProductOrders.Text = ol.Order.Note;
+            //orders.dgFoodList.ItemsSource;
+            orders.DataContext = context;
+            orders.ShowDialog();
         }
 
     }
