@@ -22,13 +22,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridComboBoxColumn Header="Unit" >
-                    <DataGridComboBoxColumn.ElementStyle>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DummyUnitList}"/>
-                        </Style>
-                    </DataGridComboBoxColumn.ElementStyle>
-                </DataGridComboBoxColumn>
+                <DataGridTemplateColumn Header="Enhed">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Units}" SelectedIndex="1" SelectedValue="{Binding Units/Id}" SelectedValuePath="{Binding /Id}" DisplayMemberPath="Name"
+                                      ></ComboBox> 
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

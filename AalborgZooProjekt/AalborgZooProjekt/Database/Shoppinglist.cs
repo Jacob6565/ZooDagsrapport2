@@ -17,7 +17,7 @@ namespace AalborgZooProjekt.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ShoppingList()
         {
-            this.Orders = new HashSet<Order>();
+            this.Orders = new HashSet<DummyOrder>();
         }
     
         public int Id { get; set; }
@@ -27,7 +27,7 @@ namespace AalborgZooProjekt.Database
         public int ShopperId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<DummyOrder> Orders { get; set; }
         public virtual Shopper Shopper { get; set; }
     }
 }
