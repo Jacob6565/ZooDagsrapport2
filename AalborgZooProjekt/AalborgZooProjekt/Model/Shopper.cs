@@ -25,6 +25,11 @@ namespace AalborgZooProjekt.Model
             throw new NotImplementedException();
         }
 
+        public int GetID()
+        {
+            return this.Id;
+        }
+
         public void MakeProduct()
         {
             throw new NotImplementedException();
