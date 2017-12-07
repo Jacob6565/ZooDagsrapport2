@@ -28,9 +28,9 @@ namespace AalborgZooProjekt.ViewModel
         void AttachZookeeperToOrder(Order order, Zookeeper zookeeper);
         void CheckIfOrderIsAllowedToBeSent();
         void CheckIfOrderIsAllowedToBeFilledOut();
-        void CheckIfProductIsActive();
-        void ChangeNumberForOrderLines();
-        void ChangeDepartmentForZookeeper();
-        void ChangeUnitForOrderLine(Unit unit);       
+        void CheckIfProductIsActive(Product product);
+        void ChangeNumberForOrderLines(OrderLine orderline);
+        void ChangeDepartmentForZookeeper(Zookeeper zookeeper);
+        void ChangeUnitForOrderLine(OrderLine orderline, Unit unit);       
     }
 }
