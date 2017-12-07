@@ -5,57 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using AalborgZooProjekt.Database;
 using GalaSoft.MvvmLight;
+using AalborgZooProjekt.Interfaces;
 
 namespace AalborgZooProjekt.ViewModel
 {
     class ZookeeperViewModel : ViewModelBase, IZookeeperViewModel
     {
-        public void AddDepartmentSpecificProduct()
+        public void ChangeNumberForOrderLines(OrderLine orderline)
         {
             throw new NotImplementedException();
         }
 
-        public void AddOrderLine()
+        public void ChangeUnitForOrderLine(OrderLine orderline, Unit unit)
         {
             throw new NotImplementedException();
         }
 
-        public void AttachZookeeperToOrder()
+        public void CheckIfOrderIsAllowedToBeFilledOut(Order order)
         {
             throw new NotImplementedException();
         }
 
-        public void CancelOrder(Order order)
+        public void CheckIfOrderIsAllowedToBeSent(Order order)
         {
             throw new NotImplementedException();
         }
 
-        public void ChangeDepartmentForZookeeper()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ChangeNumberForOrderLines()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ChangeUnitForOrderLine()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CheckIfOrderIsAllowedToBeFilledOut()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CheckIfOrderIsAllowedToBeSent()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CheckIfProductIsActive()
+        public void CheckIfProductIsActive(Product product)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +41,7 @@ namespace AalborgZooProjekt.ViewModel
             throw new NotImplementedException();
         }
 
-        public void GetCurrentOrder()
+        public Order GetCurrentOrder()
         {
             throw new NotImplementedException();
         }
@@ -75,42 +51,17 @@ namespace AalborgZooProjekt.ViewModel
             throw new NotImplementedException();
         }
 
-        public void GetOrderHistory()
+        public List<Order> GetOrderHistory()
         {
             throw new NotImplementedException();
         }
 
-        public void GetProducts()
+        public List<Product> GetProducts()
         {
             throw new NotImplementedException();
         }
 
-        public void GetZookeepers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MakeOrder()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveDepartmentSpecificProduct(DepartmentSpecifikProduct dSProduct)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveOrderLine(OrderLine orderLine)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveZookeeperFromOrder(Zookeeper zookeeper)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveComment(Order order, string comment)
+        public List<Zookeeper> GetZookeepers()
         {
             throw new NotImplementedException();
         }
@@ -120,7 +71,7 @@ namespace AalborgZooProjekt.ViewModel
             throw new NotImplementedException();
         }
 
-        public void SearchForProduct()
+        public void SearchForProduct(List<Product> productList, string search)
         {
             throw new NotImplementedException();
         }
