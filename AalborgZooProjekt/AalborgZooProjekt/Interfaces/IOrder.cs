@@ -14,7 +14,9 @@ namespace AalborgZooProjekt.Interfaces
         bool CanOrderBeChanged();
 
         //Belonged to OderLine initially, but it would nice to be able to call CanOrderBeChanged b4
+        void ChangeProduct(OrderLine orderLine, ProductVersion productVersion);
         void ChangeUnit(OrderLine orderLine, Unit unit);
         void ChangeAmount(OrderLine orderLine, int amount);
+
     }
 }
