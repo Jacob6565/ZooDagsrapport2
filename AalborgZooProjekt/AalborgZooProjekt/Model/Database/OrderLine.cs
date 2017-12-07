@@ -15,8 +15,8 @@ namespace AalborgZooProjekt.Model
     public partial class OrderLine
     {
         public int Id { get; set; }
-        public string Quantity { get; set; }
-        public string UnitID { get; set; }
+        public int Quantity { get; set; }
+        public int UnitID { get; set; }
         public int ProductVersionId { get; set; }
         public int OrderId { get; set; }
     
