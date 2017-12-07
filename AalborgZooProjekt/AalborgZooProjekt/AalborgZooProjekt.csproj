@@ -143,21 +143,44 @@
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
+    <Compile Include="Model\DummyEmployee.cs" />
     <Compile Include="Model\DummyOrder.cs" />
+    <Compile Include="Model\DummyOrderLine.cs" />
     <Compile Include="Model\DummyProduct.cs" />
+    <Compile Include="Model\DummyProductVersion.cs" />
+    <Compile Include="Model\DummyShopper.cs" />
+    <Compile Include="Model\DummyShoppingList.cs" />
+    <Compile Include="Model\EmployeeMockUp.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\ProductVersion.cs" />
+    <Compile Include="Model\ZooKeeperMockUp.cs" />
+    <Compile Include="ViewModel\DBAalborgZoo.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
+    <Compile Include="ViewModel\ILoginViewModel.cs" />
+    <Compile Include="ViewModel\IShopperViewModel.cs" />
+    <Compile Include="ViewModel\IZookeeperViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OfficeDummyViewModel.cs" />
+    <Compile Include="ViewModel\ShopperViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\ZookeeperViewModel.cs" />
+    <Compile Include="View\AllProducts.xaml.cs">
+      <DependentUpon>AllProducts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OfficeFeedTypeOrders.xaml.cs">
+      <DependentUpon>OfficeFeedTypeOrders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ZooKeeper\FruitFoodList.xaml.cs">
       <DependentUpon>FruitFoodList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZooKeeper\OtherFoodList.xaml.cs">
       <DependentUpon>OtherFoodList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZooKeeper\FeedAndRawfeedTab.xaml.cs">
+    <Compile Include="View\FeedAndRawfeedTab.xaml.cs">
       <DependentUpon>FeedAndRawfeedTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZooKeeper\FeedTab.xaml.cs">
@@ -181,6 +204,18 @@
     <Compile Include="View\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AllProducts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OfficeFeedTypeOrders.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Window3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ZooKeeper\FruitFoodList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,7 +224,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZooKeeper\FeedAndRawfeedTab.xaml">
+    <Page Include="View\FeedAndRawfeedTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
