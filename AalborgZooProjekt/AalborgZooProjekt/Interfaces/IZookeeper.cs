@@ -2,7 +2,7 @@
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IZookeeperModel
+    interface IZookeeper
     {
         void MakeOrder(Order order);
     }

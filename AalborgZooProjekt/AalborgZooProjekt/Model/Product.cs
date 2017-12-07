@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public partial class Product
+    public partial class Product 
     {
+        
     }
 }

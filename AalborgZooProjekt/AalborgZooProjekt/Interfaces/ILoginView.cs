@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.ViewModel
 {
-    interface ILoginViewModel
+    interface ILoginView
     {
         /*
         void LoginCheck();
