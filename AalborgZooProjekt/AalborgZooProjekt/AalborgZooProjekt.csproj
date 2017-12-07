@@ -86,6 +86,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IDepartmentModel.cs" />
+    <Compile Include="Interfaces\ILoginViewModel.cs" />
+    <Compile Include="Interfaces\IOrderLineModel.cs" />
+    <Compile Include="Interfaces\IOrderModel.cs" />
+    <Compile Include="Interfaces\IProductModel.cs" />
+    <Compile Include="Interfaces\IShopperModel.cs" />
+    <Compile Include="Interfaces\IShoppingListModel.cs" />
+    <Compile Include="Interfaces\IZookeeperModel.cs" />
+    <Compile Include="Interfaces\IZookeeperViewModel.cs" />
     <Compile Include="Model\Database\AalborgZoo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
