@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="AalborgZoo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="AalborgZooStoreContainer">
-    <EntitySet Name="DepartmentSpecifikProductSet" EntityType="AalborgZoo.Store.DepartmentSpecifikProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DepartmentSpecificProductSet" EntityType="AalborgZoo.Store.DepartmentSpecificProductSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProductSet" EntityType="AalborgZoo.Store.ProductSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProductVersionSet" EntityType="AalborgZoo.Store.ProductVersionSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ShoppingListSet" EntityType="AalborgZoo.Store.ShoppingListSet" store:Type="Tables" Schema="dbo" />
@@ -21,7 +21,7 @@
     <EntitySet Name="EmployeeSet_Shopper" EntityType="AalborgZoo.Store.EmployeeSet_Shopper" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UnitProductVersion" EntityType="AalborgZoo.Store.UnitProductVersion" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="DepartmentSpecifikProductProduct" Association="AalborgZoo.Store.DepartmentSpecifikProductProduct">
-      <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
+      <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecificProductSet" />
       <End Role="Product" EntitySet="ProductSet" />
     </AssociationSet>
     <AssociationSet Name="ProductProductVersion" Association="AalborgZoo.Store.ProductProductVersion">
@@ -49,7 +49,7 @@
       <End Role="UnitProductVersion" EntitySet="UnitProductVersion" />
     </AssociationSet>
     <AssociationSet Name="DepartmentSpecifikProductDepartment" Association="AalborgZoo.Store.DepartmentSpecifikProductDepartment">
-      <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
+      <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecificProductSet" />
       <End Role="Department" EntitySet="DepartmentSet" />
     </AssociationSet>
     <AssociationSet Name="DepartmentZookeeper" Association="AalborgZoo.Store.DepartmentZookeeper">
@@ -77,7 +77,7 @@
       <End Role="Shopper" EntitySet="EmployeeSet_Shopper" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="DepartmentSpecifikProductSet">
+  <EntityType Name="DepartmentSpecificProductSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -94,6 +94,7 @@
     <Property Name="CreatedByID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DeletedByID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateDeleted" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductVersionSet">
     <Key>
@@ -208,7 +209,7 @@
     <Property Name="ProductVersion_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="DepartmentSpecifikProductProduct">
-    <End Role="DepartmentSpecifikProduct" Type="AalborgZoo.Store.DepartmentSpecifikProductSet" Multiplicity="*" />
+    <End Role="DepartmentSpecifikProduct" Type="AalborgZoo.Store.DepartmentSpecificProductSet" Multiplicity="*" />
     <End Role="Product" Type="AalborgZoo.Store.ProductSet" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -268,7 +269,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="DepartmentSpecifikProductDepartment">
-    <End Role="DepartmentSpecifikProduct" Type="AalborgZoo.Store.DepartmentSpecifikProductSet" Multiplicity="*" />
+    <End Role="DepartmentSpecifikProduct" Type="AalborgZoo.Store.DepartmentSpecificProductSet" Multiplicity="*" />
     <End Role="Department" Type="AalborgZoo.Store.DepartmentSet" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Department">
@@ -384,7 +385,7 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AalborgZoo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="AalborgZooContainer1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DepartmentSpecifikProductSet" EntityType="AalborgZoo.DepartmentSpecifikProduct" />
+          <EntitySet Name="DepartmentSpecificProductSet" EntityType="AalborgZoo.DepartmentSpecificProduct" />
           <EntitySet Name="ProductSet" EntityType="AalborgZoo.Product" />
           <EntitySet Name="ProductVersionSet" EntityType="AalborgZoo.ProductVersion" />
           <EntitySet Name="ShoppingListSet" EntityType="AalborgZoo.ShoppingList" />
@@ -396,7 +397,7 @@
           <EntitySet Name="PasswordChangedSet" EntityType="AalborgZoo.PasswordChanged" />
           <EntitySet Name="UnitSet" EntityType="AalborgZoo.Unit" />
           <AssociationSet Name="DepartmentSpecifikProductProduct" Association="AalborgZoo.DepartmentSpecifikProductProduct">
-            <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
+            <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecificProductSet" />
             <End Role="Product" EntitySet="ProductSet" />
           </AssociationSet>
           <AssociationSet Name="ProductProductVersion" Association="AalborgZoo.ProductProductVersion">
@@ -420,7 +421,7 @@
             <End Role="ProductVersion" EntitySet="ProductVersionSet" />
           </AssociationSet>
           <AssociationSet Name="DepartmentSpecifikProductDepartment" Association="AalborgZoo.DepartmentSpecifikProductDepartment">
-            <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecifikProductSet" />
+            <End Role="DepartmentSpecifikProduct" EntitySet="DepartmentSpecificProductSet" />
             <End Role="Department" EntitySet="DepartmentSet" />
           </AssociationSet>
           <AssociationSet Name="DepartmentZookeeper" Association="AalborgZoo.DepartmentZookeeper">
@@ -440,7 +441,7 @@
             <End Role="Shopper" EntitySet="EmployeeSet" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="DepartmentSpecifikProduct">
+        <EntityType Name="DepartmentSpecificProduct">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -461,6 +462,7 @@
           <Property Name="DateDeleted" Type="String" Nullable="false" />
           <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="Product" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="ProductVersions" Relationship="AalborgZoo.ProductProductVersion" FromRole="Product" ToRole="ProductVersion" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductVersion">
           <Key>
@@ -577,7 +579,7 @@
           <NavigationProperty Name="ProductVersion" Relationship="AalborgZoo.UnitProductVersion" FromRole="Unit" ToRole="ProductVersion" />
         </EntityType>
         <Association Name="DepartmentSpecifikProductProduct">
-          <End Type="AalborgZoo.DepartmentSpecifikProduct" Role="DepartmentSpecifikProduct" Multiplicity="*" />
+          <End Type="AalborgZoo.DepartmentSpecificProduct" Role="DepartmentSpecifikProduct" Multiplicity="*" />
           <End Type="AalborgZoo.Product" Role="Product" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -641,7 +643,7 @@
           <End Type="AalborgZoo.ProductVersion" Role="ProductVersion" Multiplicity="*" />
         </Association>
         <Association Name="DepartmentSpecifikProductDepartment">
-          <End Type="AalborgZoo.DepartmentSpecifikProduct" Role="DepartmentSpecifikProduct" Multiplicity="*" />
+          <End Type="AalborgZoo.DepartmentSpecificProduct" Role="DepartmentSpecifikProduct" Multiplicity="*" />
           <End Type="AalborgZoo.Department" Role="Department" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Department">
@@ -706,9 +708,9 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="AalborgZooStoreContainer" CdmEntityContainer="AalborgZooContainer1">
-    <EntitySetMapping Name="DepartmentSpecifikProductSet">
-      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.DepartmentSpecifikProduct)">
-        <MappingFragment StoreEntitySet="DepartmentSpecifikProductSet">
+    <EntitySetMapping Name="DepartmentSpecificProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AalborgZoo.DepartmentSpecificProduct)">
+        <MappingFragment StoreEntitySet="DepartmentSpecificProductSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
@@ -723,6 +725,7 @@
           <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
           <ScalarProperty Name="DeletedByID" ColumnName="DeletedByID" />
           <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

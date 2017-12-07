@@ -17,7 +17,7 @@ namespace AalborgZooProjekt.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            this.DepartmentSpecifikProducts = new HashSet<DepartmentSpecifikProduct>();
+            this.DepartmentSpecifikProducts = new HashSet<DepartmentSpecificProduct>();
             this.Zookeepers = new HashSet<Zookeeper>();
         }
     
@@ -27,7 +27,7 @@ namespace AalborgZooProjekt.Database
         public string DateDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DepartmentSpecifikProduct> DepartmentSpecifikProducts { get; set; }
+        public virtual ICollection<DepartmentSpecificProduct> DepartmentSpecifikProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zookeeper> Zookeepers { get; set; }
     }

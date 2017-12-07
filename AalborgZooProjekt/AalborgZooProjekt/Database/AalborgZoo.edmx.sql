@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/30/2017 14:01:38
+-- Date Created: 12/06/2017 14:24:49
 -- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
@@ -111,8 +111,8 @@ GO
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'DepartmentSpecifikProductSet'
-CREATE TABLE [dbo].[DepartmentSpecifikProductSet] (
+-- Creating table 'DepartmentSpecificProductSet'
+CREATE TABLE [dbo].[DepartmentSpecificProductSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [ProductId] int  NOT NULL,
     [DepartmentId] int  NOT NULL
@@ -125,7 +125,8 @@ CREATE TABLE [dbo].[ProductSet] (
     [DateCreated] nvarchar(max)  NOT NULL,
     [CreatedByID] nvarchar(max)  NOT NULL,
     [DeletedByID] nvarchar(max)  NOT NULL,
-    [DateDeleted] nvarchar(max)  NOT NULL
+    [DateDeleted] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -244,9 +245,9 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'DepartmentSpecifikProductSet'
-ALTER TABLE [dbo].[DepartmentSpecifikProductSet]
-ADD CONSTRAINT [PK_DepartmentSpecifikProductSet]
+-- Creating primary key on [Id] in table 'DepartmentSpecificProductSet'
+ALTER TABLE [dbo].[DepartmentSpecificProductSet]
+ADD CONSTRAINT [PK_DepartmentSpecificProductSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -332,8 +333,8 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [ProductId] in table 'DepartmentSpecifikProductSet'
-ALTER TABLE [dbo].[DepartmentSpecifikProductSet]
+-- Creating foreign key on [ProductId] in table 'DepartmentSpecificProductSet'
+ALTER TABLE [dbo].[DepartmentSpecificProductSet]
 ADD CONSTRAINT [FK_DepartmentSpecifikProductProduct]
     FOREIGN KEY ([ProductId])
     REFERENCES [dbo].[ProductSet]
@@ -343,7 +344,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DepartmentSpecifikProductProduct'
 CREATE INDEX [IX_FK_DepartmentSpecifikProductProduct]
-ON [dbo].[DepartmentSpecifikProductSet]
+ON [dbo].[DepartmentSpecificProductSet]
     ([ProductId]);
 GO
 
@@ -431,8 +432,8 @@ ON [dbo].[UnitProductVersion]
     ([ProductVersion_Id]);
 GO
 
--- Creating foreign key on [DepartmentId] in table 'DepartmentSpecifikProductSet'
-ALTER TABLE [dbo].[DepartmentSpecifikProductSet]
+-- Creating foreign key on [DepartmentId] in table 'DepartmentSpecificProductSet'
+ALTER TABLE [dbo].[DepartmentSpecificProductSet]
 ADD CONSTRAINT [FK_DepartmentSpecifikProductDepartment]
     FOREIGN KEY ([DepartmentId])
     REFERENCES [dbo].[DepartmentSet]
@@ -442,7 +443,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DepartmentSpecifikProductDepartment'
 CREATE INDEX [IX_FK_DepartmentSpecifikProductDepartment]
-ON [dbo].[DepartmentSpecifikProductSet]
+ON [dbo].[DepartmentSpecificProductSet]
     ([DepartmentId]);
 GO
 

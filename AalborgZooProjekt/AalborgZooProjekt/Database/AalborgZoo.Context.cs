@@ -25,7 +25,7 @@ namespace AalborgZooProjekt.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<DepartmentSpecifikProduct> DepartmentSpecifikProductSet { get; set; }
+        public virtual DbSet<DepartmentSpecificProduct> DepartmentSpecificProductSet { get; set; }
         public virtual DbSet<Product> ProductSet { get; set; }
         public virtual DbSet<ProductVersion> ProductVersionSet { get; set; }
         public virtual DbSet<ShoppingList> ShoppingListSet { get; set; }
