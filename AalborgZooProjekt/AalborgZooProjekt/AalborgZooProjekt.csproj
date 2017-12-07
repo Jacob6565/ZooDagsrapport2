@@ -86,69 +86,74 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\AalborgZoo.Context.cs">
+    <Compile Include="Model\Database\AalborgZoo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AalborgZoo.cs">
+    <Compile Include="Model\Database\AalborgZoo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AalborgZoo.Designer.cs">
+    <Compile Include="Model\Database\AalborgZoo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Department.cs">
+    <Compile Include="Model\Database\Department.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DepartmentChange.cs">
+    <Compile Include="Model\Database\DepartmentChange.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DepartmentSpecificProduct.cs">
+    <Compile Include="Model\Database\DepartmentSpecificProduct.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Employee.cs">
+    <Compile Include="Model\Database\Employee.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Order.cs">
+    <Compile Include="Model\Database\Order.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\OrderLine.cs">
+    <Compile Include="Model\Database\OrderLine.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PasswordChanged.cs">
+    <Compile Include="Model\Database\PasswordChanged.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Product.cs">
+    <Compile Include="Model\Database\Product.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ProductVersion.cs">
+    <Compile Include="Model\Database\ProductVersion.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Shopper.cs">
+    <Compile Include="Model\Database\Shopper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ShoppingList.cs">
+    <Compile Include="Model\Database\ShoppingList.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Unit.cs">
+    <Compile Include="Model\Database\Unit.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Zookeeper.cs">
+    <Compile Include="Model\Database\Zookeeper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Model\DataItem.cs" />
-    <Compile Include="Model\DataService.cs" />
-    <Compile Include="Model\DummyOrder.cs" />
-    <Compile Include="Model\DummyProduct.cs" />
-    <Compile Include="Model\IDataService.cs" />
-    <Compile Include="ViewModel\DummyViewModel.cs">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
+    <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\DepartmentChange.cs" />
+    <Compile Include="Model\DepartmentSpecificProduct.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderLine.cs" />
+    <Compile Include="Model\PasswordChanged.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductVersion.cs" />
+    <Compile Include="Model\Shopper.cs" />
+    <Compile Include="Model\ShopperList.cs" />
+    <Compile Include="Model\Unit.cs" />
+    <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
@@ -178,14 +183,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\AalborgZoo.edmx">
+    <EntityDeploy Include="Model\Database\AalborgZoo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AalborgZoo.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="AppSecretsDontCommit.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Model\AalborgZoo.edmx.diagram">
+    <None Include="Model\Database\AalborgZoo.edmx.diagram">
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -210,23 +215,17 @@
     <Folder Include="Commands\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\AalborgZoo.Context.tt">
+    <Content Include="Model\Database\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
-    <Content Include="Model\AalborgZoo.edmx.sql" />
-    <Content Include="Model\AalborgZoo.tt">
+    <Content Include="Model\Database\AalborgZoo.edmx.sql" />
+    <Content Include="Model\Database\AalborgZoo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
-    <Resource Include="Model\DummyOtherFood.txt" />
-    <Resource Include="Model\DummyHistoryEntries.txt" />
-    <Resource Include="Model\DummyOrders.txt" />
-    <Resource Include="Model\DummyOrdersDepartment.txt" />
-    <Resource Include="Model\DummyFruit.txt" />
-    <Resource Include="Model\DummyUnits.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
