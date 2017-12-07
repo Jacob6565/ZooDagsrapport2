@@ -1,4 +1,4 @@
-﻿using AalborgZooProjekt.Database;
+﻿using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt.Interfaces
 {
