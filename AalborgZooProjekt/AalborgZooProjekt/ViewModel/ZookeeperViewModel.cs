@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AalborgZooProjekt.Database;
 using GalaSoft.MvvmLight;
+using AalborgZooProjekt.Interfaces;
 
 namespace AalborgZooProjekt.ViewModel
 {
