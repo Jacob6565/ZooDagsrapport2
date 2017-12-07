@@ -9,7 +9,6 @@ namespace AalborgZooProjekt.ViewModel
 {
     interface IZookeeperViewModel
     {
-        
         void CancelOrder(Order order);
         void RemoveOrderLine(OrderLine orderLine);
         void RemoveZookeeperFromOrder(Zookeeper zookeeper);
@@ -17,10 +16,10 @@ namespace AalborgZooProjekt.ViewModel
         void SaveComment(Order order, string comment);
         void SaveOrder(Order order);
         Order GetOrderFromHistory();
-        void GetOrderHistory(List<Order> orderList);
-        void GetZookeepers(List<Zookeeper> zookeeperList);
-        void GetProducts(List<Product> productList);
-        void GetCurrentOrder();
+        List<Order> GetOrderHistory();
+        List<Zookeeper> GetZookeepers();
+        List<Product> GetProducts();
+        Order GetCurrentOrder();
         void CloseProgram();
         void MakeOrder(Order order);
         void SearchForProduct(List<Product> productList, string search);
@@ -32,7 +31,6 @@ namespace AalborgZooProjekt.ViewModel
         void CheckIfProductIsActive();
         void ChangeNumberForOrderLines();
         void ChangeDepartmentForZookeeper();
-        void ChangeUnitForOrderLine(Unit unit);
-        
+        void ChangeUnitForOrderLine(Unit unit);       
     }
 }
