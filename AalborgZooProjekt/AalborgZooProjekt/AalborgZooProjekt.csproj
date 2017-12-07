@@ -141,6 +141,13 @@
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
+    <Compile Include="Interfaces\IDepartmentModel.cs" />
+    <Compile Include="Interfaces\IOrderLineModel.cs" />
+    <Compile Include="Interfaces\IOrderModel.cs" />
+    <Compile Include="Interfaces\IProductModel.cs" />
+    <Compile Include="Interfaces\IShopperModel.cs" />
+    <Compile Include="Interfaces\IShoppingListModel.cs" />
+    <Compile Include="Interfaces\IZookeeperModel.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\DummyEmployee.cs" />
@@ -159,9 +166,9 @@
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
-    <Compile Include="ViewModel\ILoginViewModel.cs" />
+    <Compile Include="Interfaces\ILoginViewModel.cs" />
     <Compile Include="ViewModel\IShopperViewModel.cs" />
-    <Compile Include="ViewModel\IZookeeperViewModel.cs" />
+    <Compile Include="Interfaces\IZookeeperViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OfficeDummyViewModel.cs" />
