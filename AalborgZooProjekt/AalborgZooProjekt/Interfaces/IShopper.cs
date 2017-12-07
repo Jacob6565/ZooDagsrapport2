@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IShopper
+    public interface IShopper
     {
         // Needs to take virables that is needed to create a Product
         void MakeProduct();

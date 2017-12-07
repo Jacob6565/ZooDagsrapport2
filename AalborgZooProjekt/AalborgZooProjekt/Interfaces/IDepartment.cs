@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IDepartment
+    public interface IDepartment
     {
         Order MakeOrder();
         void CancelOrder(Order order);

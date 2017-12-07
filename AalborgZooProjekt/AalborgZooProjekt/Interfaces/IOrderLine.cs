@@ -7,7 +7,7 @@ using AalborgZooProjekt.Model;
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IOrderLine
+    public interface IOrderLine
     {
 
     }
