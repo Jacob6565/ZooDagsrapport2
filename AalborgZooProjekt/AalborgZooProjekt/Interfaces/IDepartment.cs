@@ -1,11 +1,14 @@
 ﻿using AalborgZooProjekt.Model;
+using System.Collections.Generic;
 
 namespace AalborgZooProjekt.Interfaces
 {
     interface IDepartment
     {
-        void RemoveDepartmentSpecificProduct(DepartmentSpecificProduct dSProduct);
-        void AddDepartmentSpecificProduct();
-        void ChangeDepartmentForZookeeper(Zookeeper zookeeper);
+        Order MakeOrder();
+        void CancelOrder(Order order);
+        void AddDepartmentSpecificProduct(Department department, Product product);
+        void RemoveDepartmentSpecificProduct(List<DepartmentSpecificProduct> dSProductList, DepartmentSpecificProduct dSProduct);
+        void ChangeDepartmentForZookeeper(DepartmentChange departmentChange);
     }
 }
