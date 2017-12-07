@@ -36,19 +36,19 @@ namespace AalborgZooProjekt
         public DummyViewModel()
         {
             //PopulateDatabase();
-            string[] lines = File.ReadAllLines("../../DummyFruit.txt", Encoding.UTF7);
+            string[] lines = File.ReadAllLines("../../Model/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 DummyFruitList.Add(new DummyProduct(product));
             }
 
-            lines = File.ReadAllLines("../../DummyOtherFood.txt", Encoding.UTF7);
+            lines = File.ReadAllLines("../../Model/DummyOtherFood.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 DummyOtherFoodList.Add(new DummyProduct(product));
             }
 
-            lines = File.ReadAllLines("../../DummyOrders.txt");
+            lines = File.ReadAllLines("../../Model/DummyOrders.txt");
             foreach (string orders in lines)
             {
                 DummyOrderList.Add(new DummyOrder(orders));
