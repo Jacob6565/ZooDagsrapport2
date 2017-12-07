@@ -2,7 +2,7 @@
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IDepartment
+    public interface IDepartment
     {
         void RemoveDepartmentSpecificProduct(DepartmentSpecificProduct dSProduct);
         void AddDepartmentSpecificProduct();

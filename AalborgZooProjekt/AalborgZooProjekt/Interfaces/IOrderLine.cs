@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IOrderLine
+    public interface IOrderLine
     {
     }
 }

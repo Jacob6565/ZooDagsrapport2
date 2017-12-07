@@ -3,7 +3,7 @@ using AalborgZooProjekt.Model;
 
 namespace AalborgZooProjekt.ViewModel
 {
-    interface IZookeeperView
+    public interface IZookeeperView
     {
         void SaveOrder(Order order);
         Order GetOrderFromHistory();

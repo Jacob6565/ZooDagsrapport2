@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IShopper
+    public interface IShopper
     {
     }
 }

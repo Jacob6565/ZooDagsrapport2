@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AalborgZooProjekt.Model;
 
 namespace AalborgZooProjekt.Interfaces
 {
     interface IProduct
     {
+        void RemoveProductUnit(Unit unitToRemove);
+        void DeactivateProduct();
+        void ActivateProduct();
+        void AddProductUnit(Unit unitToAdd);
+        void ChangeProductSupplier(string supplier);
+        bool CheckIfProductIsActive();
+        void ChangeProductName(string name);
     }
 }

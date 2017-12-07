@@ -2,7 +2,7 @@
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IOrder
+    public interface IOrder
     {
         void AttachZookeeperToOrder(Order order, Zookeeper zookeeper); // Work in progress
         void AddOrderLine(OrderLine orderLine);
