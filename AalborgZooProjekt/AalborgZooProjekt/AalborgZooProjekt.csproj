@@ -140,7 +140,6 @@
     <Compile Include="Model\Database\Zookeeper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\Department.cs" />
     <Compile Include="Model\DepartmentChange.cs" />
     <Compile Include="Model\DepartmentSpecificProduct.cs" />
@@ -154,8 +153,6 @@
     <Compile Include="Model\ShopperList.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\Zookeeper.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -213,6 +210,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="Design\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Database\AalborgZoo.Context.tt">
