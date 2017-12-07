@@ -4,11 +4,18 @@ namespace AalborgZooProjekt.Interfaces
 {
     public interface IOrder
     {
-        void AttachZookeeperToOrder(Order order, Zookeeper zookeeper); // Work in progress
+        void AttachZookeeperToOrder(Zookeeper zookeeper); // Work in progress
         void AddOrderLine(OrderLine orderLine);
-        void SaveComment(Order order, string comment);
-        void CancelOrder(Order order);
+        void SaveComment(string comment);
         void RemoveZookeeperFromOrder(Zookeeper zookeeper);
         void RemoveOrderLine(OrderLine orderLine);
+        bool CanOrderBeSend();
+        void SendOrder();
+        bool IsOrderFilledOut();
+        bool CanOrderBeChanged();
+
+        //Belonged to OderLine initially, but it would nice to be able to call CanOrderBeChanged b4
+        void ChangeUnit(OrderLine orderLine, Unit unit);
+        void ChangeAmount(OrderLine orderLine, int amount);
     }
 }

@@ -21,13 +21,13 @@ namespace AalborgZooProjekt.Model
         }
     
         public int Id { get; set; }
-        public string DepartmentID { get; set; }
-        public string OrderedByID { get; set; }
+        public int DepartmentID { get; set; }
+        public int OrderedByID { get; set; }
         public string DateOrdered { get; set; }
         public string DateCancelled { get; set; }
         public string Note { get; set; }
         public string DateCreated { get; set; }
-        public string DeletedByID { get; set; }
+        public int DeletedByID { get; set; }
         public string Status { get; set; }
         public Nullable<int> ShoppingListId { get; set; }
     
