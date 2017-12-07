@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AalborgZooProjekt.Database;
+using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
 using GalaSoft.MvvmLight;
-using AalborgZooProjekt.Interfaces;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -21,12 +18,12 @@ namespace AalborgZooProjekt.ViewModel
             throw new NotImplementedException();
         }
 
-        public void CheckIfOrderIsAllowedToBeFilledOut(Order order)
+        public void CheckIfOrderIsAllowedToBeFilledOut(Model.Database.Order order)
         {
             throw new NotImplementedException();
         }
 
-        public void CheckIfOrderIsAllowedToBeSent(Order order)
+        public void CheckIfOrderIsAllowedToBeSent(Model.Database.Order order)
         {
             throw new NotImplementedException();
         }
@@ -41,17 +38,17 @@ namespace AalborgZooProjekt.ViewModel
             throw new NotImplementedException();
         }
 
-        public Order GetCurrentOrder()
+        public Model.Database.Order GetCurrentOrder()
         {
             throw new NotImplementedException();
         }
 
-        public Order GetOrderFromHistory()
+        public Model.Database.Order GetOrderFromHistory()
         {
             throw new NotImplementedException();
         }
 
-        public List<Order> GetOrderHistory()
+        public List<Model.Database.Order> GetOrderHistory()
         {
             throw new NotImplementedException();
         }
@@ -66,7 +63,7 @@ namespace AalborgZooProjekt.ViewModel
             throw new NotImplementedException();
         }
 
-        public void SaveOrder(Order order)
+        public void SaveOrder(Model.Database.Order order)
         {
             throw new NotImplementedException();
         }
