@@ -7,19 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Database
+namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DepartmentChange
+    public partial class Employee
     {
         public int Id { get; set; }
-        public string DepartmentID { get; set; }
-        public string DateChanged { get; set; }
-        public string ZookeeperID { get; set; }
-        public Nullable<int> ZookeeperId1 { get; set; }
-    
-        public virtual Zookeeper Zookeeper { get; set; }
+        public string DateHired { get; set; }
+        public string Name { get; set; }
+        public string DateStopped { get; set; }
     }
 }
