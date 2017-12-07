@@ -14,5 +14,6 @@ namespace AalborgZooProjekt.Model
         }
 
         public string Name;
+        public int Amount = 0;
     }
 }

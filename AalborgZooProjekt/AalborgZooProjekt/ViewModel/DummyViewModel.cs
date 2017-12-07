@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Configuration;
 using AalborgZooProjekt.Database;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace AalborgZooProjekt
 {
@@ -29,9 +30,19 @@ namespace AalborgZooProjekt
             set { _dummyOtherFood = value; }
         }
 
-
-
         public List<DummyOrder> DummyOrderList { get; set; } = new List<DummyOrder>();
+
+        private ObservableCollection<Unit> dummyUnitList = new ObservableCollection<Unit> {
+            new Unit { Name = "kg"},
+            new Unit { Name = "kasse(r)" },
+            new Unit { Name = "styks" }
+        };
+
+        public ObservableCollection<Unit> DummyUnitList
+        {
+            get => dummyUnitList;
+            set { dummyUnitList = value; OnPropertyChanged(nameof(DummyUnitList)); }
+        }
 
         public DummyViewModel()
         {
@@ -39,13 +50,17 @@ namespace AalborgZooProjekt
             string[] lines = File.ReadAllLines("../../DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                DummyFruitList.Add(new DummyProduct(product));
+                DummyProduct dummyProduct = new DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyFruitList.Add(dummyProduct);
             }
 
             lines = File.ReadAllLines("../../DummyOtherFood.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                DummyOtherFoodList.Add(new DummyProduct(product));
+                DummyProduct dummyProduct = new DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyOtherFoodList.Add(dummyProduct);
             }
 
             lines = File.ReadAllLines("../../DummyOrders.txt");

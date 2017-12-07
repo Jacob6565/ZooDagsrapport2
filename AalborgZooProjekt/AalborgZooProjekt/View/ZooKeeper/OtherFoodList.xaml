@@ -8,15 +8,16 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Tester, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid ItemsSource="{Binding DummyOtherFoodList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding DummyOrderList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vare" Binding="{Binding Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Antal">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="+" Width="25"/>
-                                <Button Content="-" Width="25"/>
+                                <Button Content="+" Width="25" Command="{Binding AddAmount}"/>
+                                <TextBox PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Amount}" Width="25"/>
+                                <Button Content="-" Width="25" Command="{Binding SubtractAmount}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -24,7 +25,12 @@
                 <DataGridTemplateColumn Header="Enhed">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DataGrid ItemsSource="{Binding Unit}" HeadersVisibility="None"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <ComboBox ItemsSource="{Binding Path=PhoneBookEntries}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Name"
+                                          SelectedValue="{Binding Path=ph}"/>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

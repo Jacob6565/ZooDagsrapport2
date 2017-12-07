@@ -11,7 +11,7 @@
         <DataGrid ItemsSource="{Binding DummyFruitList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vare" Binding="{Binding Name}" Width="*"/>
-                <DataGridTemplateColumn Header="Antal">
+                <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -22,15 +22,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Enhed">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DataGrid ItemsSource="{Binding Unit}" HeadersVisibility="None"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridComboBoxColumn Header="Unit" >
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DummyUnitList}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                </DataGridComboBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-
 </UserControl>
