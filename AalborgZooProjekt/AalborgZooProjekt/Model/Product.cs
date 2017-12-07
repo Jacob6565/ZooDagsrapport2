@@ -7,19 +7,46 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Product : IProduct
     {
-
         public Product(IShopper shopper, string name, string supplier, List<Unit> units, bool active = true): this()
         {
-            ProductVersion firstVersion = new ProductVersion();
-            firstVersion.Supplier = supplier;
-            firstVersion.Unit.Concat(units);
-            firstVersion.IsActive = active;
-            firstVersion.Name = name;
-            firstVersion.Product = this;
-            firstVersion.ProductId = this.Id;
+            ProductVersion firstProductVersion = MakeFirstVersion(name, supplier, units, active);
+
+            this.Name = name;
+            this.CreatedByID = 
+            this.DeletedByID = null;
+            this.DateCreated = DateTime.Now.ToString();
+            
+
+            AddProductToDatabase(this);
             
             
             
+        }
+
+        /// <summary>
+        /// Creates the first version of the product.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="supplier"></param>
+        /// <param name="units"></param>
+        /// <param name="active"></param>
+        /// <returns></returns>
+        private ProductVersion MakeFirstVersion(string name, string supplier, List<Unit> units, bool active)
+        {
+            ProductVersion firstProductVersion = new ProductVersion();
+
+            firstProductVersion.Supplier = supplier;
+            firstProductVersion.Unit.Concat(units);
+            firstProductVersion.IsActive = active;
+            firstProductVersion.Name = name;
+            firstProductVersion.Product = this;
+            firstProductVersion.ProductId = this.Id;
+
+            return firstProductVersion;
+        }
+        private void AddProductToDatabase(Product product)
+        {
+            throw new NotImplementedException();
         }
 
         public void ActivateProduct()

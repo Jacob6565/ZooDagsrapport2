@@ -20,5 +20,8 @@ namespace AalborgZooProjekt.Interfaces
 
         // Takes a Product and removes it from the the database
         void DeleteProduct(Product product);
+
+        //Return the ID of the shopper
+        int GetID();
     }
 }
