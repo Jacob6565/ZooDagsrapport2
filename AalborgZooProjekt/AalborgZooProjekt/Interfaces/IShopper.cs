@@ -10,7 +10,7 @@ namespace AalborgZooProjekt.Interfaces
     public interface IShopper
     {
         // Needs to take virables that is needed to create a Product
-        void MakeProduct();
+        void MakeProduct(int employeeID, string name);
 
         // Search database for a specific order and see if it exist in the database
         void CheckIfOrderExist(Order order);
