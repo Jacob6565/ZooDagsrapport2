@@ -30,9 +30,19 @@ namespace AalborgZooProjekt.Model
             return this.Id;
         }
 
-        public void MakeProduct()
+
+        // 
+        public void MakeProduct(int employeeID, string name, )
         {
-            throw new NotImplementedException();
-        }
+            // Skriver til databasen
+            var db = new AalborgZooContainer1();
+
+            Product newProduct = new Product()
+            {
+                DateCreated = DateTime.Now.ToString(),
+                CreatedByID = employeeID,
+                Name = name
+            };
     }
+}
 }
