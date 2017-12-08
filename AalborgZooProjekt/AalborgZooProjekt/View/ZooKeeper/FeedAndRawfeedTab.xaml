@@ -8,15 +8,41 @@
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <TabControl Margin="10,0,0,0">
-            <TabItem Header="Foder" Padding="20,0">
+            <TabItem Header="Foder" Padding="20,0" Margin="1,0,0,0">
                 <TabItem.Style>
                     <Style>
                         <Setter Property="TextBlock.FontSize" Value="14"></Setter>
                     </Style>
                 </TabItem.Style>
-                <Grid>
-                    <local:FruitFoodList/>
-                </Grid>
+                <StackPanel>
+                    <TextBox>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Hurtigsøgning..." Foreground="Gray" FontStyle="Italic" Padding="5,0,0,0" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Grid>
+                        <local:FruitFoodList/>
+                    </Grid>
+                </StackPanel>
             </TabItem>
 
             <TabItem Header="Kraftfoder" Padding="20,0">
@@ -25,10 +51,37 @@
                         <Setter Property="TextBlock.FontSize" Value="14"></Setter>
                     </Style>
                 </TabItem.Style>
-                <Grid>
-                    <local:OtherFoodList/>
-                </Grid>
+                <StackPanel>
+                    <TextBox>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Hurtigsøgning..." Foreground="Gray" FontStyle="Italic" Padding="5,0,0,0" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Grid>
+                        <local:OtherFoodList/>
+                    </Grid>
+                </StackPanel>
             </TabItem>
+            
 
         </TabControl>
     </Grid>

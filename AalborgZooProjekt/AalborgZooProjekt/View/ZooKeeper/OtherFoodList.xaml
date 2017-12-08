@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Tester, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid ItemsSource="{Binding DummyOtherFoodList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding DummyFruitList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vare" Binding="{Binding Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">
@@ -22,7 +22,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Enhed">
+                <DataGridTemplateColumn Header="Enhed" MinWidth="27">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding Units}" SelectedIndex="1" SelectedValue="{Binding Units/Id}" SelectedValuePath="{Binding /Id}" DisplayMemberPath="Name"
