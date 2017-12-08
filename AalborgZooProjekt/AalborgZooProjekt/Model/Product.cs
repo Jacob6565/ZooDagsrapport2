@@ -54,8 +54,6 @@ namespace AalborgZooProjekt.Model
 
             if (previousVersion.IsActive != true)
             {
-
-
                 //Copying data from previous to new
                 newVersion.IsActive = true;
                 newVersion.Name = previousVersion.Name;
