@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using NUnit.Framework;
 using AalborgZooProjekt.Model;
 
 namespace NUnit.Test
 {
     [TestFixture]
-    public class OrderTest
+    public class OrderCanBeConstructedTest
     {
         [Test]
         public void CreateDepartmentTest()
@@ -28,7 +29,7 @@ namespace NUnit.Test
         }
 
         [Test]
-        public void CreateOrderLineTest()
+        public void OrderLineCanBeConstructedTest()
         {
             OrderLine orderLine = new OrderLine();
 
@@ -36,7 +37,7 @@ namespace NUnit.Test
         }
 
         [Test]
-        public void AddOrderLineTest()
+        public void AddOrderLineCanBeDoneTest()
         {
 
             //Arrange
