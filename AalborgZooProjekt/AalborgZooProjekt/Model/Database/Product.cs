@@ -23,8 +23,8 @@ namespace AalborgZooProjekt.Model
     
         public int Id { get; set; }
         public string DateCreated { get; set; }
-        public string CreatedByID { get; set; }
-        public string DeletedByID { get; set; }
+        public int CreatedByID { get; set; }
+        public int DeletedByID { get; set; }
         public string DateDeleted { get; set; }
         public string Name { get; set; }
     
