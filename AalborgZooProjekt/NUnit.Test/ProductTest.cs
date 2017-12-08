@@ -8,5 +8,6 @@ namespace NUnit.Test
 {
     class ProductTest
     {
+
     }
 }

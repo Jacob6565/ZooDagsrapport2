@@ -7,7 +7,7 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Product : IProduct
     {
-        public Product(IShopper shopper, string name, string supplier, List<Unit> units, bool active = true): this()
+        public Product(Shopper shopper, string name, string supplier, List<Unit> units, bool active = true): this()
         {
             ProductVersion firstProductVersion = MakeFirstVersion(name, supplier, units, active);
 
@@ -44,10 +44,7 @@ namespace AalborgZooProjekt.Model
             return firstProductVersion;
         }
 
-        private void AddProductToDatabase(Product product)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void ActivateProduct()
         {
@@ -55,21 +52,30 @@ namespace AalborgZooProjekt.Model
             newVersion = new ProductVersion();
             previousVersion = ProductVersions.First();
 
-            //Copying data from previous to new
-            newVersion.IsActive = true;
-            newVersion.Name = previousVersion.Name;
+            if (previousVersion.IsActive != true)
+            {
 
-            //Det burde da også bare kunne være "this",
-            //men det burde nærmest ikke være der, da productversionerne
-            //er gemt inde i et product.
-            newVersion.Product = previousVersion.Product;
-            newVersion.Supplier = previousVersion.Supplier;
-            newVersion.Unit = previousVersion.Unit.ToList();
-            newVersion.ProductId = previousVersion.ProductId;
-            newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-            this.ProductVersions.Add(newVersion);
-            //UpdateDatabase();
+                //Copying data from previous to new
+                newVersion.IsActive = true;
+                newVersion.Name = previousVersion.Name;
+
+                //Det burde da også bare kunne være "this",
+                //men det burde nærmest ikke være der, da productversionerne
+                //er gemt inde i et product.
+                newVersion.Product = previousVersion.Product;
+                newVersion.Supplier = previousVersion.Supplier;
+                newVersion.Unit = previousVersion.Unit.ToList();
+                newVersion.ProductId = previousVersion.ProductId;
+                newVersion.OrderLines = previousVersion.OrderLines.ToList();
+
+                this.ProductVersions.Add(newVersion);
+                //UpdateDatabase();
+            }
+            else
+            {
+                throw new ProductAlreadyActivatedException();
+            }
             
         }
 
@@ -79,21 +85,28 @@ namespace AalborgZooProjekt.Model
             newVersion = new ProductVersion();
             previousVersion = ProductVersions.First();
 
-            //Copying data from previous to new
-            newVersion.Name = previousVersion.Name;
-            newVersion.Product = previousVersion.Product;
-            newVersion.IsActive = previousVersion.IsActive;
-            newVersion.Supplier = previousVersion.Supplier;
-            newVersion.Unit = previousVersion.Unit.ToList();
-            newVersion.ProductId = previousVersion.ProductId;
-            newVersion.OrderLines = previousVersion.OrderLines.ToList();
-            
-            //Adding the change
-            newVersion.Unit.Add(unitToAdd);
+            if (!previousVersion.Unit.Contains(unitToAdd))
+            {
+                //Copying data from previous to new
+                newVersion.Name = previousVersion.Name;
+                newVersion.Product = previousVersion.Product;
+                newVersion.IsActive = previousVersion.IsActive;
+                newVersion.Supplier = previousVersion.Supplier;
+                newVersion.Unit = previousVersion.Unit.ToList();
+                newVersion.ProductId = previousVersion.ProductId;
+                newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-            this.ProductVersions.Add(newVersion);
+                //Adding the change
+                newVersion.Unit.Add(unitToAdd);
 
-            //UpdateDatabase();
+                this.ProductVersions.Add(newVersion);
+                //UpdateDatabase();
+            }
+            else
+            {
+                throw new ProductAlreadyHaveUnitException();
+            }
+
         }
 
         public void ChangeProductName(string name)
@@ -101,18 +114,26 @@ namespace AalborgZooProjekt.Model
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
             previousVersion = ProductVersions.First();
+            if (previousVersion.Name != name)
+            {
 
-            //Copying data from previous to new
-            this.Name = name;
-            newVersion.Name = name;
-            newVersion.Unit = previousVersion.Unit.ToList();
-            newVersion.Product = previousVersion.Product;
-            newVersion.Supplier = previousVersion.Supplier;
-            newVersion.IsActive = previousVersion.IsActive;
-            newVersion.ProductId = previousVersion.ProductId;
-            newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-            this.ProductVersions.Add(newVersion);
+                //Copying data from previous to new
+                this.Name = name;
+                newVersion.Name = name;
+                newVersion.Unit = previousVersion.Unit.ToList();
+                newVersion.Product = previousVersion.Product;
+                newVersion.Supplier = previousVersion.Supplier;
+                newVersion.IsActive = previousVersion.IsActive;
+                newVersion.ProductId = previousVersion.ProductId;
+                newVersion.OrderLines = previousVersion.OrderLines.ToList();
+
+                this.ProductVersions.Add(newVersion);
+            }
+            else
+            {
+                throw new ProductAlreadyHaveThatNameException();
+            }
         }
 
         public void ChangeProductSupplier(string supplier)
@@ -122,15 +143,22 @@ namespace AalborgZooProjekt.Model
             previousVersion = ProductVersions.First();
 
             //Copying data from previous to new
-            newVersion.Supplier = supplier;
-            newVersion.Name = previousVersion.Name;
-            newVersion.Unit = previousVersion.Unit.ToList();
-            newVersion.Product = previousVersion.Product;
-            newVersion.IsActive = previousVersion.IsActive;
-            newVersion.ProductId = previousVersion.ProductId;
-            newVersion.OrderLines = previousVersion.OrderLines.ToList();
+            if (previousVersion.Supplier != supplier)
+            {
+                newVersion.Supplier = supplier;
+                newVersion.Name = previousVersion.Name;
+                newVersion.Unit = previousVersion.Unit.ToList();
+                newVersion.Product = previousVersion.Product;
+                newVersion.IsActive = previousVersion.IsActive;
+                newVersion.ProductId = previousVersion.ProductId;
+                newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-            this.ProductVersions.Add(newVersion);
+                this.ProductVersions.Add(newVersion);
+            }
+            else
+            {
+                throw new AlreadyExistingSupplierException("supplier");
+            }
         }
 
         public bool CheckIfProductIsActive()
@@ -145,19 +173,26 @@ namespace AalborgZooProjekt.Model
             previousVersion = ProductVersions.First();
 
             //Copying data from previous to new
-            newVersion.IsActive = false;
-            newVersion.Name = previousVersion.Name;
-            newVersion.Unit = previousVersion.Unit.ToList();
+            if (previousVersion.IsActive == true)
+            { 
+                newVersion.IsActive = false;
+                newVersion.Name = previousVersion.Name;
+                newVersion.Unit = previousVersion.Unit.ToList();
 
-            //Det burde da også bare kunne være "this",
-            //men det burde nærmest ikke være der, da productversionerne
-            //er gemt inde i et product.
-            newVersion.Product = previousVersion.Product;
-            newVersion.Supplier = previousVersion.Supplier;
-            newVersion.ProductId = previousVersion.ProductId;
-            newVersion.OrderLines = previousVersion.OrderLines.ToList();
+                //Det burde da også bare kunne være "this",
+                //men det burde nærmest ikke være der, da productversionerne
+                //er gemt inde i et product.
+                newVersion.Product = previousVersion.Product;
+                newVersion.Supplier = previousVersion.Supplier;
+                newVersion.ProductId = previousVersion.ProductId;
+                newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-            this.ProductVersions.Add(newVersion);
+                this.ProductVersions.Add(newVersion);
+            }
+            else
+            {
+                throw new ProductAlreadyDeactivatedException(previousVersion.Name);
+            }
         }
 
         public void RemoveProductUnit(Unit unitToRemove)
@@ -166,21 +201,26 @@ namespace AalborgZooProjekt.Model
             newVersion = new ProductVersion();
             previousVersion = ProductVersions.First();
 
-            //Copying data from previous to new
-            newVersion.Name = previousVersion.Name;
-            newVersion.Unit = previousVersion.Unit.ToList();
-            newVersion.Product = previousVersion.Product;
-            newVersion.IsActive = previousVersion.IsActive;
-            newVersion.Supplier = previousVersion.Supplier;
-            newVersion.ProductId = previousVersion.ProductId;
-            newVersion.OrderLines = previousVersion.OrderLines.ToList();
+            if (previousVersion.Unit.Contains(unitToRemove))
+            {
+                //Copying data from previous to new
+                newVersion.Name = previousVersion.Name;
+                newVersion.Unit = previousVersion.Unit.ToList();
+                newVersion.Product = previousVersion.Product;
+                newVersion.IsActive = previousVersion.IsActive;
+                newVersion.Supplier = previousVersion.Supplier;
+                newVersion.ProductId = previousVersion.ProductId;
+                newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-            //Adding the change by removing the unit
-            newVersion.Unit.Remove(unitToRemove);
-
-            this.ProductVersions.Add(newVersion);
-
-            //UpdateDatabase();
+                //Adding the change by removing the unit
+                newVersion.Unit.Remove(unitToRemove);
+                this.ProductVersions.Add(newVersion);
+                //UpdateDatabase();
+            }
+            else
+            {
+                throw new UnitAlreadyRemovedException(unitToRemove.Name);
+            }
         }
     }
 }
