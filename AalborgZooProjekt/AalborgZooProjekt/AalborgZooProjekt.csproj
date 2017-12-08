@@ -155,6 +155,8 @@
     <Compile Include="Model\DepartmentChange.cs" />
     <Compile Include="Model\DepartmentSpecificProduct.cs" />
     <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Exception\DepartmentAlreadyDepartmentSpecificProductException.cs" />
+    <Compile Include="Model\Exception\DepartmentNotDepartmentSpecificProductException.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Exception\OrderIsNotUnderAnSendableStateException.cs" />
     <Compile Include="Model\Exception\OrderCanNotSendNoZookeeperException.cs" />

@@ -6,19 +6,35 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Department : IDepartment
     {
-        List<DepartmentSpecificProduct> departmentSpecificProductList = new List<DepartmentSpecificProduct>();
 
         /// <summary>
         /// Methods for adding and removing a Department Specific Product
         /// </summary>
         public void AddDepartmentSpecificProduct(Department department, Product product)
         {
-            throw new NotImplementedException();
+            var departmentSpecificProduct = new DepartmentSpecificProduct(department, product);
+
+
+            if (!department.DepartmentSpecifikProducts.Contains(departmentSpecificProduct))
+            {
+                department.DepartmentSpecifikProducts.Add(departmentSpecificProduct);
+            }
+            else
+            {
+                throw new DepartmentAlreadyDepartmentSpecificProductException();
+            }
         }
 
-        public void RemoveDepartmentSpecificProduct(List<DepartmentSpecificProduct> dSProductList, DepartmentSpecificProduct dSProduct)
+        public void RemoveDepartmentSpecificProduct(Department department, DepartmentSpecificProduct dSProduct)
         {
-            throw new NotImplementedException();
+            if (department.DepartmentSpecifikProducts.Contains(dSProduct))
+            {
+                department.DepartmentSpecifikProducts.Remove(dSProduct);
+            }
+            else
+            {
+                throw new DepartmentNotDepartmentSpecificProductException();
+            }
         }
 
         /// <summary>
@@ -34,7 +50,9 @@ namespace AalborgZooProjekt.Model
         /// </summary>
         public Order MakeOrder()
         {
-            throw new NotImplementedException();
+            Order order = new Order();
+
+            return order;
         }
 
         public void CancelOrder(Order order)

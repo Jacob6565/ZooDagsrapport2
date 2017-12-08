@@ -8,7 +8,7 @@ namespace AalborgZooProjekt.Interfaces
         Order MakeOrder();
         void CancelOrder(Order order);
         void AddDepartmentSpecificProduct(Department department, Product product);
-        void RemoveDepartmentSpecificProduct(List<DepartmentSpecificProduct> dSProductList, DepartmentSpecificProduct dSProduct);
+        void RemoveDepartmentSpecificProduct(Department department, DepartmentSpecificProduct dSProduct);
         void ChangeDepartmentForZookeeper(DepartmentChange departmentChange);
     }
 }

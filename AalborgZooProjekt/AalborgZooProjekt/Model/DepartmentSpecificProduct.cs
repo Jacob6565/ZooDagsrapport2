@@ -8,5 +8,10 @@ namespace AalborgZooProjekt.Model
 {
     public partial class DepartmentSpecificProduct
     {
+        public DepartmentSpecificProduct(Department department, Product product)
+        {
+            this.Department = department;
+            this.Product = product;
+        }
     }
 }
