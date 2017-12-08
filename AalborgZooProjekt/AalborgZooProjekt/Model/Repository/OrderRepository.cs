@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository : IRepository
     {
+        /// <summary>
+        /// Adds a not yet excisting order to the database
+        /// </summary>
+        /// <param name="order"></param>
         public void AddOrder(Order order)
         {
             using (var db = new AalborgZooContainer1())
@@ -17,6 +21,12 @@ namespace AalborgZooProjekt.Model
             }
         }
 
+
+        /// <summary>
+        /// Gets an order from orderID in the database
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <returns></returns>
         public Order GetOrder(int orderID)
         {
             using (var db = new AalborgZooContainer1())
@@ -30,7 +40,10 @@ namespace AalborgZooProjekt.Model
             }
         }
 
-
+        /// <summary>
+        /// Updates an excisting order in the database
+        /// </summary>
+        /// <param name="order"></param>
         public void UpdateOrder(Order order)
         {
             using (var db = new AalborgZooContainer1())

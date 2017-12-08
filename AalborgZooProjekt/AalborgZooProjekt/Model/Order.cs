@@ -20,7 +20,7 @@ namespace AalborgZooProjekt.Model
             dbRep.AddOrder(this);
         }
 
-        OrderRepository dbRep = new OrderRepository();
+        IRepository dbRep = new OrderRepository();
 
         private string _underConstruction = "Under Construction";
         private string _sent = "Sent";
