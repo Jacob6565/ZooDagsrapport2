@@ -164,7 +164,7 @@ namespace AalborgZooProjekt.Model
             if (CanOrderBeSend())
             {
                 Status = _sent;
-                //MISSING ACTUAL SENDING FUNCTIONALITY 
+                DateOrdered = GetDate();
                 shoppingsList.AddOrder(this);
             }
         }

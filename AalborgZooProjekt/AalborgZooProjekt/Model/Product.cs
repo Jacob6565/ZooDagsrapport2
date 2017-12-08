@@ -12,15 +12,14 @@ namespace AalborgZooProjekt.Model
             ProductVersion firstProductVersion = MakeFirstVersion(name, supplier, units, active);
 
             this.Name = name;
-            this.CreatedByID = 
-            this.DeletedByID = null;
+            //-1 indicating it is null.
+            this.DeletedByID = -1;
+            this.DateDeleted = null;
+            this.CreatedByID = shopper.GetID();
             this.DateCreated = DateTime.Now.ToString();
-            
+            this.ProductVersions.Add(firstProductVersion);
 
-            AddProductToDatabase(this);
-            
-            
-            
+            //AddProductToDatabase(this);       
         }
 
         /// <summary>
@@ -44,6 +43,7 @@ namespace AalborgZooProjekt.Model
 
             return firstProductVersion;
         }
+
         private void AddProductToDatabase(Product product)
         {
             throw new NotImplementedException();
@@ -57,18 +57,19 @@ namespace AalborgZooProjekt.Model
 
             //Copying data from previous to new
             newVersion.IsActive = true;
-            newVersion.OrderLines = previousVersion.OrderLines;
             newVersion.Name = previousVersion.Name;
 
             //Det burde da også bare kunne være "this",
             //men det burde nærmest ikke være der, da productversionerne
             //er gemt inde i et product.
             newVersion.Product = previousVersion.Product;
-            newVersion.ProductId = previousVersion.ProductId;
             newVersion.Supplier = previousVersion.Supplier;
-            newVersion.Unit = previousVersion.Unit;
+            newVersion.Unit = previousVersion.Unit.ToList();
+            newVersion.ProductId = previousVersion.ProductId;
+            newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-            ProductVersions.Add(newVersion);   
+            this.ProductVersions.Add(newVersion);
+            //UpdateDatabase();
             
         }
 
@@ -79,42 +80,107 @@ namespace AalborgZooProjekt.Model
             previousVersion = ProductVersions.First();
 
             //Copying data from previous to new
-            newVersion.IsActive = previousVersion.IsActive;
             newVersion.Name = previousVersion.Name;
-            newVersion.OrderLines = previousVersion.OrderLines;
             newVersion.Product = previousVersion.Product;
-            newVersion.ProductId = previousVersion.ProductId;
+            newVersion.IsActive = previousVersion.IsActive;
             newVersion.Supplier = previousVersion.Supplier;
-            newVersion.Unit = previousVersion.Unit;
+            newVersion.Unit = previousVersion.Unit.ToList();
+            newVersion.ProductId = previousVersion.ProductId;
+            newVersion.OrderLines = previousVersion.OrderLines.ToList();
             
+            //Adding the change
             newVersion.Unit.Add(unitToAdd);
 
-            ProductVersions.Add(newVersion);
+            this.ProductVersions.Add(newVersion);
+
+            //UpdateDatabase();
         }
 
         public void ChangeProductName(string name)
         {
-            throw new NotImplementedException();
+            ProductVersion newVersion, previousVersion;
+            newVersion = new ProductVersion();
+            previousVersion = ProductVersions.First();
+
+            //Copying data from previous to new
+            this.Name = name;
+            newVersion.Name = name;
+            newVersion.Unit = previousVersion.Unit.ToList();
+            newVersion.Product = previousVersion.Product;
+            newVersion.Supplier = previousVersion.Supplier;
+            newVersion.IsActive = previousVersion.IsActive;
+            newVersion.ProductId = previousVersion.ProductId;
+            newVersion.OrderLines = previousVersion.OrderLines.ToList();
+
+            this.ProductVersions.Add(newVersion);
         }
 
         public void ChangeProductSupplier(string supplier)
         {
-            throw new NotImplementedException();
+            ProductVersion newVersion, previousVersion;
+            newVersion = new ProductVersion();
+            previousVersion = ProductVersions.First();
+
+            //Copying data from previous to new
+            newVersion.Supplier = supplier;
+            newVersion.Name = previousVersion.Name;
+            newVersion.Unit = previousVersion.Unit.ToList();
+            newVersion.Product = previousVersion.Product;
+            newVersion.IsActive = previousVersion.IsActive;
+            newVersion.ProductId = previousVersion.ProductId;
+            newVersion.OrderLines = previousVersion.OrderLines.ToList();
+
+            this.ProductVersions.Add(newVersion);
         }
 
         public bool CheckIfProductIsActive()
         {
-            throw new NotImplementedException();
+            return ProductVersions.First().IsActive;
         }
 
         public void DeactivateProduct()
         {
-            throw new NotImplementedException();
+            ProductVersion newVersion, previousVersion;
+            newVersion = new ProductVersion();
+            previousVersion = ProductVersions.First();
+
+            //Copying data from previous to new
+            newVersion.IsActive = false;
+            newVersion.Name = previousVersion.Name;
+            newVersion.Unit = previousVersion.Unit.ToList();
+
+            //Det burde da også bare kunne være "this",
+            //men det burde nærmest ikke være der, da productversionerne
+            //er gemt inde i et product.
+            newVersion.Product = previousVersion.Product;
+            newVersion.Supplier = previousVersion.Supplier;
+            newVersion.ProductId = previousVersion.ProductId;
+            newVersion.OrderLines = previousVersion.OrderLines.ToList();
+
+            this.ProductVersions.Add(newVersion);
         }
 
         public void RemoveProductUnit(Unit unitToRemove)
         {
-            throw new NotImplementedException();
+            ProductVersion newVersion, previousVersion;
+            newVersion = new ProductVersion();
+            previousVersion = ProductVersions.First();
+
+            //Copying data from previous to new
+            newVersion.Name = previousVersion.Name;
+            newVersion.Unit = previousVersion.Unit.ToList();
+            newVersion.Product = previousVersion.Product;
+            newVersion.IsActive = previousVersion.IsActive;
+            newVersion.Supplier = previousVersion.Supplier;
+            newVersion.ProductId = previousVersion.ProductId;
+            newVersion.OrderLines = previousVersion.OrderLines.ToList();
+
+            //Adding the change by removing the unit
+            newVersion.Unit.Remove(unitToRemove);
+
+            this.ProductVersions.Add(newVersion);
+
+            //UpdateDatabase();
         }
     }
 }
