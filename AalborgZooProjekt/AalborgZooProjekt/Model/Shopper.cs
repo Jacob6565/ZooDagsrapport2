@@ -31,10 +31,8 @@ namespace AalborgZooProjekt.Model
         }
 
 
-        // 
-        public void MakeProduct(int employeeID, string name, )
+        public void MakeProduct(int employeeID, string name)
         {
-            // Skriver til databasen
             var db = new AalborgZooContainer1();
 
             Product newProduct = new Product()
