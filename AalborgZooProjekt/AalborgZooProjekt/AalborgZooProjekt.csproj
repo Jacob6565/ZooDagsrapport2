@@ -95,6 +95,7 @@
     <Compile Include="Interfaces\IShoppingList.cs" />
     <Compile Include="Interfaces\IZookeeper.cs" />
     <Compile Include="Interfaces\IZookeeperView.cs" />
+    <Compile Include="Model\Exception\AlreadyExistingSupplierException.cs" />
     <Compile Include="Model\Exception\CanNotSendEmptyOrderException.cs" />
     <Compile Include="Model\Database\AalborgZoo.Context.cs">
       <AutoGen>True</AutoGen>
@@ -158,6 +159,10 @@
     <Compile Include="Model\Exception\OrderIsNotUnderAnSendableStateException.cs" />
     <Compile Include="Model\Exception\OrderCanNotSendNoZookeeperException.cs" />
     <Compile Include="Model\OrderLine.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyHaveUnitException.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyHaveThatNameException.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyActivatedException.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyDeactivatedException.cs" />
     <Compile Include="Model\Repository\IRepository.cs" />
     <Compile Include="Model\Exception\OrderDoesNotExistInDatabaseException.cs" />
     <Compile Include="Model\Repository\OrderRepository.cs" />
@@ -168,6 +173,7 @@
     <Compile Include="Model\Shopper.cs" />
     <Compile Include="Model\ShoppingList.cs" />
     <Compile Include="Model\Unit.cs" />
+    <Compile Include="Model\Exception\UnitAlreadyRemovedException.cs" />
     <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
