@@ -15,12 +15,17 @@ namespace AalborgZooProjekt.Model
             DepartmentID = department.Id;
             DateCreated = GetDate();
             Status = _underConstruction;
+
+            //Adds the order in database
+            dbRep.AddOrder(this);
         }
+
+        IRepository dbRep = new OrderRepository();
 
         private string _underConstruction = "Under Construction";
         private string _sent = "Sent";
 
-
+        
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
         /// </summary>
@@ -38,6 +43,9 @@ namespace AalborgZooProjekt.Model
         {
             if (orderLine != null)
                 OrderLines.Add(orderLine);
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -50,6 +58,9 @@ namespace AalborgZooProjekt.Model
                 throw new ZookeeperAllReadyAddedException();
             else if (zookeeper != null)
                 OrderedByID = zookeeper.Id;
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -99,6 +110,9 @@ namespace AalborgZooProjekt.Model
                 orderLine.ProductVersion = productVersion;
             else if (productVersion.IsActive == false)
                 throw new ProductVersionIsNotActiveException();
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -112,6 +126,9 @@ namespace AalborgZooProjekt.Model
                 orderLine.Quantity = amount;
             else if (amount < 0)
                 throw new ArgumentOutOfRangeException();
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -125,6 +142,9 @@ namespace AalborgZooProjekt.Model
                 orderLine.UnitID = unit.Id;
             else if (unit == null)
                 throw new ArgumentNullException();
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -135,6 +155,9 @@ namespace AalborgZooProjekt.Model
         {
             if (CanOrderBeChanged())
                 OrderLines.Remove(orderLine);
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -144,6 +167,9 @@ namespace AalborgZooProjekt.Model
         public void RemoveZookeeperFromOrder()
         {
             OrderedByID = -1;
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
 
@@ -154,6 +180,9 @@ namespace AalborgZooProjekt.Model
         public void SaveComment(string comment)
         {
             Note = comment;
+
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -166,6 +195,9 @@ namespace AalborgZooProjekt.Model
                 Status = _sent;
                 DateOrdered = GetDate();
                 shoppingsList.AddOrder(this);
+
+                //Updates the order in database
+                dbRep.UpdateOrder(this);
             }
         }
     }
