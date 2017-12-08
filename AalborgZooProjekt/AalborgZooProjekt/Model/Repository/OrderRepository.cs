@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    class OrderRepository : IOrderRepository
+    public class OrderRepository : IOrderRepository
     {
         public void AddOrder(Order order)
         {
@@ -23,6 +23,9 @@ namespace AalborgZooProjekt.Model
             {
                 var result = db.OrderSet.SingleOrDefault(b => b.Id == orderID);
 
+                if (result == null)
+                    throw new OrderDoesNotExistInDatabaseException();
+
                 return result;
             }
         }
@@ -35,9 +38,14 @@ namespace AalborgZooProjekt.Model
                 var result = db.OrderSet.SingleOrDefault(b => b.Id == order.Id);
                 if (result != null)
                 {
+                    //Updating the order
                     result = order;
+
+                    //Calls the database to save the changes
                     db.SaveChanges();
                 }
+                else if (result == null)
+                    throw new OrderDoesNotExistInDatabaseException();
             }
         }
 
