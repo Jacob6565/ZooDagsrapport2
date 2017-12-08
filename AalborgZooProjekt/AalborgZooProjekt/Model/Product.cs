@@ -34,12 +34,12 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion firstProductVersion = new ProductVersion();
 
-            firstProductVersion.Supplier = supplier;
-            firstProductVersion.Unit.Concat(units);
-            firstProductVersion.IsActive = active;
             firstProductVersion.Name = name;
             firstProductVersion.Product = this;
             firstProductVersion.ProductId = this.Id;
+            firstProductVersion.IsActive = active;
+            firstProductVersion.Unit.Concat(units);
+            firstProductVersion.Supplier = supplier;
 
             return firstProductVersion;
         }

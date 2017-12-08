@@ -6,6 +6,6 @@ namespace AalborgZooProjekt.Interfaces
     {
         void MakeOrder(Order order);
         void ChangeDepartment(Department department);
-        void GetID();
+               
     }
 }

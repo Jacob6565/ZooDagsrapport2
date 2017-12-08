@@ -6,22 +6,36 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Zookeeper : IZookeeper
     {
+        /// <summary>
+        /// Changes Zookeeper's deparment and saves the old.
+        /// </summary>
+        /// <param name="department"></param>
         public void ChangeDepartment(Department department)
         {
-            DepartmentChange oldDepartment = new DepartmentChange();
-            oldDepartment.DateChanged = DateTime.Now.ToString();
-            oldDepartment.DepartmentID = this.DepartmentId;
+            DepartmentChange oldDepartment = new DepartmentChange
+            {
+                DateChanged = DateTime.Now.ToString(),
+                DepartmentID = this.DepartmentId,
+                ZookeeperID = this.Id,
+                Zookeeper = this
+            };
 
-        }
+            //Saving the change
+            this.DepartmentChanges.Add(oldDepartment);
 
-        public void GetID()
-        {
-            throw new NotImplementedException();
+            //Applying changes
+            this.Department = department;
+            this.DepartmentId = department.Id;
+            
         }
 
         public void MakeOrder(Order order)
         {
-            throw new NotImplementedException();
+            order.AttachZookeeperToOrder(this);
+            ShoppingList ordersShoppingList = order.ShoppingList;
+
+            //Sending order
+            order.SendOrder(ordersShoppingList);
         }
     }
 }
