@@ -158,7 +158,7 @@
     <Compile Include="Model\Exception\OrderIsNotUnderAnSendableStateException.cs" />
     <Compile Include="Model\Exception\OrderCanNotSendNoZookeeperException.cs" />
     <Compile Include="Model\OrderLine.cs" />
-    <Compile Include="Model\Repository\IRepository.cs" />
+    <Compile Include="Model\Repository\IOrderRepository.cs" />
     <Compile Include="Model\Exception\OrderDoesNotExistInDatabaseException.cs" />
     <Compile Include="Model\Repository\OrderRepository.cs" />
     <Compile Include="Model\PasswordChanged.cs" />
