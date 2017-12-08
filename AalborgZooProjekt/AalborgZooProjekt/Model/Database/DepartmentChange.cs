@@ -15,9 +15,9 @@ namespace AalborgZooProjekt.Model
     public partial class DepartmentChange
     {
         public int Id { get; set; }
-        public string DepartmentID { get; set; }
+        public int DepartmentID { get; set; }
         public string DateChanged { get; set; }
-        public string ZookeeperID { get; set; }
+        public int ZookeeperID { get; set; }
         public Nullable<int> ZookeeperId1 { get; set; }
     
         public virtual Zookeeper Zookeeper { get; set; }
