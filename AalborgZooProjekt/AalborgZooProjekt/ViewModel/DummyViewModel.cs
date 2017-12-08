@@ -76,11 +76,11 @@ namespace AalborgZooProjekt
                 DummyOtherFoodList.Add(dummyProduct);
             }
 
-            //lines = File.ReadAllLines("../../DummyOrders.txt");
-            //foreach (string orders in lines)
-            //{
-            //    DummyOrderList.Add(new Model.DummyOrder(orders));
-            //}
+            lines = File.ReadAllLines("../../DummyOrders.txt");
+            foreach (string orders in lines)
+            {
+                DummyOrderList.Add(new Model.DummyOrder(orders));
+            }
 
 
         }

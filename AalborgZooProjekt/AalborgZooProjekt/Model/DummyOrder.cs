@@ -9,10 +9,9 @@ namespace AalborgZooProjekt.Model
 {
     public class DummyOrder : INotifyPropertyChanged
     {
-        public DummyOrder(int id, int amount)
+        public DummyOrder(string name)
         {
-            Id = id;
-            Amount = amount;
+            Name = name;
         }
 
         public int Id;
