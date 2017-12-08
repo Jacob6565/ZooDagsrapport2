@@ -45,7 +45,7 @@ namespace AalborgZooProjekt.Model
         {
             using (_context)
             {
-                var result = _context.OrderSet.SingleOrDefault(b => b.Id == orderID);
+                var result = _context.OrderSet.Find(orderID);
 
                 if (result == null)
                     throw new OrderDoesNotExistInDatabaseException();
