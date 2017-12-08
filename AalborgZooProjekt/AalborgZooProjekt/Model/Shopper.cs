@@ -10,9 +10,18 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Shopper : IShopper
     {
-        public void CheckIfOrderExist(Order order)
+        public bool CheckIfProductExist(Product product)
         {
-            throw new NotImplementedException();
+            var db = new AalborgZooContainer1();
+
+            if (db.ProductSet.Where(x => x.Id == product.Id).First().Id == product.Id)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void DeleteOrder(Order order)
@@ -41,6 +50,8 @@ namespace AalborgZooProjekt.Model
                 CreatedByID = employeeID,
                 Name = name
             };
+            db.ProductSet.Add(newProduct);
+            db.SaveChanges();
     }
 }
 }

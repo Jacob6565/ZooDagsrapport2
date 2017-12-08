@@ -13,7 +13,7 @@ namespace AalborgZooProjekt.Interfaces
         void MakeProduct(int employeeID, string name);
 
         // Search database for a specific order and see if it exist in the database
-        void CheckIfOrderExist(Order order);
+        bool CheckIfProductExist(Product product);
 
         // Takes in an Order and removes it from the database
         void DeleteOrder(Order order);
