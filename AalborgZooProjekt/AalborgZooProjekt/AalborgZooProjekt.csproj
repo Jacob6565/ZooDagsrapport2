@@ -95,6 +95,7 @@
     <Compile Include="Interfaces\IShoppingList.cs" />
     <Compile Include="Interfaces\IZookeeper.cs" />
     <Compile Include="Interfaces\IZookeeperView.cs" />
+    <Compile Include="Model\Exception\CanNotSendEmptyOrderException.cs" />
     <Compile Include="Model\Database\AalborgZoo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,12 +155,15 @@
     <Compile Include="Model\DepartmentSpecificProduct.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Exception\OrderIsNotUnderAnSendableStateException.cs" />
+    <Compile Include="Model\Exception\OrderCanNotSendNoZookeeperException.cs" />
     <Compile Include="Model\OrderLine.cs" />
     <Compile Include="Model\PasswordChanged.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVersion.cs" />
+    <Compile Include="Model\Exception\ProductVersionIsNotActiveException.cs" />
     <Compile Include="Model\Shopper.cs" />
-    <Compile Include="Model\ShopperList.cs" />
+    <Compile Include="Model\ShoppingList.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="App.xaml.cs">

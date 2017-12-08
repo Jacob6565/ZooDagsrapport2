@@ -31,7 +31,7 @@ namespace AalborgZooProjekt.Model
         }
 
         /// <summary>
-        /// Adds an orderline to the order
+        /// Adds an orderline to the order, the actual parameter input orderLine will be an empty orderLine for our system
         /// </summary>
         /// <param name="orderLine"></param>
         public void AddOrderLine(OrderLine orderLine)
@@ -48,7 +48,7 @@ namespace AalborgZooProjekt.Model
         {
             if (OrderedByID > 1)
                 throw new ZookeeperAllReadyAddedException();
-            if (zookeeper != null)
+            else if (zookeeper != null)
                 OrderedByID = zookeeper.Id;
         }
 
@@ -71,17 +71,34 @@ namespace AalborgZooProjekt.Model
 
             //An order can not be send when in another state than "Editable"
             if (!String.Equals(Status, _underConstruction))
+            {
                 canOrderBeSend = false;
+                throw new OrderIsNotUnderAnSendableStateException();
+            }
 
             //Naive check. An order can not be send with an Zookeeper ID of less than 1, as that is considered as no Zookeeper
             else if (OrderedByID < 1)
+            {
                 canOrderBeSend = false;
+                throw new OrderCanNotSendNoZookeeperException();
+            }
 
             //An order can not be send without orderlines
             else if (OrderLines.Count < 1)
+            {
                 canOrderBeSend = false;
+                throw new CanNotSendEmptyOrderException();
+            }
 
             return canOrderBeSend;
+        }
+
+        public void ChangeProduct(OrderLine orderLine,ProductVersion productVersion)
+        {
+            if (productVersion.IsActive == true)
+                orderLine.ProductVersion = productVersion;
+            else if (productVersion.IsActive == false)
+                throw new ProductVersionIsNotActiveException();
         }
 
         /// <summary>
@@ -92,7 +109,9 @@ namespace AalborgZooProjekt.Model
         public void ChangeAmount(OrderLine orderLine, int amount)
         {
             if (amount >= 0)
-               orderLine.Quantity = amount;
+                orderLine.Quantity = amount;
+            else if (amount < 0)
+                throw new ArgumentOutOfRangeException();
         }
 
         /// <summary>
@@ -102,26 +121,27 @@ namespace AalborgZooProjekt.Model
         /// <param name="unit"></param>
         public void ChangeUnit(OrderLine orderLine, Unit unit)
         {
-            if(unit != null)
-               orderLine.UnitID = unit.Id;
+            if (unit != null)
+                orderLine.UnitID = unit.Id;
+            else if (unit == null)
+                throw new ArgumentNullException();
         }
 
         /// <summary>
-        /// 
+        /// Removes orderline from the current order
         /// </summary>
-        /// <returns></returns>
-        public bool IsOrderFilledOut()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <param name="orderLine"></param>
         public void RemoveOrderLine(OrderLine orderLine)
         {
             if (CanOrderBeChanged())
                 OrderLines.Remove(orderLine);
         }
 
-        public void RemoveZookeeperFromOrder(Zookeeper zookeeper)
+        /// <summary>
+        /// Changes the stored OrderedByID to -1 so symbolize no attached Zookeeper
+        /// </summary>
+        /// <param name="zookeeper"></param>
+        public void RemoveZookeeperFromOrder()
         {
             OrderedByID = -1;
         }
@@ -139,11 +159,14 @@ namespace AalborgZooProjekt.Model
         /// <summary>
         /// When the zookeepers send the order to the shopper, it changes the order state
         /// </summary>
-        public void SendOrder()
+        public void SendOrder(ShoppingList shoppingsList)
         {
-            Status = _sent;
-            
-            //MISSING ACTUAL SENDING FUNCTIONALITY 
+            if (CanOrderBeSend())
+            {
+                Status = _sent;
+                DateOrdered = GetDate();
+                shoppingsList.AddOrder(this);
+            }
         }
     }
 }
