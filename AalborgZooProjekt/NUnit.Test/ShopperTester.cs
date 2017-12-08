@@ -8,6 +8,7 @@ using AalborgZooProjekt.Model;
 
 namespace NUnit.Test
 {
+    /*
     [TestFixture]
     class ShopperTester
     {
@@ -51,4 +52,5 @@ namespace NUnit.Test
 
 
     }
+    */
 }
