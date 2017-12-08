@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public class OrderRepository : IRepository
+    public class OrderRepository : IOrderRepository
     {
         /// <summary>
         /// Adds a not yet excisting order to the database

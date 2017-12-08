@@ -26,12 +26,19 @@ namespace AalborgZooProjekt.Model
 
         public void DeleteOrder(Order order)
         {
-            throw new NotImplementedException();
+            var db = new AalborgZooContainer1();
+
+            order = db.OrderSet.Where(x => x.Id == order.Id).First();
+            db.OrderSet.Remove(order);
         }
 
         public void DeleteProduct(Product product)
         {
-            throw new NotImplementedException();
+            var db = new AalborgZooContainer1();
+
+            product = db.ProductSet.Where(x => x.Id == product.Id).First();
+            db.ProductSet.Remove(product);
+            //I really want to test this
         }
 
         public int GetID()

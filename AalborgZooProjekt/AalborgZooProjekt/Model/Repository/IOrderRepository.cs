@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    interface IRepository
+    public interface IOrderRepository
     {
         void AddOrder(Order order);
         Order GetOrder(int orderID);
