@@ -65,7 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exampleish\TemplateTest.cs" />
     <Compile Include="Exampleish\TestThisClass.cs" />
-    <Compile Include="ZooperTest.cs" />
+    <Compile Include="ShopperTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
