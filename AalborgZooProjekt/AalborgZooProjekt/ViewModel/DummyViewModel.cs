@@ -60,7 +60,7 @@ namespace AalborgZooProjekt
             DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
 
             //PopulateDatabase();
-            string[] lines = File.ReadAllLines("../../DummyFruit.txt", Encoding.UTF7);
+            string[] lines = File.ReadAllLines("../../Model/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
@@ -68,7 +68,7 @@ namespace AalborgZooProjekt
                 DummyFruitList.Add(dummyProduct);
             }
 
-            lines = File.ReadAllLines("../../DummyOtherFood.txt", Encoding.UTF7);
+            lines = File.ReadAllLines("../../Model/DummyOtherFood.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
@@ -76,7 +76,7 @@ namespace AalborgZooProjekt
                 DummyOtherFoodList.Add(dummyProduct);
             }
 
-            lines = File.ReadAllLines("../../DummyOrders.txt");
+            lines = File.ReadAllLines("../../Model/DummyOrders.txt");
             foreach (string orders in lines)
             {
                 DummyOrderList.Add(new Model.DummyOrder(orders));
