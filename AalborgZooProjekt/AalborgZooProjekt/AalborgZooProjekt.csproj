@@ -174,11 +174,14 @@
     <Compile Include="Model\Exception\ProductAlreadyDeactivatedException.cs" />
     <Compile Include="Model\Repository\IOrderRepository.cs" />
     <Compile Include="Model\Exception\OrderDoesNotExistInDatabaseException.cs" />
+    <Compile Include="Model\Repository\IProductDAL.cs" />
     <Compile Include="Model\Repository\OrderRepository.cs" />
     <Compile Include="Model\PasswordChanged.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVersion.cs" />
     <Compile Include="Model\Exception\ProductVersionIsNotActiveException.cs" />
+    <Compile Include="Model\Exception\ProductDoNotExistInDatabaseException.cs" />
+    <Compile Include="Model\Repository\ProductDAL.cs" />
     <Compile Include="Model\Shopper.cs" />
     <Compile Include="Model\ShoppingList.cs" />
     <Compile Include="Model\Unit.cs" />
