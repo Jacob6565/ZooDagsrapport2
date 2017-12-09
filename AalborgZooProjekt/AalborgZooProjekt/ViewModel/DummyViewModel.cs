@@ -8,50 +8,78 @@ using System.Diagnostics;
 using System.Configuration;
 using AalborgZooProjekt.Database;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Data;
 
 namespace AalborgZooProjekt
 {
+    public class Owner
+    {
+        public int ID;
+        public string Name;
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
+    }
+
+    public class House
+    {
+        public int ID;
+        public Owner HouseOwner;
+    }
+
     public class DummyViewModel : ViewModelBase
     {
-        private List<DummyProduct> _dummyFruit = new List<DummyProduct>();
-
-        public List<DummyProduct> DummyFruitList
+        private List<Model.DummyProduct> _dummyFruit = new List<Model.DummyProduct>();
+        public List<Model.DummyProduct> DummyFruitList
         {
             get { return _dummyFruit; }
             set { _dummyFruit = value; }
         }
 
-        private List<DummyProduct> _dummyOtherFood = new List<DummyProduct>();
-
-        public List<DummyProduct> DummyOtherFoodList
+        private List<Model.DummyProduct> _dummyOtherFood = new List<Model.DummyProduct>();
+        public List<Model.DummyProduct> DummyOtherFoodList
         {
             get { return _dummyOtherFood; }
             set { _dummyOtherFood = value; }
         }
 
+        public List<Model.DummyOrder> DummyOrderList { get; set; } = new List<Model.DummyOrder>();
 
+        ObservableCollection<Unit> DummyUnitList = new ObservableCollection<Unit>();
 
-        public List<DummyOrder> DummyOrderList { get; set; } = new List<DummyOrder>();
 
         public DummyViewModel()
         {
+            DummyUnitList.Add(new Unit() { Name = "kg" });
+            DummyUnitList.Add(new Unit() { Name = "styks" });
+            DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
+
             //PopulateDatabase();
             string[] lines = File.ReadAllLines("../../Model/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                DummyFruitList.Add(new DummyProduct(product));
+                Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyFruitList.Add(dummyProduct);
             }
 
             lines = File.ReadAllLines("../../Model/DummyOtherFood.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                DummyOtherFoodList.Add(new DummyProduct(product));
+                Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyOtherFoodList.Add(dummyProduct);
             }
 
             lines = File.ReadAllLines("../../Model/DummyOrders.txt");
             foreach (string orders in lines)
             {
-                DummyOrderList.Add(new DummyOrder(orders));
+                DummyOrderList.Add(new Model.DummyOrder(orders));
             }
 
 
@@ -66,7 +94,7 @@ namespace AalborgZooProjekt
                     Employee emp = new Employee() { DateHired = i.ToString(), Name = $"Emp{i}", DateStopped = i + 1.ToString(), Id = i };
                     db.EmployeeSet.Add(emp);
 
-                    Product prod = new Product()
+                    Database.DummyProduct prod = new Database.DummyProduct()
                     {
                         CreatedByID = i.ToString(),
                         DateDeleted = i + 1.ToString(),
@@ -132,7 +160,7 @@ namespace AalborgZooProjekt
                     db.ShoppingListSet.Add(list);
 
 
-                    Order order = new Order()
+                    Database.DummyOrder order = new Database.DummyOrder()
                     {
                         DepartmentID = dep.Id.ToString(),
                         OrderedByID = zookeeper.Id.ToString(),

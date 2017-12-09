@@ -12,10 +12,10 @@ namespace AalborgZooProjekt.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class DummyOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public DummyOrder()
         {
             this.OrderLines = new HashSet<OrderLine>();
         }

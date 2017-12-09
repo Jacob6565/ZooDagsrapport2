@@ -12,10 +12,10 @@ namespace AalborgZooProjekt.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class DummyProduct
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public DummyProduct()
         {
             this.DepartmentSpecifikProducts = new HashSet<DepartmentSpecificProduct>();
             this.ProductVersions = new HashSet<ProductVersion>();
