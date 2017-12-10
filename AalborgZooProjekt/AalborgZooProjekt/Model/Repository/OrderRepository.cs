@@ -19,7 +19,7 @@ namespace AalborgZooProjekt.Model
         /// </summary>
         /// <param name="order"></param>
         public void AddOrder(Order order)
-        {
+        {   
             using (_context)
             {
                 _context.OrderSet.Add(order);
@@ -75,7 +75,6 @@ namespace AalborgZooProjekt.Model
                     throw new OrderDoesNotExistInDatabaseException();
             }
         }
-
     }
 }
 
