@@ -106,7 +106,9 @@ namespace AalborgZooProjekt.Model
 
         public void ChangeProduct(OrderLine orderLine,ProductVersion productVersion)
         {
-            if (productVersion.IsActive == true)
+            if (productVersion == null)
+                throw new NullReferenceException();
+            else if (productVersion.IsActive == true)
                 orderLine.ProductVersion = productVersion;
             else if (productVersion.IsActive == false)
                 throw new ProductVersionIsNotActiveException();
@@ -141,7 +143,7 @@ namespace AalborgZooProjekt.Model
             if (unit != null)
                 orderLine.UnitID = unit.Id;
             else if (unit == null)
-                throw new ArgumentNullException();
+                throw new NullReferenceException();
 
             //Updates the order in database
             //dbRep.UpdateOrder(this);
