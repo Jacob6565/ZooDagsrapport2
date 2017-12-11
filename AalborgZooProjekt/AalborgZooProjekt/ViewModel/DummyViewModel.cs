@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Data;
 using System;
+using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt
 {
@@ -60,6 +61,7 @@ namespace AalborgZooProjekt
             DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
 
             //PopulateDatabase();
+
             string[] lines = File.ReadAllLines("../../Model/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
@@ -91,7 +93,12 @@ namespace AalborgZooProjekt
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Employee emp = new Employee() { DateHired = i.ToString(), Name = $"Emp{i}", DateStopped = i + 1.ToString(), Id = i };
+                    Employee emp = new Employee()
+                    {
+                        DateHired = DateTime.Today,
+                        Name = $"Emp{i}",
+                        DateStopped = DateTime.Today,
+                    };
                     db.EmployeeSet.Add(emp);
 
                     Product prod = new Product()
@@ -107,8 +114,8 @@ namespace AalborgZooProjekt
                     Department dep = new Department()
                     {
                         Name = i.ToString(),
-                        DateDeleted = i + 1.ToString(),
-                        DateCreated = i.ToString(),
+                        DateDeleted = DateTime.Today,
+                        DateCreated = DateTime.Today,
                     };
                     db.DepartmentSet.Add(dep);
 
@@ -122,18 +129,18 @@ namespace AalborgZooProjekt
                     Zookeeper zookeeper = new Zookeeper()
                     {
                         Name = i.ToString(),
-                        DateHired = i.ToString(),
-                        DateStopped = i.ToString(),
+                        DateHired = DateTime.Today,
+                        DateStopped = DateTime.Today,
                         DepartmentId = dep.Id,
                     };
                     db.EmployeeSet.Add(zookeeper);
 
                     ProductVersion prodV = new ProductVersion()
                     {
-                        IsActive = 1.ToString(),
+                        IsActive = true,
                         Supplier = i.ToString(),
-                        CreatedByID = i + 1.ToString(),
-                        DateCreated = i.ToString(),
+                        CreatedByID = i,
+                        DateCreated = DateTime.Today,
                         ProductId = prod.Id,
                     };
                     db.ProductVersionSet.Add(prodV);
@@ -142,8 +149,8 @@ namespace AalborgZooProjekt
 
                     Shopper shopper = new Shopper()
                     {
-                        DateHired = i.ToString(),
-                        DateStopped = i.ToString() + i.ToString(),
+                        DateHired = DateTime.Today,
+                        DateStopped = DateTime.Today,
                         Name = i.ToString(),
                         Password = i.ToString(),
                         Username = i.ToString()
@@ -152,9 +159,9 @@ namespace AalborgZooProjekt
 
                     ShoppingList list = new ShoppingList()
                     {
-                        CreatedByID = i.ToString(),
-                        DateCreated = i.ToString(),
-                        Status = i.ToString(),
+                        CreatedByID = i,
+                        DateCreated = DateTime.Today,
+                        Status = i,
                         ShopperId = shopper.Id,
                     };
                     db.ShoppingListSet.Add(list);
@@ -162,14 +169,14 @@ namespace AalborgZooProjekt
 
                     Order order = new Order()
                     {
-                        DepartmentID = dep.Id.ToString(),
-                        OrderedByID = zookeeper.Id.ToString(),
-                        DateOrdered = i.ToString(),
-                        DateCancelled = i.ToString(),
+                        DepartmentID = dep.Id,
+                        OrderedByID = zookeeper.Id,
+                        DateOrdered = DateTime.Today,
+                        DateCancelled = DateTime.Today,
                         Note = i.ToString(),
-                        DateCreated = i.ToString(),
-                        DeletedByID = 0.ToString(),
-                        Status = i.ToString(),
+                        DateCreated = DateTime.Today,
+                        DeletedByID = shopper.Id,
+                        Status = i,
                         ShoppingListId = 0,
                     };
                     db.OrderSet.Add(order);
@@ -193,15 +200,15 @@ namespace AalborgZooProjekt
                     OrderLine orderLine = new OrderLine()
                     {
 
-                        Quantity = i.ToString(),
-                        UnitID = i + 1.ToString(),
+                        Quantity = i,
+                        UnitID = unit.Id,
                         ProductVersionId = prodV.Id,
                     };
                     db.OrderLineSet.Add(orderLine);
 
                     PasswordChanged pwc = new PasswordChanged()
                     {
-                        DateChanged = i.ToString(),
+                        DateChanged = DateTime.Today,
                         ShopperId = shopper.Id,
                     };
                     db.PasswordChangedSet.Add(pwc);

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Model
+namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
@@ -22,10 +22,10 @@ namespace AalborgZooProjekt.Model
         }
     
         public int Id { get; set; }
-        public string IsActive { get; set; }
+        public bool IsActive { get; set; }
         public string Supplier { get; set; }
-        public string CreatedByID { get; set; }
-        public string DateCreated { get; set; }
+        public int CreatedByID { get; set; }
+        public System.DateTime DateCreated { get; set; }
         public int ProductId { get; set; }
     
         public virtual Product Product { get; set; }

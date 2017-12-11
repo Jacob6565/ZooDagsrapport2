@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2017 11:35:58
--- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Database\AalborgZoo.edmx
+-- Date Created: 12/11/2017 12:31:22
+-- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Model\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -133,10 +133,10 @@ GO
 -- Creating table 'ProductVersionSet'
 CREATE TABLE [dbo].[ProductVersionSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [IsActive] nvarchar(max)  NOT NULL,
+    [IsActive] bit  NOT NULL,
     [Supplier] nvarchar(max)  NOT NULL,
-    [CreatedByID] nvarchar(max)  NOT NULL,
-    [DateCreated] nvarchar(max)  NOT NULL,
+    [CreatedByID] int  NOT NULL,
+    [DateCreated] datetime  NOT NULL,
     [ProductId] int  NOT NULL
 );
 GO
@@ -144,9 +144,9 @@ GO
 -- Creating table 'ShoppingListSet'
 CREATE TABLE [dbo].[ShoppingListSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [CreatedByID] nvarchar(max)  NOT NULL,
-    [DateCreated] nvarchar(max)  NOT NULL,
-    [Status] nvarchar(max)  NOT NULL,
+    [CreatedByID] int  NOT NULL,
+    [DateCreated] datetime  NOT NULL,
+    [Status] int  NOT NULL,
     [ShopperId] int  NOT NULL
 );
 GO
@@ -154,14 +154,14 @@ GO
 -- Creating table 'OrderSet'
 CREATE TABLE [dbo].[OrderSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DepartmentID] nvarchar(max)  NOT NULL,
-    [OrderedByID] nvarchar(max)  NOT NULL,
-    [DateOrdered] nvarchar(max)  NOT NULL,
-    [DateCancelled] nvarchar(max)  NOT NULL,
+    [DepartmentID] int  NOT NULL,
+    [OrderedByID] int  NOT NULL,
+    [DateOrdered] datetime  NOT NULL,
+    [DateCancelled] datetime  NOT NULL,
     [Note] nvarchar(max)  NOT NULL,
-    [DateCreated] nvarchar(max)  NOT NULL,
-    [DeletedByID] nvarchar(max)  NOT NULL,
-    [Status] nvarchar(max)  NOT NULL,
+    [DateCreated] datetime  NOT NULL,
+    [DeletedByID] int  NOT NULL,
+    [Status] int  NOT NULL,
     [ShoppingListId] int  NULL
 );
 GO
@@ -169,8 +169,8 @@ GO
 -- Creating table 'OrderLineSet'
 CREATE TABLE [dbo].[OrderLineSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Quantity] nvarchar(max)  NOT NULL,
-    [UnitID] nvarchar(max)  NOT NULL,
+    [Quantity] int  NOT NULL,
+    [UnitID] int  NOT NULL,
     [ProductVersionId] int  NOT NULL,
     [OrderId] int  NOT NULL
 );
@@ -180,8 +180,8 @@ GO
 CREATE TABLE [dbo].[DepartmentSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [DateCreated] nvarchar(max)  NOT NULL,
-    [DateDeleted] nvarchar(max)  NOT NULL
+    [DateCreated] datetime  NOT NULL,
+    [DateDeleted] datetime  NOT NULL
 );
 GO
 
@@ -189,8 +189,8 @@ GO
 CREATE TABLE [dbo].[DepartmentChangeSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DepartmentID] nvarchar(max)  NOT NULL,
-    [DateChanged] nvarchar(max)  NOT NULL,
-    [ZookeeperID] nvarchar(max)  NOT NULL,
+    [DateChanged] datetime  NOT NULL,
+    [ZookeeperID] int  NOT NULL,
     [ZookeeperId1] int  NULL
 );
 GO
@@ -198,16 +198,16 @@ GO
 -- Creating table 'EmployeeSet'
 CREATE TABLE [dbo].[EmployeeSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DateHired] nvarchar(max)  NOT NULL,
+    [DateHired] datetime  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [DateStopped] nvarchar(max)  NOT NULL
+    [DateStopped] datetime  NOT NULL
 );
 GO
 
 -- Creating table 'PasswordChangedSet'
 CREATE TABLE [dbo].[PasswordChangedSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DateChanged] nvarchar(max)  NOT NULL,
+    [DateChanged] datetime  NOT NULL,
     [ShopperId] int  NULL
 );
 GO

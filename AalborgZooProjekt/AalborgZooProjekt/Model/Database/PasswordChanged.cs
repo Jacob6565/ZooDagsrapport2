@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Model
+namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace AalborgZooProjekt.Model
     public partial class PasswordChanged
     {
         public int Id { get; set; }
-        public string DateChanged { get; set; }
+        public System.DateTime DateChanged { get; set; }
         public Nullable<int> ShopperId { get; set; }
     
         public virtual Shopper Shopper { get; set; }
