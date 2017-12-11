@@ -6,23 +6,43 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Department : IDepartment
     {
-        List<DepartmentSpecificProduct> departmentSpecificProductList = new List<DepartmentSpecificProduct>();
 
         /// <summary>
-        /// Methods for adding and removing a Department Specific Product
+        /// Adds the product under the department thus making it a department specific product.
+        /// If the product already can be found under the department it will throw an exception.
         /// </summary>
         public void AddDepartmentSpecificProduct(Department department, Product product)
         {
-            throw new NotImplementedException();
-        }
+            var departmentSpecificProduct = new DepartmentSpecificProduct(department, product);
 
-        public void RemoveDepartmentSpecificProduct(List<DepartmentSpecificProduct> dSProductList, DepartmentSpecificProduct dSProduct)
-        {
-            throw new NotImplementedException();
+            if (department.DepartmentSpecificProducts.Contains(departmentSpecificProduct))
+            {
+                throw new DepartmentAlreadyDepartmentSpecificProductException();
+            }
+            else
+            {
+                department.DepartmentSpecificProducts.Add(departmentSpecificProduct);
+            }
         }
 
         /// <summary>
-        /// Method for department change for a Zookeeper
+        /// Removes the product form the department specific product.
+        /// If the product cannot be found under the department specific products an exception will be thrown.
+        /// </summary>
+        public void RemoveDepartmentSpecificProduct(Department department, DepartmentSpecificProduct dSProduct)
+        {
+            if (department.DepartmentSpecificProducts.Contains(dSProduct))
+            {
+                department.DepartmentSpecificProducts.Remove(dSProduct);
+            }
+            else
+            {
+                throw new DepartmentNotDepartmentSpecificProductException();
+            }
+        }
+
+        /// <summary>
+        /// Vil gerne snakke sammen med en om denne her.
         /// </summary>
         public void ChangeDepartmentForZookeeper(DepartmentChange departmentChange)
         {
@@ -30,13 +50,19 @@ namespace AalborgZooProjekt.Model
         }
 
         /// <summary>
-        /// Methods for Orders
+        /// In charge of making a new order.
         /// </summary>
         public Order MakeOrder()
         {
-            throw new NotImplementedException();
+            Order order = new Order();
+
+            return order;
         }
 
+
+        /// <summary>
+        /// Sets the order's cancellation fate to the current date it is executed.
+        /// </summary>
         public void CancelOrder(Order order)
         {
             order.DateCancelled = DateTime.Today.ToString("DD/MM/YYYY");

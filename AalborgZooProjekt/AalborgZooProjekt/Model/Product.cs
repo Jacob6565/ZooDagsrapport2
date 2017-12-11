@@ -7,9 +7,12 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Product : IProduct
     {
-        public Product(Shopper shopper, string name, string supplier, List<Unit> units, bool active = true): this()
+        //Used when accessing the database.
+        private IProductDAL DAL;
+
+        public Product(IProductDAL dal, Shopper shopper, string name, string supplier, List<Unit> units, bool active = true) : this()
         {
-            ProductVersion firstProductVersion = MakeFirstVersion(name, supplier, units, active);
+            ProductVersion firstProductVersion = MakeProductVersion(name, supplier, units, active);
 
             this.Name = name;
             //-1 indicating it is null.
@@ -19,8 +22,11 @@ namespace AalborgZooProjekt.Model
             this.DateCreated = DateTime.Now.ToString();
             this.ProductVersions.Add(firstProductVersion);
 
-            //AddProductToDatabase(this);       
+            //Contains the methods needed to update the database
+            DAL = dal ?? new ProductDAL();
+            DAL.AddProduct(this);
         }
+
 
         /// <summary>
         /// Creates the first version of the product.
@@ -30,7 +36,7 @@ namespace AalborgZooProjekt.Model
         /// <param name="units"></param>
         /// <param name="active"></param>
         /// <returns></returns>
-        private ProductVersion MakeFirstVersion(string name, string supplier, List<Unit> units, bool active)
+        private ProductVersion MakeProductVersion(string name, string supplier, List<Unit> units, bool active)
         {
             ProductVersion firstProductVersion = new ProductVersion();
 
@@ -42,48 +48,39 @@ namespace AalborgZooProjekt.Model
             firstProductVersion.Supplier = supplier;
 
             return firstProductVersion;
-        }
-
-       
+        }      
 
         public void ActivateProduct()
         {
             ProductVersion newVersion, previousVersion;
+            previousVersion = ProductVersions.Last();
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
 
             if (previousVersion.IsActive != true)
             {
-
-
                 //Copying data from previous to new
                 newVersion.IsActive = true;
                 newVersion.Name = previousVersion.Name;
-
-                //Det burde da også bare kunne være "this",
-                //men det burde nærmest ikke være der, da productversionerne
-                //er gemt inde i et product.
                 newVersion.Product = previousVersion.Product;
                 newVersion.Supplier = previousVersion.Supplier;
                 newVersion.Unit = previousVersion.Unit.ToList();
                 newVersion.ProductId = previousVersion.ProductId;
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-                this.ProductVersions.Add(newVersion);
-                //UpdateDatabase();
+                ProductVersions.Add(newVersion);
+                DAL.ProductVersionList(this);
             }
             else
             {
                 throw new ProductAlreadyActivatedException();
-            }
-            
+            }            
         }
 
         public void AddProductUnit(Unit unitToAdd)
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             if (!previousVersion.Unit.Contains(unitToAdd))
             {
@@ -100,7 +97,8 @@ namespace AalborgZooProjekt.Model
                 newVersion.Unit.Add(unitToAdd);
 
                 this.ProductVersions.Add(newVersion);
-                //UpdateDatabase();
+                DAL.ProductVersionList(this);
+
             }
             else
             {
@@ -113,7 +111,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
             if (previousVersion.Name != name)
             {
 
@@ -129,6 +127,8 @@ namespace AalborgZooProjekt.Model
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
                 this.ProductVersions.Add(newVersion);
+                DAL.ProductVersionList(this);
+
             }
             else
             {
@@ -140,7 +140,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             //Copying data from previous to new
             if (previousVersion.Supplier != supplier)
@@ -154,6 +154,8 @@ namespace AalborgZooProjekt.Model
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
                 this.ProductVersions.Add(newVersion);
+                DAL.ProductVersionList(this);
+
             }
             else
             {
@@ -163,14 +165,14 @@ namespace AalborgZooProjekt.Model
 
         public bool CheckIfProductIsActive()
         {
-            return ProductVersions.First().IsActive;
+            return ProductVersions.Last().IsActive;
         }
 
         public void DeactivateProduct()
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             //Copying data from previous to new
             if (previousVersion.IsActive == true)
@@ -179,15 +181,13 @@ namespace AalborgZooProjekt.Model
                 newVersion.Name = previousVersion.Name;
                 newVersion.Unit = previousVersion.Unit.ToList();
 
-                //Det burde da også bare kunne være "this",
-                //men det burde nærmest ikke være der, da productversionerne
-                //er gemt inde i et product.
                 newVersion.Product = previousVersion.Product;
                 newVersion.Supplier = previousVersion.Supplier;
                 newVersion.ProductId = previousVersion.ProductId;
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
                 this.ProductVersions.Add(newVersion);
+                DAL.ProductVersionList(this);
             }
             else
             {
@@ -199,7 +199,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             if (previousVersion.Unit.Contains(unitToRemove))
             {
@@ -215,7 +215,7 @@ namespace AalborgZooProjekt.Model
                 //Adding the change by removing the unit
                 newVersion.Unit.Remove(unitToRemove);
                 this.ProductVersions.Add(newVersion);
-                //UpdateDatabase();
+                DAL.ProductVersionList(this);
             }
             else
             {

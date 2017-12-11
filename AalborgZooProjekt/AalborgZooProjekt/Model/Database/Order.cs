@@ -19,7 +19,7 @@ namespace AalborgZooProjekt.Model
         {
             this.OrderLines = new HashSet<OrderLine>();
         }
-    
+        
         public int Id { get; set; }
         public int DepartmentID { get; set; }
         public int OrderedByID { get; set; }

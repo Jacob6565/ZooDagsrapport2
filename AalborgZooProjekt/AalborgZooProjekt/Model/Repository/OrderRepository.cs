@@ -8,16 +8,22 @@ namespace AalborgZooProjekt.Model
 {
     public class OrderRepository : IOrderRepository
     {
+        private AalborgZooContainer1 _context;
+
+        public OrderRepository(AalborgZooContainer1 context)
+        {
+            _context = context;
+        }
         /// <summary>
         /// Adds a not yet excisting order to the database
         /// </summary>
         /// <param name="order"></param>
         public void AddOrder(Order order)
-        {
-            using (var db = new AalborgZooContainer1())
+        {   
+            using (_context)
             {
-                db.OrderSet.Add(order);
-                db.SaveChanges();
+                _context.OrderSet.Add(order);
+                _context.SaveChanges();
             }
         }
 
@@ -29,9 +35,9 @@ namespace AalborgZooProjekt.Model
         /// <returns></returns>
         public Order GetOrder(int orderID)
         {
-            using (var db = new AalborgZooContainer1())
+            using (_context)
             {
-                var result = db.OrderSet.SingleOrDefault(b => b.Id == orderID);
+                var result = _context.OrderSet.Find(orderID);
 
                 if (result == null)
                     throw new OrderDoesNotExistInDatabaseException();
@@ -46,21 +52,21 @@ namespace AalborgZooProjekt.Model
         /// <param name="order"></param>
         public void UpdateOrder(Order order)
         {
-            using (var db = new AalborgZooContainer1())
+            using (_context)
             {
-                var result = db.OrderSet.SingleOrDefault(b => b.Id == order.Id);
+                var result = _context.OrderSet.SingleOrDefault(b => b.Id == order.Id);
                 if (result != null)
                 {
                     //Updating the order
                     result = order;
 
                     //Calls the database to save the changes
-                    db.SaveChanges();
+                    _context.SaveChanges();
                 }
                 else if (result == null)
                     throw new OrderDoesNotExistInDatabaseException();
             }
         }
-
     }
 }
+
