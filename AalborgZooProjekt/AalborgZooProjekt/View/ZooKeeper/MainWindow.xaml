@@ -99,7 +99,7 @@
                             </Grid>
                         </ControlTemplate>
                     </TabControl.Template>
-                    <TabItem Header="Foder" Grid.Column="0" Margin="0,0,6.4,0.2">
+                    <TabItem Header="Foderbestilling" Grid.Column="0" Margin="0,0,6.4,0.2">
                         <ScrollViewer>
                             <Grid Background="#FFE5E5E5">
                                 <Grid.RowDefinitions>
