@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\ZookeeperViewModel.cs" />
     <Compile Include="View\ZooKeeper\FruitFoodList.xaml.cs">
       <DependentUpon>FruitFoodList.xaml</DependentUpon>
     </Compile>

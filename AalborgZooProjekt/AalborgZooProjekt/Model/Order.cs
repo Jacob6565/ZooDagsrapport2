@@ -10,17 +10,21 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Order : IOrder
     {
-        public Order(Department department) : this()
+        public Order(IOrderRepository rep, Department department) : this()
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
             Status = _underConstruction;
 
+            //Repository to update, get and add from database
+            dbRep = rep;
+            
+
             //Adds the order in database
-            //dbRep.AddOrder(this);
+            dbRep.AddOrder(this);
         }
 
-        //IOrderRepository dbRep = new OrderRepository();
+        private IOrderRepository dbRep;
 
         private string _underConstruction = "Under Construction";
         private string _sent = "Sent";
@@ -45,7 +49,7 @@ namespace AalborgZooProjekt.Model
                 OrderLines.Add(orderLine);
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -61,7 +65,7 @@ namespace AalborgZooProjekt.Model
                 OrderedByID = zookeeper.Id;
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -115,7 +119,7 @@ namespace AalborgZooProjekt.Model
                 throw new ProductVersionIsNotActiveException();
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -131,7 +135,7 @@ namespace AalborgZooProjekt.Model
                 throw new ArgumentOutOfRangeException();
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -147,7 +151,7 @@ namespace AalborgZooProjekt.Model
                 throw new NullReferenceException();
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -160,7 +164,7 @@ namespace AalborgZooProjekt.Model
                 OrderLines.Remove(orderLine);
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -172,7 +176,7 @@ namespace AalborgZooProjekt.Model
             OrderedByID = -1;
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
 
@@ -185,7 +189,7 @@ namespace AalborgZooProjekt.Model
             Note = comment;
 
             //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -200,7 +204,7 @@ namespace AalborgZooProjekt.Model
                 shoppingsList.AddOrder(this);
 
                 //Updates the order in database
-                //dbRep.UpdateOrder(this);
+                dbRep.UpdateOrder(this);
             }
         }
     }
