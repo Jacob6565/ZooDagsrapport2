@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Exception\AlreadyExistingSupplierException.cs" />
+    <Compile Include="Model\Exception\CanNotSendEmptyOrderException.cs" />
     <Compile Include="Model\Database\AalborgZoo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,6 +143,8 @@
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
+    <Compile Include="Model\Exception\DepartmentAlreadyDepartmentSpecificProductException.cs" />
+    <Compile Include="Model\Exception\DepartmentNotDepartmentSpecificProductException.cs" />
     <Compile Include="Model\DummyStuff\DataItem.cs" />
     <Compile Include="Model\DummyStuff\DataService.cs" />
     <Compile Include="Model\Department.cs" />
@@ -150,14 +154,23 @@
     <Compile Include="Model\DummyStuff\DummyProduct.cs" />
     <Compile Include="Model\DummyStuff\IDataService.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Exception\OrderIsNotUnderAnSendableStateException.cs" />
+    <Compile Include="Model\Exception\OrderCanNotSendNoZookeeperException.cs" />
     <Compile Include="Model\OrderLine.cs" />
     <Compile Include="Model\PasswordChanged.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyActivatedException.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyHaveUnitException.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyHaveThatNameException.cs" />
+    <Compile Include="Model\Exception\ProductAlreadyDeactivatedException.cs" />
     <Compile Include="Model\ProductVersion.cs" />
+    <Compile Include="Model\Exception\ProductVersionIsNotActiveException.cs" />
     <Compile Include="Model\Shopper.cs" />
     <Compile Include="Model\ShoppingList.cs" />
     <Compile Include="Model\Unit.cs" />
+    <Compile Include="Model\Exception\UnitAlreadyRemovedException.cs" />
     <Compile Include="Model\Zookeeper.cs" />
+    <Compile Include="Model\Exception\ZookeeperAllReadyAddedException.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
@@ -299,7 +312,6 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Model\Exception\" />
     <Folder Include="Model\Repository\" />
   </ItemGroup>
   <ItemGroup>

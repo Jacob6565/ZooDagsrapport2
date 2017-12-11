@@ -8,5 +8,6 @@ namespace AalborgZooProjekt.Model
 {
     public partial class ProductVersion
     {
+        public string Name { get; internal set; }
     }
 }
