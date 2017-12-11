@@ -86,6 +86,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IDepartment.cs" />
+    <Compile Include="Interfaces\ILoginView.cs" />
+    <Compile Include="Interfaces\IOrder.cs" />
+    <Compile Include="Interfaces\IOrderLine.cs" />
+    <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Interfaces\IShopper.cs" />
+    <Compile Include="Interfaces\IShoppingList.cs" />
+    <Compile Include="Interfaces\IZookeeper.cs" />
+    <Compile Include="Interfaces\IZookeeperView.cs" />
     <Compile Include="Model\Exception\AlreadyExistingSupplierException.cs" />
     <Compile Include="Model\Exception\CanNotSendEmptyOrderException.cs" />
     <Compile Include="Model\Database\AalborgZoo.Context.cs">
@@ -165,6 +174,12 @@
     <Compile Include="Model\Exception\ProductAlreadyDeactivatedException.cs" />
     <Compile Include="Model\ProductVersion.cs" />
     <Compile Include="Model\Exception\ProductVersionIsNotActiveException.cs" />
+    <Compile Include="Model\Repository\IOrderRepository.cs" />
+    <Compile Include="Model\Repository\IProductDAL.cs" />
+    <Compile Include="Model\Exception\OrderDoesNotExistInDatabaseException.cs" />
+    <Compile Include="Model\Repository\OrderRepository.cs" />
+    <Compile Include="Model\Repository\ProductDAL.cs" />
+    <Compile Include="Model\Exception\ProductDoNotExistInDatabaseException.cs" />
     <Compile Include="Model\Shopper.cs" />
     <Compile Include="Model\ShoppingList.cs" />
     <Compile Include="Model\Unit.cs" />
@@ -311,8 +326,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Model\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Database\AalborgZoo.Context.tt">

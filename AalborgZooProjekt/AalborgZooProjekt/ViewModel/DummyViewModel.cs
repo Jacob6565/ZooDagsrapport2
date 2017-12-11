@@ -119,11 +119,7 @@ namespace AalborgZooProjekt
                     };
                     db.DepartmentSet.Add(dep);
 
-                    DepartmentSpecificProduct depSP = new DepartmentSpecificProduct()
-                    {
-                        DepartmentId = dep.Id,
-                        ProductId = prod.Id,
-                    };
+                    DepartmentSpecificProduct depSP = new DepartmentSpecificProduct(dep, prod);
                     db.DepartmentSpecificProductSet.Add(depSP);
 
                     Zookeeper zookeeper = new Zookeeper()
@@ -176,7 +172,7 @@ namespace AalborgZooProjekt
                         Note = i.ToString(),
                         DateCreated = DateTime.Today,
                         DeletedByID = shopper.Id,
-                        Status = i,
+                        Status = i.ToString(),
                         ShoppingListId = 0,
                     };
                     db.OrderSet.Add(order);
