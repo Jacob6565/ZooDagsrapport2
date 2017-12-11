@@ -79,7 +79,7 @@ namespace AalborgZooProjekt
             lines = File.ReadAllLines("../../Model/DummyOrders.txt");
             foreach (string orders in lines)
             {
-                DummyOrderList.Add(new Model.DummyOrder(orders));
+                DummyOrderList.Add(new Model.DummyOrder(orders) { Name = orders});
             }
 
 
