@@ -11,8 +11,8 @@ namespace AalborgZooProjekt
 {
     public class DummyViewModel : ViewModelBase
     {
-        string connectionString = "name=AalborgZooMockContainer";
-        string connectionString1 = "name=AalborgZooContainer1";
+        string connectionString1 = "name=AalborgZooMockContainer";
+        string connectionString = "name=AalborgZooContainer1";
         public List<DummyProduct> DummyFoodList { get; set; } = new List<DummyProduct>();
 
         public List<DummyHistoryEntry> DummyHistoryList { get; set; } = new List<DummyHistoryEntry>();
