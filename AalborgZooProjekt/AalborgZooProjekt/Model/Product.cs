@@ -44,7 +44,7 @@ namespace AalborgZooProjekt.Model
             firstProductVersion.Product = this;
             firstProductVersion.ProductId = this.Id;
             firstProductVersion.IsActive = active;
-            firstProductVersion.Unit.Concat(units);
+            firstProductVersion.Unit = units;
             firstProductVersion.Supplier = supplier;
 
             return firstProductVersion;
@@ -98,7 +98,6 @@ namespace AalborgZooProjekt.Model
 
                 this.ProductVersions.Add(newVersion);
                 DAL.ProductVersionList(this);
-
             }
             else
             {
@@ -114,8 +113,6 @@ namespace AalborgZooProjekt.Model
             previousVersion = ProductVersions.Last();
             if (previousVersion.Name != name)
             {
-
-
                 //Copying data from previous to new
                 this.Name = name;
                 newVersion.Name = name;
