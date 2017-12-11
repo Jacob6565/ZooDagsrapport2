@@ -130,6 +130,21 @@ namespace AalborgZooProjekt
                     };
                     db.EmployeeSet.Add(zookeeper);
 
+                    //We only want a single kg instance.
+                    Unit unit;
+                    if(db.UnitSet.Any())
+                    {
+                        unit = db.UnitSet.First();
+                    }
+                    else
+                    {
+                        unit = new Unit()
+                        {
+                            Name = "kg",
+                        };
+                        db.UnitSet.Add(unit);
+                    }
+
                     ProductVersion prodV = new ProductVersion()
                     {
                         IsActive = true,
@@ -137,6 +152,8 @@ namespace AalborgZooProjekt
                         CreatedByID = i,
                         DateCreated = DateTime.Today,
                         ProductId = prod.Id,
+                        Name = $"ProductVersion {i}",
+                        Product = prod,
                     };
                     db.ProductVersionSet.Add(prodV);
 
@@ -177,20 +194,6 @@ namespace AalborgZooProjekt
                     db.OrderSet.Add(order);
 
 
-                    //We only want a single kg instance.
-                    Unit unit;
-                    if(db.UnitSet.Any())
-                    {
-                        unit = db.UnitSet.First();
-                    }
-                    else
-                    {
-                        unit = new Unit()
-                        {
-                            Name = "kg",
-                        };
-                        db.UnitSet.Add(unit);
-                    }
 
                     OrderLine orderLine = new OrderLine()
                     {
