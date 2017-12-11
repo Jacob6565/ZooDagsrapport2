@@ -11,5 +11,9 @@ namespace AalborgZooProjekt.Interfaces
     {
         //AddOrder is needed in Order
         void AddOrder(Order order1);
+        void CheckShoppingList(ShoppingList ShopListToCheck);
+        void ExecuteShoppingList(ShoppingList bla);
+        void MakeCompleteShoppingList(Order bla);
+
     }
 }

@@ -9,6 +9,6 @@ namespace AalborgZooProjekt.Interfaces
 {
     public interface IOrderLine
     {
-
+        // see IOrder.cs
     }
 }
