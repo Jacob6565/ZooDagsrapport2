@@ -53,7 +53,7 @@ namespace AalborgZooProjekt
             set { _dummyOtherFood = value; }
         }
 
-        public List<Model.DummyOrder> DummyOrderList { get; set; } = new List<Model.DummyOrder>();
+        public List<Model.DummyOrder> DummyHistoryList { get; set; } = new List<Model.DummyOrder>();
 
         ObservableCollection<Unit> DummyUnitList = new ObservableCollection<Unit>();
 
@@ -105,11 +105,8 @@ namespace AalborgZooProjekt
             lines = File.ReadAllLines("../../Model/DummyStuff/DummyHistoryEntries.txt");
             foreach (string orders in lines)
             {
-                DummyHistoryList.Add(new DummyHistoryEntry(orders));
+                DummyHistoryList.Add(new DummyOrder(orders));
             }          
-                    db.SaveChanges();
-                }
-            }
         }
     }
 }

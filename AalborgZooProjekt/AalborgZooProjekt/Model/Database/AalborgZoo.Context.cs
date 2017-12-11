@@ -16,7 +16,7 @@ namespace AalborgZooProjekt.Model
     public partial class AalborgZooContainer1 : DbContext
     {
         public AalborgZooContainer1(string dbName)
-            : base(dbName)
+            : base("name=AalborgZooContainer1")
         {
         }
 
@@ -25,7 +25,7 @@ namespace AalborgZooProjekt.Model
             throw new UnintentionalCodeFirstException();
         }
 
-        public virtual DbSet<DepartmentSpecifikProduct> DepartmentSpecifikProductSet { get; set; }
+        public virtual DbSet<DepartmentSpecificProduct> DepartmentSpecifikProductSet { get; set; }
         public virtual DbSet<Product> ProductSet { get; set; }
         public virtual DbSet<ProductVersion> ProductVersionSet { get; set; }
         public virtual DbSet<ShoppingList> ShoppingListSet { get; set; }
