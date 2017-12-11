@@ -78,7 +78,7 @@ namespace AalborgZooProjekt
                 DummyOtherFoodList.Add(dummyProduct);
             }
 
-            lines = File.ReadAllLines("../../Model/DummyOrders.txt");
+            lines = File.ReadAllLines("../../Model/DummyHistoryEntries.txt");
             foreach (string orders in lines)
             {
                 DummyOrderList.Add(new Model.DummyOrder(orders));
