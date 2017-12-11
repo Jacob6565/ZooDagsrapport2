@@ -1,4 +1,4 @@
-﻿using AalborgZooProjekt.Model.Database;
+﻿using AalborgZooProjekt.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -174,16 +174,14 @@
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Model\DataItem.cs" />
-    <Compile Include="Model\DataService.cs" />
+    <Compile Include="Model\DummyStuff\DataItem.cs" />
+    <Compile Include="Model\DummyStuff\DataService.cs" />
     <Compile Include="Model\Department.cs" />
     <Compile Include="Model\DepartmentChange.cs" />
     <Compile Include="Model\DepartmentSpecificProduct.cs" />
-    <Compile Include="Model\DummyHistoryEntry.cs" />
-    <Compile Include="Model\DummyOrder.cs" />
-    <Compile Include="Model\DummyOrderDepartment.cs" />
-    <Compile Include="Model\DummyProduct.cs" />
-    <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Model\DummyStuff\DummyOrder.cs" />
+    <Compile Include="Model\DummyStuff\DummyProduct.cs" />
+    <Compile Include="Model\DummyStuff\IDataService.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderLine.cs" />
     <Compile Include="Model\PasswordChanged.cs" />
@@ -344,6 +342,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Model\Exception\" />
     <Folder Include="Model\Repository\" />
   </ItemGroup>
   <ItemGroup>
@@ -358,12 +358,12 @@
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
-    <Resource Include="Model\DummyOtherFood.txt" />
-    <Resource Include="Model\DummyHistoryEntries.txt" />
-    <Resource Include="Model\DummyOrders.txt" />
-    <Resource Include="Model\DummyOrdersDepartment.txt" />
-    <Resource Include="Model\DummyFruit.txt" />
-    <Resource Include="Model\DummyUnits.txt" />
+    <Resource Include="Model\DummyStuff\DummyOtherFood.txt" />
+    <Resource Include="Model\DummyStuff\DummyHistoryEntries.txt" />
+    <Resource Include="Model\DummyStuff\DummyOrders.txt" />
+    <Resource Include="Model\DummyStuff\DummyOrdersDepartment.txt" />
+    <Resource Include="Model\DummyStuff\DummyFruit.txt" />
+    <Resource Include="Model\DummyStuff\DummyUnits.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

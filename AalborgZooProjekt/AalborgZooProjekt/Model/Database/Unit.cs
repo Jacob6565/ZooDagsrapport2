@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Model.Database
+namespace AalborgZooProjekt.Model
 {
     using System;
     using System.Collections.Generic;
