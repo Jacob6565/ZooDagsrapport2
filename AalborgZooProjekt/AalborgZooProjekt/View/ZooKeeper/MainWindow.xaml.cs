@@ -87,10 +87,5 @@ namespace AalborgZooProjekt
         {
             Time = DateTime.Now;
         }
-
-        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

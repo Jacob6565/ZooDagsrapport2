@@ -11,7 +11,7 @@
         Height="768"
         Width="1024"
         Title="Aalborg Zoo Rapporteringssystem" MinWidth="1024" MinHeight="768"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Tester, Source={StaticResource Locator}}">
 
     <Window.Resources>
         <ResourceDictionary>
