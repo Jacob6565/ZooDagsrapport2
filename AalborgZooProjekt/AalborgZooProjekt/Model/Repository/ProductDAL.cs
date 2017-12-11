@@ -27,6 +27,30 @@ namespace AalborgZooProjekt.Model
             }
         }
 
+
+        /// <summary>
+        /// Gets all product from the database that are departmentspecikproduct to a given department
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns></returns>
+        public List<Product> GetDepartmentSpecifikProducts(Department department)
+        {
+            List<Product> departmentProductList = new List<Product>();
+            using (_context)
+            {
+                foreach (Product product in _context.ProductSet)
+                {
+                    foreach (DepartmentSpecificProduct depProduct in product.DepartmentSpecificProducts)
+                    {
+                        if (depProduct.Department==department)
+                            departmentProductList.Add(product);
+                    }
+                }
+            }
+
+            return departmentProductList;
+        }
+
         /// <summary>
         /// Opdates the product and thereby also the ProductVersions contained in the product objekt.
         /// </summary>
