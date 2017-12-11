@@ -19,13 +19,16 @@ namespace NUnit.Test
         {
             //Arrange
             var mockSet = new Mock<DbSet<Order>>();
+
+
             var mockContext = new Mock<AalborgZooContainer1>();
             mockContext.Setup(m => m.OrderSet).Returns(() => mockSet.Object);
-
             IOrderRepository dbRep = new OrderRepository(mockContext.Object);
 
-            Assert.AreSame(mockContext.Object.OrderSet.Count(), 5);
-
+            Order test = new Order();
+            test.Id = 1;
+            dbRep.AddOrder(test);
+            
             //Act
             Order order = dbRep.GetOrder(1);
 

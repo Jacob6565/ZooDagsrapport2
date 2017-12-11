@@ -27,14 +27,6 @@ namespace AalborgZooProjekt.Model
             }
         }
 
-        public void AddOrder(Order order, string useless)
-        {
-            using (_context)
-            {
-                _context.OrderSet.Add(order);
-                _context.SaveChanges();
-            }
-        }
 
         /// <summary>
         /// Gets an order from orderID in the database
