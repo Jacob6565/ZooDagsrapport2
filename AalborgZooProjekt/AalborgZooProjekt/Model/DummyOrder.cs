@@ -14,9 +14,9 @@ namespace AalborgZooProjekt.Model
             Name = name;
         }
 
-        public int Id;
-        public string Name;
-        public int Amount = 0;
+        public int Id{ get; set; }
+        public string Name { get; set; }
+        public int Amount { get; set; } = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
