@@ -143,9 +143,21 @@
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
+    <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\DepartmentChange.cs" />
+    <Compile Include="Model\DepartmentSpecificProduct.cs" />
     <Compile Include="Model\DummyOrder.cs" />
     <Compile Include="Model\DummyProduct.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderLine.cs" />
+    <Compile Include="Model\PasswordChanged.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductVersion.cs" />
+    <Compile Include="Model\Shopper.cs" />
+    <Compile Include="Model\ShoppingList.cs" />
+    <Compile Include="Model\Unit.cs" />
+    <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="ViewModel\DummyViewModel.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
@@ -286,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="Model\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Database\AalborgZoo.Context.tt">
