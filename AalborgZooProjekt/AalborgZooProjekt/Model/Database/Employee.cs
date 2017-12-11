@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Model
+namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
@@ -15,8 +15,8 @@ namespace AalborgZooProjekt.Model
     public partial class Employee
     {
         public int Id { get; set; }
-        public string DateHired { get; set; }
+        public System.DateTime DateHired { get; set; }
         public string Name { get; set; }
-        public string DateStopped { get; set; }
+        public System.DateTime DateStopped { get; set; }
     }
 }

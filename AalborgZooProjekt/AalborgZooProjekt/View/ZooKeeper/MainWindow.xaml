@@ -1,5 +1,5 @@
 ﻿<Controls:MetroWindow  
-        x:Class="AalborgZooProjekt.MainWindow"
+        x:Class="AalborgZooProjekt.View.ZooKeeper.MainWindow"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

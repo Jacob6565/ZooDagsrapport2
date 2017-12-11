@@ -5,7 +5,7 @@ using System.Windows.Threading;
 using System;
 using System.Windows.Controls;
 
-namespace AalborgZooProjekt
+namespace AalborgZooProjekt.View.ZooKeeper
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
