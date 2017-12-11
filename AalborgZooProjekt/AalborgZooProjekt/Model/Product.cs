@@ -53,25 +53,21 @@ namespace AalborgZooProjekt.Model
         public void ActivateProduct()
         {
             ProductVersion newVersion, previousVersion;
+            previousVersion = ProductVersions.Last();
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
 
             if (previousVersion.IsActive != true)
             {
                 //Copying data from previous to new
                 newVersion.IsActive = true;
                 newVersion.Name = previousVersion.Name;
-
-                //Det burde da også bare kunne være "this",
-                //men det burde nærmest ikke være der, da productversionerne
-                //er gemt inde i et product.
                 newVersion.Product = previousVersion.Product;
                 newVersion.Supplier = previousVersion.Supplier;
                 newVersion.Unit = previousVersion.Unit.ToList();
                 newVersion.ProductId = previousVersion.ProductId;
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
-                this.ProductVersions.Add(newVersion);
+                ProductVersions.Add(newVersion);
                 DAL.ProductVersionList(this);
             }
             else
@@ -84,7 +80,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             if (!previousVersion.Unit.Contains(unitToAdd))
             {
@@ -115,7 +111,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
             if (previousVersion.Name != name)
             {
 
@@ -144,7 +140,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             //Copying data from previous to new
             if (previousVersion.Supplier != supplier)
@@ -169,14 +165,14 @@ namespace AalborgZooProjekt.Model
 
         public bool CheckIfProductIsActive()
         {
-            return ProductVersions.First().IsActive;
+            return ProductVersions.Last().IsActive;
         }
 
         public void DeactivateProduct()
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             //Copying data from previous to new
             if (previousVersion.IsActive == true)
@@ -185,9 +181,6 @@ namespace AalborgZooProjekt.Model
                 newVersion.Name = previousVersion.Name;
                 newVersion.Unit = previousVersion.Unit.ToList();
 
-                //Det burde da også bare kunne være "this",
-                //men det burde nærmest ikke være der, da productversionerne
-                //er gemt inde i et product.
                 newVersion.Product = previousVersion.Product;
                 newVersion.Supplier = previousVersion.Supplier;
                 newVersion.ProductId = previousVersion.ProductId;
@@ -195,7 +188,6 @@ namespace AalborgZooProjekt.Model
 
                 this.ProductVersions.Add(newVersion);
                 DAL.ProductVersionList(this);
-
             }
             else
             {
@@ -207,7 +199,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             if (previousVersion.Unit.Contains(unitToRemove))
             {
@@ -224,7 +216,6 @@ namespace AalborgZooProjekt.Model
                 newVersion.Unit.Remove(unitToRemove);
                 this.ProductVersions.Add(newVersion);
                 DAL.ProductVersionList(this);
-
             }
             else
             {
