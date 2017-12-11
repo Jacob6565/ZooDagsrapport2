@@ -106,6 +106,7 @@
     <Property Name="CreatedByID" Type="int" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ShoppingListSet">
     <Key>
@@ -459,7 +460,7 @@
           <Property Name="CreatedByID" Type="Int32" Nullable="false" />
           <Property Name="DeletedByID" Type="Int32" Nullable="false" />
           <Property Name="DateDeleted" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="Product" ToRole="DepartmentSpecifikProduct" />
+          <NavigationProperty Name="DepartmentSpecificProducts" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="Product" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="ProductVersions" Relationship="AalborgZoo.ProductProductVersion" FromRole="Product" ToRole="ProductVersion" />
           <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
@@ -476,6 +477,7 @@
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OrderLines" Relationship="AalborgZoo.ProductVersionOrderLine" FromRole="ProductVersion" ToRole="OrderLine" />
           <NavigationProperty Name="Unit" Relationship="AalborgZoo.UnitProductVersion" FromRole="ProductVersion" ToRole="Unit" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingList">
           <Key>
@@ -526,7 +528,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateDeleted" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductDepartment" FromRole="Department" ToRole="DepartmentSpecifikProduct" />
+          <NavigationProperty Name="DepartmentSpecificProducts" Relationship="AalborgZoo.DepartmentSpecifikProductDepartment" FromRole="Department" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="Zookeepers" Relationship="AalborgZoo.DepartmentZookeeper" FromRole="Department" ToRole="Zookeeper" />
         </EntityType>
         <EntityType Name="Zookeeper" BaseType="AalborgZoo.Employee">
@@ -736,6 +738,7 @@
           <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

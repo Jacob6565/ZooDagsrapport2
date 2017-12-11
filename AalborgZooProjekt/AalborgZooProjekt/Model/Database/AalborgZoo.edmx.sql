@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2017 14:09:31
--- Generated from EDMX file: C:\Users\kristoffer\Documents\GitHub\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Model\Database\AalborgZoo.edmx
+-- Date Created: 12/11/2017 14:28:56
+-- Generated from EDMX file: C:\Users\kristoffer\Documents\GitHub\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt.Model\AalborgZoo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -137,7 +137,8 @@ CREATE TABLE [dbo].[ProductVersionSet] (
     [Supplier] nvarchar(max)  NOT NULL,
     [CreatedByID] int  NOT NULL,
     [DateCreated] datetime  NOT NULL,
-    [ProductId] int  NOT NULL
+    [ProductId] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
