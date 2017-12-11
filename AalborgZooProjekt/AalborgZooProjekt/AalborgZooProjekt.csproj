@@ -86,58 +86,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Database\AalborgZoo.Context.cs">
+    <Compile Include="Model\Database\AalborgZoo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\AalborgZoo.cs">
+    <Compile Include="Model\Database\AalborgZoo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\AalborgZoo.Designer.cs">
+    <Compile Include="Model\Database\AalborgZoo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\Department.cs">
+    <Compile Include="Model\Database\Department.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\DepartmentChange.cs">
+    <Compile Include="Model\Database\DepartmentChange.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\DepartmentSpecificProduct.cs">
+    <Compile Include="Model\Database\DepartmentSpecificProduct.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Employee.cs">
+    <Compile Include="Model\Database\Employee.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Order.cs">
+    <Compile Include="Model\Database\Order.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\OrderLine.cs">
+    <Compile Include="Model\Database\OrderLine.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\PasswordChanged.cs">
+    <Compile Include="Model\Database\PasswordChanged.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Product.cs">
+    <Compile Include="Model\Database\Product.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\ProductVersion.cs">
+    <Compile Include="Model\Database\ProductVersion.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Shopper.cs">
+    <Compile Include="Model\Database\Shopper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\ShoppingList.cs">
+    <Compile Include="Model\Database\ShoppingList.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Unit.cs">
+    <Compile Include="Model\Database\Unit.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Zookeeper.cs">
+    <Compile Include="Model\Database\Zookeeper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
@@ -256,14 +256,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Database\AalborgZoo.edmx">
+    <EntityDeploy Include="Model\Database\AalborgZoo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AalborgZoo.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="AppSecretsDontCommit.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Database\AalborgZoo.edmx.diagram">
+    <None Include="Model\Database\AalborgZoo.edmx.diagram">
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -288,13 +288,13 @@
     <Folder Include="Commands\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\AalborgZoo.Context.tt">
+    <Content Include="Model\Database\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
-    <Content Include="Database\AalborgZoo.edmx.sql" />
-    <Content Include="Database\AalborgZoo.tt">
+    <Content Include="Model\Database\AalborgZoo.edmx.sql" />
+    <Content Include="Model\Database\AalborgZoo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>

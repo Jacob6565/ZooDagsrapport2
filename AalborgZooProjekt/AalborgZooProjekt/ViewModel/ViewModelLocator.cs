@@ -39,7 +39,7 @@ namespace AalborgZooProjekt.ViewModel
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
-            //SimpleIoc.Default.Register<DummyViewModel>();
+            SimpleIoc.Default.Register<DummyViewModel>();
         }
 
         /// <summary>
@@ -55,13 +55,13 @@ namespace AalborgZooProjekt.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        //public DummyViewModel Tester
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<DummyViewModel>();
-        //    }
-        //}
+        public DummyViewModel Tester
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DummyViewModel>();
+            }
+        }
 
         /// <summary>
         /// Cleans up all the resources.

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2017 14:24:49
+-- Date Created: 12/11/2017 11:35:58
 -- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
@@ -18,7 +18,7 @@ GO
 -- --------------------------------------------------
 
 IF OBJECT_ID(N'[dbo].[FK_DepartmentSpecifikProductProduct]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DepartmentSpecifikProductSet] DROP CONSTRAINT [FK_DepartmentSpecifikProductProduct];
+    ALTER TABLE [dbo].[DepartmentSpecificProductSet] DROP CONSTRAINT [FK_DepartmentSpecifikProductProduct];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductProductVersion]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductVersionSet] DROP CONSTRAINT [FK_ProductProductVersion];
@@ -39,7 +39,7 @@ IF OBJECT_ID(N'[dbo].[FK_UnitProductVersion_ProductVersion]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UnitProductVersion] DROP CONSTRAINT [FK_UnitProductVersion_ProductVersion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DepartmentSpecifikProductDepartment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DepartmentSpecifikProductSet] DROP CONSTRAINT [FK_DepartmentSpecifikProductDepartment];
+    ALTER TABLE [dbo].[DepartmentSpecificProductSet] DROP CONSTRAINT [FK_DepartmentSpecifikProductDepartment];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DepartmentZookeeper]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EmployeeSet_Zookeeper] DROP CONSTRAINT [FK_DepartmentZookeeper];
@@ -64,8 +64,8 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[DepartmentSpecifikProductSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DepartmentSpecifikProductSet];
+IF OBJECT_ID(N'[dbo].[DepartmentSpecificProductSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartmentSpecificProductSet];
 GO
 IF OBJECT_ID(N'[dbo].[ProductSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ProductSet];
@@ -122,10 +122,10 @@ GO
 -- Creating table 'ProductSet'
 CREATE TABLE [dbo].[ProductSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DateCreated] nvarchar(max)  NOT NULL,
-    [CreatedByID] nvarchar(max)  NOT NULL,
-    [DeletedByID] nvarchar(max)  NOT NULL,
-    [DateDeleted] nvarchar(max)  NOT NULL,
+    [DateCreated] datetime  NOT NULL,
+    [CreatedByID] int  NOT NULL,
+    [DeletedByID] int  NOT NULL,
+    [DateDeleted] datetime  NOT NULL,
     [Name] nvarchar(max)  NOT NULL
 );
 GO

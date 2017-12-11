@@ -6,12 +6,12 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
-using AalborgZooProjekt.Database;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Data;
+using System;
 
 namespace AalborgZooProjekt
 {
@@ -94,12 +94,12 @@ namespace AalborgZooProjekt
                     Employee emp = new Employee() { DateHired = i.ToString(), Name = $"Emp{i}", DateStopped = i + 1.ToString(), Id = i };
                     db.EmployeeSet.Add(emp);
 
-                    Database.DummyProduct prod = new Database.DummyProduct()
+                    Product prod = new Product()
                     {
-                        CreatedByID = i.ToString(),
-                        DateDeleted = i + 1.ToString(),
-                        DateCreated = i.ToString(),
-                        DeletedByID = i.ToString(),
+                        CreatedByID = i,
+                        DateDeleted = DateTime.Today,
+                        DateCreated = DateTime.Today,
+                        DeletedByID = i,
                         Name = i.ToString(),
                     };
                     db.ProductSet.Add(prod);
@@ -160,7 +160,7 @@ namespace AalborgZooProjekt
                     db.ShoppingListSet.Add(list);
 
 
-                    Database.DummyOrder order = new Database.DummyOrder()
+                    Order order = new Order()
                     {
                         DepartmentID = dep.Id.ToString(),
                         OrderedByID = zookeeper.Id.ToString(),

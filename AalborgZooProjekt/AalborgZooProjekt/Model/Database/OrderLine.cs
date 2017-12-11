@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Database
+namespace AalborgZooProjekt.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PasswordChanged
+    public partial class OrderLine
     {
         public int Id { get; set; }
-        public string DateChanged { get; set; }
-        public Nullable<int> ShopperId { get; set; }
+        public string Quantity { get; set; }
+        public string UnitID { get; set; }
+        public int ProductVersionId { get; set; }
+        public int OrderId { get; set; }
     
-        public virtual Shopper Shopper { get; set; }
+        public virtual ProductVersion ProductVersion { get; set; }
+        public virtual Order Order { get; set; }
     }
 }
