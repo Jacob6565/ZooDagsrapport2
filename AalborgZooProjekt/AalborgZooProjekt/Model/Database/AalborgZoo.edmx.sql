@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2017 12:31:22
--- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt.Model\AalborgZoo.edmx
+-- Date Created: 12/11/2017 14:09:31
+-- Generated from EDMX file: C:\Users\kristoffer\Documents\GitHub\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Model\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -146,7 +146,7 @@ CREATE TABLE [dbo].[ShoppingListSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CreatedByID] int  NOT NULL,
     [DateCreated] datetime  NOT NULL,
-    [Status] int  NOT NULL,
+    [Status] nvarchar(max)  NOT NULL,
     [ShopperId] int  NOT NULL
 );
 GO
@@ -161,7 +161,7 @@ CREATE TABLE [dbo].[OrderSet] (
     [Note] nvarchar(max)  NOT NULL,
     [DateCreated] datetime  NOT NULL,
     [DeletedByID] int  NOT NULL,
-    [Status] int  NOT NULL,
+    [Status] nvarchar(max)  NOT NULL,
     [ShoppingListId] int  NULL
 );
 GO
@@ -190,8 +190,7 @@ CREATE TABLE [dbo].[DepartmentChangeSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DepartmentID] nvarchar(max)  NOT NULL,
     [DateChanged] datetime  NOT NULL,
-    [ZookeeperID] int  NOT NULL,
-    [ZookeeperId1] int  NULL
+    [ZookeeperID] int  NULL
 );
 GO
 
@@ -462,10 +461,10 @@ ON [dbo].[EmployeeSet_Zookeeper]
     ([DepartmentId]);
 GO
 
--- Creating foreign key on [ZookeeperId1] in table 'DepartmentChangeSet'
+-- Creating foreign key on [ZookeeperID] in table 'DepartmentChangeSet'
 ALTER TABLE [dbo].[DepartmentChangeSet]
 ADD CONSTRAINT [FK_DepartmentChangeZookeeper]
-    FOREIGN KEY ([ZookeeperId1])
+    FOREIGN KEY ([ZookeeperID])
     REFERENCES [dbo].[EmployeeSet_Zookeeper]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -474,7 +473,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_DepartmentChangeZookeeper'
 CREATE INDEX [IX_FK_DepartmentChangeZookeeper]
 ON [dbo].[DepartmentChangeSet]
-    ([ZookeeperId1]);
+    ([ZookeeperID]);
 GO
 
 -- Creating foreign key on [ShopperId] in table 'ShoppingListSet'

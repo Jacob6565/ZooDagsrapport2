@@ -114,7 +114,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CreatedByID" Type="int" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ShopperId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="OrderSet">
@@ -129,7 +129,7 @@
     <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="DeletedByID" Type="int" Nullable="false" />
-    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ShoppingListId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="OrderLineSet">
@@ -158,8 +158,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DepartmentID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateChanged" Type="datetime" Nullable="false" />
-    <Property Name="ZookeeperID" Type="int" Nullable="false" />
-    <Property Name="ZookeeperId1" Type="int" Nullable="true" />
+    <Property Name="ZookeeperID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="EmployeeSet">
     <Key>
@@ -300,7 +299,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="DepartmentChange">
-        <PropertyRef Name="ZookeeperId1" />
+        <PropertyRef Name="ZookeeperID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -485,7 +484,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CreatedByID" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="AalborgZoo.OrderShoppingList" FromRole="ShoppingList" ToRole="Order" />
           <NavigationProperty Name="Shopper" Relationship="AalborgZoo.ShopperShoppingList" FromRole="ShoppingList" ToRole="Shopper" />
           <Property Name="ShopperId" Type="Int32" Nullable="false" />
@@ -502,7 +501,7 @@
           <Property Name="Note" Type="String" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DeletedByID" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
           <NavigationProperty Name="OrderLines" Relationship="AalborgZoo.OrderLineOrder" FromRole="Order" ToRole="OrderLine" />
           <NavigationProperty Name="ShoppingList" Relationship="AalborgZoo.OrderShoppingList" FromRole="Order" ToRole="ShoppingList" />
           <Property Name="ShoppingListId" Type="Int32" Nullable="true" />
@@ -542,9 +541,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentID" Type="String" Nullable="false" />
           <Property Name="DateChanged" Type="DateTime" Nullable="false" />
-          <Property Name="ZookeeperID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Zookeeper" Relationship="AalborgZoo.DepartmentChangeZookeeper" FromRole="DepartmentChange" ToRole="Zookeeper" />
-          <Property Name="ZookeeperId1" Type="Int32" Nullable="true" />
+          <Property Name="ZookeeperID" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -674,7 +672,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="DepartmentChange">
-              <PropertyRef Name="ZookeeperId1" />
+              <PropertyRef Name="ZookeeperID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -796,7 +794,6 @@
           <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
           <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
           <ScalarProperty Name="ZookeeperID" ColumnName="ZookeeperID" />
-          <ScalarProperty Name="ZookeeperId1" ColumnName="ZookeeperId1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -12,7 +12,6 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Data;
 using System;
-using AalborgZooProjekt.Model;
 
 namespace AalborgZooProjekt
 {
@@ -157,7 +156,7 @@ namespace AalborgZooProjekt
                     {
                         CreatedByID = i,
                         DateCreated = DateTime.Today,
-                        Status = i,
+                        Status = "Editable",
                         ShopperId = shopper.Id,
                     };
                     db.ShoppingListSet.Add(list);
