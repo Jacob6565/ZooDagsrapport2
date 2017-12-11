@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Data;
 using System;
-using AalborgZooProjekt.Model.Database;
+using AalborgZooProjekt.Model;
 
 namespace AalborgZooProjekt
 {
@@ -62,7 +62,7 @@ namespace AalborgZooProjekt
 
             //PopulateDatabase();
 
-            string[] lines = File.ReadAllLines("../../Model/DummyFruit.txt", Encoding.UTF7);
+            string[] lines = File.ReadAllLines("../../Model/DummyStuff/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
@@ -70,7 +70,7 @@ namespace AalborgZooProjekt
                 DummyFruitList.Add(dummyProduct);
             }
 
-            lines = File.ReadAllLines("../../Model/DummyOtherFood.txt", Encoding.UTF7);
+            lines = File.ReadAllLines("../../Model/DummyStuff/DummyOtherFood.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
                 Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
@@ -78,7 +78,7 @@ namespace AalborgZooProjekt
                 DummyOtherFoodList.Add(dummyProduct);
             }
 
-            lines = File.ReadAllLines("../../Model/DummyOrders.txt");
+            lines = File.ReadAllLines("../../Model/DummyStuff/DummyOrders.txt");
             foreach (string orders in lines)
             {
                 DummyOrderList.Add(new Model.DummyOrder(orders));
