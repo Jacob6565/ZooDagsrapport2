@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Data;
+using System;
 
 namespace AalborgZooProjekt
 {
@@ -59,7 +60,7 @@ namespace AalborgZooProjekt
             DummyUnitList.Add(new Unit() { Name = "styks" });
             DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
 
-            //PopulateDatabase();
+            PopulateDatabase();
             string[] lines = File.ReadAllLines("../../Model/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
@@ -94,12 +95,12 @@ namespace AalborgZooProjekt
                     Employee emp = new Employee() { DateHired = i.ToString(), Name = $"Emp{i}", DateStopped = i + 1.ToString(), Id = i };
                     db.EmployeeSet.Add(emp);
 
-                    Database.DummyProduct prod = new Database.DummyProduct()
+                    Database.Product prod = new Database.Product()
                     {
-                        CreatedByID = i.ToString(),
-                        DateDeleted = i + 1.ToString(),
-                        DateCreated = i.ToString(),
-                        DeletedByID = i.ToString(),
+                        CreatedByID = i,
+                        DateDeleted = DateTime.Today,
+                        DateCreated = DateTime.Today,
+                        DeletedByID = i,
                         Name = i.ToString(),
                     };
                     db.ProductSet.Add(prod);
@@ -160,7 +161,7 @@ namespace AalborgZooProjekt
                     db.ShoppingListSet.Add(list);
 
 
-                    Database.DummyOrder order = new Database.DummyOrder()
+                    Database.Order order = new Database.Order()
                     {
                         DepartmentID = dep.Id.ToString(),
                         OrderedByID = zookeeper.Id.ToString(),

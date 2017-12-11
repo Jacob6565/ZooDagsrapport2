@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Tester, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid ItemsSource="{Binding DummyFruitList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding DummyOtherFoodList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vare" Binding="{Binding Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">

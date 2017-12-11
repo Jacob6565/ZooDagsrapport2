@@ -90,10 +90,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DateCreated" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CreatedByID" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DeletedByID" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DateDeleted" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="CreatedByID" Type="int" Nullable="false" />
+    <Property Name="DeletedByID" Type="int" Nullable="false" />
+    <Property Name="DateDeleted" Type="datetime" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductVersionSet">
@@ -456,10 +456,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateCreated" Type="String" Nullable="false" />
-          <Property Name="CreatedByID" Type="String" Nullable="false" />
-          <Property Name="DeletedByID" Type="String" Nullable="false" />
-          <Property Name="DateDeleted" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
+          <Property Name="DeletedByID" Type="Int32" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="Product" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="ProductVersions" Relationship="AalborgZoo.ProductProductVersion" FromRole="Product" ToRole="ProductVersion" />
           <Property Name="Name" Type="String" Nullable="false" />
