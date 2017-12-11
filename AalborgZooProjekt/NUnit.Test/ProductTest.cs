@@ -11,32 +11,25 @@ namespace NUnit.Test
     public class ProductTest
     {
         [Test]
-        public void Constructor_CorrectInput_Succes()
+        public void ActivateProduct()
         {
             //Arrange
-            //Setting up mockDAL
-            //Mock<IProductDAL> mockDAL = new Mock<IProductDAL>();
+            Mock<IProductDAL> MockDAL = new Mock<IProductDAL>();
             
-            MockDAL dal = new MockDAL();
+            string name = "Æble";
             Shopper shopper = new Shopper();
-            string name = "Banan";
-            string supplier = "Karl";
+            string supplier = "karl";
+            bool IsActive = true;
             List<Unit> units = new List<Unit>();
-            units.Add(new Unit()
-            {
-                Name = "kg"
-
-            });
-
-            bool active = false;
-
+            Product product = new Product(MockDAL.Object, shopper, name, supplier, units, IsActive);
+            
             //Act
-            Product product = new Product(dal, shopper, name, supplier, units, active);
+            
 
             //Assert
-            Assert.AreEqual(product, dal.mockDB.First());
-          
+            
         }
+
     }
  
     class MockDAL : IProductDAL

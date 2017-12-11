@@ -33,7 +33,6 @@ namespace AalborgZooProjekt.Model
         /// <param name="product"></param>
         public void ProductVersionList(Product product)
         {
-
             using (_context)
             {
                 //Finds the current product in the database.
@@ -51,6 +50,5 @@ namespace AalborgZooProjekt.Model
                 }
             }
         }
-
     }
 }

@@ -10,12 +10,9 @@ namespace AalborgZooProjekt.Model
         //Used when accessing the database.
         private IProductDAL DAL;
 
-        //public Product(Shopper shopper, string name, string supplier, List<Unit> units, bool active = true)
-        //    : this(null, shopper, name, supplier, units, active) { }
-
         public Product(IProductDAL dal, Shopper shopper, string name, string supplier, List<Unit> units, bool active = true) : this()
         {
-            ProductVersion firstProductVersion = MakeFirstVersion(name, supplier, units, active);
+            ProductVersion firstProductVersion = MakeProductVersion(name, supplier, units, active);
 
             this.Name = name;
             //-1 indicating it is null.
@@ -26,10 +23,8 @@ namespace AalborgZooProjekt.Model
             this.ProductVersions.Add(firstProductVersion);
 
             //Contains the methods needed to update the database
-
-            DAL = dal;
+            DAL = dal ?? new ProductDAL();
             DAL.AddProduct(this);
-
         }
 
 
@@ -41,7 +36,7 @@ namespace AalborgZooProjekt.Model
         /// <param name="units"></param>
         /// <param name="active"></param>
         /// <returns></returns>
-        private ProductVersion MakeFirstVersion(string name, string supplier, List<Unit> units, bool active)
+        private ProductVersion MakeProductVersion(string name, string supplier, List<Unit> units, bool active)
         {
             ProductVersion firstProductVersion = new ProductVersion();
 
@@ -53,9 +48,7 @@ namespace AalborgZooProjekt.Model
             firstProductVersion.Supplier = supplier;
 
             return firstProductVersion;
-        }
-
-       
+        }      
 
         public void ActivateProduct()
         {
