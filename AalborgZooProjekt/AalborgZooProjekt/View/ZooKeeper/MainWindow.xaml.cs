@@ -5,7 +5,7 @@ using System.Windows.Threading;
 using System;
 using System.Windows.Controls;
 
-namespace AalborgZooProjekt
+namespace AalborgZooProjekt.View.ZooKeeper
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -13,7 +13,7 @@ namespace AalborgZooProjekt
     public partial class MainWindow : MetroWindow
     {
         DispatcherTimer Timer = new DispatcherTimer();
-        //GridLength[] expanderGridHeight;
+        GridLength[] expanderGridHeight;
 
         public DateTime Time
         {
@@ -86,11 +86,6 @@ namespace AalborgZooProjekt
         private void TimerClick(object sender, EventArgs e)
         {
             Time = DateTime.Now;
-        }
-
-        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

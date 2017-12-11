@@ -6,66 +6,214 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
-using AalborgZooProjekt.Database;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Data;
+using System;
 
 namespace AalborgZooProjekt
 {
+    public class Owner
+    {
+        public int ID;
+        public string Name;
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
+    }
+
+    public class House
+    {
+        public int ID;
+        public Owner HouseOwner;
+    }
+
     public class DummyViewModel : ViewModelBase
     {
-        private List<DummyProduct> _dummyFruit = new List<DummyProduct>();
-
-        public List<DummyProduct> DummyFruitList
+        private List<Model.DummyProduct> _dummyFruit = new List<Model.DummyProduct>();
+        public List<Model.DummyProduct> DummyFruitList
         {
             get { return _dummyFruit; }
             set { _dummyFruit = value; }
         }
 
-        private List<DummyProduct> _dummyOtherFood = new List<DummyProduct>();
-
-        public List<DummyProduct> DummyOtherFoodList
+        private List<Model.DummyProduct> _dummyOtherFood = new List<Model.DummyProduct>();
+        public List<Model.DummyProduct> DummyOtherFoodList
         {
             get { return _dummyOtherFood; }
             set { _dummyOtherFood = value; }
         }
 
+        public List<Model.DummyOrder> DummyOrderList { get; set; } = new List<Model.DummyOrder>();
 
+        ObservableCollection<Unit> DummyUnitList = new ObservableCollection<Unit>();
 
-        public List<DummyOrder> DummyOrderList { get; set; } = new List<DummyOrder>();
 
         public DummyViewModel()
         {
-            using (var db = new AalborgZooContainer1())
-            {
-                string name;
-                //The following presents two ways to read the name property of the employee with id 1.
-                //First
-                Employee em = db.EmployeeSet.Where(x => x.Id == 1).First();
-                name = em.Name;
+            DummyUnitList.Add(new Unit() { Name = "kg" });
+            DummyUnitList.Add(new Unit() { Name = "styks" });
+            DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
 
-                //Second - oneliner
-                name = db.EmployeeSet.Where(x => x.Id == 1).Select(x => x.Name).First();
-            }
+            //PopulateDatabase();
 
-            string[] lines = File.ReadAllLines("../../DummyFruit.txt", Encoding.UTF7);
+            string[] lines = File.ReadAllLines("../../Model/DummyStuff/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                DummyFruitList.Add(new DummyProduct(product));
+                Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyFruitList.Add(dummyProduct);
             }
 
-            lines = File.ReadAllLines("../../DummyOtherFood.txt", Encoding.UTF7);
+            lines = File.ReadAllLines("../../Model/DummyStuff/DummyOtherFood.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                DummyOtherFoodList.Add(new DummyProduct(product));
+                Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyOtherFoodList.Add(dummyProduct);
             }
 
-            lines = File.ReadAllLines("../../DummyOrders.txt");
+            lines = File.ReadAllLines("../../Model/DummyStuff/DummyHistoryEntries.txt");
             foreach (string orders in lines)
             {
-                DummyOrderList.Add(new DummyOrder(orders));
+                DummyOrderList.Add(new Model.DummyOrder(orders));
             }
 
 
+        }
+
+        public void PopulateDatabase()
+        {
+            using (var db = new AalborgZooContainer1())
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Employee emp = new Employee()
+                    {
+                        DateHired = DateTime.Today,
+                        Name = $"Emp{i}",
+                        DateStopped = DateTime.Today,
+                    };
+                    db.EmployeeSet.Add(emp);
+
+                    Product prod = new Product()
+                    {
+                        CreatedByID = i,
+                        DateDeleted = DateTime.Today,
+                        DateCreated = DateTime.Today,
+                        DeletedByID = i,
+                        Name = i.ToString(),
+                    };
+                    db.ProductSet.Add(prod);
+
+                    Department dep = new Department()
+                    {
+                        Name = i.ToString(),
+                        DateDeleted = DateTime.Today,
+                        DateCreated = DateTime.Today,
+                    };
+                    db.DepartmentSet.Add(dep);
+
+                    DepartmentSpecificProduct depSP = new DepartmentSpecificProduct(dep, prod);
+                    db.DepartmentSpecificProductSet.Add(depSP);
+
+                    Zookeeper zookeeper = new Zookeeper()
+                    {
+                        Name = i.ToString(),
+                        DateHired = DateTime.Today,
+                        DateStopped = DateTime.Today,
+                        DepartmentId = dep.Id,
+                    };
+                    db.EmployeeSet.Add(zookeeper);
+
+                    //We only want a single kg instance.
+                    Unit unit;
+                    if(db.UnitSet.Any())
+                    {
+                        unit = db.UnitSet.First();
+                    }
+                    else
+                    {
+                        unit = new Unit()
+                        {
+                            Name = "kg",
+                        };
+                        db.UnitSet.Add(unit);
+                    }
+
+                    ProductVersion prodV = new ProductVersion()
+                    {
+                        IsActive = true,
+                        Supplier = i.ToString(),
+                        CreatedByID = i,
+                        DateCreated = DateTime.Today,
+                        ProductId = prod.Id,
+                        Name = $"ProductVersion {i}",
+                        Product = prod,
+                    };
+                    db.ProductVersionSet.Add(prodV);
+
+                    db.SaveChanges();
+
+                    Shopper shopper = new Shopper()
+                    {
+                        DateHired = DateTime.Today,
+                        DateStopped = DateTime.Today,
+                        Name = i.ToString(),
+                        Password = i.ToString(),
+                        Username = i.ToString()
+                    };
+                    db.EmployeeSet.Add(shopper);
+
+                    ShoppingList list = new ShoppingList()
+                    {
+                        CreatedByID = i,
+                        DateCreated = DateTime.Today,
+                        Status = "Editable",
+                        ShopperId = shopper.Id,
+                    };
+                    db.ShoppingListSet.Add(list);
+
+
+                    Order order = new Order()
+                    {
+                        DepartmentID = dep.Id,
+                        OrderedByID = zookeeper.Id,
+                        DateOrdered = DateTime.Today,
+                        DateCancelled = DateTime.Today,
+                        Note = i.ToString(),
+                        DateCreated = DateTime.Today,
+                        DeletedByID = shopper.Id,
+                        Status = i.ToString(),
+                        ShoppingListId = 0,
+                    };
+                    db.OrderSet.Add(order);
+
+
+
+                    OrderLine orderLine = new OrderLine()
+                    {
+
+                        Quantity = i,
+                        UnitID = unit.Id,
+                        ProductVersionId = prodV.Id,
+                    };
+                    db.OrderLineSet.Add(orderLine);
+
+                    PasswordChanged pwc = new PasswordChanged()
+                    {
+                        DateChanged = DateTime.Today,
+                        ShopperId = shopper.Id,
+                    };
+                    db.PasswordChangedSet.Add(pwc);
+
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }
