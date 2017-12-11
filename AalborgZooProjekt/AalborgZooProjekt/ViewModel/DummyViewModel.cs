@@ -1,21 +1,62 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Collections.Generic;
 using AalborgZooProjekt.Model;
-using AalborgZooProjekt.Database;
+
 using System.IO;
 using System.Text;
-using System.Data.Common;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Configuration;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Data;
+using System;
+using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt
 {
+    public class Owner
+    {
+        public int ID;
+        public string Name;
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
+    }
+
+    public class House
+    {
+        public int ID;
+        public Owner HouseOwner;
+    }
+
     public class DummyViewModel : ViewModelBase
     {
         string connectionString1 = "name=AalborgZooMockContainer";
         string connectionString = "name=AalborgZooContainer1";
         public List<DummyProduct> DummyFoodList { get; set; } = new List<DummyProduct>();
+        private List<Model.DummyProduct> _dummyFruit = new List<Model.DummyProduct>();
+        public List<Model.DummyProduct> DummyFruitList
+        {
+            get { return _dummyFruit; }
+            set { _dummyFruit = value; }
+        }
 
-        public List<DummyHistoryEntry> DummyHistoryList { get; set; } = new List<DummyHistoryEntry>();
+        private List<Model.DummyProduct> _dummyOtherFood = new List<Model.DummyProduct>();
+        public List<Model.DummyProduct> DummyOtherFoodList
+        {
+            get { return _dummyOtherFood; }
+            set { _dummyOtherFood = value; }
+        }
+
+        public List<Model.DummyOrder> DummyOrderList { get; set; } = new List<Model.DummyOrder>();
+
+        ObservableCollection<Unit> DummyUnitList = new ObservableCollection<Unit>();
+
 
         public List<Employee> MockTestEmployee
         {
@@ -39,24 +80,36 @@ namespace AalborgZooProjekt
 
         public DummyViewModel()
         {
-            //using (var db = new AalborgZooContainer1(connectionString))
-            //{
-            //    Employee emp = new Employee() { Name = "HANS", DateHired = "000", DateStopped = "9/11" };
-            //    db.EmployeeSet.Add(emp);
-            //    db.SaveChanges();
-            //}
-            string fileAndPath = "../../DummyProducts.txt";
-            string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
+            DummyUnitList.Add(new Unit() { Name = "kg" });
+            DummyUnitList.Add(new Unit() { Name = "styks" });
+            DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
+
+            //PopulateDatabase();
+
+            string[] lines = File.ReadAllLines("../../Model/DummyFruit.txt", Encoding.UTF7);
             foreach (string product in lines)
             {
-                DummyFoodList.Add(new DummyProduct(product));
+                Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyFruitList.Add(dummyProduct);
             }
-            fileAndPath = "../../DummyHistoryEntries.txt";
-            lines = File.ReadAllLines(fileAndPath);
+
+            lines = File.ReadAllLines("../../Model/DummyOtherFood.txt", Encoding.UTF7);
+            foreach (string product in lines)
+            {
+                Model.DummyProduct dummyProduct = new Model.DummyProduct(product);
+                dummyProduct.Units = DummyUnitList;
+                DummyOtherFoodList.Add(dummyProduct);
+            }
+
+            lines = File.ReadAllLines("../../Model/DummyHistoryEntries.txt");
             foreach (string orders in lines)
             {
                 DummyHistoryList.Add(new DummyHistoryEntry(orders));
             }          
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

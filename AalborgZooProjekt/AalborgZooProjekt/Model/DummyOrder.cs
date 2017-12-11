@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AalborgZooProjekt.Database;
 
-namespace AalborgZooProjekt.Model.DummyModel
+namespace AalborgZooProjekt.Model
 {
-    public class DummyOrder
+    public class DummyOrder : INotifyPropertyChanged
     {
-        public DummyOrder(string good)
+        public DummyOrder(string name)
         {
-            Good = good;
+            Name = name;
         }
 
-        public string Good { get; set; }
+        public int Id{ get; set; }
+        public string Name { get; set; }
+        public int Amount { get; set; } = 0;
 
-        public List<OrderLine> Orders { get; set; } = new List<OrderLine>();
-    }
-    public class DummyOrderLine
-    {
-        public DummyOrderLine(string unit, double amount)
-        {
-            Unit = unit;
-            Amount = amount;
-        }
-
-        public string Unit { get; set; }
-        public double Amount { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

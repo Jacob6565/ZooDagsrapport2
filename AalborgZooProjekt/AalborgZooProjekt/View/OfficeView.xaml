@@ -62,7 +62,7 @@
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
                                                             <TextBlock Text="{Binding Unit}" Width="60"/>
-                                                            <xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>
+                                                            <!--<xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>-->
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
