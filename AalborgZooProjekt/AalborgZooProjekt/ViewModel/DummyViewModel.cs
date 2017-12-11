@@ -6,7 +6,6 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
-using AalborgZooProjekt.Database;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
@@ -95,7 +94,7 @@ namespace AalborgZooProjekt
                     Employee emp = new Employee() { DateHired = i.ToString(), Name = $"Emp{i}", DateStopped = i + 1.ToString(), Id = i };
                     db.EmployeeSet.Add(emp);
 
-                    Database.Product prod = new Database.Product()
+                    Product prod = new Product()
                     {
                         CreatedByID = i,
                         DateDeleted = DateTime.Today,
@@ -161,7 +160,7 @@ namespace AalborgZooProjekt
                     db.ShoppingListSet.Add(list);
 
 
-                    Database.Order order = new Database.Order()
+                    Order order = new Order()
                     {
                         DepartmentID = dep.Id.ToString(),
                         OrderedByID = zookeeper.Id.ToString(),

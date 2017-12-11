@@ -7,23 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Database
+namespace AalborgZooProjekt.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Zookeeper : Employee
+    public partial class ShoppingList
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Zookeeper()
+        public ShoppingList()
         {
-            this.DepartmentChanges = new HashSet<DepartmentChange>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public int DepartmentId { get; set; }
+        public int Id { get; set; }
+        public string CreatedByID { get; set; }
+        public string DateCreated { get; set; }
+        public string Status { get; set; }
+        public int ShopperId { get; set; }
     
-        public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DepartmentChange> DepartmentChanges { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Shopper Shopper { get; set; }
     }
 }

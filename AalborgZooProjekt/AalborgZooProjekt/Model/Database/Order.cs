@@ -7,31 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Database
+namespace AalborgZooProjekt.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductVersion
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductVersion()
+        public Order()
         {
             this.OrderLines = new HashSet<OrderLine>();
-            this.Unit = new HashSet<Unit>();
         }
     
         public int Id { get; set; }
-        public string IsActive { get; set; }
-        public string Supplier { get; set; }
-        public string CreatedByID { get; set; }
+        public string DepartmentID { get; set; }
+        public string OrderedByID { get; set; }
+        public string DateOrdered { get; set; }
+        public string DateCancelled { get; set; }
+        public string Note { get; set; }
         public string DateCreated { get; set; }
-        public int ProductId { get; set; }
+        public string DeletedByID { get; set; }
+        public string Status { get; set; }
+        public Nullable<int> ShoppingListId { get; set; }
     
-        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderLine> OrderLines { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Unit> Unit { get; set; }
+        public virtual ShoppingList ShoppingList { get; set; }
     }
 }
