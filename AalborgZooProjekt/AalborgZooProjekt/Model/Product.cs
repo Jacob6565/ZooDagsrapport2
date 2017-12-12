@@ -8,9 +8,12 @@ namespace AalborgZooProjekt.Model
     public partial class Product : IProduct
     {
         //Used when accessing the database.
-        private IProductDAL DAL;
+        private IProductRepository repository;
 
-        public Product(IProductDAL dal, Shopper shopper, string name, string supplier, List<Unit> units, bool active = true) : this()
+        public Product(Shopper shopper, string name, string supplier, List<Unit> units, bool active = true)
+            : this(new ProductRepository(), shopper, name, supplier, units, active) { }
+
+        public Product(IProductRepository repository, Shopper shopper, string name, string supplier, List<Unit> units, bool active = true) : this()
         {
             ProductVersion firstProductVersion = MakeProductVersion(name, supplier, units, active);
 
@@ -22,8 +25,8 @@ namespace AalborgZooProjekt.Model
             this.ProductVersions.Add(firstProductVersion);
 
             //Contains the methods needed to update the database
-            DAL = dal ?? new ProductDAL();
-            DAL.AddProduct(this);
+            this.repository = repository;
+            this.repository.AddProduct(this);
         }
 
 
@@ -71,7 +74,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
                 this.ProductVersions.Add(newVersion);
-                DAL.ProductVersionList(this);
+                repository.ProductVersionList(this);
             }
             else
             {
@@ -100,7 +103,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.Unit.Add(unitToAdd);
 
                 this.ProductVersions.Add(newVersion);
-                DAL.ProductVersionList(this);
+                repository.ProductVersionList(this);
 
             }
             else
@@ -130,7 +133,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
                 this.ProductVersions.Add(newVersion);
-                DAL.ProductVersionList(this);
+                repository.ProductVersionList(this);
 
             }
             else
@@ -157,7 +160,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
                 this.ProductVersions.Add(newVersion);
-                DAL.ProductVersionList(this);
+                repository.ProductVersionList(this);
 
             }
             else
@@ -193,7 +196,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.OrderLines = previousVersion.OrderLines.ToList();
 
                 this.ProductVersions.Add(newVersion);
-                DAL.ProductVersionList(this);
+                repository.ProductVersionList(this);
 
             }
             else
@@ -222,7 +225,7 @@ namespace AalborgZooProjekt.Model
                 //Adding the change by removing the unit
                 newVersion.Unit.Remove(unitToRemove);
                 this.ProductVersions.Add(newVersion);
-                DAL.ProductVersionList(this);
+                repository.ProductVersionList(this);
 
             }
             else

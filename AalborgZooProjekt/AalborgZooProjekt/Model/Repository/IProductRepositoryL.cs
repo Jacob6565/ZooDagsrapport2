@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public interface IProductDAL
+    public interface IProductRepository
     {
         void AddProduct(Product product);
         void ProductVersionList(Product product);

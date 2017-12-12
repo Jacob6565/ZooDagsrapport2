@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AalborgZooProjekt.Model
+namespace AalborgZooProjekt.Interfaces
 {
-    public partial class Unit
+    public interface IProductVersion
     {
     }
 }
- 
