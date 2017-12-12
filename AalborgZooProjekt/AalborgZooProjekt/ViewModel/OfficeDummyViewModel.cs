@@ -9,6 +9,10 @@ using AalborgZooProjekt.View;
 using AalborgZooProjekt.Model;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
+using System.Diagnostics;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using PdfSharp;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -28,22 +32,23 @@ namespace AalborgZooProjekt.ViewModel
             //string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             //foreach (string product in lines)
             //{
-                 using(var db = new AalborgZooContainer1(connectionString))
-                {
-                    foreach (OrderLine ol in db.OrderLineSet)
-                    {
-                    //ol.Quantity
-                    OrderList.Add(new OrderLine()
-                    {
-                        Order = ol.Order,                        
-                        OrderId = ol.OrderId,
-                        ProductVersion = ol.ProductVersion,
-                        ProductVersionId = ol.ProductVersionId,
-                        Quantity = ol.Quantity,
-                        UnitID = ol.UnitID                                                   
-                        });
-                    }
-                }
+            using (var db = new AalborgZooContainer1(connectionString))
+            {
+                //foreach (OrderLine ol in db.OrderLineSet)
+                //{
+                ////ol.Quantity
+                //OrderList.Add(new OrderLine()
+                //{
+                //    Order = ol.Order,                        
+                //    OrderId = ol.OrderId,
+                //    ProductVersion = ol.ProductVersion,
+                //    ProductVersionId = ol.ProductVersionId,
+                //    Quantity = ol.Quantity,
+                //    UnitID = ol.UnitID                                                   
+                //    });
+                OrderList = db.OrderLineSet.Include("ProductVersion.Product").ToList();
+
+            }
             //  string[] words = product.Split(' ');
             //Queue<string> wordQueue = new Queue<string>(words);
 
@@ -83,7 +88,104 @@ namespace AalborgZooProjekt.ViewModel
 
     }
 
+        private RelayCommand _newCommand;
 
+        public RelayCommand NewCommand
+        {
+            get
+            {
+                return _newCommand ?? (_newCommand = new RelayCommand(
+                    async () => Foo()
+                    ));
+            }
+        }
+
+        private void Foo()
+        {
+            string alphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
+            PdfDocument pdf = new PdfDocument();
+            PdfPage pdfPage = pdf.AddPage();
+            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+            XFont fontHeader = new XFont("Verdana", 13, XFontStyle.Bold);
+            XFont fontParagraph = new XFont("Verdana", 13, XFontStyle.Regular);
+            XSize size = PageSizeConverter.ToSize(PdfSharp.PageSize.A4);
+            int marginTop = 20;
+            int marginLeft = 50;
+            int marginRight = 50;
+
+            double lineHeight = graph.MeasureString(alphabet, fontParagraph).Height + 5;
+
+            //Draw the headlines.
+            string nameString = "Produkt";
+            string quantityString = "Antal";
+            string unitString = "Enhed";
+
+            double nameLength = graph.MeasureString(nameString, fontHeader).Width;
+            double quantityLength = graph.MeasureString(quantityString, fontHeader).Width;
+            double unitLength = graph.MeasureString(unitString, fontHeader).Width;
+
+            double nameX = marginLeft;
+            double quantityX = size.Width - nameLength - unitLength - marginRight;
+            double unitX = size.Width - unitLength - marginRight;
+
+            graph.DrawString(
+                nameString, 
+                fontHeader, 
+                XBrushes.Black,
+                new XRect(nameX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point), 
+                XStringFormats.TopLeft);
+
+            graph.DrawString(
+                quantityString,
+                fontHeader,
+                XBrushes.Black,
+                new XRect(quantityX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
+                XStringFormats.TopLeft);
+
+            graph.DrawString(
+                unitString,
+                fontHeader,
+                XBrushes.Black,
+                new XRect(unitX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
+                XStringFormats.TopLeft);
+
+            //Draw entries
+            for (int i = 0; i < OrderList.Count; i++)
+            {
+                double lineY = lineHeight * (i + 1);
+                if (i % 2 == 1)
+                {
+                    XSolidBrush brush = new XSolidBrush(XColors.LightGray);
+
+                    graph.DrawRectangle(brush, marginLeft, lineY - 2, size.Width - marginLeft - marginRight, lineHeight - 2);
+                    
+                }
+
+                graph.DrawString(
+                    OrderList[i].ProductVersion.Product.Name,
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(nameX, marginTop + lineY, pdfPage.Width.Point, pdfPage.Height.Point),
+                    XStringFormats.TopLeft);
+
+                graph.DrawString(
+                    OrderList[i].Quantity.ToString(),
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(quantityX, marginTop + lineY, pdfPage.Width.Point, pdfPage.Height.Point),
+                    XStringFormats.TopLeft);
+
+                graph.DrawString(
+                    "kg", //Selected unit value
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(unitX, marginTop + lineY, pdfPage.Width.Point, pdfPage.Height.Point),
+                    XStringFormats.TopLeft);
+            }
+
+            pdf.Save("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
+
+        }
 
 
         private RelayCommand<object> _editOrder;

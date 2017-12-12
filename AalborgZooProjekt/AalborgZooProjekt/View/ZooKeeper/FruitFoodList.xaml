@@ -25,7 +25,7 @@
                 <DataGridTemplateColumn Header="Enhed" MinWidth="77" MaxWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Units}" SelectedIndex="1" SelectedValue="{Binding Units/Id}" SelectedValuePath="{Binding /Id}" DisplayMemberPath="Name"
+                            <ComboBox ItemsSource="{Binding Units}" SelectedValue="{Binding Units/Id}" SelectedValuePath="Id" DisplayMemberPath="Name"
                                       ></ComboBox> 
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
