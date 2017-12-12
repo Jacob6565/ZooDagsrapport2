@@ -10,6 +10,6 @@ namespace AalborgZooProjekt.Model
     {
         void AddProduct(Product product);
         void ProductVersionList(Product product);
-        List<Product> GetDepartmentSpecifikProducts(Department department);
+        List<Product> GetDepartmentProducts(Department department);
     }
 }

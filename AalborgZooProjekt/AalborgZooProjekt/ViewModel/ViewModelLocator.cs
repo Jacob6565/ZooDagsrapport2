@@ -40,6 +40,7 @@ namespace AalborgZooProjekt.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DummyViewModel>();
+            SimpleIoc.Default.Register<ZookeeperViewModel>();
         }
 
         /// <summary>
@@ -60,6 +61,13 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<DummyViewModel>();
+            }
+        }
+        public ZookeeperViewModel Zoo
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ZookeeperViewModel>();
             }
         }
 
