@@ -11,5 +11,6 @@ namespace AalborgZooProjekt.Model
         void AddOrder(Order order);
         Order GetOrder(int orderID);
         void UpdateOrder(Order order);
+        List<Unit> GetProductUnits(Product product);
     }
 }
