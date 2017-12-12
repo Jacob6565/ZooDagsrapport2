@@ -51,14 +51,14 @@ namespace AalborgZooProjekt.ViewModel
             foreach (Product product in prodList)
             {
                 OrderLine tempOrderLine = new OrderLine();
-                using (var db = new AalborgZooContainer1())
-                {
-                    tempOrderLine.ProductVersion = db.ProductVersionSet.Include("Unit").FirstOrDefault(x => x.Id == product.Id);
-                }
+                //using (var db = new AalborgZooContainer1())
+                //{
+                //    tempOrderLine.ProductVersion = db.ProductVersionSet.Include("Unit").FirstOrDefault(x => x.Id == product.Id);
+                //}
 
 
-                //tempOrderLine.ProductVersion = product.ProductVersions.Last();
-                //tempOrderLine.ProductVersion.Unit = 
+                tempOrderLine.ProductVersion = product.ProductVersions.Last();
+                tempOrderLine.ProductVersion.Unit = dbProductRep.GetProductUnits(product);
 
                 orderlines.Add(tempOrderLine);
             }
@@ -66,7 +66,7 @@ namespace AalborgZooProjekt.ViewModel
             if (orderlines.Count == 0)
                 throw new Exception();
 
-            orderlines.First().ProductVersion.Unit.First().
+            //orderlines.First().ProductVersion.Unit.First().
 
             return orderlines;
         }
