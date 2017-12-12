@@ -9,9 +9,9 @@ namespace AalborgZooProjekt.Model
 {
     public partial class ShoppingList : IShoppingList
     {
-        public void AddOrder(Order order1)
+        public void AddOrder(Order order)
         {
-            throw new NotImplementedException();
+            this.Orders.Add(order);
         }
     }
 }
