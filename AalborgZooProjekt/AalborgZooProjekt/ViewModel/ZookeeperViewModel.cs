@@ -14,19 +14,23 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
-            
+            DepOrderLines = GetDepProductListFromDb();
         }
 
         private Department department;
         private IProductRepository dbProductRep = new ProductRepository();
 
+        private ObservableCollection<OrderLine> _depOrderLines = new ObservableCollection<OrderLine>();
         public ObservableCollection<OrderLine> DepOrderLines
         {
             get
             {
-                return GetDepProductListFromDb();
+                return _depOrderLines;
             } 
-            private set { }
+            private set
+            {
+                _depOrderLines = value;
+            }
         }
 
 
@@ -47,13 +51,22 @@ namespace AalborgZooProjekt.ViewModel
             foreach (Product product in prodList)
             {
                 OrderLine tempOrderLine = new OrderLine();
+                //using (var db = new AalborgZooContainer1())
+                //{
+                //    tempOrderLine.ProductVersion = db.ProductVersionSet.Include("Unit").FirstOrDefault(x => x.Id == product.Id);
+                //}
+
+
                 tempOrderLine.ProductVersion = product.ProductVersions.Last();
+                tempOrderLine.ProductVersion.Unit = dbProductRep.GetProductUnits(product);
 
                 orderlines.Add(tempOrderLine);
             }
 
             if (orderlines.Count == 0)
                 throw new Exception();
+
+            //orderlines.First().ProductVersion.Unit.First().
 
             return orderlines;
         }

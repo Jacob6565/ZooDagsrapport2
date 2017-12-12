@@ -48,6 +48,21 @@ namespace AalborgZooProjekt.Model
             return departmentProductList;
         }
 
+        public List<Unit> GetProductUnits(Product product)
+        {
+            List<Unit> UnitList = new List<Unit>();
+
+            using (_context)
+            {
+                foreach (Unit unit in _context.ProductSet.Find(product.Id).ProductVersions.Last().Unit)
+                {
+                    UnitList.Add(unit);
+                }
+            }
+
+            return UnitList;
+        }
+
         /// <summary>
         /// Opdates the product and thereby also the ProductVersions contained in the product objekt.
         /// </summary>
