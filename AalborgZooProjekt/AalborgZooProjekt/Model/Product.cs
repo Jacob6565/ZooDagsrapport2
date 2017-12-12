@@ -51,28 +51,34 @@ namespace AalborgZooProjekt.Model
 
             return firstProductVersion;
         }
+        private ProductVersion DublicateProductVersion(ProductVersion productToCopy)
+        {
+            ProductVersion Copy = new ProductVersion();
+
+            Copy.IsActive = productToCopy.IsActive;
+            Copy.Name = productToCopy.Name;
+            Copy.Product = productToCopy.Product;
+            Copy.Supplier = productToCopy.Supplier;
+            Copy.Unit = productToCopy.Unit.ToList();
+            Copy.ProductId = productToCopy.ProductId;
+            Copy.OrderLines = productToCopy.OrderLines.ToList();
+
+            return Copy;
+        }
 
         public void ActivateProduct()
         {
             ProductVersion newVersion, previousVersion;
-            newVersion = new ProductVersion();
+           
             previousVersion = ProductVersions.Last();
 
             if (previousVersion.IsActive != true)
             {
                 //Copying data from previous to new
+                newVersion = DublicateProductVersion(previousVersion);
+                //Adding the change
                 newVersion.IsActive = true;
-                newVersion.Name = previousVersion.Name;
-
-                //Det burde da også bare kunne være "this",
-                //men det burde nærmest ikke være der, da productversionerne
-                //er gemt inde i et product.
-                newVersion.Product = previousVersion.Product;
-                newVersion.Supplier = previousVersion.Supplier;
-                newVersion.Unit = previousVersion.Unit.ToList();
-                newVersion.ProductId = previousVersion.ProductId;
-                newVersion.OrderLines = previousVersion.OrderLines.ToList();
-
+                
                 this.ProductVersions.Add(newVersion);
                 repository.ProductVersionList(this);
             }

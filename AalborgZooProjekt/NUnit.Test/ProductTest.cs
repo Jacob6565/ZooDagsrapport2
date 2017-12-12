@@ -10,19 +10,43 @@ namespace NUnit.Test
     [TestFixture]
     public class ProductTest
     {
-
+        #region Common used members
         private Mock<IProductRepository> MockRep;
-        
+        private string name;
+        private string supplier;
+        private Shopper shopper;
+        private List<Unit> units;
+        #endregion
+
+        /// <summary>
+        /// Creates a product and returns it.
+        /// </summary>
+        /// <returns></returns>
+        private Product InitializeProduct()
+        {
+            return InitializeProduct(false);
+        }
+        private Product InitializeProduct(bool active)
+        {
+            return InitializeProduct(new List<Unit>(), active);
+        }
+        private Product InitializeProduct(List<Unit> units, bool active)
+        {
+            MockRep = new Mock<IProductRepository>();
+            name = "Æble";
+            shopper = new Shopper();
+            supplier = "Karl";
+            this.units = units.ToList();
+            Product product = new Product(MockRep.Object, shopper, name, supplier, units, active);
+
+            return product;
+        }
+
         [Test]
         public void ActivateProduct_ProductIsDeactivated_GetsActivated()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
+            Product product = InitializeProduct();
 
             //Act
             product.ActivateProduct();
@@ -35,28 +59,21 @@ namespace NUnit.Test
         public void ActivateProduct_ProductIsActivated_ThrowsException()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, true);
+            Product product = InitializeProduct();
 
-            //Act and Assert
+            //Act
+            product.ActivateProduct();
+
+            //Assert
             Assert.Throws<ProductAlreadyActivatedException>(() => product.ActivateProduct());
         }
-
+        
         [Test]
         public void DeactivateProduct_ProductIsActivated_GetsDeactivated()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, true);
-
+            Product product = InitializeProduct(true);
+            
             //Act
             product.DeactivateProduct();
 
@@ -68,12 +85,7 @@ namespace NUnit.Test
         public void DeactivateProduct_ProductIsDeactivated_ThrowsException()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
+            Product product = InitializeProduct(false);
 
             //Act and Assert
             Assert.Throws<ProductAlreadyDeactivatedException>(() => product.DeactivateProduct());
@@ -83,20 +95,8 @@ namespace NUnit.Test
         public void AddProductUnit_UnitCanBeAdded_UnitAdded()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Unit kg = new Unit()
-            {
-                Name = "kg"
-            };
-
-            units.Add(kg);
-
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
-
+            Product product = InitializeProduct();
+            
             Unit UnitToAdd = new Unit()
             {
                 Name = "kasser"
@@ -113,26 +113,17 @@ namespace NUnit.Test
         public void AddProductUnit_UnitAlredyAdded_ExceptionThrown()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Unit kg = new Unit()
-            {
-                Name = "kg"
-            };
+            Product product = InitializeProduct();
+
             Unit UnitToAdd = new Unit()
             {
                 Name = "kasser"
             };
 
-            units.Add(kg);
-            units.Add(UnitToAdd);
+            //Act
+            product.AddProductUnit(UnitToAdd);
 
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
-
-            //Act And Assert
+            //Assert
             Assert.Throws<ProductAlreadyHaveUnitException>(() => product.AddProductUnit(UnitToAdd));
 
         }
@@ -141,10 +132,6 @@ namespace NUnit.Test
         public void RemoveProductUnit_UnitCanBeRemoved_UnitRemoved()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
             List<Unit> units = new List<Unit>();
             Unit kg = new Unit()
             {
@@ -154,9 +141,11 @@ namespace NUnit.Test
             {
                 Name = "kasser"
             };
+
             units.Add(kg);
             units.Add(kasser);
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
+
+            Product product = InitializeProduct(units, true);
 
             //Act
             product.RemoveProductUnit(kg);
@@ -166,13 +155,9 @@ namespace NUnit.Test
         }
 
         [Test]
-        public void RemoveProductUnit_UnitDoNotExist_ExceptionThrown()
+        public void RemoveProductUnit_UnitAlreadyRemoved_ExceptionThrown()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
             List<Unit> units = new List<Unit>();
             Unit kasser = new Unit()
             {
@@ -185,7 +170,7 @@ namespace NUnit.Test
             units.Add(kasser);
             units.Add(UnitToRemove);
 
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
+            Product product = InitializeProduct(units, true);
 
             //Act and Assert
             product.RemoveProductUnit(UnitToRemove);
@@ -197,24 +182,8 @@ namespace NUnit.Test
         public void ChangeProductName_NameIsNew_NameChanged()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
+            Product product = InitializeProduct(true);
             string newName = "Banan";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Unit kasser = new Unit()
-            {
-                Name = "kasser"
-            };
-            Unit kg = new Unit()
-            {
-                Name = "kg"
-            };
-            units.Add(kasser);
-            units.Add(kg);
-
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
 
             //Act
             product.ChangeProductName(newName);
@@ -227,25 +196,9 @@ namespace NUnit.Test
         public void ChangeProductName_NameIsNotNew_ExceptionThrown()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
+            Product product = InitializeProduct(true);
             string newName = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Unit kasser = new Unit()
-            {
-                Name = "kasser"
-            };
-            Unit kg = new Unit()
-            {
-                Name = "kg"
-            };
-            units.Add(kasser);
-            units.Add(kg);
-
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
-
+           
             //Act and Assert
             Assert.Throws<ProductAlreadyHaveThatNameException>(() => product.ChangeProductName(newName));
 
@@ -255,25 +208,9 @@ namespace NUnit.Test
         public void ChangeProductSupplier_SupplierIsNew_SupplierChanged()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
+            Product product = InitializeProduct(true);
             string newSupplier = "Ole";
-            List<Unit> units = new List<Unit>();
-            Unit kasser = new Unit()
-            {
-                Name = "kasser"
-            };
-            Unit kg = new Unit()
-            {
-                Name = "kg"
-            };
-            units.Add(kasser);
-            units.Add(kg);
-
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
-
+          
             //Act
             product.ChangeProductSupplier(newSupplier);
 
@@ -285,27 +222,11 @@ namespace NUnit.Test
         public void ChangeProductSupplier_SupplierIsNotNew_ExceptionThrown()
         {
             //Arrange
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
-            Shopper shopper = new Shopper();
-            string supplier = "Karl";
-            string newSupplier = "Karl";
-            List<Unit> units = new List<Unit>();
-            Unit kasser = new Unit()
-            {
-                Name = "kasser"
-            };
-            Unit kg = new Unit()
-            {
-                Name = "kg"
-            };
-            units.Add(kasser);
-            units.Add(kg);
-
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, false);
+            Product product = InitializeProduct(true);
+            string newSupplierButSame = "Karl";
 
             //Act And Assert
-            Assert.Throws<AlreadyExistingSupplierException>(() => product.ChangeProductSupplier(newSupplier));
+            Assert.Throws<AlreadyExistingSupplierException>(() => product.ChangeProductSupplier(newSupplierButSame));
 
         }
     }    
