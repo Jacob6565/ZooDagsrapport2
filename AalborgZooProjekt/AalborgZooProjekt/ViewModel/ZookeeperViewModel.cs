@@ -51,7 +51,14 @@ namespace AalborgZooProjekt.ViewModel
             foreach (Product product in prodList)
             {
                 OrderLine tempOrderLine = new OrderLine();
-                tempOrderLine.ProductVersion = product.ProductVersions.Last();
+                using (var db = new AalborgZooContainer1())
+                {
+                    tempOrderLine.ProductVersion = db.ProductVersionSet.Include("Unit").FirstOrDefault(x => x.Id == product.Id);
+                }
+
+
+                //tempOrderLine.ProductVersion = product.ProductVersions.Last();
+                //tempOrderLine.ProductVersion.Unit = 
 
                 orderlines.Add(tempOrderLine);
             }
