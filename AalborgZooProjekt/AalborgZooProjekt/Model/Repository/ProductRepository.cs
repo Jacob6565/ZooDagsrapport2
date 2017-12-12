@@ -9,11 +9,11 @@ namespace AalborgZooProjekt.Model
     /// <summary>
     /// The class which Product.cs uses when it needs to 
     /// </summary>
-    public class ProductDAL : IProductDAL
+    public class ProductRepository : IProductRepository
     {
         private AalborgZooContainer1 _context;
 
-        public ProductDAL()
+        public ProductRepository()
         {
             _context = new AalborgZooContainer1();
         }

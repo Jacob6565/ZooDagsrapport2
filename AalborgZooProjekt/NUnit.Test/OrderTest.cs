@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using AalborgZooProjekt.Model;
 using System.Collections.Generic;
+using AalborgZooProjekt.Interfaces;
 
 namespace NUnit.Test
 {
@@ -109,11 +110,10 @@ namespace NUnit.Test
                     Id = 2
                 }
             };
-
+            
             mockProductVersion.Unit = units;
             orderline.ProductVersion = mockProductVersion;
-            order.AddOrderLine(orderline);
-
+            order.AddOrderLine(orderline);           
             //Act
             order.ChangeUnit(orderline, units.Last());
 
