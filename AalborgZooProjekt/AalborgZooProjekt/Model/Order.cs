@@ -139,10 +139,12 @@ namespace AalborgZooProjekt.Model
         /// <param name="unit"></param>
         public void ChangeUnit(OrderLine orderLine, Unit unit)
         {
-            if (unit != null)
+            if (unit != null && orderLine.ProductVersion.Unit.Contains(unit))
                 orderLine.UnitID = unit.Id;
             else if (unit == null)
                 throw new NullReferenceException();
+            else if (!orderLine.ProductVersion.Unit.Contains(unit))
+                throw new ProductVersionDoesNotContainGivenUnitException();
 
             //Updates the order in database
             dbRep.UpdateOrder(this);
