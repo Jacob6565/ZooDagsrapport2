@@ -18,7 +18,7 @@ namespace AalborgZooProjekt.ViewModel
         }
 
         private Department department;
-        private IProductDAL dbProductRep = new ProductDAL();
+        private IProductRepository dbProductRep = new ProductRepository();
 
         public ObservableCollection<OrderLine> DepOrderLines
         {
