@@ -223,8 +223,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             OrderLine ol = context as OrderLine;            
             OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
-            orders.SpecificProductOrders.Text = ol.Order.Status.ToString();
-            orders.dgFoodList.DataContext = ol;
+            //orders.dgFoodList. = ol;          
             orders.ShowDialog();
         }
 

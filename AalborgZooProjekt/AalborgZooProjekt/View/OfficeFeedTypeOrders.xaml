@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:AalborgZooProjekt.View"
         xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        DataContext="{Binding OfficeTester, Source={StaticResource Locator}}"
         Name="officeOrderTypeList">
 
     <StackPanel VerticalAlignment="Stretch">
@@ -17,10 +16,10 @@
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Name="SpecificProductOrders" FontSize="24" Height="40" Margin="0,10,0,0" Foreground="DeepSkyBlue" Grid.Row="0"/>
-            <DataGrid ItemsSource="{Binding OrderList}"  IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False" Grid.Row="1" VerticalScrollBarVisibility="Visible">
+            <TextBlock Name="SpecificProductOrders" Text="{Binding ProductVersion.ProductId, Mode=TwoWay}" FontSize="24" Height="40" Margin="0,10,0,0" Foreground="DeepSkyBlue" Grid.Row="0"/>
+            <DataGrid IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False" Grid.Row="1" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Afdeling" Binding="{Binding OrderList}" Width="*">
+                    <DataGridTextColumn Header="Afdeling" Binding="{Binding Order }" Width="*">
                     </DataGridTextColumn>
                     <DataGridTemplateColumn Header="Antal og Enhed" >
                         <DataGridTemplateColumn.CellTemplate>
