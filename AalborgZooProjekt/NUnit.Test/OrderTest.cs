@@ -94,16 +94,42 @@ namespace NUnit.Test
         [Test]
         public void ChangeUnit_ValidInput_UnitChanged()
         {
-            //Skal vi ikke gøre sådna at Orderline.UnitID er OrderLine.Unit istedet.
+            
         }
 
         [Test]
         public void AttackZookeeperToOrder_ValidZookeeper_ZookeeperAdded()
         {
+            //Arrange
             Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
-            
+            mockZookeeper.Object.Id = 2;
+
+            Mock<IOrderRepository> mockRep = new Mock<IOrderRepository>();
+            Order order = new Order(mockRep.Object, new Department());
+
+            //Act
+            order.AttachZookeeperToOrder(mockZookeeper.Object);
+
+            //Assert
+            Assert.AreEqual(mockZookeeper.Object.Id, order.OrderedByID);
         }
 
+        [Test]
+        public void AttackZookeeperToOrder_ZookeeperAlreadyAttached_ExceptionThrown()
+        {
+            //Arrange
+            Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
+            mockZookeeper.Object.Id = 2;
+
+            Mock<IOrderRepository> mockRep = new Mock<IOrderRepository>();
+            Order order = new Order(mockRep.Object, new Department());
+
+            //Act
+            order.AttachZookeeperToOrder(mockZookeeper.Object);
+
+            //Assert
+            Assert.Throws<ZookeeperAllReadyAddedException>(() => order.AttachZookeeperToOrder(mockZookeeper.Object));
+        }
         [TestCase("Under Construction", ExpectedResult = true)]
         [TestCase("Sent", ExpectedResult = true)]
         public bool CanOrderBeChanged_ValidStatus_CanBeChanged(string status)

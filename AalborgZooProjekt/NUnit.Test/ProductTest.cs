@@ -305,21 +305,5 @@ namespace NUnit.Test
             Assert.Throws<AlreadyExistingSupplierException>(() => product.ChangeProductSupplier(newSupplier));
 
         }
-    }
-
-    class MockDAL : IProductDAL
-    {
-        public List<Product> mockDB = new List<Product>();
-
-        public void AddProduct(Product product)
-        {
-            mockDB.Add(product);
-        }
-
-        public void ProductVersionList(Product product)
-        {
-            Product outdated = mockDB.SingleOrDefault(x => x.Id == product.Id);
-            outdated = product;
-        }
-    }
+    }    
 }

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AalborgZooProjekt.Interfaces;
-
 
 namespace AalborgZooProjekt.Model
 {
@@ -17,19 +12,17 @@ namespace AalborgZooProjekt.Model
             Status = _underConstruction;
 
             //Repository to update, get and add from database
-            dbRep = rep;
-            
+            dbRep = rep;           
 
             //Adds the order in database
             dbRep.AddOrder(this);
         }
-        public Order(Department department) :this(new OrderRepository(), department){}
+        public Order(Department department) : this(new OrderRepository(), department){}
 
         private IOrderRepository dbRep;
 
         private string _underConstruction = "Under Construction";
         private string _sent = "Sent";
-
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
@@ -60,9 +53,7 @@ namespace AalborgZooProjekt.Model
 
         public void AttachZookeeperToOrder(Zookeeper zookeeper)
         {
-            //Hvornår bliver OrderedByID sat og burde det ikke være
-            //OrderedByID == zookeeper)
-            if (OrderedByID > 1)
+            if (OrderedByID == zookeeper.Id)
                 throw new ZookeeperAllReadyAddedException();
             else if (zookeeper != null)
                 OrderedByID = zookeeper.Id;
