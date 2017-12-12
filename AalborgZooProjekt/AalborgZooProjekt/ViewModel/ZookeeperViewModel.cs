@@ -14,24 +14,48 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
-            GetDepProductListFromDb();
+            
         }
 
         private Department department;
         private IProductDAL dbProductRep = new ProductDAL();
 
-        private ObservableCollection<Product> depProducts;
-        public ObservableCollection<Product> DepProducts { get; private set; }
+        public ObservableCollection<OrderLine> DepOrderLines
+        {
+            get
+            {
+                return GetDepProductListFromDb();
+            } 
+            private set { }
+        }
+
 
         /// <summary>
-        /// Gets the department specifik product for a given department, via the 
+        /// Gets the department specific product for a given department, via the 
         /// database repository for Product
         /// </summary>
-        void GetDepProductListFromDb()
+        ObservableCollection<OrderLine> GetDepProductListFromDb()
         {
-            var prodList = dbProductRep.GetDepartmentSpecifikProducts(department);
+            ObservableCollection<OrderLine> orderlines = new ObservableCollection<OrderLine>();
+
+            department = new Department()
+            {
+                Name = "Sydamerika"
+            };
+            var prodList = dbProductRep.GetDepartmentProducts(department);
             
-            ObservableCollection<Product> depProducts = new ObservableCollection<Product>(prodList);
+            foreach (Product product in prodList)
+            {
+                OrderLine tempOrderLine = new OrderLine();
+                tempOrderLine.ProductVersion = product.ProductVersions.Last();
+
+                orderlines.Add(tempOrderLine);
+            }
+
+            if (orderlines.Count == 0)
+                throw new Exception();
+
+            return orderlines;
         }
     }
 }

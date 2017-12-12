@@ -33,18 +33,15 @@ namespace AalborgZooProjekt.Model
         /// </summary>
         /// <param name="department"></param>
         /// <returns></returns>
-        public List<Product> GetDepartmentSpecifikProducts(Department department)
+        public List<Product> GetDepartmentProducts(Department department)
         {
             List<Product> departmentProductList = new List<Product>();
             using (_context)
             {
-                foreach (Product product in _context.ProductSet)
+                foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet)
                 {
-                    foreach (DepartmentSpecificProduct depProduct in product.DepartmentSpecificProducts)
-                    {
-                        if (depProduct.Department==department)
-                            departmentProductList.Add(product);
-                    }
+                    if (depProduct.Product.CheckIfProductIsActive() && String.Equals(depProduct.Department.Name,department.Name))
+                        departmentProductList.Add(depProduct.Product);
                 }
             }
 

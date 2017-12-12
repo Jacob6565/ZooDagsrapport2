@@ -6,17 +6,17 @@
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding Tester, Source={StaticResource Locator}}">
+             DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid ItemsSource="{Binding DummyFruitList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding DepOrderLines}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vare" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Vare" Binding="{Binding ProductVersion.Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="+" Width="25" Command="{Binding AddAmount}"/>
-                                <TextBox PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Amount}" Width="25"/>
+                                <TextBox PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Quantity}" Width="25"/>
                                 <Button Content="-" Width="25" Command="{Binding SubtractAmount}"/>
                             </StackPanel>
                         </DataTemplate>
@@ -25,7 +25,7 @@
                 <DataGridTemplateColumn Header="Enhed" MinWidth="77" MaxWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Units}" SelectedIndex="1" SelectedValue="{Binding Units/Id}" SelectedValuePath="{Binding /Id}" DisplayMemberPath="Name"
+                            <ComboBox ItemsSource="{Binding ProductVersion.Unit}" SelectedIndex="1" SelectedValue="{Binding Unit/Id}" SelectedValuePath="Id" DisplayMemberPath="Name"
                                       ></ComboBox> 
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
