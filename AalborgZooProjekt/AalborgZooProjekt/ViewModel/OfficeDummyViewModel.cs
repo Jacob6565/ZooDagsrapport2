@@ -28,22 +28,24 @@ namespace AalborgZooProjekt.ViewModel
             //string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             //foreach (string product in lines)
             //{
-                 using(var db = new AalborgZooContainer1(connectionString))
+            using (var db = new AalborgZooContainer1(connectionString))
+            {
+                foreach (OrderLine ol in db.OrderLineSet)
                 {
-                    foreach (OrderLine ol in db.OrderLineSet)
+                    if (ol.ProductVersion != null)
                     {
-                    //ol.Quantity
-                    OrderList.Add(new OrderLine()
-                    {
-                        Order = ol.Order,                        
-                        OrderId = ol.OrderId,
-                        ProductVersion = ol.ProductVersion,
-                        ProductVersionId = ol.ProductVersionId,
-                        Quantity = ol.Quantity,
-                        UnitID = ol.UnitID                                                   
+                        OrderList.Add(new OrderLine()
+                        {
+                            Order = ol.Order,
+                            OrderId = ol.OrderId,
+                            ProductVersion = ol.ProductVersion,
+                            ProductVersionId = ol.ProductVersionId,
+                            Quantity = ol.Quantity,
+                            UnitID = ol.UnitID
                         });
                     }
                 }
+            }
             //  string[] words = product.Split(' ');
             //Queue<string> wordQueue = new Queue<string>(words);
 
@@ -121,8 +123,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             OrderLine ol = context as OrderLine;            
             OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
-            orders.SpecificProductOrders.Text = ol.Order.Status.ToString();
-            orders.dgFoodList.DataContext = ol;
+            //orders.dgFoodList. = ol;          
             orders.ShowDialog();
         }
 
