@@ -30,6 +30,7 @@ namespace AalborgZooProjekt.ViewModel
         void GetDepProductListFromDb()
         {
             var prodList = dbProductRep.GetDepartmentSpecifikProducts(department);
+            
             ObservableCollection<Product> depProducts = new ObservableCollection<Product>(prodList);
         }
     }
