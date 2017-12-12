@@ -14,7 +14,10 @@ namespace AalborgZooProjekt.Model
         {
             _context = context;
         }
-
+        public OrderRepository() : this(new AalborgZooContainer1())
+        {
+            
+        }
         /// <summary>
         /// Adds a not yet excisting order to the database
         /// </summary>

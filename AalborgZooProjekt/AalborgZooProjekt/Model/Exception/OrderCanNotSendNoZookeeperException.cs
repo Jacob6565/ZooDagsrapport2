@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class OrderCanNotSendNoZookeeperException : Exception
+    public class OrderCanNotSendNoZookeeperException : Exception
     {
         public OrderCanNotSendNoZookeeperException()
         {

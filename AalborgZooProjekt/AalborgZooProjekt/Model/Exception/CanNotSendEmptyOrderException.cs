@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class CanNotSendEmptyOrderException : Exception
+    public class CanNotSendEmptyOrderException : Exception
     {
         public CanNotSendEmptyOrderException()
         {

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class ProductAlreadyHaveUnitException : Exception
+    public class ProductAlreadyHaveUnitException : Exception
     {
         public ProductAlreadyHaveUnitException()
         {

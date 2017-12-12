@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class AlreadyExistingSupplierException : Exception
+    public class AlreadyExistingSupplierException : Exception
     {
         public AlreadyExistingSupplierException()
         {

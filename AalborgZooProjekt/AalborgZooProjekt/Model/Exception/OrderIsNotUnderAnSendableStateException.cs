@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class OrderIsNotUnderAnSendableStateException : Exception
+    public class OrderIsNotUnderAnSendableStateException : Exception
     {
         public OrderIsNotUnderAnSendableStateException()
         {

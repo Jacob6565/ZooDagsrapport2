@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class OrderDoesNotExistInDatabaseException : Exception
+    public class OrderDoesNotExistInDatabaseException : Exception
     {
         public OrderDoesNotExistInDatabaseException()
         {

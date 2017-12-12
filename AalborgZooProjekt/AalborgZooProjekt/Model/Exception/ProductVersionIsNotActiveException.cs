@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class ProductVersionIsNotActiveException : Exception
+    public class ProductVersionIsNotActiveException : Exception
     {
         public ProductVersionIsNotActiveException()
         {

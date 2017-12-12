@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class ZookeeperAllReadyAddedException : Exception
+    public class ZookeeperAllReadyAddedException : Exception
     {
         public ZookeeperAllReadyAddedException()
         {
