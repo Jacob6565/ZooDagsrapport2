@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class ProductAlreadyDeactivatedException : Exception
+    public class ProductAlreadyDeactivatedException : Exception
     {
         public ProductAlreadyDeactivatedException()
         {

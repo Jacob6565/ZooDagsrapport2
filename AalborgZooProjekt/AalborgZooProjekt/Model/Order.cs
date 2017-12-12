@@ -23,6 +23,7 @@ namespace AalborgZooProjekt.Model
             //Adds the order in database
             dbRep.AddOrder(this);
         }
+        public Order(Department department) :this(new OrderRepository(), department){}
 
         private IOrderRepository dbRep;
 
@@ -59,6 +60,8 @@ namespace AalborgZooProjekt.Model
 
         public void AttachZookeeperToOrder(Zookeeper zookeeper)
         {
+            //Hvornår bliver OrderedByID sat og burde det ikke være
+            //OrderedByID == zookeeper)
             if (OrderedByID > 1)
                 throw new ZookeeperAllReadyAddedException();
             else if (zookeeper != null)
@@ -129,9 +132,9 @@ namespace AalborgZooProjekt.Model
         /// <param name="amount"></param>
         public void ChangeAmount(OrderLine orderLine, int amount)
         {
-            if (amount >= 0)
+            if (amount > 0)
                 orderLine.Quantity = amount;
-            else if (amount < 0)
+            else if (amount <= 0)
                 throw new ArgumentOutOfRangeException();
 
             //Updates the order in database

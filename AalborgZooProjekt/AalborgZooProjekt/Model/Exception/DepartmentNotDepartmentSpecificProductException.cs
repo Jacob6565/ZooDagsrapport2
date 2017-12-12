@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AalborgZooProjekt.Model
 {
     [Serializable]
-    internal class DepartmentNotDepartmentSpecificProductException : Exception
+    public class DepartmentNotDepartmentSpecificProductException : Exception
     {
         public DepartmentNotDepartmentSpecificProductException()
         {

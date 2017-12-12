@@ -43,7 +43,7 @@ namespace AalborgZooProjekt.Model
             firstProductVersion.Product = this;
             firstProductVersion.ProductId = this.Id;
             firstProductVersion.IsActive = active;
-            firstProductVersion.Unit.Concat(units);
+            firstProductVersion.Unit = units;
             firstProductVersion.Supplier = supplier;
 
             return firstProductVersion;
@@ -53,7 +53,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             if (previousVersion.IsActive != true)
             {
@@ -83,7 +83,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             if (!previousVersion.Unit.Contains(unitToAdd))
             {
@@ -114,7 +114,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
             if (previousVersion.Name != name)
             {
 
@@ -143,7 +143,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             //Copying data from previous to new
             if (previousVersion.Supplier != supplier)
@@ -175,7 +175,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             //Copying data from previous to new
             if (previousVersion.IsActive == true)
@@ -206,7 +206,7 @@ namespace AalborgZooProjekt.Model
         {
             ProductVersion newVersion, previousVersion;
             newVersion = new ProductVersion();
-            previousVersion = ProductVersions.First();
+            previousVersion = ProductVersions.Last();
 
             if (previousVersion.Unit.Contains(unitToRemove))
             {
@@ -227,7 +227,7 @@ namespace AalborgZooProjekt.Model
             }
             else
             {
-                throw new UnitAlreadyRemovedException(unitToRemove.Name);
+                throw new UnitAlreadyRemovedException();
             }
         }
     }
