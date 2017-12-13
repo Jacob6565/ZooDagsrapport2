@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Model
+namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace AalborgZooProjekt.Model
         public ProductVersion()
         {
             this.OrderLines = new HashSet<OrderLine>();
-            this.Unit = new HashSet<Unit>();
+            this.Units = new HashSet<Unit>();
         }
     
         public int Id { get; set; }
@@ -32,6 +32,6 @@ namespace AalborgZooProjekt.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderLine> OrderLines { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Unit> Unit { get; set; }
+        public virtual ICollection<Unit> Units { get; set; }
     }
 }

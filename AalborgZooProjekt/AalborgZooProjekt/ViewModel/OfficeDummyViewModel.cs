@@ -129,10 +129,10 @@ namespace AalborgZooProjekt.ViewModel
             double unitX = size.Width - unitLength - marginRight;
 
             graph.DrawString(
-                nameString, 
-                fontHeader, 
+                nameString,
+                fontHeader,
                 XBrushes.Black,
-                new XRect(nameX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point), 
+                new XRect(nameX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
                 XStringFormats.TopLeft);
 
             graph.DrawString(
@@ -156,37 +156,36 @@ namespace AalborgZooProjekt.ViewModel
                 if (i % 2 == 1)
                 {
                     XSolidBrush brush = new XSolidBrush(XColors.LightGray);
-
-                    graph.DrawRectangle(brush, marginLeft, lineY - 2, size.Width - marginLeft - marginRight, lineHeight - 2);
                     
-                }
+                    graph.DrawRectangle(brush, marginLeft, lineY + marginTop, size.Width - marginLeft - marginRight, lineHeight - 2);
 
+                }
+                
                 graph.DrawString(
                     OrderList[i].ProductVersion.Product.Name,
                     fontParagraph,
                     XBrushes.Black,
-                    new XRect(nameX, marginTop + lineY, pdfPage.Width.Point, pdfPage.Height.Point),
+                    new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
-
+                
                 graph.DrawString(
                     OrderList[i].Quantity.ToString(),
                     fontParagraph,
                     XBrushes.Black,
-                    new XRect(quantityX, marginTop + lineY, pdfPage.Width.Point, pdfPage.Height.Point),
+                    new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
-
+                
                 graph.DrawString(
                     "kg", //Selected unit value
                     fontParagraph,
                     XBrushes.Black,
-                    new XRect(unitX, marginTop + lineY, pdfPage.Width.Point, pdfPage.Height.Point),
+                    new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
             }
-
+            
             pdf.Save("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
-
+            Process.Start("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
         }
-
 
         private RelayCommand<object> _editOrder;
         /// <summary>

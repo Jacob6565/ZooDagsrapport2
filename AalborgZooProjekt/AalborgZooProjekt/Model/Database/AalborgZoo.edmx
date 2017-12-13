@@ -92,8 +92,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="CreatedByID" Type="int" Nullable="false" />
-    <Property Name="DeletedByID" Type="int" Nullable="false" />
-    <Property Name="DateDeleted" Type="datetime" Nullable="false" />
+    <Property Name="DeletedByID" Type="int" Nullable="true" />
+    <Property Name="DateDeleted" Type="datetime" Nullable="true" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductVersionSet">
@@ -125,10 +125,10 @@
     <Property Name="DepartmentID" Type="int" Nullable="false" />
     <Property Name="OrderedByID" Type="int" Nullable="false" />
     <Property Name="DateOrdered" Type="datetime" Nullable="false" />
-    <Property Name="DateCancelled" Type="datetime" Nullable="false" />
-    <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCancelled" Type="datetime" Nullable="true" />
+    <Property Name="Note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="DeletedByID" Type="int" Nullable="false" />
+    <Property Name="DeletedByID" Type="int" Nullable="true" />
     <Property Name="Status" Type="int" Nullable="false" />
     <Property Name="ShoppingListId" Type="int" Nullable="true" />
   </EntityType>
@@ -149,7 +149,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="DateDeleted" Type="datetime" Nullable="false" />
+    <Property Name="DateDeleted" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="DepartmentChangeSet">
     <Key>
@@ -168,7 +168,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DateHired" Type="datetime" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DateStopped" Type="datetime" Nullable="false" />
+    <Property Name="DateStopped" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="PasswordChangedSet">
     <Key>
@@ -202,11 +202,11 @@
   </EntityType>
   <EntityType Name="UnitProductVersion">
     <Key>
-      <PropertyRef Name="Unit_Id" />
-      <PropertyRef Name="ProductVersion_Id" />
+      <PropertyRef Name="Units_Id" />
+      <PropertyRef Name="ProductVersions_Id" />
     </Key>
-    <Property Name="Unit_Id" Type="int" Nullable="false" />
-    <Property Name="ProductVersion_Id" Type="int" Nullable="false" />
+    <Property Name="Units_Id" Type="int" Nullable="false" />
+    <Property Name="ProductVersions_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="DepartmentSpecifikProductProduct">
     <End Role="DepartmentSpecifikProduct" Type="AalborgZoo.Store.DepartmentSpecificProductSet" Multiplicity="*" />
@@ -336,7 +336,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UnitProductVersion">
-        <PropertyRef Name="Unit_Id" />
+        <PropertyRef Name="Units_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -348,7 +348,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UnitProductVersion">
-        <PropertyRef Name="ProductVersion_Id" />
+        <PropertyRef Name="ProductVersions_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -458,8 +458,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="CreatedByID" Type="Int32" Nullable="false" />
-          <Property Name="DeletedByID" Type="Int32" Nullable="false" />
-          <Property Name="DateDeleted" Type="DateTime" Nullable="false" />
+          <Property Name="DeletedByID" Type="Int32" Nullable="true" />
+          <Property Name="DateDeleted" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductProduct" FromRole="Product" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="ProductVersions" Relationship="AalborgZoo.ProductProductVersion" FromRole="Product" ToRole="ProductVersion" />
           <Property Name="Name" Type="String" Nullable="false" />
@@ -476,7 +476,7 @@
           <NavigationProperty Name="Product" Relationship="AalborgZoo.ProductProductVersion" FromRole="ProductVersion" ToRole="Product" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OrderLines" Relationship="AalborgZoo.ProductVersionOrderLine" FromRole="ProductVersion" ToRole="OrderLine" />
-          <NavigationProperty Name="Unit" Relationship="AalborgZoo.UnitProductVersion" FromRole="ProductVersion" ToRole="Unit" />
+          <NavigationProperty Name="Units" Relationship="AalborgZoo.UnitProductVersion" FromRole="ProductVersion" ToRole="Unit" />
         </EntityType>
         <EntityType Name="ShoppingList">
           <Key>
@@ -498,10 +498,10 @@
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <Property Name="OrderedByID" Type="Int32" Nullable="false" />
           <Property Name="DateOrdered" Type="DateTime" Nullable="false" />
-          <Property Name="DateCancelled" Type="DateTime" Nullable="false" />
-          <Property Name="Note" Type="String" Nullable="false" />
+          <Property Name="DateCancelled" Type="DateTime" Nullable="true" />
+          <Property Name="Note" Type="String" Nullable="true" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DeletedByID" Type="Int32" Nullable="false" />
+          <Property Name="DeletedByID" Type="Int32" Nullable="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OrderLines" Relationship="AalborgZoo.OrderLineOrder" FromRole="Order" ToRole="OrderLine" />
           <NavigationProperty Name="ShoppingList" Relationship="AalborgZoo.OrderShoppingList" FromRole="Order" ToRole="ShoppingList" />
@@ -526,7 +526,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateDeleted" Type="DateTime" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="DepartmentSpecifikProducts" Relationship="AalborgZoo.DepartmentSpecifikProductDepartment" FromRole="Department" ToRole="DepartmentSpecifikProduct" />
           <NavigationProperty Name="Zookeepers" Relationship="AalborgZoo.DepartmentZookeeper" FromRole="Department" ToRole="Zookeeper" />
         </EntityType>
@@ -553,7 +553,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateHired" Type="DateTime" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="DateStopped" Type="DateTime" Nullable="false" />
+          <Property Name="DateStopped" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Shopper" BaseType="AalborgZoo.Employee">
           <Property Name="Username" Type="String" Nullable="false" />
@@ -576,7 +576,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <NavigationProperty Name="ProductVersion" Relationship="AalborgZoo.UnitProductVersion" FromRole="Unit" ToRole="ProductVersion" />
+          <NavigationProperty Name="ProductVersions" Relationship="AalborgZoo.UnitProductVersion" FromRole="Unit" ToRole="ProductVersion" />
         </EntityType>
         <Association Name="DepartmentSpecifikProductProduct">
           <End Type="AalborgZoo.DepartmentSpecificProduct" Role="DepartmentSpecifikProduct" Multiplicity="*" />
@@ -842,10 +842,10 @@
     </EntitySetMapping>
     <AssociationSetMapping Name="UnitProductVersion" TypeName="AalborgZoo.UnitProductVersion" StoreEntitySet="UnitProductVersion">
       <EndProperty Name="Unit">
-        <ScalarProperty Name="Id" ColumnName="Unit_Id" />
+        <ScalarProperty Name="Id" ColumnName="Units_Id" />
       </EndProperty>
       <EndProperty Name="ProductVersion">
-        <ScalarProperty Name="Id" ColumnName="ProductVersion_Id" />
+        <ScalarProperty Name="Id" ColumnName="ProductVersions_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

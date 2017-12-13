@@ -7,7 +7,7 @@
       <Diagram DiagramId="4f1ce8fda3e649669cfea250f6f0cfa2" Name="Diagram1" ZoomLevel="86" >
         <EntityTypeShape EntityType="AalborgZoo.DepartmentSpecificProduct" Width="1.5" PointX="2" PointY="0.75" />
         <EntityTypeShape EntityType="AalborgZoo.Product" Width="1.5" PointX="2" PointY="3.5" />
-        <EntityTypeShape EntityType="AalborgZoo.ProductVersion" Width="1.5" PointX="2" PointY="6.5" />
+        <EntityTypeShape EntityType="AalborgZoo.ProductVersion" Width="1.5" PointX="2" PointY="6.625" />
         <EntityTypeShape EntityType="AalborgZoo.ShoppingList" Width="1.5" PointX="4.375" PointY="0.75" />
         <EntityTypeShape EntityType="AalborgZoo.Order" Width="1.5" PointX="4.375" PointY="3.875" />
         <EntityTypeShape EntityType="AalborgZoo.OrderLine" Width="1.5" PointX="4.375" PointY="7.875" />
