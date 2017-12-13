@@ -13,7 +13,6 @@ using System.Diagnostics;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using PdfSharp;
-using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -24,7 +23,7 @@ namespace AalborgZooProjekt.ViewModel
 
         string connectionString = "name=AalborgZooContainer1";
 
-        public List<Model.Database.OrderLine> OrderList { get; set; } = new List<Model.Database.OrderLine>();
+        public List<OrderLine> OrderList { get; set; } = new List<OrderLine>();
         //public List<DummyOrderDepartment> DepartmentListApples { get; set; } = new List<DummyOrderDepartment>();
 
         public OfficeDummyViewModel()
@@ -33,7 +32,7 @@ namespace AalborgZooProjekt.ViewModel
             //string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             //foreach (string product in lines)
             //{
-            using (var db = new AalborgZooContainer1())
+            using (var db = new AalborgZooContainer1(connectionString))
             {
                 //foreach (OrderLine ol in db.OrderLineSet)
                 //{
@@ -89,19 +88,19 @@ namespace AalborgZooProjekt.ViewModel
 
     }
 
-        //private RelayCommand _newCommand;
+        private RelayCommand _newCommand;
 
-        //public RelayCommand NewCommand
-        //{
-        //    get
-        //    {
-        //        //return _newCommand ?? (_newCommand = new RelayCommand(
-        //        //    async () => Foo()
-        //        //    ));
-        //    }
-        //}
+        public RelayCommand NewCommand
+        {
+            get
+            {
+                return _newCommand ?? (_newCommand = new RelayCommand(
+                    async () => Foo()
+                    ));
+            }
+        }
 
-        /*private void Foo()
+        private void Foo()
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
             PdfDocument pdf = new PdfDocument();
@@ -186,7 +185,7 @@ namespace AalborgZooProjekt.ViewModel
             
             pdf.Save("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
             Process.Start("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
-        }*/
+        }
 
         private RelayCommand<object> _editOrder;
         /// <summary>
@@ -221,7 +220,7 @@ namespace AalborgZooProjekt.ViewModel
 
         public void EditOrderWindow(object context)
         {
-            Model.OrderLine ol = context as Model.OrderLine;            
+            OrderLine ol = context as OrderLine;            
             OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
             //orders.dgFoodList. = ol;          
             orders.ShowDialog();
