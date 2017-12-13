@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Data;
 using System;
 using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt
 {
@@ -55,21 +56,21 @@ namespace AalborgZooProjekt
 
         public List<Model.DummyOrder> DummyHistoryList { get; set; } = new List<Model.DummyOrder>();
 
-        ObservableCollection<Unit> DummyUnitList = new ObservableCollection<Unit>();
+        ObservableCollection<Model.Unit> DummyUnitList = new ObservableCollection<Model.Unit>();
 
 
         public List<Employee> MockTestEmployee
         {
             get
             {
-                using (var db = new AalborgZooContainer1(connectionString))
+                using (var db = new AalborgZooContainer1())
                 {
                     return db.EmployeeSet.Select(x => x).ToList();                    
                 }
             }
             set
             {
-                using (var db = new AalborgZooContainer1(connectionString))
+                using (var db = new AalborgZooContainer1())
                 {
                     Employee emp = db.EmployeeSet.Where(x => x.Name == "Hans").First();
                     emp.Name = value.ToString();
@@ -80,9 +81,9 @@ namespace AalborgZooProjekt
 
         public DummyViewModel()
         {
-            DummyUnitList.Add(new Unit() { Name = "kg" });
-            DummyUnitList.Add(new Unit() { Name = "styks" });
-            DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
+            DummyUnitList.Add(new Model.Unit() { Name = "kg" });
+            DummyUnitList.Add(new Model.Unit() { Name = "styks" });
+            DummyUnitList.Add(new Model.Unit() { Name = "kasse(r)" });
 
             //PopulateDatabase();
 
