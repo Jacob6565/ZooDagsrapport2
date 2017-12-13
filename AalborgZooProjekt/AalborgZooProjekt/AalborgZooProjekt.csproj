@@ -180,7 +180,7 @@
     <Compile Include="Model\Repository\IOrderRepository.cs" />
     <Compile Include="Model\Repository\IProductRepository.cs" />
     <Compile Include="Model\Exception\OrderDoesNotExistInDatabaseException.cs" />
-    <Compile Include="Model\Repository\IShopperRepository.cs" />
+    <Compile Include="Model\Repository\IShoppingListRepository.cs" />
     <Compile Include="Model\Repository\OrderRepository.cs" />
     <Compile Include="Model\Repository\ProductRepository.cs" />
     <Compile Include="Model\Exception\ProductDoNotExistInDatabaseException.cs" />
