@@ -271,26 +271,26 @@ namespace NUnit.Test
             Assert.Throws<CanNotSendEmptyOrderException>(() => order.CanOrderBeSend());
         }
 
-        [Test]
-        public void SendOrder_CanBeSendWork_OrderCanBeSend()
-        {
-            //Arrange
+        //[Test]
+        //public void SendOrder_CanBeSendWork_OrderCanBeSend()
+        //{
+        //    //Arrange
 
-            Order order = MakeOrder();
-            order.OrderLines.Add(MakeOrderLine());
-            order.Status = "Under Construction";
-            Zookeeper zookeeper = MakeZookeeper();
-            zookeeper.Id = 2;
-            order.OrderedByID = zookeeper.Id;
-            ShoppingList mockShoppingList = new ShoppingList();
-            
-            //Act
-            order.SendOrder(mockShoppingList);
+        //    Order order = MakeOrder();
+        //    order.OrderLines.Add(MakeOrderLine());
+        //    order.Status = "Under Construction";
+        //    Zookeeper zookeeper = MakeZookeeper();
+        //    zookeeper.Id = 2;
+        //    order.OrderedByID = zookeeper.Id;
+        //    ShoppingList mockShoppingList = new ShoppingList();
 
-            //Assert
-            Assert.AreEqual("Sent", order.Status);
-            Assert.AreEqual(order, mockShoppingList.Orders.Last());
-        }
+        //    //Act
+        //    order.SendOrder(mockShoppingList);
+
+        //    //Assert
+        //    Assert.AreEqual("Sent", order.Status);
+        //    Assert.AreEqual(order, mockShoppingList.Orders.Last());
+        //}
 
         [Test]
         public void RemoveOrderLine_ValidOrderLine_CanBeRemoved()
