@@ -8,5 +8,7 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Unit
     {
+        public string Name { get; set; }
     }
 }
+ 

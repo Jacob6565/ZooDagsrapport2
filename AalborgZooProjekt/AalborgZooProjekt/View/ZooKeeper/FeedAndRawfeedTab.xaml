@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400">
-    <Grid>
+    <ScrollViewer>
         <TabControl Margin="10,0,0,0">
-            <TabItem Header="Foder" Padding="20,0" Margin="1,0,0,0">
+            <TabItem Header="Frugt og grønt" MinWidth="120" Margin="1,0,0,0">
                 <TabItem.Style>
                     <Style>
                         <Setter Property="TextBlock.FontSize" Value="14"></Setter>
@@ -45,7 +45,7 @@
                 </StackPanel>
             </TabItem>
 
-            <TabItem Header="Kraftfoder" Padding="20,0">
+            <TabItem Header="Andet foder" MinWidth="120">
                 <TabItem.Style>
                     <Style>
                         <Setter Property="TextBlock.FontSize" Value="14"></Setter>
@@ -84,6 +84,6 @@
             
 
         </TabControl>
-    </Grid>
+    </ScrollViewer>
 
 </UserControl>

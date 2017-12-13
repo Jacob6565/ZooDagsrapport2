@@ -17,8 +17,7 @@ namespace AalborgZooProjekt.Model.Database
         public int Id { get; set; }
         public string DepartmentID { get; set; }
         public System.DateTime DateChanged { get; set; }
-        public int ZookeeperID { get; set; }
-        public Nullable<int> ZookeeperId1 { get; set; }
+        public Nullable<int> ZookeeperID { get; set; }
     
         public virtual Zookeeper Zookeeper { get; set; }
     }

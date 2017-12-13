@@ -11,16 +11,36 @@ namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
-    public partial class OrderLine
+    public partial class OrderLine : INotifyPropertyChanged
     {
         public int Id { get; set; }
-        public int Quantity { get; set; }
+        private int _quantity;
+        public int Quantity
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value;
+                OnPropertyChanged("Quantity");
+            }
+        }
         public int UnitID { get; set; }
         public int ProductVersionId { get; set; }
         public int OrderId { get; set; }
     
         public virtual ProductVersion ProductVersion { get; set; }
         public virtual Order Order { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
     }
 }
