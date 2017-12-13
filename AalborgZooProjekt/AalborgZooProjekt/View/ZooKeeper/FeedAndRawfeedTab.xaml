@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400">
-    <Grid>
+    <ScrollViewer>
         <TabControl Margin="10,0,0,0">
             <TabItem Header="Frugt og grønt" MinWidth="120" Margin="1,0,0,0">
                 <TabItem.Style>
@@ -84,6 +84,6 @@
             
 
         </TabControl>
-    </Grid>
+    </ScrollViewer>
 
 </UserControl>
