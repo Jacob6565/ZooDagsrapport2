@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <Grid Grid.Column="2">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -19,7 +20,7 @@
         </Viewbox>
 
         <DataGrid Margin="0,0,10,0"
-                     Grid.Row="1"/>
+                     Grid.Row="1" ItemsSource="{Binding DepOrderList, Mode=TwoWay}"/>
 
         <GridSplitter Height="10"
                      Margin="0,0,10,0"

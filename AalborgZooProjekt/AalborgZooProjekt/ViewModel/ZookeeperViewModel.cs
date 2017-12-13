@@ -7,6 +7,8 @@ using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using AalborgZooProjekt.Model;
 using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows.Controls;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -14,7 +16,14 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
-            
+            AddAmount = new RelayCommand<object>(ChangeAmount);
+
+            DepOrderList.Add(new OrderLine() { Id = 44 });
+            DepOrderList.Add(new OrderLine() { Id = 44 });
+            DepOrderList.Add(new OrderLine() { Id = 44 });
+            DepOrderList.Add(new OrderLine() { Id = 44 });
+            DepOrderList.Add(new OrderLine() { Id = 44 });
+            DepOrderList.Add(new OrderLine() { Id = 44 });
         }
 
         private Department department;
@@ -29,6 +38,7 @@ namespace AalborgZooProjekt.ViewModel
             private set { }
         }
 
+        public BindingList<OrderLine> DepOrderList { get; set; } = new BindingList<OrderLine>();
 
         /// <summary>
         /// Gets the department specific product for a given department, via the 
@@ -55,7 +65,37 @@ namespace AalborgZooProjekt.ViewModel
             if (orderlines.Count == 0)
                 throw new Exception();
 
+
             return orderlines;
+        }
+
+        public RelayCommand<object> AddAmount { get; set; }
+        public RelayCommand<object> SubtractAmount { get; set; } 
+
+        public void ChangeAmount(object context)
+        {
+            StackPanel sp = context as StackPanel;
+            TextBox box = sp.Children.OfType<TextBox>().First();
+            int intAmount = Int32.Parse(box.Text);
+            if (sp.Children.OfType<Button>().First().IsFocused)
+            {
+                intAmount++;
+            }
+            else intAmount--;
+            box.Text = intAmount.ToString();
+
+            ChangeOrderList(box);
+        }
+
+
+        public void ChangeOrderList(TextBox tb)
+        {
+            OrderLine ol = tb.DataContext as OrderLine;
+            if(!DepOrderList.Contains(ol))
+            {
+                DepOrderList.Add(ol);
+                RaisePropertyChanged("added");
+            }
         }
     }
 }
