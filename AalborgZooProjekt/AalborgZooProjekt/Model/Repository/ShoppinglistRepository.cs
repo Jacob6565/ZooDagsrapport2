@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AalborgZooProjekt.Model.Repository
+namespace AalborgZooProjekt.Model
 {
-    public class ShoppinglistRepository : IShopperRepository
+    public class ShoppinglistRepository : IShoppingListRepository
     {
+        public ShoppingList GetActiveShoppingList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

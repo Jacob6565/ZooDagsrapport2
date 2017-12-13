@@ -130,6 +130,46 @@ namespace AalborgZooProjekt.ViewModel
                 DepOrderList.Remove(ol);
             }
         }
+
+        private Order _orderInTheMaking = new Order();
+        public Order OrderInTheMaking
+        {
+            get { return _orderInTheMaking; }
+            private set { _orderInTheMaking = value; }
+        }
+
+
+        private bool _canBeSend = true;
+        public bool CanBeSend
+        {
+            get { return _canBeSend; }
+            private set { _canBeSend = value; }
+        }
+
+        public void Sendorder(Order order)
+        {
+            if (CanBeSend)
+            {
+                CanBeSend = false;
+                order.SendOrder();
+                throw new Exception();
+            }
+        }
+
+        private RelayCommand _sendOrderCommand;
+
+        public RelayCommand SendOrderCommand
+        {
+            get
+            {
+                return _sendOrderCommand
+                  ?? (_sendOrderCommand = new RelayCommand(
+                    () =>
+                    {
+                        Sendorder(OrderInTheMaking);   
+                    }));
+            }
+        }
     }
 }
 

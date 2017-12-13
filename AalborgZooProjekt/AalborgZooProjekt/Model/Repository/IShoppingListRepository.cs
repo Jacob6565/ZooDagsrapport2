@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AalborgZooProjekt.Model.Repository
+namespace AalborgZooProjekt.Model
 {
-    public interface IShopperRepository
+    public interface IShoppingListRepository
     {
+        ShoppingList GetActiveShoppingList();
     }
 }
