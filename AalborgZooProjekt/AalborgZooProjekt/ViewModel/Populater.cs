@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AalborgZooProjekt.Model;
-using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -24,7 +23,7 @@ namespace AalborgZooProjekt.ViewModel
                     };
                     db.EmployeeSet.Add(emp);
 
-                    Model.Database.Product prod = new Model.Database.Product()
+                    Product prod = new Product()
                     {
                         CreatedByID = i,
                         DateDeleted = DateTime.Today,
@@ -34,7 +33,7 @@ namespace AalborgZooProjekt.ViewModel
                     };
                     db.ProductSet.Add(prod);
 
-                    Model.Database.Department dep = new Model.Database.Department()
+                    Department dep = new Department()
                     {
                         Name = "Sydamerika",
                         DateDeleted = DateTime.Today,
@@ -42,7 +41,7 @@ namespace AalborgZooProjekt.ViewModel
                     };
                     db.DepartmentSet.Add(dep);
 
-                    Model.Database.Zookeeper zookeeper = new Model.Database.Zookeeper()
+                    Zookeeper zookeeper = new Zookeeper()
                     {
                         Name = "Tuan",
                         DateHired = DateTime.Today,
@@ -52,21 +51,21 @@ namespace AalborgZooProjekt.ViewModel
                     db.EmployeeSet.Add(zookeeper);
 
                     //We only want a single kg instance.
-                    Model.Database.Unit unit;
+                    Unit unit;
                     if (db.UnitSet.Any())
                     {
                         unit = db.UnitSet.First();
                     }
                     else
                     {
-                        unit = new Model.Database.Unit()
+                        unit = new Unit()
                         {
                             Name = "kg",
                         };
                         db.UnitSet.Add(unit);
                     }
 
-                    Model.Database.ProductVersion prodV = new Model.Database.ProductVersion()
+                    ProductVersion prodV = new ProductVersion()
                     {
                         IsActive = true,
                         Supplier = i.ToString(),
@@ -76,12 +75,12 @@ namespace AalborgZooProjekt.ViewModel
                         Name = "Banan",
                         Product = prod,
                     };
-                    prodV.Units.Add(unit);
+                    prodV.Unit.Add(unit);
                     db.ProductVersionSet.Add(prodV);
 
                     db.SaveChanges();
 
-                    Model.Database.Shopper shopper = new Model.Database.Shopper()
+                    Shopper shopper = new Shopper()
                     {
                         DateHired = DateTime.Today,
                         DateStopped = DateTime.Today,
@@ -91,7 +90,7 @@ namespace AalborgZooProjekt.ViewModel
                     };
                     db.EmployeeSet.Add(shopper);
 
-                    Model.Database.ShoppingList list = new Model.Database.ShoppingList()
+                    ShoppingList list = new ShoppingList()
                     {
                         CreatedByID = i,
                         DateCreated = DateTime.Today,
@@ -101,7 +100,7 @@ namespace AalborgZooProjekt.ViewModel
                     db.ShoppingListSet.Add(list);
 
 
-                    Model.Database.Order order = new Model.Database.Order()
+                    Order order = new Order()
                     {
                         DepartmentID = dep.Id,
                         OrderedByID = zookeeper.Id,
@@ -110,14 +109,14 @@ namespace AalborgZooProjekt.ViewModel
                         Note = i.ToString(),
                         DateCreated = DateTime.Today,
                         DeletedByID = shopper.Id,
-                        Status = i,
+                        Status = i.ToString(),
                         ShoppingListId = 0,
                     };
                     db.OrderSet.Add(order);
 
 
 
-                    Model.Database.OrderLine orderLine = new Model.Database.OrderLine()
+                    OrderLine orderLine = new OrderLine()
                     {
 
                         Quantity = i,
@@ -126,14 +125,14 @@ namespace AalborgZooProjekt.ViewModel
                     };
                     db.OrderLineSet.Add(orderLine);
 
-                    Model.Database.PasswordChanged pwc = new Model.Database.PasswordChanged()
+                    PasswordChanged pwc = new PasswordChanged()
                     {
                         DateChanged = DateTime.Today,
                         ShopperId = shopper.Id,
                     };
                     db.PasswordChangedSet.Add(pwc);
 
-                    Model.Database.DepartmentSpecificProduct depSpecificProduct = new Model.Database.DepartmentSpecificProduct()
+                    DepartmentSpecificProduct depSpecificProduct = new DepartmentSpecificProduct(dep, prod)
                     {
                         ProductId = prod.Id,
                         DepartmentId = dep.Id
