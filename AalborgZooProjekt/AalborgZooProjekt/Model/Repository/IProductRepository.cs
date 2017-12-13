@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace AalborgZooProjekt.Model
         void AddProduct(Product product);
         void ProductVersionList(Product product);
         List<Product> GetDepartmentProducts(Department department);
-        List<Unit> GetProductUnits(Product product);
+        List<Product> GetDepartmentProductsWithUnits(Department department);
+        ICollection<Unit> GetProductUnits(Product product);
+        
     }
 }
