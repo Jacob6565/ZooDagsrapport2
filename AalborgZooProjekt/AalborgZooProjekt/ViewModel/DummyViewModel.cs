@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Collections.Generic;
 using AalborgZooProjekt.Model;
+
 using System.IO;
 using System.Text;
 using System.Data.SqlClient;
@@ -12,6 +13,8 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Data;
 using System;
+using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt
 {
@@ -34,6 +37,9 @@ namespace AalborgZooProjekt
 
     public class DummyViewModel : ViewModelBase
     {
+        string connectionString1 = "name=AalborgZooMockContainer";
+        string connectionString = "name=AalborgZooContainer1";
+        public List<DummyProduct> DummyFoodList { get; set; } = new List<DummyProduct>();
         private List<Model.DummyProduct> _dummyFruit = new List<Model.DummyProduct>();
         public List<Model.DummyProduct> DummyFruitList
         {
@@ -48,16 +54,36 @@ namespace AalborgZooProjekt
             set { _dummyOtherFood = value; }
         }
 
-        public List<Model.DummyOrder> DummyOrderList { get; set; } = new List<Model.DummyOrder>();
+        public List<Model.DummyOrder> DummyHistoryList { get; set; } = new List<Model.DummyOrder>();
 
-        ObservableCollection<Unit> DummyUnitList = new ObservableCollection<Unit>();
+        ObservableCollection<Model.Unit> DummyUnitList = new ObservableCollection<Model.Unit>();
 
+
+        public List<Employee> MockTestEmployee
+        {
+            get
+            {
+                using (var db = new AalborgZooContainer1())
+                {
+                    return db.EmployeeSet.Select(x => x).ToList();                    
+                }
+            }
+            set
+            {
+                using (var db = new AalborgZooContainer1())
+                {
+                    Employee emp = db.EmployeeSet.Where(x => x.Name == "Hans").First();
+                    emp.Name = value.ToString();
+                    db.SaveChanges();
+                }
+            }
+        }
 
         public DummyViewModel()
         {
-            DummyUnitList.Add(new Unit() { Name = "kg" });
-            DummyUnitList.Add(new Unit() { Name = "styks" });
-            DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
+            DummyUnitList.Add(new Model.Unit() { Name = "kg" });
+            DummyUnitList.Add(new Model.Unit() { Name = "styks" });
+            DummyUnitList.Add(new Model.Unit() { Name = "kasse(r)" });
 
             //PopulateDatabase();
 
@@ -118,7 +144,11 @@ namespace AalborgZooProjekt
                     };
                     db.DepartmentSet.Add(dep);
 
-                    DepartmentSpecificProduct depSP = new DepartmentSpecificProduct(dep, prod);
+                    DepartmentSpecificProduct depSP = new DepartmentSpecificProduct()
+                    {
+                        DepartmentId = dep.Id,
+                        ProductId = prod.Id,
+                    };
                     db.DepartmentSpecificProductSet.Add(depSP);
 
                     Zookeeper zookeeper = new Zookeeper()
@@ -130,21 +160,6 @@ namespace AalborgZooProjekt
                     };
                     db.EmployeeSet.Add(zookeeper);
 
-                    //We only want a single kg instance.
-                    Unit unit;
-                    if(db.UnitSet.Any())
-                    {
-                        unit = db.UnitSet.First();
-                    }
-                    else
-                    {
-                        unit = new Unit()
-                        {
-                            Name = "kg",
-                        };
-                        db.UnitSet.Add(unit);
-                    }
-
                     ProductVersion prodV = new ProductVersion()
                     {
                         IsActive = true,
@@ -152,8 +167,6 @@ namespace AalborgZooProjekt
                         CreatedByID = i,
                         DateCreated = DateTime.Today,
                         ProductId = prod.Id,
-                        Name = $"ProductVersion {i}",
-                        Product = prod,
                     };
                     db.ProductVersionSet.Add(prodV);
 
@@ -173,7 +186,7 @@ namespace AalborgZooProjekt
                     {
                         CreatedByID = i,
                         DateCreated = DateTime.Today,
-                        Status = "Editable",
+                        Status = i,
                         ShopperId = shopper.Id,
                     };
                     db.ShoppingListSet.Add(list);
@@ -188,12 +201,26 @@ namespace AalborgZooProjekt
                         Note = i.ToString(),
                         DateCreated = DateTime.Today,
                         DeletedByID = shopper.Id,
-                        Status = i.ToString(),
+                        Status = i,
                         ShoppingListId = 0,
                     };
                     db.OrderSet.Add(order);
 
 
+                    //We only want a single kg instance.
+                    Unit unit;
+                    if(db.UnitSet.Any())
+                    {
+                        unit = db.UnitSet.First();
+                    }
+                    else
+                    {
+                        unit = new Unit()
+                        {
+                            Name = "kg",
+                        };
+                        db.UnitSet.Add(unit);
+                    }
 
                     OrderLine orderLine = new OrderLine()
                     {

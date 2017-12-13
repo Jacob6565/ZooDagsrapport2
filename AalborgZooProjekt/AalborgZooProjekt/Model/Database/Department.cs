@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Model
+namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace AalborgZooProjekt.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public System.DateTime DateCreated { get; set; }
-        public System.DateTime DateDeleted { get; set; }
+        public Nullable<System.DateTime> DateDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepartmentSpecificProduct> DepartmentSpecificProducts { get; set; }

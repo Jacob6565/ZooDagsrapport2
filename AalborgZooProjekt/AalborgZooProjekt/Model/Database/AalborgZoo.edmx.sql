@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2017 14:28:56
--- Generated from EDMX file: C:\Users\kristoffer\Documents\GitHub\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt.Model\AalborgZoo.edmx
+-- Date Created: 12/13/2017 18:20:29
+-- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Model\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -124,8 +124,8 @@ CREATE TABLE [dbo].[ProductSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DateCreated] datetime  NOT NULL,
     [CreatedByID] int  NOT NULL,
-    [DeletedByID] int  NOT NULL,
-    [DateDeleted] datetime  NOT NULL,
+    [DeletedByID] int  NULL,
+    [DateDeleted] datetime  NULL,
     [Name] nvarchar(max)  NOT NULL
 );
 GO
@@ -137,8 +137,7 @@ CREATE TABLE [dbo].[ProductVersionSet] (
     [Supplier] nvarchar(max)  NOT NULL,
     [CreatedByID] int  NOT NULL,
     [DateCreated] datetime  NOT NULL,
-    [ProductId] int  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [ProductId] int  NOT NULL
 );
 GO
 
@@ -147,7 +146,7 @@ CREATE TABLE [dbo].[ShoppingListSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CreatedByID] int  NOT NULL,
     [DateCreated] datetime  NOT NULL,
-    [Status] nvarchar(max)  NOT NULL,
+    [Status] int  NOT NULL,
     [ShopperId] int  NOT NULL
 );
 GO
@@ -158,11 +157,11 @@ CREATE TABLE [dbo].[OrderSet] (
     [DepartmentID] int  NOT NULL,
     [OrderedByID] int  NOT NULL,
     [DateOrdered] datetime  NOT NULL,
-    [DateCancelled] datetime  NOT NULL,
-    [Note] nvarchar(max)  NOT NULL,
+    [DateCancelled] datetime  NULL,
+    [Note] nvarchar(max)  NULL,
     [DateCreated] datetime  NOT NULL,
-    [DeletedByID] int  NOT NULL,
-    [Status] nvarchar(max)  NOT NULL,
+    [DeletedByID] int  NULL,
+    [Status] int  NOT NULL,
     [ShoppingListId] int  NULL
 );
 GO
@@ -182,7 +181,7 @@ CREATE TABLE [dbo].[DepartmentSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [DateCreated] datetime  NOT NULL,
-    [DateDeleted] datetime  NOT NULL
+    [DateDeleted] datetime  NULL
 );
 GO
 
@@ -191,7 +190,8 @@ CREATE TABLE [dbo].[DepartmentChangeSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DepartmentID] nvarchar(max)  NOT NULL,
     [DateChanged] datetime  NOT NULL,
-    [ZookeeperID] int  NULL
+    [ZookeeperID] int  NOT NULL,
+    [ZookeeperId1] int  NULL
 );
 GO
 
@@ -200,7 +200,7 @@ CREATE TABLE [dbo].[EmployeeSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DateHired] datetime  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [DateStopped] datetime  NOT NULL
+    [DateStopped] datetime  NULL
 );
 GO
 
@@ -236,8 +236,8 @@ GO
 
 -- Creating table 'UnitProductVersion'
 CREATE TABLE [dbo].[UnitProductVersion] (
-    [Unit_Id] int  NOT NULL,
-    [ProductVersion_Id] int  NOT NULL
+    [Units_Id] int  NOT NULL,
+    [ProductVersions_Id] int  NOT NULL
 );
 GO
 
@@ -323,10 +323,10 @@ ADD CONSTRAINT [PK_EmployeeSet_Shopper]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Unit_Id], [ProductVersion_Id] in table 'UnitProductVersion'
+-- Creating primary key on [Units_Id], [ProductVersions_Id] in table 'UnitProductVersion'
 ALTER TABLE [dbo].[UnitProductVersion]
 ADD CONSTRAINT [PK_UnitProductVersion]
-    PRIMARY KEY CLUSTERED ([Unit_Id], [ProductVersion_Id] ASC);
+    PRIMARY KEY CLUSTERED ([Units_Id], [ProductVersions_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -408,19 +408,19 @@ ON [dbo].[OrderSet]
     ([ShoppingListId]);
 GO
 
--- Creating foreign key on [Unit_Id] in table 'UnitProductVersion'
+-- Creating foreign key on [Units_Id] in table 'UnitProductVersion'
 ALTER TABLE [dbo].[UnitProductVersion]
 ADD CONSTRAINT [FK_UnitProductVersion_Unit]
-    FOREIGN KEY ([Unit_Id])
+    FOREIGN KEY ([Units_Id])
     REFERENCES [dbo].[UnitSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ProductVersion_Id] in table 'UnitProductVersion'
+-- Creating foreign key on [ProductVersions_Id] in table 'UnitProductVersion'
 ALTER TABLE [dbo].[UnitProductVersion]
 ADD CONSTRAINT [FK_UnitProductVersion_ProductVersion]
-    FOREIGN KEY ([ProductVersion_Id])
+    FOREIGN KEY ([ProductVersions_Id])
     REFERENCES [dbo].[ProductVersionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -429,7 +429,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_UnitProductVersion_ProductVersion'
 CREATE INDEX [IX_FK_UnitProductVersion_ProductVersion]
 ON [dbo].[UnitProductVersion]
-    ([ProductVersion_Id]);
+    ([ProductVersions_Id]);
 GO
 
 -- Creating foreign key on [DepartmentId] in table 'DepartmentSpecificProductSet'
@@ -462,10 +462,10 @@ ON [dbo].[EmployeeSet_Zookeeper]
     ([DepartmentId]);
 GO
 
--- Creating foreign key on [ZookeeperID] in table 'DepartmentChangeSet'
+-- Creating foreign key on [ZookeeperId1] in table 'DepartmentChangeSet'
 ALTER TABLE [dbo].[DepartmentChangeSet]
 ADD CONSTRAINT [FK_DepartmentChangeZookeeper]
-    FOREIGN KEY ([ZookeeperID])
+    FOREIGN KEY ([ZookeeperId1])
     REFERENCES [dbo].[EmployeeSet_Zookeeper]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -474,7 +474,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_DepartmentChangeZookeeper'
 CREATE INDEX [IX_FK_DepartmentChangeZookeeper]
 ON [dbo].[DepartmentChangeSet]
-    ([ZookeeperID]);
+    ([ZookeeperId1]);
 GO
 
 -- Creating foreign key on [ShopperId] in table 'ShoppingListSet'
