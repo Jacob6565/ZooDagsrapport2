@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AalborgZooProjekt.Model
 {
-    public interface IProductDAL
+    public interface IProductRepository
     {
         void AddProduct(Product product);
-        void ProductVersionList(Product product);
+        void UpdateProductVersionList(Product product);
         List<Product> GetDepartmentProducts(Department department);
+        List<Product> GetDepartmentProductsWithUnits(Department department);
+        ICollection<Unit> GetProductUnits(Product product);
+        
     }
 }

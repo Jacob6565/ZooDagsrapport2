@@ -2,7 +2,7 @@
 
 namespace AalborgZooProjekt.Interfaces
 {
-    interface IProduct
+    public interface IProduct
     {
         void RemoveProductUnit(Unit unitToRemove);
         void DeactivateProduct();

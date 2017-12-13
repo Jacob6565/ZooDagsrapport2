@@ -17,25 +17,23 @@ namespace AalborgZooProjekt.ViewModel
         public ZookeeperViewModel()
         {
             AddAmount = new RelayCommand<object>(ChangeAmount);
-
-            DepOrderList.Add(new OrderLine() { Id = 44 });
-            DepOrderList.Add(new OrderLine() { Id = 44 });
-            DepOrderList.Add(new OrderLine() { Id = 44 });
-            DepOrderList.Add(new OrderLine() { Id = 44 });
-            DepOrderList.Add(new OrderLine() { Id = 44 });
-            DepOrderList.Add(new OrderLine() { Id = 44 });
+            DepOrderLines = GetDepProductListFromDb();
         }
 
         private Department department;
-        private IProductDAL dbProductRep = new ProductDAL();
+        private IProductRepository dbProductRep = new ProductRepository();
 
+        private ObservableCollection<OrderLine> _depOrderLines = new ObservableCollection<OrderLine>();
         public ObservableCollection<OrderLine> DepOrderLines
         {
             get
             {
-                return GetDepProductListFromDb();
+                return _depOrderLines;
             } 
-            private set { }
+            private set
+            {
+                _depOrderLines = value;
+            }
         }
 
         public BindingList<OrderLine> DepOrderList { get; set; } = new BindingList<OrderLine>();
@@ -52,11 +50,12 @@ namespace AalborgZooProjekt.ViewModel
             {
                 Name = "Sydamerika"
             };
-            var prodList = dbProductRep.GetDepartmentProducts(department);
+            var prodList = dbProductRep.GetDepartmentProductsWithUnits(department);
             
             foreach (Product product in prodList)
             {
                 OrderLine tempOrderLine = new OrderLine();
+
                 tempOrderLine.ProductVersion = product.ProductVersions.Last();
 
                 orderlines.Add(tempOrderLine);

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +11,11 @@ namespace AalborgZooProjekt.Model
     /// <summary>
     /// The class which Product.cs uses when it needs to 
     /// </summary>
-    public class ProductDAL : IProductDAL
+    public class ProductRepository : IProductRepository
     {
         private AalborgZooContainer1 _context;
 
-        public ProductDAL()
+        public ProductRepository()
         {
             _context = new AalborgZooContainer1();
         }
@@ -48,11 +50,34 @@ namespace AalborgZooProjekt.Model
             return departmentProductList;
         }
 
+        public List<Product> GetDepartmentProductsWithUnits(Department department)
+        {
+            List<Product> departmentProductList = new List<Product>();
+            using (_context)
+            {
+                foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Unit"))
+                {
+                    if (depProduct.Product.CheckIfProductIsActive() && String.Equals(depProduct.Department.Name, department.Name))
+                        departmentProductList.Add(depProduct.Product);
+                }
+            }
+
+            return departmentProductList;
+        }
+
+        public ICollection<Unit> GetProductUnits(Product product)
+        {
+            using (_context)
+            {
+                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Unit;
+            }
+        }
+
         /// <summary>
         /// Opdates the product and thereby also the ProductVersions contained in the product objekt.
         /// </summary>
         /// <param name="product"></param>
-        public void ProductVersionList(Product product)
+        public void UpdateProductVersionList(Product product)
         {
             using (_context)
             {
