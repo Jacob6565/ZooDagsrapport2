@@ -81,7 +81,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.IsActive = true;
                 
                 this.ProductVersions.Add(newVersion);
-                repository.ProductVersionList(this);
+                repository.UpdateProductVersionList(this);
             }
             else
             {
@@ -103,7 +103,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.Unit.Add(unitToAdd);
 
                 this.ProductVersions.Add(newVersion);
-                repository.ProductVersionList(this);
+                repository.UpdateProductVersionList(this);
 
             }
             else
@@ -129,7 +129,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.Name = name;
 
                 this.ProductVersions.Add(newVersion);
-                repository.ProductVersionList(this);
+                repository.UpdateProductVersionList(this);
 
             }
             else
@@ -153,7 +153,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.Supplier = supplier;
 
                 this.ProductVersions.Add(newVersion);
-                repository.ProductVersionList(this);
+                repository.UpdateProductVersionList(this);
             }
             else
             {
@@ -180,7 +180,7 @@ namespace AalborgZooProjekt.Model
                 newVersion.IsActive = false;
 
                 this.ProductVersions.Add(newVersion);
-                repository.ProductVersionList(this);
+                repository.UpdateProductVersionList(this);
             }
             else
             {
@@ -201,7 +201,7 @@ namespace AalborgZooProjekt.Model
                 //Adding the change
                 newVersion.Unit.Remove(unitToRemove);
                 this.ProductVersions.Add(newVersion);
-                repository.ProductVersionList(this);
+                repository.UpdateProductVersionList(this);
             }
             else
             {

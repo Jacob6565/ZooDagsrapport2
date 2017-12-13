@@ -42,6 +42,20 @@ namespace NUnit.Test
             Order order = new Order(MockRep.Object, dep);
             return order;
         }
+
+        private OrderLine MakeOrderLine()
+        {
+            return new OrderLine();
+        }
+
+        private Zookeeper MakeZookeeper()
+        {
+            return new Zookeeper();
+        }
+        private ProductVersion MakeProductVersion()
+        {
+            return new ProductVersion();
+        }
         #endregion
 
         [Test]
@@ -49,9 +63,9 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            OrderLine firstOrderLine = new OrderLine();
+            OrderLine firstOrderLine = MakeOrderLine();
             firstOrderLine.Quantity = 20;
-            OrderLine secondOrderLine = new OrderLine();
+            OrderLine secondOrderLine = MakeOrderLine();
             secondOrderLine.Quantity = 40;
 
             //Act
@@ -67,7 +81,7 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            OrderLine orderLine = new OrderLine();
+            OrderLine orderLine = MakeOrderLine();
             orderLine.Quantity = 20;
 
             //Act
@@ -85,7 +99,7 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            OrderLine orderLine = new OrderLine();
+            OrderLine orderLine = MakeOrderLine();
             orderLine.Quantity = 20;
             order.OrderLines.Add(orderLine);
 
@@ -98,9 +112,9 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            OrderLine orderline = new OrderLine();
-            
-            ProductVersion mockProductVersion = new ProductVersion();
+            OrderLine orderline = MakeOrderLine();
+
+            ProductVersion ProductVersion = MakeProductVersion();
             List<Unit> units = new List<Unit>()
             {
                 new Unit()
@@ -110,8 +124,8 @@ namespace NUnit.Test
                 }
             };
             
-            mockProductVersion.Unit = units;
-            orderline.ProductVersion = mockProductVersion;
+            ProductVersion.Unit = units;
+            orderline.ProductVersion = ProductVersion;
             order.AddOrderLine(orderline);           
             //Act
             order.ChangeUnit(orderline, units.Last());
@@ -124,32 +138,32 @@ namespace NUnit.Test
         public void AttackZookeeperToOrder_ValidZookeeper_ZookeeperAdded()
         {
             //Arrange
-            Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
-            mockZookeeper.Object.Id = 2;
+            Zookeeper zookeeper = MakeZookeeper();
+            zookeeper.Id = 2;
 
             Order order = MakeOrder();
 
             //Act
-            order.AttachZookeeperToOrder(mockZookeeper.Object);
+            order.AttachZookeeperToOrder(zookeeper);
 
             //Assert
-            Assert.AreEqual(mockZookeeper.Object.Id, order.OrderedByID);
+            Assert.AreEqual(zookeeper.Id, order.OrderedByID);
         }
 
         [Test]
         public void AttackZookeeperToOrder_ZookeeperAlreadyAttached_ExceptionThrown()
         {
             //Arrange
-            Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
-            mockZookeeper.Object.Id = 2;
+            Zookeeper zookeeper = MakeZookeeper();
+            zookeeper.Id = 2;
 
             Order order = MakeOrder();
 
             //Act
-            order.AttachZookeeperToOrder(mockZookeeper.Object);
+            order.AttachZookeeperToOrder(zookeeper);
 
             //Assert
-            Assert.Throws<ZookeeperAllReadyAddedException>(() => order.AttachZookeeperToOrder(mockZookeeper.Object));
+            Assert.Throws<ZookeeperAllReadyAddedException>(() => order.AttachZookeeperToOrder(zookeeper));
         }
 
         [TestCase("Under Construction", ExpectedResult = true)]
@@ -171,11 +185,10 @@ namespace NUnit.Test
         public void ChangeProduct_ActiveProductVersion_ProductChanged()
         {
             //Arrange   
-            ProductVersion ProductVersion = new ProductVersion();
+            ProductVersion ProductVersion = MakeProductVersion();
             ProductVersion.IsActive = true;
-            Mock<IOrderRepository> mockRep = new Mock<IOrderRepository>();
-            Order order = new Order(mockRep.Object, new Department());
-            OrderLine orderline = new OrderLine();
+            Order order = MakeOrder();
+            OrderLine orderline = MakeOrderLine();
 
             //Act
             order.ChangeProduct(orderline, ProductVersion);
@@ -188,26 +201,25 @@ namespace NUnit.Test
         public void ChangeProduct_DeactivatedProductVersion_ExceptionThrown()
         {
             //Arrange   
-            Mock<ProductVersion> mockProductVersion = new Mock<ProductVersion>();
-            mockProductVersion.Object.IsActive = false;
+            ProductVersion productVersion = MakeProductVersion();
+            productVersion.IsActive = false;
             Order order = MakeOrder();
-            OrderLine orderline = new OrderLine();
+            OrderLine orderline = MakeOrderLine();
 
             //Act and Assert
-            Assert.Throws<ProductVersionIsNotActiveException>(() => order.ChangeProduct(orderline, mockProductVersion.Object));
+            Assert.Throws<ProductVersionIsNotActiveException>(() => order.ChangeProduct(orderline, productVersion));
         }
 
         [Test]
         public void CanOrderBeSend_None_CanBeSend()
         {
             //Arrange
-
             Order order = MakeOrder();
-            order.OrderLines.Add(new OrderLine());
+            order.OrderLines.Add(MakeOrderLine());
             order.Status = "Under Construction";
-            Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
-            mockZookeeper.Object.Id = 2;
-            order.OrderedByID = mockZookeeper.Object.Id;
+            Zookeeper zookeeper = MakeZookeeper();
+            zookeeper.Id = 2;
+            order.OrderedByID = zookeeper.Id;
 
             //Act
             bool result = order.CanOrderBeSend();
@@ -222,11 +234,11 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            order.OrderLines.Add(new OrderLine());
+            order.OrderLines.Add(MakeOrderLine());
             order.Status = "Sent";
-            Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
-            mockZookeeper.Object.Id = 2;
-            order.OrderedByID = mockZookeeper.Object.Id;
+            Zookeeper zookeeper = MakeZookeeper();
+            zookeeper.Id = 2;
+            order.OrderedByID = zookeeper.Id;
 
             //Act And Arrange
             Assert.Throws<OrderIsNotUnderAnSendableStateException>(() => order.CanOrderBeSend());
@@ -238,7 +250,7 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            order.OrderLines.Add(new OrderLine());
+            order.OrderLines.Add(MakeOrderLine());
             order.Status = "Under Construction";
            
             //Act And Arrange
@@ -251,9 +263,9 @@ namespace NUnit.Test
             //Arrange
             Order order = MakeOrder();
             order.Status = "Under Construction";
-            Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
-            mockZookeeper.Object.Id = 2;
-            order.OrderedByID = mockZookeeper.Object.Id;
+            Zookeeper zookeeper = MakeZookeeper();
+            zookeeper.Id = 2;
+            order.OrderedByID = zookeeper.Id;
             
             //Act And Arrange
             Assert.Throws<CanNotSendEmptyOrderException>(() => order.CanOrderBeSend());
@@ -265,13 +277,11 @@ namespace NUnit.Test
             //Arrange
 
             Order order = MakeOrder();
-            order.OrderLines.Add(new OrderLine());
+            order.OrderLines.Add(MakeOrderLine());
             order.Status = "Under Construction";
-            Mock<Zookeeper> mockZookeeper = new Mock<Zookeeper>();
-            mockZookeeper.Object.Id = 2;
-            order.OrderedByID = mockZookeeper.Object.Id;
-            //Making mock of shoppinglist because we only need it to keep data and use at input to function
-            //Therefore we don't make a real one because it will interact with the database when data gets stored.
+            Zookeeper zookeeper = MakeZookeeper();
+            zookeeper.Id = 2;
+            order.OrderedByID = zookeeper.Id;
             ShoppingList mockShoppingList = new ShoppingList();
             
             //Act
@@ -287,7 +297,7 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            OrderLine orderline = new OrderLine();
+            OrderLine orderline = MakeOrderLine();
             order.OrderLines.Add(orderline);
 
             //Act
