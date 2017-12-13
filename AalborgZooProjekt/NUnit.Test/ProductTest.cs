@@ -10,14 +10,6 @@ namespace NUnit.Test
     [TestFixture]
     public class ProductTest
     {
-        #region Common used members
-        private Mock<IProductRepository> MockRep;
-        private string name;
-        private string supplier;
-        private Shopper shopper;
-        private List<Unit> units;
-        #endregion
-
         /// <summary>
         /// Creates a product and returns it.
         /// </summary>
@@ -32,12 +24,12 @@ namespace NUnit.Test
         }
         private Product InitializeProduct(List<Unit> units, bool active)
         {
-            MockRep = new Mock<IProductRepository>();
-            name = "Æble";
-            shopper = new Shopper();
-            supplier = "Karl";
-            this.units = units.ToList();
-            Product product = new Product(MockRep.Object, shopper, name, supplier, units, active);
+            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
+            string name = "Æble";
+            Shopper shopper = new Shopper();
+            string supplier = "Karl";
+            List<Unit> Units = units.ToList();
+            Product product = new Product(MockRep.Object, shopper, name, supplier, Units, active);
 
             return product;
         }

@@ -67,7 +67,7 @@ namespace AalborgZooProjekt.Model
         /// Opdates the product and thereby also the ProductVersions contained in the product objekt.
         /// </summary>
         /// <param name="product"></param>
-        public void ProductVersionList(Product product)
+        public void UpdateProductVersionList(Product product)
         {
             using (_context)
             {
