@@ -46,27 +46,19 @@ namespace AalborgZooProjekt.ViewModel
             {
                 Name = "Sydamerika"
             };
-            var prodList = dbProductRep.GetDepartmentProducts(department);
+            var prodList = dbProductRep.GetDepartmentProductsWithUnits(department);
             
             foreach (Product product in prodList)
             {
                 OrderLine tempOrderLine = new OrderLine();
-                //using (var db = new AalborgZooContainer1())
-                //{
-                //    tempOrderLine.ProductVersion = db.ProductVersionSet.Include("Unit").FirstOrDefault(x => x.Id == product.Id);
-                //}
-
 
                 tempOrderLine.ProductVersion = product.ProductVersions.Last();
-                tempOrderLine.ProductVersion.Unit = dbProductRep.GetProductUnits(product);
 
                 orderlines.Add(tempOrderLine);
             }
 
             if (orderlines.Count == 0)
                 throw new Exception();
-
-            //orderlines.First().ProductVersion.Unit.First().
 
             return orderlines;
         }

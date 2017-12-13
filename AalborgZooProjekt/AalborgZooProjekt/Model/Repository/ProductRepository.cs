@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,19 +50,27 @@ namespace AalborgZooProjekt.Model
             return departmentProductList;
         }
 
-        public List<Unit> GetProductUnits(Product product)
+        public List<Product> GetDepartmentProductsWithUnits(Department department)
         {
-            List<Unit> UnitList = new List<Unit>();
-
+            List<Product> departmentProductList = new List<Product>();
             using (_context)
             {
-                foreach (Unit unit in _context.ProductSet.Find(product.Id).ProductVersions.Last().Unit)
+                foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Unit"))
                 {
-                    UnitList.Add(unit);
+                    if (depProduct.Product.CheckIfProductIsActive() && String.Equals(depProduct.Department.Name, department.Name))
+                        departmentProductList.Add(depProduct.Product);
                 }
             }
 
-            return UnitList;
+            return departmentProductList;
+        }
+
+        public ICollection<Unit> GetProductUnits(Product product)
+        {
+            using (_context)
+            {
+                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Unit;
+            }
         }
 
         /// <summary>
