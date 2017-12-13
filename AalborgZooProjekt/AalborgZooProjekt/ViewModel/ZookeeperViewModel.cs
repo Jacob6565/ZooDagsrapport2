@@ -16,15 +16,15 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
-            AddAmount = new RelayCommand<object>(ChangeAmount);
+            //AddCommand = new RelayCommand<object>(ChangeAmount);
             DepOrderLines = GetDepProductListFromDb();
         }
 
         private Department department;
         private IProductRepository dbProductRep = new ProductRepository();
 
-        private ObservableCollection<OrderLine> _depOrderLines = new ObservableCollection<OrderLine>();
-        public ObservableCollection<OrderLine> DepOrderLines
+        private BindingList<OrderLine> _depOrderLines = new BindingList<OrderLine>();
+        public BindingList<OrderLine> DepOrderLines
         {
             get
             {
@@ -42,9 +42,9 @@ namespace AalborgZooProjekt.ViewModel
         /// Gets the department specific product for a given department, via the 
         /// database repository for Product
         /// </summary>
-        ObservableCollection<OrderLine> GetDepProductListFromDb()
+        BindingList<OrderLine> GetDepProductListFromDb()
         {
-            ObservableCollection<OrderLine> orderlines = new ObservableCollection<OrderLine>();
+            BindingList<OrderLine> orderlines = new BindingList<OrderLine>();
 
             department = new Department()
             {
@@ -68,32 +68,66 @@ namespace AalborgZooProjekt.ViewModel
             return orderlines;
         }
 
-        public RelayCommand<object> AddAmount { get; set; }
-        public RelayCommand<object> SubtractAmount { get; set; } 
-
         public void ChangeAmount(object context)
         {
             StackPanel sp = context as StackPanel;
-            TextBox box = sp.Children.OfType<TextBox>().First();
+            TextBox box = sp.Children.OfType<TextBox>().Single();
             int intAmount = Int32.Parse(box.Text);
+            OrderLine ol = box.DataContext as OrderLine;
             if (sp.Children.OfType<Button>().First().IsFocused)
             {
-                intAmount++;
+                ol.Quantity++;
             }
-            else intAmount--;
-            box.Text = intAmount.ToString();
-
+            else
+            {
+                ol.Quantity--;
+            }
             ChangeOrderList(box);
+        }
+
+        private RelayCommand<object> _addCommand;
+        public RelayCommand<object> AddCommand
+        {
+            get
+            {
+                return _addCommand
+                    ?? (_addCommand = new RelayCommand<object>(ChangeAmount));
+            }
+        }
+
+        private RelayCommand<object> _subtractCommand;
+        public RelayCommand<object> SubtractCommand
+        {
+            get
+            {
+                return _subtractCommand
+                    ?? (_subtractCommand = new RelayCommand<object>(ChangeAmount, CanChangeAmount));
+            }
+        }
+
+
+        public bool CanChangeAmount(object context)
+        {
+            StackPanel sp = context as StackPanel;
+            OrderLine ol = sp.DataContext as OrderLine;
+            if (ol != null)
+            {
+                return ol.Quantity != 0;
+            }
+            else return false;
         }
 
 
         public void ChangeOrderList(TextBox tb)
         {
             OrderLine ol = tb.DataContext as OrderLine;
-            if(!DepOrderList.Contains(ol))
+            if (ol.Quantity > 0 && !DepOrderList.Contains(ol))
             {
                 DepOrderList.Add(ol);
-                RaisePropertyChanged("added");
+            }
+            else if (ol.Quantity == 0 && DepOrderList.Contains(ol))
+            {
+                DepOrderList.Remove(ol);
             }
         }
     }
