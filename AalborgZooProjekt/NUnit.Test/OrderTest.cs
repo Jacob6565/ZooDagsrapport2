@@ -275,21 +275,23 @@ namespace NUnit.Test
         public void SendOrder_CanBeSendWork_OrderCanBeSend()
         {
             //Arrange
+            Assert.Fail();
 
-            Order order = MakeOrder();
-            order.OrderLines.Add(MakeOrderLine());
-            order.Status = "Under Construction";
-            Zookeeper zookeeper = MakeZookeeper();
-            zookeeper.Id = 2;
-            order.OrderedByID = zookeeper.Id;
-            ShoppingList mockShoppingList = new ShoppingList();
-            
-            //Act
-            order.SendOrder(mockShoppingList);
+            // THIS CAUSED AN ERROR, SO IT WAS COMMENTED OUT
+            //Order order = MakeOrder();
+            //order.OrderLines.Add(MakeOrderLine());
+            //order.Status = "Under Construction";
+            //Zookeeper zookeeper = MakeZookeeper();
+            //zookeeper.Id = 2;
+            //order.OrderedByID = zookeeper.Id;
+            //ShoppingList mockShoppingList = new ShoppingList();
 
-            //Assert
-            Assert.AreEqual("Sent", order.Status);
-            Assert.AreEqual(order, mockShoppingList.Orders.Last());
+            ////Act
+            //order.SendOrder(mockShoppingList);
+
+            ////Assert
+            //Assert.AreEqual("Sent", order.Status);
+            //Assert.AreEqual(order, mockShoppingList.Orders.Last());
         }
 
         [Test]
