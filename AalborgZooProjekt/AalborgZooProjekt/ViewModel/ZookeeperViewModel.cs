@@ -17,6 +17,7 @@ namespace AalborgZooProjekt.ViewModel
         public ZookeeperViewModel()
         {
             DepOrderLines = GetDepProductListFromDb();
+            //OrderInTheMaking.AddOrderLine();
         }
 
         private Department department;
@@ -156,7 +157,6 @@ namespace AalborgZooProjekt.ViewModel
         }
 
         private RelayCommand _sendOrderCommand;
-
         public RelayCommand SendOrderCommand
         {
             get

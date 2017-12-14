@@ -1,5 +1,6 @@
 ﻿using System;
 using AalborgZooProjekt.Interfaces;
+using System.Collections.Generic;
 
 namespace AalborgZooProjekt.Model
 {
@@ -45,6 +46,19 @@ namespace AalborgZooProjekt.Model
             //Updates the order in database
             dbRep.UpdateOrder(this);
         }
+
+        /// <summary>
+        /// Adds an orderline to the order, the actual parameter input orderLine will be an empty orderLine for our system
+        /// </summary>
+        /// <param name="orderLine"></param>
+        //public void AddOrderLines(List<OrderLine> orderLine)
+        //{
+        //    if (orderLine != null)
+        //        OrderLines.Add(orderLine);
+
+        //    //Updates the order in database
+        //    dbRep.UpdateOrder(this);
+        //}
 
         /// <summary>
         /// Attaches a zookeeper to an order, only one zookeeper can be attached to one order

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AalborgZooProjekt.Model
+namespace AalborgZooProjekt.Model.Database
 {
     using System;
     using System.Collections.Generic;
@@ -24,11 +24,11 @@ namespace AalborgZooProjekt.Model
         public int DepartmentID { get; set; }
         public int OrderedByID { get; set; }
         public System.DateTime DateOrdered { get; set; }
-        public System.DateTime DateCancelled { get; set; }
+        public Nullable<System.DateTime> DateCancelled { get; set; }
         public string Note { get; set; }
         public System.DateTime DateCreated { get; set; }
-        public int DeletedByID { get; set; }
-        public string Status { get; set; }
+        public Nullable<int> DeletedByID { get; set; }
+        public int Status { get; set; }
         public Nullable<int> ShoppingListId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
