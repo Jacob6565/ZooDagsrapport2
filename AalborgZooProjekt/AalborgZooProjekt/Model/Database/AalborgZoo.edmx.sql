@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2017 10:55:00
+-- Date Created: 12/14/2017 12:19:52
 -- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Model\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
@@ -147,7 +147,7 @@ CREATE TABLE [dbo].[ShoppingListSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CreatedByID] int  NOT NULL,
     [DateCreated] datetime  NOT NULL,
-    [Status] nvarchar(max)  NOT NULL,
+    [Status] int  NOT NULL,
     [ShopperId] int  NOT NULL
 );
 GO
@@ -162,7 +162,7 @@ CREATE TABLE [dbo].[OrderSet] (
     [Note] nvarchar(max)  NULL,
     [DateCreated] datetime  NOT NULL,
     [DeletedByID] int  NULL,
-    [Status] nvarchar(max)  NOT NULL,
+    [Status] int  NOT NULL,
     [ShoppingListId] int  NULL
 );
 GO
@@ -236,8 +236,8 @@ GO
 
 -- Creating table 'UnitProductVersion'
 CREATE TABLE [dbo].[UnitProductVersion] (
-    [Unit_Id] int  NOT NULL,
-    [ProductVersion_Id] int  NOT NULL
+    [Units_Id] int  NOT NULL,
+    [ProductVersions_Id] int  NOT NULL
 );
 GO
 
@@ -323,10 +323,10 @@ ADD CONSTRAINT [PK_EmployeeSet_Shopper]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Unit_Id], [ProductVersion_Id] in table 'UnitProductVersion'
+-- Creating primary key on [Units_Id], [ProductVersions_Id] in table 'UnitProductVersion'
 ALTER TABLE [dbo].[UnitProductVersion]
 ADD CONSTRAINT [PK_UnitProductVersion]
-    PRIMARY KEY CLUSTERED ([Unit_Id], [ProductVersion_Id] ASC);
+    PRIMARY KEY CLUSTERED ([Units_Id], [ProductVersions_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -408,19 +408,19 @@ ON [dbo].[OrderSet]
     ([ShoppingListId]);
 GO
 
--- Creating foreign key on [Unit_Id] in table 'UnitProductVersion'
+-- Creating foreign key on [Units_Id] in table 'UnitProductVersion'
 ALTER TABLE [dbo].[UnitProductVersion]
 ADD CONSTRAINT [FK_UnitProductVersion_Unit]
-    FOREIGN KEY ([Unit_Id])
+    FOREIGN KEY ([Units_Id])
     REFERENCES [dbo].[UnitSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ProductVersion_Id] in table 'UnitProductVersion'
+-- Creating foreign key on [ProductVersions_Id] in table 'UnitProductVersion'
 ALTER TABLE [dbo].[UnitProductVersion]
 ADD CONSTRAINT [FK_UnitProductVersion_ProductVersion]
-    FOREIGN KEY ([ProductVersion_Id])
+    FOREIGN KEY ([ProductVersions_Id])
     REFERENCES [dbo].[ProductVersionSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -429,7 +429,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_UnitProductVersion_ProductVersion'
 CREATE INDEX [IX_FK_UnitProductVersion_ProductVersion]
 ON [dbo].[UnitProductVersion]
-    ([ProductVersion_Id]);
+    ([ProductVersions_Id]);
 GO
 
 -- Creating foreign key on [DepartmentId] in table 'DepartmentSpecificProductSet'

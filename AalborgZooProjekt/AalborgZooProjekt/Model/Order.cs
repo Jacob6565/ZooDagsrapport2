@@ -19,13 +19,10 @@ namespace AalborgZooProjekt.Model
         private IOrderRepository dbRep = new OrderRepository();
 
 
-        // A string used to assign to the attribute status
-        private string _underConstruction = "Under Construction";
-        public string UnderConstruction { get; private set; }
-
-        // A string used to assign to the attribute status
-        private string _sent = "Sent";
-        public string Sent { get; private set; }
+        private int _underConstruction = 0;
+        public int UnderConstruction { get; private set; }
+        private int _sent = 1;
+        public int Sent { get; private set; }
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
@@ -157,11 +154,11 @@ namespace AalborgZooProjekt.Model
         /// <param name="unit"></param>
         public void ChangeUnit(OrderLine orderLine, Unit unit)
         {
-            if (unit != null && orderLine.ProductVersion.Unit.Contains(unit))
+            if (unit != null && orderLine.ProductVersion.Units.Contains(unit))
                 orderLine.UnitID = unit.Id;
             else if (unit == null)
                 throw new NullReferenceException();
-            else if (!orderLine.ProductVersion.Unit.Contains(unit))
+            else if (!orderLine.ProductVersion.Units.Contains(unit))
                 throw new ProductVersionDoesNotContainGivenUnitException();
 
             //Updates the order in database

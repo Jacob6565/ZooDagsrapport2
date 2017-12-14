@@ -54,7 +54,7 @@ namespace AalborgZooProjekt.Model
             List<Product> departmentProductList = new List<Product>();
             using (var _context = new AalborgZooContainer1())
             {
-                foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Unit"))
+                foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Units"))
                 {
                     if (depProduct.Product.CheckIfProductIsActive() && String.Equals(depProduct.Department.Name, department.Name))
                         departmentProductList.Add(depProduct.Product);
@@ -68,7 +68,7 @@ namespace AalborgZooProjekt.Model
         {
             using (var _context = new AalborgZooContainer1())
             {
-                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Unit;
+                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Units;
             }
         }
 
