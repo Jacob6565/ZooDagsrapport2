@@ -23,7 +23,10 @@ namespace AalborgZooProjekt.Model
         private IOrderRepository dbRep;
 
         private string _underConstruction = "Under Construction";
+        public string UnderConstruction { get; private set; }
+
         private string _sent = "Sent";
+        public string Sent { get; private set; }
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
@@ -44,7 +47,7 @@ namespace AalborgZooProjekt.Model
                 OrderLines.Add(orderLine);
 
             //Updates the order in database
-            dbRep.UpdateOrder(this);
+            //dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -73,7 +76,7 @@ namespace AalborgZooProjekt.Model
                 OrderedByID = zookeeper.Id;
 
             //Updates the order in database
-            dbRep.UpdateOrder(this);
+            //dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -94,7 +97,7 @@ namespace AalborgZooProjekt.Model
             bool canOrderBeSend = true;
 
             //An order can not be send when in another state than "Editable"
-            if (!String.Equals(Status, _underConstruction))
+            if (String.Equals(Status, _underConstruction))
             {
                 canOrderBeSend = false;
                 throw new OrderIsNotUnderAnSendableStateException();
@@ -209,10 +212,12 @@ namespace AalborgZooProjekt.Model
         {
             if (CanOrderBeSend())
             {
-                IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
-                ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
                 Status = _sent;
                 DateOrdered = GetDate();
+
+                IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
+                //ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
+                ShoppingList shoppingList = new ShoppingList();
                 shoppingList.AddOrder(this);
 
                 //Updates the order in database

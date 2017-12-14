@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="700">
+             d:DesignHeight="600" d:DesignWidth="700"
+             DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <Grid>
         <Grid Background="#FFE5E5E5">
             <Grid.RowDefinitions>
@@ -120,7 +121,7 @@
                 <Button Content="Gem" 
                                         Margin="5,0" Padding="50,0"
                                         Grid.Column="1"/>
-                <Button Content="Bestil" 
+                <Button Command ="{Binding SendOrderCommand}" Content="Bestil" 
                                         Margin="5,0" Padding="50,0"
                                         Grid.Column="2"/>
             </Grid>
