@@ -86,7 +86,7 @@ namespace AalborgZooProjekt
             DummyUnitList.Add(new Unit() { Name = "styks" });
             DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
 
-            if (!new AalborgZooContainer1().OrderLineSet.Any(x => true))
+            if ((new AalborgZooContainer1().ProductSet.Count() == 0))
                 Populater.PopulateDatabase();
 
             string[] lines = File.ReadAllLines("../../Model/DummyStuff/DummyFruit.txt", Encoding.UTF7);

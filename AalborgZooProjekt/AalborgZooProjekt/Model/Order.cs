@@ -24,9 +24,6 @@ namespace AalborgZooProjekt.Model
         private int _sent = 1;
         public int Sent { get; private set; }
 
-        private string _sent = "Sent";
-        public string Sent { get; private set; }
-
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
         /// </summary>
