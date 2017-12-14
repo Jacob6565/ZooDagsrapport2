@@ -16,7 +16,6 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
-            //AddCommand = new RelayCommand<object>(ChangeAmount);
             DepOrderLines = GetDepProductListFromDb();
         }
 
