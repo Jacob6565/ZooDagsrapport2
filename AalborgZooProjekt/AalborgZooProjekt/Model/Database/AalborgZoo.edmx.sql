@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2017 14:28:56
--- Generated from EDMX file: C:\Users\kristoffer\Documents\GitHub\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt.Model\AalborgZoo.edmx
+-- Date Created: 12/14/2017 10:22:55
+-- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Model\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -124,8 +124,8 @@ CREATE TABLE [dbo].[ProductSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DateCreated] datetime  NOT NULL,
     [CreatedByID] int  NOT NULL,
-    [DeletedByID] int  NOT NULL,
-    [DateDeleted] datetime  NOT NULL,
+    [DeletedByID] int  NULL,
+    [DateDeleted] datetime  NULL,
     [Name] nvarchar(max)  NOT NULL
 );
 GO
@@ -158,10 +158,10 @@ CREATE TABLE [dbo].[OrderSet] (
     [DepartmentID] int  NOT NULL,
     [OrderedByID] int  NOT NULL,
     [DateOrdered] datetime  NOT NULL,
-    [DateCancelled] datetime  NOT NULL,
-    [Note] nvarchar(max)  NOT NULL,
+    [DateCancelled] datetime  NULL,
+    [Note] nvarchar(max)  NULL,
     [DateCreated] datetime  NOT NULL,
-    [DeletedByID] int  NOT NULL,
+    [DeletedByID] int  NULL,
     [Status] nvarchar(max)  NOT NULL,
     [ShoppingListId] int  NULL
 );
@@ -182,7 +182,7 @@ CREATE TABLE [dbo].[DepartmentSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [DateCreated] datetime  NOT NULL,
-    [DateDeleted] datetime  NOT NULL
+    [DateDeleted] datetime  NULL
 );
 GO
 
@@ -200,7 +200,7 @@ CREATE TABLE [dbo].[EmployeeSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DateHired] datetime  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [DateStopped] datetime  NOT NULL
+    [DateStopped] datetime  NULL
 );
 GO
 

@@ -62,9 +62,6 @@ namespace AalborgZooProjekt.ViewModel
                 orderlines.Add(tempOrderLine);
             }
 
-            if (orderlines.Count == 0)
-                throw new Exception();
-
 
             return orderlines;
         }

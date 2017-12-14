@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
