@@ -17,24 +17,26 @@ namespace AalborgZooProjekt.ViewModel
         public ZookeeperViewModel()
         {
             DepOrderLines = GetDepProductListFromDb();
-            //OrderInTheMaking.AddOrderLine();
+
+            //Simulates that an order has assigned status underconstruction as it would be given in view when "created"
+            OrderInTheMaking.Status = OrderInTheMaking.UnderConstruction;
+
+            //Simulates that Zookeeper with id = 1 it attached to order.
+            OrderInTheMaking.AttachZookeeperToOrder(new Zookeeper() {Id = 1});
+
+            //Simulates that an orderline is added to order.
+            OrderInTheMaking.AddOrderLine(new OrderLine());
         }
 
-        private Department department;
+        //Simulates a chosen departement with the needed information for the current implemented functionality
+        private Department department = new Department() {Name = "Sydamerika", Id = 100, DateCreated = DateTime.Now};
+
+        //Product repository which is used as a data access layer between Product and database in model
         private IProductRepository dbProductRep = new ProductRepository();
 
+        /*This bindinglist is used in view to illustrate the departmentspecific products for the chosen department*/
         private BindingList<OrderLine> _depOrderLines = new BindingList<OrderLine>();
-        public BindingList<OrderLine> DepOrderLines
-        {
-            get
-            {
-                return _depOrderLines;
-            } 
-            private set
-            {
-                _depOrderLines = value;
-            }
-        }
+        public BindingList<OrderLine> DepOrderLines { get {return _depOrderLines; } private set {_depOrderLines = value; }}
 
         public BindingList<OrderLine> DepOrderList { get; set; } = new BindingList<OrderLine>();
 
@@ -128,6 +130,7 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
+        //
         private Order _orderInTheMaking = new Order();
         public Order OrderInTheMaking
         {

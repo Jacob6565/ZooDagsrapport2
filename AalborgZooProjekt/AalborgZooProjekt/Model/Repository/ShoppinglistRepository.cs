@@ -10,7 +10,15 @@ namespace AalborgZooProjekt.Model
     {
         public ShoppingList GetActiveShoppingList()
         {
-            throw new NotImplementedException();
+            using(var context = new AalborgZooContainer1())
+            {
+                ShoppingList shopList = context.ShoppingListSet.Include("Orders").Last();
+
+                if (shopList != null)
+                    return shopList;
+                else
+                    throw new NullReferenceException();
+            }
         }
     }
 }

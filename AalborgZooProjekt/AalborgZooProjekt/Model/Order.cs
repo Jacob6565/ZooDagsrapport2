@@ -22,8 +22,10 @@ namespace AalborgZooProjekt.Model
 
         private IOrderRepository dbRep;
 
-        private string _underConstruction = "Under Construction";
-        private string _sent = "Sent";
+        private int _underConstruction = 0;
+        public int UnderConstruction { get; private set; }
+        private int _sent = 1;
+        public int Sent { get; private set; }
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
@@ -44,7 +46,7 @@ namespace AalborgZooProjekt.Model
                 OrderLines.Add(orderLine);
 
             //Updates the order in database
-            dbRep.UpdateOrder(this);
+            //dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -73,7 +75,7 @@ namespace AalborgZooProjekt.Model
                 OrderedByID = zookeeper.Id;
 
             //Updates the order in database
-            dbRep.UpdateOrder(this);
+            //dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -94,7 +96,7 @@ namespace AalborgZooProjekt.Model
             bool canOrderBeSend = true;
 
             //An order can not be send when in another state than "Editable"
-            if (!String.Equals(Status, _underConstruction))
+            if (String.Equals(Status, _underConstruction))
             {
                 canOrderBeSend = false;
                 throw new OrderIsNotUnderAnSendableStateException();
@@ -153,11 +155,11 @@ namespace AalborgZooProjekt.Model
         /// <param name="unit"></param>
         public void ChangeUnit(OrderLine orderLine, Unit unit)
         {
-            if (unit != null && orderLine.ProductVersion.Unit.Contains(unit))
+            if (unit != null && orderLine.ProductVersion.Units.Contains(unit))
                 orderLine.UnitID = unit.Id;
             else if (unit == null)
                 throw new NullReferenceException();
-            else if (!orderLine.ProductVersion.Unit.Contains(unit))
+            else if (!orderLine.ProductVersion.Units.Contains(unit))
                 throw new ProductVersionDoesNotContainGivenUnitException();
 
             //Updates the order in database
@@ -209,10 +211,12 @@ namespace AalborgZooProjekt.Model
         {
             if (CanOrderBeSend())
             {
-                IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
-                ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
                 Status = _sent;
                 DateOrdered = GetDate();
+
+                IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
+                //ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
+                ShoppingList shoppingList = new ShoppingList();
                 shoppingList.AddOrder(this);
 
                 //Updates the order in database
