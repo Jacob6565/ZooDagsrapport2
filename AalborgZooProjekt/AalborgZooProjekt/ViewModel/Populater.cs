@@ -76,7 +76,7 @@ namespace AalborgZooProjekt.ViewModel
                         Name = "Banan",
                         Product = prod,
                     };
-                    prodV.Units.Add(unit);
+                    prodV.Unit.Add(unit);
                     db.ProductVersionSet.Add(prodV);
 
                     db.SaveChanges();

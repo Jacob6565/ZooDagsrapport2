@@ -71,7 +71,7 @@ namespace AalborgZooProjekt.Model
         {
             using (_context)
             {
-                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Units;
+                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Unit;
             }
         }
 
