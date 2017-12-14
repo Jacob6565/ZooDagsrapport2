@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding Tester, Source={StaticResource Locator}}">
+             DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <Grid>
         <DataGrid ItemsSource="{Binding DummyOtherFoodList}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
@@ -14,10 +14,10 @@
                 <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="+" Width="25" Command="{Binding AddAmount}"/>
-                                <TextBox PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Amount}" Width="25"/>
-                                <Button Content="-" Width="25" Command="{Binding SubtractAmount}"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="SPAmountControl2">
+                                <Button Content="+" Width="25" Command="{Binding Zoo.AddCommand}" CommandParameter="{Binding ElementName=SpAmountControl2}"/>
+                                <TextBox PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting"  Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="25"/>
+                                <Button Content="-" Width="25" Command="{Binding Zoo.SubtractCommand}" CommandParameter="{Binding ElementName=SpAmountControl2}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
