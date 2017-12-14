@@ -22,8 +22,8 @@ namespace AalborgZooProjekt.Model
 
         private IOrderRepository dbRep;
 
-        private string _underConstruction = "Under Construction";
-        private string _sent = "Sent";
+        private int _underConstruction = 0;
+        private int _sent = 1;
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
@@ -153,11 +153,11 @@ namespace AalborgZooProjekt.Model
         /// <param name="unit"></param>
         public void ChangeUnit(OrderLine orderLine, Unit unit)
         {
-            if (unit != null && orderLine.ProductVersion.Unit.Contains(unit))
+            if (unit != null && orderLine.ProductVersion.Units.Contains(unit))
                 orderLine.UnitID = unit.Id;
             else if (unit == null)
                 throw new NullReferenceException();
-            else if (!orderLine.ProductVersion.Unit.Contains(unit))
+            else if (!orderLine.ProductVersion.Units.Contains(unit))
                 throw new ProductVersionDoesNotContainGivenUnitException();
 
             //Updates the order in database

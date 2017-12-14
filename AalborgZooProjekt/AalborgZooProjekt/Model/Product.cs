@@ -46,7 +46,7 @@ namespace AalborgZooProjekt.Model
             firstProductVersion.Product = this;
             firstProductVersion.ProductId = this.Id;
             firstProductVersion.IsActive = active;
-            firstProductVersion.Unit = units;
+            firstProductVersion.Units = units;
             firstProductVersion.Supplier = supplier;
 
             return firstProductVersion;
@@ -59,7 +59,7 @@ namespace AalborgZooProjekt.Model
             Copy.Name = productToCopy.Name;
             Copy.Product = productToCopy.Product;
             Copy.Supplier = productToCopy.Supplier;
-            Copy.Unit = productToCopy.Unit.ToList();
+            Copy.Units = productToCopy.Units.ToList();
             Copy.ProductId = productToCopy.ProductId;
             Copy.OrderLines = productToCopy.OrderLines.ToList();
 
@@ -94,13 +94,13 @@ namespace AalborgZooProjekt.Model
             ProductVersion newVersion, previousVersion;
             previousVersion = ProductVersions.Last();
 
-            if (!previousVersion.Unit.Contains(unitToAdd))
+            if (!previousVersion.Units.Contains(unitToAdd))
             {
                 //Copying data from previous to new
                 newVersion = DublicateProductVersion(previousVersion);
 
                 //Adding the change
-                newVersion.Unit.Add(unitToAdd);
+                newVersion.Units.Add(unitToAdd);
 
                 this.ProductVersions.Add(newVersion);
                 repository.UpdateProductVersionList(this);
@@ -193,13 +193,13 @@ namespace AalborgZooProjekt.Model
             ProductVersion newVersion, previousVersion;
             previousVersion = ProductVersions.Last();
 
-            if (previousVersion.Unit.Contains(unitToRemove))
+            if (previousVersion.Units.Contains(unitToRemove))
             {
                 //Copying data from previous to new
                 newVersion = DublicateProductVersion(previousVersion);
 
                 //Adding the change
-                newVersion.Unit.Remove(unitToRemove);
+                newVersion.Units.Remove(unitToRemove);
                 this.ProductVersions.Add(newVersion);
                 repository.UpdateProductVersionList(this);
             }
