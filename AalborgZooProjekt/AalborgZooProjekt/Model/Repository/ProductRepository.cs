@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -31,7 +33,7 @@ namespace AalborgZooProjekt.Model
 
 
         /// <summary>
-        /// Gets all product from the database that are departmentspecikproduct to a given department
+        /// Gets all product from the database that are departmentspecicproduct to a given department
         /// </summary>
         /// <param name="department"></param>
         /// <returns></returns>

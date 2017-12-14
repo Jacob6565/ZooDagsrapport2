@@ -24,8 +24,8 @@ namespace AalborgZooProjekt.Model
         public int Id { get; set; }
         public System.DateTime DateCreated { get; set; }
         public int CreatedByID { get; set; }
-        public int DeletedByID { get; set; }
-        public System.DateTime DateDeleted { get; set; }
+        public Nullable<int> DeletedByID { get; set; }
+        public Nullable<System.DateTime> DateDeleted { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

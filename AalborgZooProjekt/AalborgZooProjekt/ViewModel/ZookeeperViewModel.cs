@@ -16,7 +16,6 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
-            //AddCommand = new RelayCommand<object>(ChangeAmount);
             DepOrderLines = GetDepProductListFromDb();
 
             //Simulates that an order has assigned status underconstruction as it would be given in view when "created"
@@ -63,9 +62,6 @@ namespace AalborgZooProjekt.ViewModel
 
                 orderlines.Add(tempOrderLine);
             }
-
-            if (orderlines.Count == 0)
-                throw new Exception();
 
 
             return orderlines;
