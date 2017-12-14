@@ -18,7 +18,7 @@ namespace AalborgZooProjekt.Model.Database
         public ProductVersion()
         {
             this.OrderLines = new HashSet<OrderLine>();
-            this.Units = new HashSet<Unit>();
+            this.Unit = new HashSet<Unit>();
         }
     
         public int Id { get; set; }
@@ -33,6 +33,6 @@ namespace AalborgZooProjekt.Model.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderLine> OrderLines { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<Unit> Unit { get; set; }
     }
 }

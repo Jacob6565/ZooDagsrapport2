@@ -33,7 +33,7 @@ namespace AalborgZooProjekt.Model
 
 
         /// <summary>
-        /// Gets all product from the database that are departmentspecikproduct to a given department
+        /// Gets all product from the database that are departmentspecicproduct to a given department
         /// </summary>
         /// <param name="department"></param>
         /// <returns></returns>
@@ -71,7 +71,7 @@ namespace AalborgZooProjekt.Model
         {
             using (_context)
             {
-                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Unit;
+                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Units;
             }
         }
 

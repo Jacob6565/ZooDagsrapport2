@@ -56,7 +56,7 @@ namespace AalborgZooProjekt
 
         public List<Model.DummyOrder> DummyHistoryList { get; set; } = new List<Model.DummyOrder>();
 
-        ObservableCollection<Model.Database.Unit> DummyUnitList = new ObservableCollection<Model.Database.Unit>();
+        ObservableCollection<Unit> DummyUnitList = new ObservableCollection<Unit>();
 
 
         public List<Employee> MockTestEmployee
@@ -81,9 +81,9 @@ namespace AalborgZooProjekt
 
         public DummyViewModel()
         {
-            DummyUnitList.Add(new Model.Database.Unit() { Name = "kg" });
-            DummyUnitList.Add(new Model.Database.Unit() { Name = "styks" });
-            DummyUnitList.Add(new Model.Database.Unit() { Name = "kasse(r)" });
+            DummyUnitList.Add(new Unit() { Name = "kg" });
+            DummyUnitList.Add(new Unit() { Name = "styks" });
+            DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
 
             //PopulateDatabase();
 

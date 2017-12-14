@@ -18,7 +18,7 @@ namespace AalborgZooProjekt.Model
 
         public int Id;
         public string Name { get; set; }
-        public ObservableCollection<Database.Unit> Units { get; set; }
+        public ObservableCollection<Unit> Units { get; set; }
         public Unit unit;
 
         public event PropertyChangedEventHandler PropertyChanged;

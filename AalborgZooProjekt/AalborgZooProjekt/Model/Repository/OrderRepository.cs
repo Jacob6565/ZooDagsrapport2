@@ -1,4 +1,5 @@
-﻿using AalborgZooProjekt.Model.Database;
+﻿using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace AalborgZooProjekt.Model
         /// Adds a not yet excisting order to the database
         /// </summary>
         /// <param name="order"></param>
-        public void AddOrder(Model.Database.Order order)
+        public void AddOrder(Order order)
         {
             using (_context)
             {
@@ -38,7 +39,7 @@ namespace AalborgZooProjekt.Model
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
-        public Database.Order GetOrder(int orderID)
+        public Order GetOrder(int orderID)
         {
             using (_context)
             {

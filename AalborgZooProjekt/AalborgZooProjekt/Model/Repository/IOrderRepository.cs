@@ -8,8 +8,8 @@ namespace AalborgZooProjekt.Model
 {
     public interface IOrderRepository
     {
-        void AddOrder(Database.Order order);
-        Database.Order GetOrder(int orderID);
+        void AddOrder(Order order);
+        Order GetOrder(int orderID);
         void UpdateOrder(Order order);
     }
 }
