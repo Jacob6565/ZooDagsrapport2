@@ -20,14 +20,14 @@
         </Viewbox>
 
         <DataGrid Margin="0,0,10,0"
-                     Grid.Row="1" ItemsSource="{Binding DepOrderList, Mode=TwoWay}" Name="dgOrderList" AutoGenerateColumns="False">
+                     Grid.Row="1" ItemsSource="{Binding DepOrderList, Mode=TwoWay}" Name="dgOrderList" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Navn" Binding="{Binding ProductVersion.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Navn" Binding="{Binding ProductVersion.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Enhed"  Binding="{Binding Quantity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Enhed" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox />
+                            <ComboBox ItemsSource="{Binding ProductVersion.Unit}" SelectedIndex="1" SelectedValue="{Binding Unit/Id}" SelectedValuePath="Id" DisplayMemberPath="Name"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

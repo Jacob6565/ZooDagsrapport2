@@ -23,7 +23,7 @@ namespace AalborgZooProjekt.Model
         /// Adds a not yet excisting order to the database
         /// </summary>
         /// <param name="order"></param>
-        public void AddOrder(Order order)
+        public void AddOrder(Model.Database.Order order)
         {
             using (_context)
             {
@@ -38,7 +38,7 @@ namespace AalborgZooProjekt.Model
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
-        public Order GetOrder(int orderID)
+        public Database.Order GetOrder(int orderID)
         {
             using (_context)
             {

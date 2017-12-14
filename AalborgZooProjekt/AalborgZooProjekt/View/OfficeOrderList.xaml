@@ -5,15 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
-             DataContext="{Binding OfficeTester, Source={StaticResource Locator}}">
+             DataContext="{Binding OfficeTester, Source={StaticResource Locator}}"
+             x:Name="OfficeViewOrderList">
         <TabControl x:Name="tabControl" Margin="5,5,5,10" VerticalAlignment="Top"> 
             <TabItem Header="Samlet" >
                 <Grid>
-                    <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>   
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="25"/>
                     </Grid.RowDefinitions>
-                        <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding OrderList}" HeadersVisibility="None" Grid.Row="0">
+                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding OrderList}" HeadersVisibility="None" Grid.Row="0">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Vare" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -22,11 +23,10 @@
                                                 <Expander.Header>
                                                     <Grid>
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                            <TextBlock Text="{Binding Good}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
-                                                            <TextBlock Text="Enhed og Antal: 15 kg." Foreground="White" VerticalAlignment="Center"/>
+                                                            <TextBlock  Text="{Binding ProductVersion.ProductId}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                            <Button Content="Rediger" />
+                                                            <Button Content="Rediger" Command="{Binding OfficeTester.EditOrder, Source={StaticResource Locator}}" CommandParameter="{Binding Mode=OneWay}"/>
                                                             <Button>
                                                                 <StackPanel Orientation="Horizontal">
                                                                     <TextBlock Text="Godkend"/>
@@ -36,7 +36,7 @@
                                                         </StackPanel>
                                                     </Grid>
                                                 </Expander.Header>
-                                                <DataGrid Margin="25,0,0,0" VerticalAlignment="Top" ItemsSource="{Binding Orders}" 
+                                                <DataGrid Margin="25,0,0,0" VerticalAlignment="Top" ItemsSource="{Binding}" 
                                                             AutoGenerateColumns="True" ScrollViewer.CanContentScroll="False"
                                                             VerticalScrollBarVisibility="Disabled" CanUserResizeRows="False" MinRowHeight="18" />
                                             </Expander>
