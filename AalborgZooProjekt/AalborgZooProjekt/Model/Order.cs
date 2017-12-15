@@ -7,14 +7,14 @@ namespace AalborgZooProjekt.Model
     public partial class Order : IOrder
     {
         public Order(Department department) : this(new OrderRepository(), department) { }
-        public Order(IOrderRepository orderRep, Department department) : this()
+        public Order(IOrderRepository rep, Department department) : this()
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
             Status = _underConstruction;        
         }
 
-        private IOrderRepository dbRep = new OrderRepository();
+        private IOrderRepository orderRep = new OrderRepository();
 
 
         private int _underConstruction = 0;
@@ -105,34 +105,6 @@ namespace AalborgZooProjekt.Model
         }
 
         /// <summary>
-        /// Changes the quantity of an orderline in the current order
-        /// </summary>
-        /// <param name="orderLine"></param>
-        /// <param name="amount"></param>
-        public void ChangeAmount(OrderLine orderLine, int amount)
-        {
-            if (amount > 0)
-                orderLine.Quantity = amount;
-            else if (amount <= 0)
-                throw new ArgumentOutOfRangeException();
-        }
-
-        /// <summary>
-        /// Changes the unit of an orderline in the current order
-        /// </summary>
-        /// <param name="orderLine"></param>
-        /// <param name="unit"></param>
-        public void ChangeUnit(OrderLine orderLine, Unit unit)
-        {
-            if (unit != null && orderLine.ProductVersion.Units.Contains(unit))
-                orderLine.UnitID = unit.Id;
-            else if (unit == null)
-                throw new NullReferenceException();
-            else if (!orderLine.ProductVersion.Units.Contains(unit))
-                throw new ProductVersionDoesNotContainGivenUnitException();
-        }
-
-        /// <summary>
         /// Removes orderline from the current order
         /// </summary>
         /// <param name="orderLine"></param>
@@ -171,20 +143,17 @@ namespace AalborgZooProjekt.Model
                 Status = _sent;
                 DateOrdered = GetDate();
 
-                IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
-                //ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
-
                 //Temporary
                 if (shoppingList == null)
                 {
-                    shoppingList = new ShoppingList();
+                    shoppingList = new ShoppingList(new ShoppinglistRepository());
                 }
 
                 shoppingList.AddOrder(this);
 
                 //Updates the order in database and adds it to shoppinglist in database
-                dbRep.AddOrder(this);
-                dbShopListRep.Update(shoppingList);
+                //orderRep.AddOrder(this);
+                //shoppingList.shoppingListRep.Update(shoppingList);
             }
         }
     }
