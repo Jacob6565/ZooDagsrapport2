@@ -7,6 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
     xmlns:view="clr-namespace:AalborgZooProjekt.View"
+    xmlns:local="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
     mc:Ignorable="d ignore"
         Height="768"
         Width="1024"
@@ -41,14 +42,14 @@
                 </Grid.RowDefinitions>
 
                 <!-- Watch / Clock -->
-                <TextBlock Margin="10" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
+                <TextBlock Margin="10" Text="{Binding  Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
                     <TextBlock.Style>
                         <Style>
                             <Setter Property="TextBlock.FontSize" Value="20"/>
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <view:History Grid.Row="1"/>
+                <local:History Grid.Row="1"/>
             </Grid>
 
             <GridSplitter Width="10"
@@ -100,96 +101,7 @@
                         </ControlTemplate>
                     </TabControl.Template>
                     <TabItem Header="Foderbestilling" Grid.Column="0" Margin="0,0,6.4,0.2">
-                        <view:FeedTab/>
-                        <!--<ScrollViewer>
-                            <Grid Background="#FFE5E5E5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="2*"/>
-                                    <RowDefinition Height="10"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
-
-                                <Grid Grid.Row="0" MaxHeight="500">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*" MinWidth="300"/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="3*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid Grid.Column="0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="50"/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        
-                                        --><!-- Department specific list / All products / All goods --><!--
-                                        <Viewbox>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="20"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <RadioButton Content="Foretrukne" VerticalAlignment="Center" Style="{StaticResource {x:Type ToggleButton}}" IsChecked="True" Margin="10, 0"/>
-                                                    <Button Width="20" Grid.Column="1" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                                                        <Image Source="/AalborgZooProjekt;component/Img/wrench icon.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-10,-10"/>
-                                                    </Button>
-                                                    <RadioButton Content="Alle varer" VerticalAlignment="Center" Grid.Column="2" Style="{StaticResource {x:Type ToggleButton}}" IsChecked="False" Margin="10, 0"/>
-                                                </Grid>
-                                            </StackPanel>
-                                        </Viewbox>
-                                        <ScrollViewer Grid.Row="1">
-                                            <view:FeedAndRawfeedTab/>
-                                        </ScrollViewer>
-                                    </Grid>
-                                    <view:OrderList Grid.Column="2"/>
-                                </Grid>
-
-                                <GridSplitter Grid.Row="1"
-                                          Height="10"
-                                          HorizontalAlignment="Stretch"/>
-
-                                <StackPanel Orientation="Vertical" Grid.Row="2">
-                                    <Grid x:Name="ExpanderGrid">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" 
-                                              Margin="0,2">
-                                            <Grid>
-                                                <TextBox x:Name="BemærkningerExpanderTextbox"
-                                            TextWrapping="Wrap" 
-                                            VerticalScrollBarVisibility="Auto" Height="150"/>
-                                            </Grid>
-                                        </Expander>
-
-                                        <Expander x:Name="MedarbejderExpander" Header="Medarbejder" 
-                                              Margin="0,2" 
-                                              Grid.Row="1">
-                                            <Grid Height="75">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 1" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 3" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 4" Grid.Column="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                                            </Grid>
-                                        </Expander>
-                                    </Grid>
-                                </StackPanel>
-
-                                --><!--<Button Content="Bestil" Grid.Row="3" Width="100" HorizontalAlignment="Right" Margin="0, 0, 10, 0"/>--><!--
-
-                            </Grid>
-                        </ScrollViewer>-->
+                        <local:FeedTab/>
                     </TabItem>
 
                     <TabItem Header="Dyr">

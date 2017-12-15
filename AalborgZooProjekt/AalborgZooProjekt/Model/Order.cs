@@ -6,7 +6,8 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Order : IOrder
     {
-        public Order(Department department) : this()
+        public Order(Department department) : this(new OrderRepository(), department) { }
+        public Order(IOrderRepository orderRep, Department department) : this()
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
@@ -17,9 +18,22 @@ namespace AalborgZooProjekt.Model
 
 
         private int _underConstruction = 0;
-        public int UnderConstruction { get; private set; }
+        public int UnderConstruction
+        {
+            get
+            {
+                return _underConstruction;
+            }
+        }
+
         private int _sent = 1;
-        public int Sent { get; private set; }
+        public int Sent
+        {
+            get
+            {
+                return _sent;
+            }
+        }
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
@@ -162,7 +176,7 @@ namespace AalborgZooProjekt.Model
         /// <summary>
         /// When the zookeepers send the order to the shopper, it changes the order state
         /// </summary>
-        public void SendOrder()
+        public void SendOrder(ShoppingList shoppingList)
         {
             if (CanOrderBeSend())
             {
@@ -173,7 +187,11 @@ namespace AalborgZooProjekt.Model
                 //ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
 
                 //Temporary
-                ShoppingList shoppingList = new ShoppingList();
+                if (shoppingList == null)
+                {
+                    shoppingList = new ShoppingList();
+                }
+
                 shoppingList.AddOrder(this);
 
                 //Updates the order in database and adds it to shoppinglist in database

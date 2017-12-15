@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="AalborgZooProjekt.View.FeedTab"
+﻿<UserControl x:Class="AalborgZooProjekt.View.ZooKeeper.FeedTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AalborgZooProjekt.View"
+             xmlns:local="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="700"
              DataContext="{Binding Zoo, Source={StaticResource Locator}}">
@@ -31,7 +31,7 @@
 
                     <Viewbox Margin="10,5,0,5"
                                     HorizontalAlignment="Left">
-                        <TextBlock Text="{Binding Department, StringFormat='{}{0}'}" />
+                        <TextBlock Text="{Binding Department/Name, StringFormat='{}{0}'}" />
                     </Viewbox>
                     <local:FeedAndRawfeedTab  Grid.Row="1"/>
                 </Grid>
@@ -42,47 +42,8 @@
                                           Height="10"
                                           HorizontalAlignment="Stretch"/>
 
-            <!--<Grid x:Name="ExpanderGrid"
-                                  Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" 
-                                          Margin="0,2">
-                    <Grid>
-                        <TextBox x:Name="BemærkningerExpanderTextbox" 
-                                        TextWrapping="WrapWithOverflow" 
-                                        VerticalScrollBarVisibility="Auto"/>
-                    </Grid>
-                </Expander>
-
-                <Expander x:Name="MedarbejderExpander" Header="Medarbejder" 
-                                          Margin="0,2" 
-                                          Grid.Row="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <CheckBox Content="Medarbejder 1" Grid.Column="0"/>
-                        <CheckBox Content="Medarbejder 2" Grid.Column="1"/>
-                        <CheckBox Content="Medarbejder 3" Grid.Column="2"/>
-                        <CheckBox Content="Medarbejder 4" Grid.Column="3"/>
-                    </Grid>
-                </Expander>
-            </Grid>-->
             <StackPanel Orientation="Vertical" Grid.Row="2">
-                <Grid x:Name="ExpanderGrid">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" 
+                <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" 
                                               Margin="0,2">
                         <Grid>
                             <TextBox x:Name="BemærkningerExpanderTextbox"
@@ -94,21 +55,26 @@
                     <Expander x:Name="MedarbejderExpander" Header="Medarbejder" 
                                               Margin="0,2" 
                                               Grid.Row="1">
-                        <Grid Height="75">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
 
-                            <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 1" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                            <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                            <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 3" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                            <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 4" Grid.Column="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                        </Grid>
+                        <ListView ItemsSource="{Binding DepEmployeeList}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Name}" Height="50"/>
+                            </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                            <!--<StackPanel Orientation="Horizontal">
+                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 1" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
+                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
+                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 3" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
+                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 4" Grid.Column="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
+                            </StackPanel>-->
                     </Expander>
-                </Grid>
             </StackPanel>
 
             <Grid Grid.Row="3">

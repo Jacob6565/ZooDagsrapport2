@@ -10,7 +10,7 @@ namespace AalborgZooProjekt.Interfaces
         void RemoveZookeeperFromOrder();
         void RemoveOrderLine(OrderLine orderLine);
         bool CanOrderBeSend();
-        void SendOrder();
+        void SendOrder(ShoppingList shoppingList);
         bool CanOrderBeChanged();
         void ChangeUnit(OrderLine orderLine, Unit unit);
         void ChangeAmount(OrderLine orderLine, int amount);

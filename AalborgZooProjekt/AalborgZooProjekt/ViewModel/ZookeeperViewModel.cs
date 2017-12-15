@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Controls;
@@ -60,10 +61,40 @@ namespace AalborgZooProjekt.ViewModel
 
 
         /*This bindinglist is used in view to illustrate the departmentspecific products for the chosen department*/
-        private BindingList<OrderLine> _depOrderLines = new BindingList<OrderLine>();
-        public BindingList<OrderLine> DepOrderLines { get {return _depOrderLines; } private set {_depOrderLines = value; }}
-
+        public BindingList<OrderLine> DepOrderLines { get; set; } = new BindingList<OrderLine>();
         public BindingList<OrderLine> DepOrderList { get; set; } = new BindingList<OrderLine>();
+
+        public BindingList<Department> _departments = new BindingList<Department>();
+        public BindingList<Department> Department
+        {
+            get
+            {
+                BindingList<Department> _depList = new BindingList<Department>();
+                using (var db = new AalborgZooContainer1())
+                {
+                    foreach (Department dep in db.DepartmentSet.Include("ZooKeepers"))
+                    {
+                        
+                        _depList.Add(dep);
+                    }                    
+                }
+                return _depList;
+            }
+        }
+
+        private BindingList<Employee> _depEmployeeList = new BindingList<Employee>();
+        public BindingList<Employee> DepEmployeeList
+        {
+            get
+            {
+                BindingList<Employee> _empList = new BindingList<Employee>();
+                foreach (Employee emp in Department[0].Zookeepers)
+                {
+                    _empList.Add(emp);
+                }
+                return _empList;
+            }
+        }
 
         /// <summary>
         /// Gets the department specific product for a given department, via the 
@@ -98,11 +129,11 @@ namespace AalborgZooProjekt.ViewModel
             OrderLine ol = box.DataContext as OrderLine;
             if (sp.Children.OfType<Button>().First().IsFocused)
             {
-                ol.Quantity++;
+                ol.ChangeQuantity++; 
             }
             else
             {
-                ol.Quantity--;
+                ol.ChangeQuantity--;
             }
             ChangeOrderList(box);
         }
@@ -173,7 +204,7 @@ namespace AalborgZooProjekt.ViewModel
             if (CanBeSend)
             {
                 CanBeSend = false;
-                order.SendOrder();
+                order.SendOrder(new ShoppingList());
                 OrderInTheMaking = new Order(department);
                 throw new Exception();
             }
@@ -197,4 +228,3 @@ namespace AalborgZooProjekt.ViewModel
         }
     }
 }
-
