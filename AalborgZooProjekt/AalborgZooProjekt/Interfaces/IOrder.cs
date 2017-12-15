@@ -12,8 +12,5 @@ namespace AalborgZooProjekt.Interfaces
         bool CanOrderBeSend();
         void SendOrder(ShoppingList shoppingList);
         bool CanOrderBeChanged();
-        void ChangeUnit(OrderLine orderLine, Unit unit);
-        void ChangeAmount(OrderLine orderLine, int amount);
-
     }
 }

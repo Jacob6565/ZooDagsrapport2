@@ -9,9 +9,9 @@ namespace AalborgZooProjekt.Model
 {
     public partial class OrderLine : INotifyPropertyChanged
     {
-    public int ChangeQuantity
+        public int ChangeQuantity
         {
-            get => Quantity;
+            get { return Quantity; }
             set
             {
                 if (value >= 0)
@@ -21,8 +21,8 @@ namespace AalborgZooProjekt.Model
                 }
                 else Quantity = 0;
             }
-
         }
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -9,6 +9,13 @@ namespace AalborgZooProjekt.Model
 {
     public partial class ShoppingList : IShoppingList
     {
+        public ShoppingList(IShoppingListRepository repository)
+        {
+            shoppingListRep = repository;
+        }
+        
+        public IShoppingListRepository shoppingListRep { get; private set; }
+
         public void AddOrder(Order order)
         {
             this.Orders.Add(order);
