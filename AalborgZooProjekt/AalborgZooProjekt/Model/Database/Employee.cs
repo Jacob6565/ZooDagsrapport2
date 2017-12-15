@@ -17,6 +17,6 @@ namespace AalborgZooProjekt.Model
         public int Id { get; set; }
         public System.DateTime DateHired { get; set; }
         public string Name { get; set; }
-        public System.DateTime DateStopped { get; set; }
+        public Nullable<System.DateTime> DateStopped { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,12 +43,12 @@ namespace AalborgZooProjekt.Model
         {
             using (_context)
             {
-                var result = _context.OrderSet.Find(orderID);
+                Order order = _context.OrderSet.Find(orderID);
 
-                if (result == null)
+                if (order == null)
                     throw new OrderDoesNotExistInDatabaseException();
 
-                return result;
+                return order;
             }
         }
 
@@ -62,13 +64,33 @@ namespace AalborgZooProjekt.Model
                 if (result != null)
                 {
                     //Updating the order
-                    result = order;
-
+                    
                     //Calls the database to save the changes
                     _context.SaveChanges();
                 }
                 else if (result == null)
                     throw new OrderDoesNotExistInDatabaseException();
+            }
+        }
+
+
+        /// <summary>
+        /// Finds an department order that is under construction and thereby not yet sent. If no such order exist it
+        /// will return null. 
+        /// The function is linear and will look through all orders in database until a satisfying order is found.
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns></returns>
+        public Order GetUnfinishedOrder(Department department)
+        {
+            using (var _context = new AalborgZooContainer1())
+            {
+                foreach (Order order in _context.OrderSet)
+                {
+                    if (order.Status == order.UnderConstruction && order.DepartmentID == department.Id)
+                        return order;
+                }
+                return null;
             }
         }
     }

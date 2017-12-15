@@ -100,7 +100,8 @@
                         </ControlTemplate>
                     </TabControl.Template>
                     <TabItem Header="Foderbestilling" Grid.Column="0" Margin="0,0,6.4,0.2">
-                        <ScrollViewer>
+                        <view:FeedTab/>
+                        <!--<ScrollViewer>
                             <Grid Background="#FFE5E5E5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="2*"/>
@@ -121,13 +122,8 @@
                                             <RowDefinition Height="50"/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-
-                                        <!--<Viewbox Margin="10,5,0,5"
-                                                HorizontalAlignment="Left">
-                                            <TextBlock Text="{Binding Department, StringFormat='{}{0}'}" />
-                                        </Viewbox>-->
-
-                                        <!-- Department specific list / All products / All goods -->
+                                        
+                                        --><!-- Department specific list / All products / All goods --><!--
                                         <Viewbox>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                                 <Grid>
@@ -190,10 +186,10 @@
                                     </Grid>
                                 </StackPanel>
 
-                                <Button Content="Bestil" Grid.Row="3" Width="100" HorizontalAlignment="Right" Margin="0, 0, 10, 0"/>
+                                --><!--<Button Content="Bestil" Grid.Row="3" Width="100" HorizontalAlignment="Right" Margin="0, 0, 10, 0"/>--><!--
 
                             </Grid>
-                        </ScrollViewer>
+                        </ScrollViewer>-->
                     </TabItem>
 
                     <TabItem Header="Dyr">

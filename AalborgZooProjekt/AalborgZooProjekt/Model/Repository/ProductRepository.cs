@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,16 +15,13 @@ namespace AalborgZooProjekt.Model
     /// </summary>
     public class ProductRepository : IProductRepository
     {
-        private AalborgZooContainer1 _context;
-
         public ProductRepository()
         {
-            _context = new AalborgZooContainer1();
         }
 
         public void AddProduct(Product product)
         {
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
                 _context.ProductSet.Add(product);
                 _context.SaveChanges();
@@ -31,14 +30,14 @@ namespace AalborgZooProjekt.Model
 
 
         /// <summary>
-        /// Gets all product from the database that are departmentspecikproduct to a given department
+        /// Gets all product from the database that are departmentspecicproduct to a given department
         /// </summary>
         /// <param name="department"></param>
         /// <returns></returns>
         public List<Product> GetDepartmentProducts(Department department)
         {
             List<Product> departmentProductList = new List<Product>();
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
                 foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet)
                 {
@@ -53,9 +52,9 @@ namespace AalborgZooProjekt.Model
         public List<Product> GetDepartmentProductsWithUnits(Department department)
         {
             List<Product> departmentProductList = new List<Product>();
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
-                foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Unit"))
+                foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Units"))
                 {
                     if (depProduct.Product.CheckIfProductIsActive() && String.Equals(depProduct.Department.Name, department.Name))
                         departmentProductList.Add(depProduct.Product);
@@ -67,9 +66,9 @@ namespace AalborgZooProjekt.Model
 
         public ICollection<Unit> GetProductUnits(Product product)
         {
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
-                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Unit;
+                return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Units;
             }
         }
 
@@ -79,7 +78,7 @@ namespace AalborgZooProjekt.Model
         /// <param name="product"></param>
         public void UpdateProductVersionList(Product product)
         {
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
                 //Finds the current product in the database.
                 Product Outdated = _context.ProductSet.SingleOrDefault(x => x.Id == product.Id);

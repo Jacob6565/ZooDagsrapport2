@@ -4,144 +4,334 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt.ViewModel
 {
-    public class Populater
+    public static class Populater
     {
+        public static AalborgZooContainer1 db = new AalborgZooContainer1();
         static public void PopulateDatabase()
         {
-            using (var db = new AalborgZooContainer1())
+            using (db)
             {
-                for (int i = 5; i < 10; i++)
+                /* Shopper */
+
+                Shopper shp = new Shopper()
                 {
-                    Employee emp = new Employee()
-                    {
-                        DateHired = DateTime.Today,
-                        Name = $"Emp{i}",
-                        DateStopped = DateTime.Today,
-                    };
-                    db.EmployeeSet.Add(emp);
+                    DateHired = DateTime.Today.AddMonths(-1),
+                    Name = "Tobias Palludan",
+                    Password = "1234",
+                    Username = "LoginName"
+                };
+                db.EmployeeSet.Add(shp);
 
-                    Product prod = new Product()
-                    {
-                        CreatedByID = i,
-                        DateDeleted = DateTime.Today,
-                        DateCreated = DateTime.Today,
-                        DeletedByID = i,
-                        Name = "Banan",
-                    };
-                    db.ProductSet.Add(prod);
+                shp = new Shopper()
+                {
+                    DateHired = DateTime.Today.AddMonths(-1),
+                    Name = "Mikkel Jessen",
+                    Password = "1234",
+                    Username = "LoginName",
+                };
+                db.EmployeeSet.Add(shp);
 
-                    Department dep = new Department()
-                    {
-                        Name = "Sydamerika",
-                        DateDeleted = DateTime.Today,
-                        DateCreated = DateTime.Today,
-                    };
-                    db.DepartmentSet.Add(dep);
+                db.SaveChanges();
+                /* Departments */
 
-                    Zookeeper zookeeper = new Zookeeper()
-                    {
-                        Name = "Tuan",
-                        DateHired = DateTime.Today,
-                        DateStopped = DateTime.Today,
-                        DepartmentId = dep.Id,
-                    };
-                    db.EmployeeSet.Add(zookeeper);
+                Department depSydAmerika = new Department()
+                {
+                    DateCreated = DateTime.Today.AddMonths(-1),
+                    Name = "Sydamerika",
+                };
+                db.DepartmentSet.Add(depSydAmerika);
 
-                    //We only want a single kg instance.
-                    Unit unit;
-                    if (db.UnitSet.Any())
-                    {
-                        unit = db.UnitSet.First();
-                    }
-                    else
-                    {
-                        unit = new Unit()
-                        {
-                            Name = "kg",
-                        };
-                        db.UnitSet.Add(unit);
-                    }
+                Department depAfrika = new Department()
+                {
+                    DateCreated = DateTime.Today.AddMonths(-1),
+                    Name = "Sydamerika",
+                };
+                db.DepartmentSet.Add(depAfrika);
 
-                    ProductVersion prodV = new ProductVersion()
-                    {
-                        IsActive = true,
-                        Supplier = i.ToString(),
-                        CreatedByID = i,
-                        DateCreated = DateTime.Today,
-                        ProductId = prod.Id,
-                        Name = "Banan",
-                        Product = prod,
-                    };
-                    prodV.Unit.Add(unit);
-                    db.ProductVersionSet.Add(prodV);
+                db.SaveChanges();
+                /* Zookeepers */
 
-                    db.SaveChanges();
+                Zookeeper zkp = new Zookeeper()
+                {
+                    DateHired = DateTime.Today.AddMonths(-1),
+                    Department = depSydAmerika,
+                    Name = "Anh Tuan Truong"
+                };
+                db.EmployeeSet.Add(zkp);
 
-                    Shopper shopper = new Shopper()
-                    {
-                        DateHired = DateTime.Today,
-                        DateStopped = DateTime.Today,
-                        Name = i.ToString(),
-                        Password = i.ToString(),
-                        Username = i.ToString()
-                    };
-                    db.EmployeeSet.Add(shopper);
+                zkp = new Zookeeper()
+                {
+                    DateHired = DateTime.Today.AddMonths(-1),
+                    Department = depSydAmerika,
+                    Name = "Casper Corfitz Christensen"
+                };
+                db.EmployeeSet.Add(zkp);
 
-                    ShoppingList list = new ShoppingList()
-                    {
-                        CreatedByID = i,
-                        DateCreated = DateTime.Today,
-                        Status = "Editable",
-                        ShopperId = shopper.Id,
-                    };
-                    db.ShoppingListSet.Add(list);
+                zkp = new Zookeeper()
+                {
+                    DateHired = DateTime.Today.AddMonths(-1),
+                    Department = depSydAmerika,
+                    Name = "Kristoffer Jensen"
+                };
+                db.EmployeeSet.Add(zkp);
 
+                zkp = new Zookeeper()
+                {
+                    DateHired = DateTime.Today.AddMonths(-1),
+                    Department = depSydAmerika,
+                    Name = "Jacob Gosch"
+                };
+                db.EmployeeSet.Add(zkp);
 
-                    Order order = new Order()
-                    {
-                        DepartmentID = dep.Id,
-                        OrderedByID = zookeeper.Id,
-                        DateOrdered = DateTime.Today,
-                        DateCancelled = DateTime.Today,
-                        Note = i.ToString(),
-                        DateCreated = DateTime.Today,
-                        DeletedByID = shopper.Id,
-                        Status = i.ToString(),
-                        ShoppingListId = 0,
-                    };
-                    db.OrderSet.Add(order);
+                Zookeeper zkpAfrika = new Zookeeper()
+                {
+                    DateHired = DateTime.Today.AddMonths(-1),
+                    Department = depAfrika,
+                    Name = "Afrika Medarbejder, burde ikke vises"
+                };
+                db.EmployeeSet.Add(zkpAfrika);
 
+                db.SaveChanges();
+                /* Product */
 
+                Product prodBanan = new Product()
+                {
+                    CreatedByID = zkp.Id,
+                    DateCreated = DateTime.Today.AddMonths(-1),
+                    Name = "Banan",
+                };
+                db.ProductSet.Add(prodBanan);
 
-                    OrderLine orderLine = new OrderLine()
-                    {
+                Product prodPære = new Product()
+                {
+                    CreatedByID = zkp.Id,
+                    DateCreated = DateTime.Today.AddMonths(-1),
+                    Name = "Pære",
+                };
+                db.ProductSet.Add(prodPære);
 
-                        Quantity = i,
-                        UnitID = unit.Id,
-                        ProductVersionId = prodV.Id,
-                    };
-                    db.OrderLineSet.Add(orderLine);
+                Product prodÆble = new Product()
+                {
+                    CreatedByID = zkp.Id,
+                    DateCreated = DateTime.Today.AddMonths(-1),
+                    Name = "Æble",
+                };
+                db.ProductSet.Add(prodÆble);
 
-                    PasswordChanged pwc = new PasswordChanged()
-                    {
-                        DateChanged = DateTime.Today,
-                        ShopperId = shopper.Id,
-                    };
-                    db.PasswordChangedSet.Add(pwc);
+                Product prodAbrikos = new Product()
+                {
+                    CreatedByID = zkp.Id,
+                    DateCreated = DateTime.Today.AddMonths(-1),
+                    Name = "Abrikos",
+                };
+                db.ProductSet.Add(prodAbrikos);
 
-                    DepartmentSpecificProduct depSpecificProduct = new DepartmentSpecificProduct(dep, prod)
-                    {
-                        ProductId = prod.Id,
-                        DepartmentId = dep.Id
-                    };
-                    db.DepartmentSpecificProductSet.Add(depSpecificProduct);
+                Product prodTuttiFruttiMix = new Product()
+                {
+                    CreatedByID = zkp.Id,
+                    DateCreated = DateTime.Today.AddMonths(-1),
+                    Name = "TuttiFruttiMix, burde ikke vises",
+                };
+                db.ProductSet.Add(prodTuttiFruttiMix);
 
-                    db.SaveChanges();
+                db.SaveChanges();
+                /* Units */
 
-                }
+                ICollection<Unit> unitCollection = new List<Unit>();
+
+                Unit unitKg = new Unit()
+                {
+                    Name = "kg"
+                };
+                db.UnitSet.Add(unitKg);
+                unitCollection.Add(unitKg);
+
+                Unit unitKs = new Unit()
+                {
+                    Name = "kasse(r)"
+                };
+                db.UnitSet.Add(unitKs);
+                unitCollection.Add(unitKs);
+
+                Unit unitStk = new Unit()
+                {
+                    Name = "styks"
+                };
+                db.UnitSet.Add(unitStk);
+                unitCollection.Add(unitStk);
+
+                db.SaveChanges();
+                /* Product versions */
+
+                ProductVersion prodvBanan = new ProductVersion()
+                {
+                    Name = "Banan",
+                    Product = prodBanan,
+                    IsActive = true,
+                    Supplier = "FrugtKarl",
+                    Units = unitCollection,
+                    DateCreated = DateTime.Today,
+                    CreatedByID = shp.Id
+                };
+                db.ProductVersionSet.Add(prodvBanan);
+
+                ProductVersion prodvÆble = new ProductVersion()
+                {
+                    Name = "Æble",
+                    Product = prodÆble,
+                    IsActive = true,
+                    Supplier = "FrugtKarl",
+                    Units = unitCollection,
+                    DateCreated = DateTime.Today,
+                };
+                db.ProductVersionSet.Add(prodvBanan);
+
+                ProductVersion prodvPære = new ProductVersion()
+                {
+                    Name = "Pære",
+                    Product = prodÆble,
+                    IsActive = true,
+                    Supplier = "FrugtKarl",
+                    DateCreated = DateTime.Today,
+                    Units = unitCollection
+                };
+                db.ProductVersionSet.Add(prodvBanan);
+
+                ProductVersion prodvAbrikos = new ProductVersion()
+                {
+                    Name = "Abrikos",
+                    Product = prodÆble,
+                    IsActive = true,
+                    Supplier = "FrugtKarl",
+                    DateCreated = DateTime.Today,
+                    Units = unitCollection
+                };
+                db.ProductVersionSet.Add(prodvBanan);
+
+                ProductVersion prodvTuttiFrutti = new ProductVersion()
+                {
+                    Name = "Tutti Frutti Mix, burde ikke vises",
+                    Product = prodÆble,
+                    IsActive = true,
+                    Supplier = "Tivoli",
+                    DateCreated = DateTime.Today,
+                    Units = unitCollection
+                };
+                db.ProductVersionSet.Add(prodvBanan);
+
+                db.SaveChanges();
+                /* Department Specific Products */
+
+                DepartmentSpecificProduct departmentSpecificProduct = new DepartmentSpecificProduct()
+                {
+                    Department = depSydAmerika,
+                    Product = prodBanan
+                };
+                db.DepartmentSpecificProductSet.Add(departmentSpecificProduct);
+
+                departmentSpecificProduct = new DepartmentSpecificProduct()
+                {
+                    Department = depSydAmerika,
+                    Product = prodÆble
+                };
+                db.DepartmentSpecificProductSet.Add(departmentSpecificProduct);
+
+                departmentSpecificProduct = new DepartmentSpecificProduct()
+                {
+                    Department = depSydAmerika,
+                    Product = prodPære
+                };
+                db.DepartmentSpecificProductSet.Add(departmentSpecificProduct);
+
+                departmentSpecificProduct = new DepartmentSpecificProduct()
+                {
+                    Department = depSydAmerika,
+                    Product = prodAbrikos
+                };
+                db.DepartmentSpecificProductSet.Add(departmentSpecificProduct);
+
+                departmentSpecificProduct = new DepartmentSpecificProduct()
+                {
+                    Department = depAfrika,
+                    Product = prodTuttiFruttiMix
+                };
+                db.DepartmentSpecificProductSet.Add(departmentSpecificProduct);
+
+                db.SaveChanges();
+                /* Shopping list */
+
+                ShoppingList shoppingList = new ShoppingList()
+                {
+                    CreatedByID = shp.Id,
+                    DateCreated = DateTime.Today,
+                    Shopper = shp,
+                    Status = 2,
+
+                };
+                db.ShoppingListSet.Add(shoppingList);
+
+                db.SaveChanges();
+                /* Orders */
+
+                Order order = new Order()
+                {
+                    DateCreated = DateTime.Today,
+                    Status = 2,
+                    DepartmentID = depSydAmerika.Id,
+                    OrderedByID = zkp.Id,
+                    ShoppingList = shoppingList,
+                    DateOrdered = DateTime.Today,
+                };
+                db.OrderSet.Add(order);
+
+                db.SaveChanges();
+                /* OrderLine */
+
+                OrderLine orderLineBanan = new OrderLine()
+                {
+                    Order = order,
+                    ProductVersion = prodvBanan,
+                    Quantity = 15,
+                    UnitID = unitKg.Id
+                };
+
+                OrderLine orderLineÆble = new OrderLine()
+                {
+                    Order = order,
+                    ProductVersion = prodvÆble,
+                    Quantity = 15,
+                    UnitID = unitKg.Id
+                };
+
+                OrderLine orderLinePære = new OrderLine()
+                {
+                    Order = order,
+                    ProductVersion = prodvPære,
+                    Quantity = 15,
+                    UnitID = unitKg.Id
+                };
+
+                OrderLine orderLineAbrikos = new OrderLine()
+                {
+                    Order = order,
+                    ProductVersion = prodvAbrikos,
+                    Quantity = 15,
+                    UnitID = unitKg.Id
+                };
+
+                OrderLine orderLineTuttiFruttiMix = new OrderLine()
+                {
+                    Order = order,
+                    ProductVersion = prodvTuttiFrutti,
+                    Quantity = 15,
+                    UnitID = unitKg.Id
+                };
+
+                db.SaveChanges();
             }
         }
     }
