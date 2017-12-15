@@ -216,6 +216,9 @@
     <Compile Include="View\ZooKeeper\FruitFoodList.xaml.cs">
       <DependentUpon>FruitFoodList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZooKeeper\OrderList.xaml.cs">
+      <DependentUpon>OrderList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ZooKeeper\OtherFoodList.xaml.cs">
       <DependentUpon>OtherFoodList.xaml</DependentUpon>
     </Compile>
@@ -234,9 +237,6 @@
     <Compile Include="View\OfficeView.xaml.cs">
       <DependentUpon>OfficeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OrderList.xaml.cs">
-      <DependentUpon>OrderList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Remarks.xaml.cs">
       <DependentUpon>Remarks.xaml</DependentUpon>
     </Compile>
@@ -246,6 +246,10 @@
     <Page Include="View\ZooKeeper\FruitFoodList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZooKeeper\OrderList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ZooKeeper\OtherFoodList.xaml">
       <SubType>Designer</SubType>
@@ -284,10 +288,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OfficeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OrderList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -187,39 +187,43 @@ namespace AalborgZooProjekt.ViewModel
                     Supplier = "FrugtKarl",
                     Units = unitCollection,
                     DateCreated = DateTime.Today,
+                    CreatedByID = shp.Id
                 };
                 db.ProductVersionSet.Add(prodvÆble);
 
                 ProductVersion prodvPære = new ProductVersion()
                 {
                     Name = "Pære",
-                    Product = prodÆble,
+                    Product = prodPære,
                     IsActive = true,
                     Supplier = "FrugtKarl",
                     DateCreated = DateTime.Today,
-                    Units = unitCollection
+                    Units = unitCollection,
+                    CreatedByID = shp.Id
                 };
                 db.ProductVersionSet.Add(prodvPære);
 
                 ProductVersion prodvAbrikos = new ProductVersion()
                 {
                     Name = "Abrikos",
-                    Product = prodÆble,
+                    Product = prodAbrikos,
                     IsActive = true,
                     Supplier = "FrugtKarl",
                     DateCreated = DateTime.Today,
-                    Units = unitCollection
+                    Units = unitCollection,
+                    CreatedByID = shp.Id
                 };
                 db.ProductVersionSet.Add(prodvAbrikos);
 
                 ProductVersion prodvTuttiFrutti = new ProductVersion()
                 {
                     Name = "Tutti Frutti Mix, burde ikke vises",
-                    Product = prodÆble,
+                    Product = prodTuttiFruttiMix,
                     IsActive = true,
                     Supplier = "Tivoli",
                     DateCreated = DateTime.Today,
-                    Units = unitCollection
+                    Units = unitCollection,
+                    CreatedByID = shp.Id
                 };
                 db.ProductVersionSet.Add(prodvTuttiFrutti);
 
