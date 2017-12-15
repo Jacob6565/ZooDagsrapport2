@@ -13,6 +13,7 @@ namespace AalborgZooProjekt.Model
     {
         public bool CheckIfProductExist(Product product)
         {
+            //Burde sådan noget har ikke være i et repository.
             var db = new AalborgZooContainer1();
 
             if (db.ProductSet.Where(x => x.Id == product.Id).First().Id == product.Id)
@@ -50,6 +51,7 @@ namespace AalborgZooProjekt.Model
 
         public void MakeProduct(int employeeID, string name)
         {
+            //Burde sådan noget har ikke være i et repository.
             var db = new AalborgZooContainer1();
 
             Product newProduct = new Product()
