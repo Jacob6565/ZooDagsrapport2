@@ -17,10 +17,19 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
-            DepOrderLines = GetDepProductListFromDb();
+            //Load departments from database
+            Departments = new BindingList<Department>(dbDepartmentRep.GetDepartments());
 
+            //Temporary, should get department from view, as you log in
+            _department = DepartmentFromName("Sydamerika");
+
+            //Load zookeepers from department
+            DepZookeeperList = new BindingList<Zookeeper>(GetDepartmentZookeepers(_department));
+
+            
             SetupOrder();
 
+            DepOrderLines = GetDepProductListFromDb();            
         }
 
         //The order that are being created/edited in the Zookeeper view
@@ -32,16 +41,32 @@ namespace AalborgZooProjekt.ViewModel
         }
 
         /// <summary>
+        /// Temporary way of "choosing" a department in the program
+        /// </summary>
+        /// <param name="name"></param>
+        Department DepartmentFromName(string name)
+        {
+            foreach (Department department in Departments)
+            {
+                if (string.Equals(name, department.Name))
+                    return department;
+            }
+
+            return null;
+        }
+
+
+        /// <summary>
         /// Responsible for setting up the order, if a unfinished order exist it will be loaded, otherwise there will
         /// be created a new order.
         /// </summary>
         private void SetupOrder()
         {
-            Order unfinishedOrder = dbOrderRep.GetUnfinishedOrder(department);
+            Order unfinishedOrder = dbOrderRep.GetUnfinishedOrder(_department);
 
             if (unfinishedOrder == null)
             {
-                OrderInTheMaking = new Order(department);
+                OrderInTheMaking = new Order(_department);
             }
             else if (unfinishedOrder != null)
             {
@@ -51,48 +76,60 @@ namespace AalborgZooProjekt.ViewModel
         }
 
         //Simulates a chosen departement with the needed information for the current implemented functionality
-        private Department department = new Department() {Name = "Sydamerika", Id = 100, DateCreated = DateTime.Now};
+        private Department _department = new Department();
+        public Department Department
+        {
+            get { return _department; }
+            set
+            {
+                if (value != null)
+                    _department = value;
+                else
+                    throw new NullReferenceException();
+            }
+        }
 
-        //Product repository which is used as a data access layer between Product and database in model
+        //Product repository which is used as a data access layer to access Product in database
         private IProductRepository dbProductRep = new ProductRepository();
 
-        //Order repository which is used as a data access layer between Product and database in model
+        //Order repository which is used as a data access layer to access Order in database
         private IOrderRepository dbOrderRep = new OrderRepository();
 
+        //Department repository which is used as a data access layer to access Department in database
+        private IDepartmentRepository dbDepartmentRep = new DeparmentRepository();
 
         /*This bindinglist is used in view to illustrate the departmentspecific products for the chosen department*/
         public BindingList<OrderLine> DepOrderLines { get; set; } = new BindingList<OrderLine>();
         public BindingList<OrderLine> DepOrderList { get; set; } = new BindingList<OrderLine>();
 
         public BindingList<Department> _departments = new BindingList<Department>();
-        public BindingList<Department> Department
+        public BindingList<Department> Departments
         {
             get
             {
-                BindingList<Department> _depList = new BindingList<Department>();
-                using (var db = new AalborgZooContainer1())
-                {
-                    foreach (Department dep in db.DepartmentSet.Include("ZooKeepers"))
-                    {
-                        
-                        _depList.Add(dep);
-                    }                    
-                }
-                return _depList;
+                return _departments;
+            }
+            private set
+            {
+                _departments = value;
             }
         }
 
-        private BindingList<Employee> _depEmployeeList = new BindingList<Employee>();
-        public BindingList<Employee> DepEmployeeList
+        List<Zookeeper> GetDepartmentZookeepers(Department department)
+        {
+            return department.Zookeepers.ToList();
+        }
+
+        private BindingList<Zookeeper> _depZookeeperList = new BindingList<Zookeeper>();
+        public BindingList<Zookeeper> DepZookeeperList
         {
             get
             {
-                BindingList<Employee> _empList = new BindingList<Employee>();
-                foreach (Employee emp in Department[0].Zookeepers)
-                {
-                    _empList.Add(emp);
-                }
-                return _empList;
+                return _depZookeeperList;
+            }
+            set
+            {
+                _depZookeeperList = value;
             }
         }
 
@@ -103,12 +140,7 @@ namespace AalborgZooProjekt.ViewModel
         BindingList<OrderLine> GetDepProductListFromDb()
         {
             BindingList<OrderLine> orderlines = new BindingList<OrderLine>();
-
-            department = new Department()
-            {
-                Name = "Sydamerika"
-            };
-            var prodList = dbProductRep.GetDepartmentProductsWithUnits(department);
+            var prodList = dbProductRep.GetDepartmentProductsWithUnits(_department);
             
             foreach (Product product in prodList)
             {
@@ -118,6 +150,7 @@ namespace AalborgZooProjekt.ViewModel
 
                 orderlines.Add(tempOrderLine);
             }
+
             return orderlines;
         }
 
@@ -203,9 +236,14 @@ namespace AalborgZooProjekt.ViewModel
         {
             if (CanBeSend)
             {
+                //Temp
+                order.OrderedByID = 1;
+                order.AddOrderLine(new OrderLine());
+
                 CanBeSend = false;
                 order.SendOrder(new ShoppingList());
-                OrderInTheMaking = new Order(department);
+                OrderInTheMaking = new Order(_department);
+                CanBeSend = true;
                 throw new Exception();
             }
         }

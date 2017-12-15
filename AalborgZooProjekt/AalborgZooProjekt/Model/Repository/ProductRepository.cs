@@ -58,7 +58,7 @@ namespace AalborgZooProjekt.Model
             {
                 foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Units"))
                 {
-                    if (depProduct.Product.CheckIfProductIsActive() && String.Equals(depProduct.Department.Name, department.Name))
+                    if (depProduct.Product.CheckIfProductIsActive() && department.Id == depProduct.DepartmentId)
                         departmentProductList.Add(depProduct.Product);
                 }
             }

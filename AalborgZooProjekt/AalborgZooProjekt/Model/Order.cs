@@ -43,7 +43,6 @@ namespace AalborgZooProjekt.Model
             {
                 OrderLines.Add(orderLine);
             }
-
             else
                 throw new ArgumentNullException();
         }
