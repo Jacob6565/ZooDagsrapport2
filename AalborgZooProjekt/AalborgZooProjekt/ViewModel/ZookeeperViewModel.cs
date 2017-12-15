@@ -227,33 +227,17 @@ namespace AalborgZooProjekt.ViewModel
             private set { _canBeSend = value; }
         }
 
+        
         /// <summary>
-        /// Functionality for actually sending an order, if it is legal it will be added to the database and added to
-        /// the current shoppinglist
+        /// Assembles order by adding the orderLines and zookeeper chosen in view
         /// </summary>
-        /// <param name="order"></param>
-        public void Sendorder(object context)
-        {
-            if (CanBeSend)
-            {
-                //TODO Temp
-                AssembleOrder();
-
-                OrderInTheMaking.OrderedByID = 1;
-                OrderInTheMaking.AddOrderLine(new OrderLine());
-
-                CanBeSend = false;
-                OrderInTheMaking.SendOrder(new ShoppingList());
-                OrderInTheMaking = new Order(_department);
-                CanBeSend = true;
-                throw new Exception();
-            }
-        }
-
         private void AssembleOrder()
         {
+            //TODO temp before we can get a zookeeper from view
+            Zookeeper tempZookeeper = new Zookeeper() { Id = 1 };
+
             OrderInTheMaking.OrderLines = DepOrderList;
-            OrderInTheMaking.OrderedByID = 1;
+            OrderInTheMaking.OrderedByID = tempZookeeper.Id;
         }
 
         public bool CanSendOrder(object context)
@@ -269,6 +253,30 @@ namespace AalborgZooProjekt.ViewModel
             return false;
         }
 
+        
+        /// <summary>
+        /// Functionality for actually sending an order, if it is legal it will be added to the database and added to
+        /// the current shoppinglist
+        /// </summary>
+        /// <param name="order"></param>
+        public void Sendorder(object context)
+        {
+            if (CanBeSend)
+            {
+                //TODO Temp
+                AssembleOrder();
+
+                CanBeSend = false;
+                OrderInTheMaking.SendOrder(new ShoppingList());
+                OrderInTheMaking = new Order(_department);
+
+                //TODO clear the chosen orderLines and zookeeper from view
+
+                CanBeSend = true;
+            }
+        }
+        
+        
         ///// <summary>
         ///// The button that sends an order in the view
         ///// </summary>
