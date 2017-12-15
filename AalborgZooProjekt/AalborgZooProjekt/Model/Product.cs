@@ -163,7 +163,11 @@ namespace AalborgZooProjekt.Model
 
         public bool CheckIfProductIsActive()
         {
-            return ProductVersions.Last().IsActive;
+            if (ProductVersions.Count != 0)
+            {
+                return ProductVersions.Last().IsActive;
+            }
+            else return false;
         }
 
         public void DeactivateProduct()
