@@ -9,7 +9,7 @@ namespace AalborgZooProjekt.Model
 {
     public interface IProductRepository
     {
-        void AddProduct(Product product);
+        Product AddProduct(Product product);
         void UpdateProductVersionList(Product product);
         List<Product> GetDepartmentProducts(Department department);
         List<Product> GetDepartmentProductsWithUnits(Department department);

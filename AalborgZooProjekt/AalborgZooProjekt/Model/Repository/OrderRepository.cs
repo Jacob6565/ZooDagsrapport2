@@ -10,28 +10,40 @@ namespace AalborgZooProjekt.Model
 {
     public class OrderRepository : IOrderRepository
     {
-        private AalborgZooContainer1 _context;
-
-        public OrderRepository(AalborgZooContainer1 context)
-        {
-            _context = context;
-        }
-        public OrderRepository() : this(new AalborgZooContainer1())
-        {
-            
-        }
         /// <summary>
         /// Adds a not yet excisting order to the database
         /// </summary>
         /// <param name="order"></param>
         public void AddOrder(Order order)
         {
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
+                foreach (OrderLine orderLine in order.OrderLines)
+                {
+                    _context.OrderLineSet.Add(orderLine);
+                }
+
                 _context.OrderSet.Add(order);
+                
                 _context.SaveChanges();
             }
         }
+
+        //public void AddOrderLine(OrderLine orderLine, Order order)
+        //{
+        //    using (var _context = new AalborgZooContainer1())
+        //    {
+        //        //Adds the orderline to orderlineset in database and updates the local version, so it also contains
+        //        //the orderline key, that the database created
+        //        OrderLine orderLineWithKey = _context.OrderLineSet.Add(orderLine);
+
+        //        //Updates the Order to contain the orderLine
+        //        _context.OrderSet.Find(order.Id).OrderLines.Add(orderLineWithKey);
+
+
+        //        _context.SaveChanges();
+        //    }
+        //}
 
 
         /// <summary>
@@ -41,7 +53,7 @@ namespace AalborgZooProjekt.Model
         /// <returns></returns>
         public Order GetOrder(int orderID)
         {
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
                 Order order = _context.OrderSet.Find(orderID);
 
@@ -58,13 +70,20 @@ namespace AalborgZooProjekt.Model
         /// <param name="order"></param>
         public void UpdateOrder(Order order)
         {
-            using (_context)
+            using (var _context = new AalborgZooContainer1())
             {
                 var result = _context.OrderSet.SingleOrDefault(b => b.Id == order.Id);
                 if (result != null)
                 {
-                    //Updating the order
+                    result.OrderLines = order.OrderLines;
+                    result.DateOrdered = order.DateOrdered;
+                    result.Note = order.Note;
+                    result.OrderedByID = order.OrderedByID;
+                    result.Status = order.Status;
+                    result.ShoppingListId = order.ShoppingListId;
+
                     
+
                     //Calls the database to save the changes
                     _context.SaveChanges();
                 }
