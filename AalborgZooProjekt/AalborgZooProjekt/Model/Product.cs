@@ -62,7 +62,7 @@ namespace AalborgZooProjekt.Model
             Copy.Units = productToCopy.Units.ToList();
             Copy.ProductId = productToCopy.ProductId;
             Copy.OrderLines = productToCopy.OrderLines.ToList();
-
+            
             return Copy;
         }
 
@@ -116,12 +116,12 @@ namespace AalborgZooProjekt.Model
         public void ChangeProductName(string name)
         {
             ProductVersion newVersion, previousVersion;
-            previousVersion = ProductVersions.Last();
+            previousVersion = this.ProductVersions.Last();
 
             if (previousVersion.Name != name)
             {
                 this.Name = name;
-
+                
                 //Copying data from previous to new
                 newVersion = DublicateProductVersion(previousVersion);
 
@@ -157,16 +157,17 @@ namespace AalborgZooProjekt.Model
             }
             else
             {
-                throw new AlreadyExistingSupplierException("supplier");
+                throw new AlreadyExistingSupplierException(supplier);
             }
         }
 
         public bool CheckIfProductIsActive()
         {
-            if (ProductVersions.Count == 0)
-                return false;
-            else
+            if (ProductVersions.Count != 0)
+            {
                 return ProductVersions.Last().IsActive;
+            }
+            else return false;
         }
 
         public void DeactivateProduct()

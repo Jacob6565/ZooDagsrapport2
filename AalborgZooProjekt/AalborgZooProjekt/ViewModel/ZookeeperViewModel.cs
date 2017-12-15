@@ -87,8 +87,6 @@ namespace AalborgZooProjekt.ViewModel
 
                 orderlines.Add(tempOrderLine);
             }
-
-
             return orderlines;
         }
 
@@ -156,7 +154,7 @@ namespace AalborgZooProjekt.ViewModel
         }
 
         /// <summary>
-        /// A bool that describes if it is legal to send the order, (this bool is bound the sendorder button in view)
+        /// A bool that describes if it is legal to send the order, this bool is bound the sendorder button in view)
         /// </summary>
         private bool _canBeSend = true;
         public bool CanBeSend
@@ -176,7 +174,7 @@ namespace AalborgZooProjekt.ViewModel
             {
                 CanBeSend = false;
                 order.SendOrder();
-                OrderInTheMaking = new Order() {DepartmentID = department.Id };
+                OrderInTheMaking = new Order(department);
                 throw new Exception();
             }
         }

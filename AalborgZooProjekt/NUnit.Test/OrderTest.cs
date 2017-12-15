@@ -11,33 +11,12 @@ namespace NUnit.Test
     [TestFixture]
     public class OrderCanBeConstructedTest
     {
-        [Test]
-        public void CreateDepartmentTest()
-        {
-            Department dep = new Department();
-
-            Assert.IsNotNull(dep);
-        }
-
-        [Test]
-        public void CreateOrderTest()
-        {
-            Order order = new Order();
-
-            Assert.IsNotNull(order);
-        }
-
-        [Test]
-        public void OrderLineCanBeConstructedTest()
-        {
-            OrderLine orderLine = new OrderLine();
-
-            Assert.IsNotNull(orderLine);
-        }
         #region Commom Actions
+
+        Mock<IOrderRepository> MockRep;
         private Order MakeOrder()
         {
-            Mock<IOrderRepository> MockRep = new Mock<IOrderRepository>();
+            MockRep = new Mock<IOrderRepository>();
             Department dep = new Department();
             Order order = new Order(MockRep.Object, dep);
             return order;
@@ -57,6 +36,40 @@ namespace NUnit.Test
             return new ProductVersion();
         }
         #endregion
+        
+        [Test]
+        public void CreateDepartmentTest()
+        {
+            Department dep = new Department();
+
+            Assert.IsNotNull(dep);
+        }
+
+        [Test]
+        public void CreateOrderTest()
+        {
+            Order order = new Order();
+
+            Assert.IsNotNull(order);
+        }
+
+        [Test]
+        public void CreateOrder_NotDefaultConstructor_GetsCreated()
+        {
+            Order order = MakeOrder();
+            Assert.IsNotNull(order);
+            MockRep.Verify(x => x.AddOrder(order), Times.Once());
+
+        }
+
+        [Test]
+        public void OrderLineCanBeConstructedTest()
+        {
+            OrderLine orderLine = new OrderLine();
+
+            Assert.IsNotNull(orderLine);
+        }
+       
 
         [Test]
         public void AddOrderLine_ValidOrderLine_CanBeAdded()
@@ -74,6 +87,9 @@ namespace NUnit.Test
 
             //Assert
             Assert.AreEqual(order.OrderLines.Last(), secondOrderLine);
+
+            //Asserting whether the functions on the mocked object gets called.
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(2));
         }
 
         [Test]
@@ -86,10 +102,10 @@ namespace NUnit.Test
 
             //Act
             order.ChangeAmount(orderLine, 15);
-            order.ChangeAmount(orderLine, 10);
-
+            
             //Assert
-            Assert.AreEqual(10, orderLine.Quantity);
+            Assert.AreEqual(15, orderLine.Quantity);
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
         }
 
         [TestCase(-10)]
@@ -105,6 +121,7 @@ namespace NUnit.Test
 
             //Act and Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => order.ChangeAmount(orderLine, amount));
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(0));
         }
 
         [Test]
@@ -126,12 +143,14 @@ namespace NUnit.Test
             
             ProductVersion.Unit = units;
             orderline.ProductVersion = ProductVersion;
-            order.AddOrderLine(orderline);           
+            order.OrderLines.Add(orderline);           
+
             //Act
             order.ChangeUnit(orderline, units.Last());
 
             //Assert
             Assert.AreEqual(units.Last().Id, order.OrderLines.Last().UnitID);
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
         }
 
         [Test]
@@ -148,6 +167,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.AreEqual(zookeeper.Id, order.OrderedByID);
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
         }
 
         [Test]
@@ -164,11 +184,14 @@ namespace NUnit.Test
 
             //Assert
             Assert.Throws<ZookeeperAllReadyAddedException>(() => order.AttachZookeeperToOrder(zookeeper));
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(1));
+
         }
 
         [TestCase("Under Construction", ExpectedResult = true)]
         [TestCase("Sent", ExpectedResult = true)]
-        public bool CanOrderBeChanged_ValidStatus_CanBeChanged(string status)
+        [TestCase("", ExpectedResult = false)]
+        public bool CanOrderBeChanged_StatusIsString_IfValidReturnsTrueElseFalse(string status)
         {
             //Arrange
             Order order = MakeOrder();
@@ -195,6 +218,8 @@ namespace NUnit.Test
 
             //Arrange
             Assert.AreEqual(ProductVersion, orderline.ProductVersion);
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
+
         }
 
         [Test]
@@ -208,6 +233,8 @@ namespace NUnit.Test
 
             //Act and Assert
             Assert.Throws<ProductVersionIsNotActiveException>(() => order.ChangeProduct(orderline, productVersion));
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(0));
+
         }
 
         [Test]
@@ -282,14 +309,15 @@ namespace NUnit.Test
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
             order.OrderedByID = zookeeper.Id;
-            ShoppingList mockShoppingList = new ShoppingList();
+            ShoppingList shoppingList = new ShoppingList();
             
             //Act
-            order.SendOrder(mockShoppingList);
+            order.SendOrder(shoppingList);
 
             //Assert
             Assert.AreEqual("Sent", order.Status);
-            Assert.AreEqual(order, mockShoppingList.Orders.Last());
+            Assert.AreEqual(order, shoppingList.Orders.Last());
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
         }
 
         [Test]
@@ -305,6 +333,8 @@ namespace NUnit.Test
 
             //Assert
             Assert.IsTrue(!order.OrderLines.Contains(orderline));
+            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
+
         }
 
     }

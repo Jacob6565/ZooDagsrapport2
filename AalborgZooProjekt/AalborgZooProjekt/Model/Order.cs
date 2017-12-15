@@ -27,7 +27,7 @@ namespace AalborgZooProjekt.Model
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
         /// </summary>
-        /// <returns></returns>
+        /// <returns></returns>W
         private DateTime GetDate()
         {
             return DateTime.Today;
@@ -220,8 +220,10 @@ namespace AalborgZooProjekt.Model
                 ShoppingList shoppingList = new ShoppingList();
                 shoppingList.AddOrder(this);
 
+                //Shoppinglist repository
+
                 //Updates the order in database
-                //dbRep.UpdateOrder(this);
+                dbShopListRep.Update(shoppingList);
             }
         }
     }

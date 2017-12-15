@@ -9,5 +9,7 @@ namespace AalborgZooProjekt.Model
     public interface IShoppingListRepository
     {
         ShoppingList GetActiveShoppingList();
+        void Update(ShoppingList shoppingList);
+        void Add(ShoppingList shoppingList);
     }
 }
