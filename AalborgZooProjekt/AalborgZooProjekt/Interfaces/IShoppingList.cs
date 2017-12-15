@@ -10,6 +10,6 @@ namespace AalborgZooProjekt.Interfaces
     public interface IShoppingList
     {
         //AddOrder is needed in Order
-        void AddOrder(Order order1);
+        void AddOrder(Order order);
     }
 }

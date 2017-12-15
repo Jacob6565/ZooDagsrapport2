@@ -87,5 +87,6 @@ namespace AalborgZooProjekt.View.ZooKeeper
         {
             Time = DateTime.Now;
         }
+
     }
 }

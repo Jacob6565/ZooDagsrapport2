@@ -11,11 +11,7 @@ namespace AalborgZooProjekt.Model
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
-            Status = _underConstruction;
-
-            dbRep = orderRep;
-            //Adds the order in database
-            //dbRep.AddOrder(this);
+            Status = _underConstruction;        
         }
 
         private IOrderRepository dbRep = new OrderRepository();
@@ -49,30 +45,21 @@ namespace AalborgZooProjekt.Model
         }
 
         /// <summary>
-        /// Adds an orderline to the order, the actual parameter input orderLine will be an empty orderLine for our system
+        /// Adds an orderline to the order, the actual parameter input orderLine will be an empty orderLine for 
+        /// our system
         /// </summary>
         /// <param name="orderLine"></param>
         public void AddOrderLine(OrderLine orderLine)
         {
             if (orderLine != null)
+            {
                 OrderLines.Add(orderLine);
+            }
 
-            //Updates the order in database
-            //dbRep.UpdateOrder(this);
+            else
+                throw new ArgumentNullException();
         }
 
-        // <summary>
-        // Adds an orderline to the order, the actual parameter input orderLine will be an empty orderLine for our system
-        // </summary>
-        // <param name = "orderLine" ></ param >
-        public void AddOrderLines(List<OrderLine> orderLine)
-        {
-            if (orderLine != null)
-                
-
-            //Updates the order in database
-            dbRep.UpdateOrder(this);
-        }
 
         /// <summary>
         /// Attaches a zookeeper to an order, only one zookeeper can be attached to one order
@@ -85,9 +72,6 @@ namespace AalborgZooProjekt.Model
                 throw new ZookeeperAllReadyAddedException();
             else if (zookeeper != null)
                 OrderedByID = zookeeper.Id;
-
-            //Updates the order in database
-            //dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -100,7 +84,8 @@ namespace AalborgZooProjekt.Model
         }
 
         /// <summary>
-        /// Determines if the order is sendable, by checking the order state, the orderline, and Zookeeper ID attached to it
+        /// Determines if the order is sendable, by checking the order state, the orderline, and Zookeeper 
+        /// ID attached to it
         /// </summary>
         /// <returns></returns>
         public bool CanOrderBeSend()
@@ -108,7 +93,7 @@ namespace AalborgZooProjekt.Model
             bool canOrderBeSend = true;
 
             //An order can not be send when in another state than "Editable"
-            if (String.Equals(Status, _sent))
+            if (Status != UnderConstruction)
             {
                 canOrderBeSend = false;
                 throw new OrderIsNotUnderAnSendableStateException();
@@ -131,21 +116,6 @@ namespace AalborgZooProjekt.Model
             return canOrderBeSend;
         }
 
-
-        //???? is this correct hilsen Kris
-        public void ChangeProduct(OrderLine orderLine, ProductVersion productVersion)
-        {
-            if (productVersion == null)
-                throw new NullReferenceException();
-            else if (productVersion.IsActive == true)
-                orderLine.ProductVersion = productVersion;
-            else if (productVersion.IsActive == false)
-                throw new ProductVersionIsNotActiveException();
-
-            //Updates the order in database
-            dbRep.UpdateOrder(this);
-        }
-
         /// <summary>
         /// Changes the quantity of an orderline in the current order
         /// </summary>
@@ -157,9 +127,6 @@ namespace AalborgZooProjekt.Model
                 orderLine.Quantity = amount;
             else if (amount <= 0)
                 throw new ArgumentOutOfRangeException();
-
-            //Updates the order in database
-            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -175,9 +142,6 @@ namespace AalborgZooProjekt.Model
                 throw new NullReferenceException();
             else if (!orderLine.ProductVersion.Units.Contains(unit))
                 throw new ProductVersionDoesNotContainGivenUnitException();
-
-            //Updates the order in database
-            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -188,21 +152,15 @@ namespace AalborgZooProjekt.Model
         {
             if (CanOrderBeChanged())
                 OrderLines.Remove(orderLine);
-
-            //Updates the order in database
-            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
-        /// Changes the stored OrderedByID to -1 so symbolize no attached Zookeeper
+        /// Changes the stored OrderedByID to 0 so symbolize no attached Zookeeper
         /// </summary>
         /// <param name="zookeeper"></param>
         public void RemoveZookeeperFromOrder()
         {
-            OrderedByID = -1;
-
-            //Updates the order in database
-            dbRep.UpdateOrder(this);
+            OrderedByID = 0;
         }
 
 
@@ -213,9 +171,6 @@ namespace AalborgZooProjekt.Model
         public void SaveComment(string comment)
         {
             Note = comment;
-
-            //Updates the order in database
-            dbRep.UpdateOrder(this);
         }
 
         /// <summary>
@@ -228,9 +183,6 @@ namespace AalborgZooProjekt.Model
                 Status = _sent;
                 DateOrdered = GetDate();
 
-                //Dette burde man ikke gøre, det burde være sådan, at shoppinglist,
-                //igennem sin constructor får en IShoppingListRepository, som så blot kan bruges her.
-                //ved at sige ShoppingList shoppingList = shoppingList.dbShopListRep.GetActiveShoppingList();
                 IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
                 //ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
 
@@ -242,9 +194,8 @@ namespace AalborgZooProjekt.Model
 
                 shoppingList.AddOrder(this);
 
-                //Shoppinglist repository
-
-                //Updates the order in database
+                //Updates the order in database and adds it to shoppinglist in database
+                dbRep.AddOrder(this);
                 dbShopListRep.Update(shoppingList);
             }
         }

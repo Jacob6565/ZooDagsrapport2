@@ -19,12 +19,14 @@ namespace AalborgZooProjekt.Model
         {
         }
 
-        public void AddProduct(Product product)
+        public Product AddProduct(Product product)
         {
             using (var _context = new AalborgZooContainer1())
             {
-                _context.ProductSet.Add(product);
+                Product productWithKey = _context.ProductSet.Add(product);
                 _context.SaveChanges();
+
+                return productWithKey;
             }
         }
 
