@@ -6,21 +6,18 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Order : IOrder
     {
-        public Order(IOrderRepository rep, Department department) : this()
+        public Order(Department department) : this()
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
-            Status = _underConstruction;
-
-            //Repository to update, get and add from database
-            dbRep = rep;           
+            Status = _underConstruction;        
 
             //Adds the order in database
-            dbRep.AddOrder(this);
+           // dbRep.AddOrder(this);
         }
-        public Order(Department department) : this(new OrderRepository(), department){}
 
-        private IOrderRepository dbRep;
+        private IOrderRepository dbRep = new OrderRepository();
+
 
         private int _underConstruction = 0;
         public int UnderConstruction { get; private set; }
@@ -49,18 +46,18 @@ namespace AalborgZooProjekt.Model
             //dbRep.UpdateOrder(this);
         }
 
-        /// <summary>
-        /// Adds an orderline to the order, the actual parameter input orderLine will be an empty orderLine for our system
-        /// </summary>
-        /// <param name="orderLine"></param>
-        //public void AddOrderLines(List<OrderLine> orderLine)
-        //{
-        //    if (orderLine != null)
-        //        OrderLines.Add(orderLine);
+        // <summary>
+        // Adds an orderline to the order, the actual parameter input orderLine will be an empty orderLine for our system
+        // </summary>
+        // <param name = "orderLine" ></ param >
+        public void AddOrderLines(List<OrderLine> orderLine)
+        {
+            if (orderLine != null)
+                
 
-        //    //Updates the order in database
-        //    dbRep.UpdateOrder(this);
-        //}
+            //Updates the order in database
+            dbRep.UpdateOrder(this);
+        }
 
         /// <summary>
         /// Attaches a zookeeper to an order, only one zookeeper can be attached to one order
@@ -119,6 +116,8 @@ namespace AalborgZooProjekt.Model
             return canOrderBeSend;
         }
 
+
+        //???? is this correct hilsen Kris
         public void ChangeProduct(OrderLine orderLine, ProductVersion productVersion)
         {
             if (productVersion == null)
@@ -216,6 +215,8 @@ namespace AalborgZooProjekt.Model
 
                 IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
                 //ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
+
+                //Temporary
                 ShoppingList shoppingList = new ShoppingList();
                 shoppingList.AddOrder(this);
 

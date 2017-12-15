@@ -115,12 +115,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-
-                <Button Content="Gem" 
-                                        Margin="5,0" Padding="50,0"
-                                        Grid.Column="1"/>
                 <Button Command ="{Binding SendOrderCommand}" Content="Bestil" 
                                         Margin="5,0" Padding="50,0"
                                         Grid.Column="2"/>

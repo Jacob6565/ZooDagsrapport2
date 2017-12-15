@@ -18,14 +18,35 @@ namespace AalborgZooProjekt.ViewModel
         {
             DepOrderLines = GetDepProductListFromDb();
 
-            //Simulates that an order has assigned status underconstruction as it would be given in view when "created"
-            OrderInTheMaking.Status = OrderInTheMaking.UnderConstruction;
+            SetupOrder();
 
-            //Simulates that Zookeeper with id = 1 it attached to order.
-            OrderInTheMaking.AttachZookeeperToOrder(new Zookeeper() {Id = 1});
+        }
 
-            //Simulates that an orderline is added to order.
-            OrderInTheMaking.AddOrderLine(new OrderLine());
+        //The order that are being created/edited in the Zookeeper view
+        private Order _orderInTheMaking;
+        public Order OrderInTheMaking
+        {
+            get { return _orderInTheMaking; }
+            private set { _orderInTheMaking = value; }
+        }
+
+        /// <summary>
+        /// Responsible for setting up the order, if a unfinished order exist it will be loaded, otherwise there will
+        /// be created a new order.
+        /// </summary>
+        private void SetupOrder()
+        {
+            Order unfinishedOrder = dbOrderRep.GetUnfinishedOrder(department);
+
+            if (unfinishedOrder == null)
+            {
+                OrderInTheMaking = new Order(department);
+            }
+            else if (unfinishedOrder != null)
+            {
+                OrderInTheMaking = unfinishedOrder;
+            }
+
         }
 
         //Simulates a chosen departement with the needed information for the current implemented functionality
@@ -33,6 +54,10 @@ namespace AalborgZooProjekt.ViewModel
 
         //Product repository which is used as a data access layer between Product and database in model
         private IProductRepository dbProductRep = new ProductRepository();
+
+        //Order repository which is used as a data access layer between Product and database in model
+        private IOrderRepository dbOrderRep = new OrderRepository();
+
 
         /*This bindinglist is used in view to illustrate the departmentspecific products for the chosen department*/
         private BindingList<OrderLine> _depOrderLines = new BindingList<OrderLine>();
@@ -130,15 +155,9 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
-        //
-        private Order _orderInTheMaking = new Order();
-        public Order OrderInTheMaking
-        {
-            get { return _orderInTheMaking; }
-            private set { _orderInTheMaking = value; }
-        }
-
-
+        /// <summary>
+        /// A bool that describes if it is legal to send the order, (this bool is bound the sendorder button in view)
+        /// </summary>
         private bool _canBeSend = true;
         public bool CanBeSend
         {
@@ -146,16 +165,25 @@ namespace AalborgZooProjekt.ViewModel
             private set { _canBeSend = value; }
         }
 
+        /// <summary>
+        /// Functionality for actually sending an order, if it is legal it will be added to the database and added to
+        /// the current shoppinglist
+        /// </summary>
+        /// <param name="order"></param>
         public void Sendorder(Order order)
         {
             if (CanBeSend)
             {
                 CanBeSend = false;
                 order.SendOrder();
+                OrderInTheMaking = new Order() {DepartmentID = department.Id };
                 throw new Exception();
             }
         }
 
+        /// <summary>
+        /// The button that sends an order in the view
+        /// </summary>
         private RelayCommand _sendOrderCommand;
         public RelayCommand SendOrderCommand
         {
