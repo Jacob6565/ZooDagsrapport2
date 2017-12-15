@@ -18,8 +18,7 @@ namespace AalborgZooProjekt.Model
         {
             using(var context = new AalborgZooContainer1())
             {
-                ShoppingList shopList = context.ShoppingListSet.Include("Orders").Last();
-
+                ShoppingList shopList = context.ShoppingListSet.Include("Orders.OrderLines").Last();
                 if (shopList != null && shopList.Status == 0)
                     return shopList;
                 else

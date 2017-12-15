@@ -11,10 +11,12 @@ namespace AalborgZooProjekt.Model
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
-            Status = _underConstruction;        
-        }
+            Status = _underConstruction;
 
-        private IOrderRepository orderRep = new OrderRepository();
+            orderRep = rep;            
+        }
+        
+        private IOrderRepository orderRep;
 
 
         private int _underConstruction = 0;
@@ -43,9 +45,10 @@ namespace AalborgZooProjekt.Model
             {
                 OrderLines.Add(orderLine);
             }
-
             else
+            {
                 throw new ArgumentNullException();
+            }
         }
 
 
@@ -57,9 +60,13 @@ namespace AalborgZooProjekt.Model
         public void AttachZookeeperToOrder(Zookeeper zookeeper)
         {
             if (OrderedByID == zookeeper.Id)
+            {
                 throw new ZookeeperAllReadyAddedException();
+            }
             else if (zookeeper != null)
+            {
                 OrderedByID = zookeeper.Id;
+            }
         }
 
         /// <summary>
@@ -111,7 +118,9 @@ namespace AalborgZooProjekt.Model
         public void RemoveOrderLine(OrderLine orderLine)
         {
             if (CanOrderBeChanged())
+            {
                 OrderLines.Remove(orderLine);
+            }
         }
 
         /// <summary>

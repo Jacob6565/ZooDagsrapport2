@@ -6,7 +6,6 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Department : IDepartment
     {
-
         /// <summary>
         /// Adds the product under the department thus making it a department specific product.
         /// If the product already can be found under the department it will throw an exception.
