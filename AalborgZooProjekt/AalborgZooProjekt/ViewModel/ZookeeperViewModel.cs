@@ -232,36 +232,68 @@ namespace AalborgZooProjekt.ViewModel
         /// the current shoppinglist
         /// </summary>
         /// <param name="order"></param>
-        public void Sendorder(Order order)
+        public void Sendorder(object context)
         {
             if (CanBeSend)
             {
-                //Temp
-                order.OrderedByID = 1;
-                order.AddOrderLine(new OrderLine());
+                //TODO Temp
+                AssembleOrder();
+
+                OrderInTheMaking.OrderedByID = 1;
+                OrderInTheMaking.AddOrderLine(new OrderLine());
 
                 CanBeSend = false;
-                order.SendOrder(new ShoppingList());
+                OrderInTheMaking.SendOrder(new ShoppingList());
                 OrderInTheMaking = new Order(_department);
                 CanBeSend = true;
                 throw new Exception();
             }
         }
 
-        /// <summary>
-        /// The button that sends an order in the view
-        /// </summary>
-        private RelayCommand _sendOrderCommand;
-        public RelayCommand SendOrderCommand
+        private void AssembleOrder()
+        {
+            OrderInTheMaking.OrderLines = DepOrderList;
+            OrderInTheMaking.OrderedByID = 1;
+        }
+
+        public bool CanSendOrder(object context)
+        {
+            RadioButton sp = context as RadioButton;
+            if (sp != null)
+            {
+                if (sp.IsChecked.Value)
+                    {
+                        return true;
+                    }
+            }            
+            return false;
+        }
+
+        ///// <summary>
+        ///// The button that sends an order in the view
+        ///// </summary>
+        //private RelayCommand _sendOrderCommand;
+        //public RelayCommand SendOrderCommand
+        //{
+        //    get
+        //    {
+        //        return _sendOrderCommand
+        //          ?? (_sendOrderCommand = new RelayCommand(
+        //            () =>
+        //            {
+        //                Sendorder(OrderInTheMaking);   
+        //            },
+        //            () => CanSendOrder));
+        //    }
+        //}
+
+        private RelayCommand<object> _sendOrderCommand;
+        public RelayCommand<object> SendOrderCommand
         {
             get
             {
                 return _sendOrderCommand
-                  ?? (_sendOrderCommand = new RelayCommand(
-                    () =>
-                    {
-                        Sendorder(OrderInTheMaking);   
-                    }));
+                    ?? (_sendOrderCommand = new RelayCommand<object>(Sendorder, CanSendOrder));
             }
         }
     }
