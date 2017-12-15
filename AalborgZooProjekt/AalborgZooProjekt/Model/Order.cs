@@ -10,6 +10,7 @@ namespace AalborgZooProjekt.Model
             DepartmentID = department.Id;
             DateCreated = GetDate();
             Status = _underConstruction;
+            
 
             //Repository to update, get and add from database
             dbRep = rep;           
@@ -175,6 +176,7 @@ namespace AalborgZooProjekt.Model
             dbRep.UpdateOrder(this);
         }
 
+        
 
         /// <summary>
         /// Changes the current order comment
