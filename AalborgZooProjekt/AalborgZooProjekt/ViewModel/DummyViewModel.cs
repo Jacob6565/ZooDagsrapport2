@@ -75,6 +75,9 @@ namespace AalborgZooProjekt
             DummyUnitList.Add(new Unit() { Name = "styks" });
             DummyUnitList.Add(new Unit() { Name = "kasse(r)" });
 
+            if (false)
+                Populater.DeleteDatabase();
+
             if ((new AalborgZooContainer1().ProductSet.Count() == 0))
                 Populater.PopulateDatabase();
 
