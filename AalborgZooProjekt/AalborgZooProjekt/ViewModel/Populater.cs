@@ -13,7 +13,7 @@ namespace AalborgZooProjekt.ViewModel
         public static AalborgZooContainer1 db = new AalborgZooContainer1();
         static public void PopulateDatabase()
         {
-            using (db)
+            using (db = new AalborgZooContainer1())
             {
                 /* Shopper */
 
@@ -188,7 +188,7 @@ namespace AalborgZooProjekt.ViewModel
                     Units = unitCollection,
                     DateCreated = DateTime.Today,
                 };
-                db.ProductVersionSet.Add(prodvBanan);
+                db.ProductVersionSet.Add(prodvÆble);
 
                 ProductVersion prodvPære = new ProductVersion()
                 {
@@ -199,7 +199,7 @@ namespace AalborgZooProjekt.ViewModel
                     DateCreated = DateTime.Today,
                     Units = unitCollection
                 };
-                db.ProductVersionSet.Add(prodvBanan);
+                db.ProductVersionSet.Add(prodvPære);
 
                 ProductVersion prodvAbrikos = new ProductVersion()
                 {
@@ -210,7 +210,7 @@ namespace AalborgZooProjekt.ViewModel
                     DateCreated = DateTime.Today,
                     Units = unitCollection
                 };
-                db.ProductVersionSet.Add(prodvBanan);
+                db.ProductVersionSet.Add(prodvAbrikos);
 
                 ProductVersion prodvTuttiFrutti = new ProductVersion()
                 {
@@ -221,7 +221,7 @@ namespace AalborgZooProjekt.ViewModel
                     DateCreated = DateTime.Today,
                     Units = unitCollection
                 };
-                db.ProductVersionSet.Add(prodvBanan);
+                db.ProductVersionSet.Add(prodvTuttiFrutti);
 
                 db.SaveChanges();
                 /* Department Specific Products */
@@ -298,6 +298,7 @@ namespace AalborgZooProjekt.ViewModel
                     Quantity = 15,
                     UnitID = unitKg.Id
                 };
+                db.OrderLineSet.Add(orderLineBanan);
 
                 OrderLine orderLineÆble = new OrderLine()
                 {
@@ -306,6 +307,7 @@ namespace AalborgZooProjekt.ViewModel
                     Quantity = 15,
                     UnitID = unitKg.Id
                 };
+                db.OrderLineSet.Add(orderLineÆble);
 
                 OrderLine orderLinePære = new OrderLine()
                 {
@@ -314,6 +316,7 @@ namespace AalborgZooProjekt.ViewModel
                     Quantity = 15,
                     UnitID = unitKg.Id
                 };
+                db.OrderLineSet.Add(orderLinePære);
 
                 OrderLine orderLineAbrikos = new OrderLine()
                 {
@@ -322,6 +325,7 @@ namespace AalborgZooProjekt.ViewModel
                     Quantity = 15,
                     UnitID = unitKg.Id
                 };
+                db.OrderLineSet.Add(orderLineAbrikos);
 
                 OrderLine orderLineTuttiFruttiMix = new OrderLine()
                 {
@@ -330,8 +334,30 @@ namespace AalborgZooProjekt.ViewModel
                     Quantity = 15,
                     UnitID = unitKg.Id
                 };
+                db.OrderLineSet.Add(orderLineTuttiFruttiMix);
 
                 db.SaveChanges();
+            }
+        }
+
+        static public void DeleteDatabase()
+        {
+            using (db = new AalborgZooContainer1())
+            {
+                db.Database.ExecuteSqlCommand("DELETE FROM [DepartmentChangeSet] DBCC CHECKIDENT ([DepartmentChangeSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [PasswordChangedSet] DBCC CHECKIDENT ([PasswordChangedSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [DepartmentSpecificProductSet] DBCC CHECKIDENT ([DepartmentSpecificProductSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [OrderLineSet] DBCC CHECKIDENT ([OrderLineSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [EmployeeSet] DBCC CHECKIDENT ([EmployeeSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [ShoppingListSet] DBCC CHECKIDENT ([ShoppingListSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [OrderSet] DBCC CHECKIDENT ([OrderSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [UnitProductVersion]");
+                db.Database.ExecuteSqlCommand("DELETE FROM [ProductVersionSet] DBCC CHECKIDENT ([ProductVersionSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [DepartmentSet] DBCC CHECKIDENT ([DepartmentSet], RESEED, 0)");
+                //db..RemoveRange(db.DepartmentChangeSet.Where(x => true));
+                //db.DepartmentChangeSet.RemoveRange(db.DepartmentChangeSet.Where(x => true));
+                db.Database.ExecuteSqlCommand("DELETE FROM [ProductSet] DBCC CHECKIDENT ([ProductSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [UnitSet] DBCC CHECKIDENT ([UnitSet], RESEED, 0)");
             }
         }
     }
