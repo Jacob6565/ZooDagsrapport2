@@ -10,6 +10,7 @@ namespace NUnit.Test
     [TestFixture]
     public class ProductTest
     {
+        Mock<IProductRepository> MockRep;
         /// <summary>
         /// Creates a product and returns it.
         /// </summary>
@@ -24,13 +25,13 @@ namespace NUnit.Test
         }
         private Product InitializeProduct(List<Unit> units, bool active)
         {
-            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
-            string name = "Æble";
+            MockRep = new Mock<IProductRepository>();
+            string name = "ProductName";
             Shopper shopper = new Shopper();
-            string supplier = "Karl";
+            string supplier = "Supplier";
             List<Unit> Units = units.ToList();
             Product product = new Product(MockRep.Object, shopper, name, supplier, Units, active);
-
+            
             return product;
         }
 
@@ -38,13 +39,14 @@ namespace NUnit.Test
         public void ActivateProduct_ProductIsDeactivated_GetsActivated()
         {
             //Arrange
-            Product product = InitializeProduct();
-
+            Product product = InitializeProduct(false);
+            
             //Act
             product.ActivateProduct();
 
             //Assert
             Assert.AreEqual(true, product.ProductVersions.Last().IsActive);
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
         }
 
         [Test]
@@ -98,7 +100,7 @@ namespace NUnit.Test
             product.AddProductUnit(UnitToAdd);
 
             //Assert
-            Assert.IsTrue(product.ProductVersions.Last().Unit.Contains(UnitToAdd));
+            Assert.IsTrue(product.ProductVersions.Last().Units.Contains(UnitToAdd));
         }
 
         [Test]
@@ -143,7 +145,7 @@ namespace NUnit.Test
             product.RemoveProductUnit(kg);
 
             //Assert
-            Assert.IsTrue(!product.ProductVersions.Last().Unit.Contains(kg));
+            Assert.IsTrue(!product.ProductVersions.Last().Units.Contains(kg));
         }
 
         [Test]
@@ -189,7 +191,7 @@ namespace NUnit.Test
         {
             //Arrange
             Product product = InitializeProduct(true);
-            string newName = "Æble";
+            string newName = "ProductName";
            
             //Act and Assert
             Assert.Throws<ProductAlreadyHaveThatNameException>(() => product.ChangeProductName(newName));
@@ -215,7 +217,7 @@ namespace NUnit.Test
         {
             //Arrange
             Product product = InitializeProduct(true);
-            string newSupplierButSame = "Karl";
+            string newSupplierButSame = "Supplier";
 
             //Act And Assert
             Assert.Throws<AlreadyExistingSupplierException>(() => product.ChangeProductSupplier(newSupplierButSame));

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AalborgZooProjekt.View
+namespace AalborgZooProjekt.View.ZooKeeper
 {
     /// <summary>
     /// Interaction logic for History.xaml

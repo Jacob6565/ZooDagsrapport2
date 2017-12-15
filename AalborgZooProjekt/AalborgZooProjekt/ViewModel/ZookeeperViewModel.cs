@@ -87,8 +87,6 @@ namespace AalborgZooProjekt.ViewModel
 
                 orderlines.Add(tempOrderLine);
             }
-
-
             return orderlines;
         }
 
@@ -100,11 +98,11 @@ namespace AalborgZooProjekt.ViewModel
             OrderLine ol = box.DataContext as OrderLine;
             if (sp.Children.OfType<Button>().First().IsFocused)
             {
-                ol.Quantity++;
+                ol.ChangeQuantity++; 
             }
             else
             {
-                ol.Quantity--;
+                ol.ChangeQuantity--;
             }
             ChangeOrderList(box);
         }
@@ -156,7 +154,7 @@ namespace AalborgZooProjekt.ViewModel
         }
 
         /// <summary>
-        /// A bool that describes if it is legal to send the order, (this bool is bound the sendorder button in view)
+        /// A bool that describes if it is legal to send the order, this bool is bound the sendorder button in view)
         /// </summary>
         private bool _canBeSend = true;
         public bool CanBeSend
@@ -175,8 +173,8 @@ namespace AalborgZooProjekt.ViewModel
             if (CanBeSend)
             {
                 CanBeSend = false;
-                order.SendOrder();
-                OrderInTheMaking = new Order() {DepartmentID = department.Id };
+                order.SendOrder(new ShoppingList());
+                OrderInTheMaking = new Order(department);
                 throw new Exception();
             }
         }
@@ -199,4 +197,3 @@ namespace AalborgZooProjekt.ViewModel
         }
     }
 }
-

@@ -64,8 +64,7 @@ namespace AalborgZooProjekt.Model
                 if (result != null)
                 {
                     //Updating the order
-                    result = order;
-
+                    
                     //Calls the database to save the changes
                     _context.SaveChanges();
                 }

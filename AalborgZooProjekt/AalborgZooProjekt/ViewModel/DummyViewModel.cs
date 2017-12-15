@@ -1,18 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Collections.Generic;
-using AalborgZooProjekt.Model;
-
 using System.IO;
 using System.Text;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Configuration;
 using System.Linq;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Data;
-using System;
 using AalborgZooProjekt.Model;
 using AalborgZooProjekt.Model.Database;
 using AalborgZooProjekt.ViewModel;
@@ -38,8 +29,6 @@ namespace AalborgZooProjekt
 
     public class DummyViewModel : ViewModelBase
     {
-        string connectionString1 = "name=AalborgZooMockContainer";
-        string connectionString = "name=AalborgZooContainer1";
         public List<DummyProduct> DummyFoodList { get; set; } = new List<DummyProduct>();
         private List<Model.DummyProduct> _dummyFruit = new List<Model.DummyProduct>();
         public List<Model.DummyProduct> DummyFruitList
