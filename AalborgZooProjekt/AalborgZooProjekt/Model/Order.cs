@@ -6,23 +6,38 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Order : IOrder
     {
-        public Order(Department department) : this()
+        public Order(Department department) : this(new OrderRepository(), department) { }
+        public Order(IOrderRepository orderRep, Department department) : this()
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
-            Status = _underConstruction;        
+            Status = _underConstruction;
 
+            dbRep = orderRep;
             //Adds the order in database
-           // dbRep.AddOrder(this);
+            //dbRep.AddOrder(this);
         }
 
         private IOrderRepository dbRep = new OrderRepository();
 
 
         private int _underConstruction = 0;
-        public int UnderConstruction { get; private set; }
+        public int UnderConstruction
+        {
+            get
+            {
+                return _underConstruction;
+            }
+        }
+
         private int _sent = 1;
-        public int Sent { get; private set; }
+        public int Sent
+        {
+            get
+            {
+                return _sent;
+            }
+        }
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
@@ -93,7 +108,7 @@ namespace AalborgZooProjekt.Model
             bool canOrderBeSend = true;
 
             //An order can not be send when in another state than "Editable"
-            if (String.Equals(Status, _underConstruction))
+            if (String.Equals(Status, _sent))
             {
                 canOrderBeSend = false;
                 throw new OrderIsNotUnderAnSendableStateException();
@@ -206,18 +221,25 @@ namespace AalborgZooProjekt.Model
         /// <summary>
         /// When the zookeepers send the order to the shopper, it changes the order state
         /// </summary>
-        public void SendOrder()
+        public void SendOrder(ShoppingList shoppingList)
         {
             if (CanOrderBeSend())
             {
                 Status = _sent;
                 DateOrdered = GetDate();
 
+                //Dette burde man ikke gøre, det burde være sådan, at shoppinglist,
+                //igennem sin constructor får en IShoppingListRepository, som så blot kan bruges her.
+                //ved at sige ShoppingList shoppingList = shoppingList.dbShopListRep.GetActiveShoppingList();
                 IShoppingListRepository dbShopListRep = new ShoppinglistRepository();
                 //ShoppingList shoppingList = dbShopListRep.GetActiveShoppingList();
 
                 //Temporary
-                ShoppingList shoppingList = new ShoppingList();
+                if (shoppingList == null)
+                {
+                    shoppingList = new ShoppingList();
+                }
+
                 shoppingList.AddOrder(this);
 
                 //Shoppinglist repository

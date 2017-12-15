@@ -173,7 +173,7 @@ namespace AalborgZooProjekt.ViewModel
             if (CanBeSend)
             {
                 CanBeSend = false;
-                order.SendOrder();
+                order.SendOrder(new ShoppingList());
                 OrderInTheMaking = new Order(department);
                 throw new Exception();
             }

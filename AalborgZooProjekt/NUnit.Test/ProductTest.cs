@@ -100,7 +100,7 @@ namespace NUnit.Test
             product.AddProductUnit(UnitToAdd);
 
             //Assert
-            Assert.IsTrue(product.ProductVersions.Last().Unit.Contains(UnitToAdd));
+            Assert.IsTrue(product.ProductVersions.Last().Units.Contains(UnitToAdd));
         }
 
         [Test]
@@ -145,7 +145,7 @@ namespace NUnit.Test
             product.RemoveProductUnit(kg);
 
             //Assert
-            Assert.IsTrue(!product.ProductVersions.Last().Unit.Contains(kg));
+            Assert.IsTrue(!product.ProductVersions.Last().Units.Contains(kg));
         }
 
         [Test]
