@@ -23,7 +23,7 @@
                      Grid.Row="1" ItemsSource="{Binding DepOrderList, Mode=TwoWay}" Name="dgOrderList" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding ProductVersion.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Enhed"  Binding="{Binding Quantity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Antal"  Binding="{Binding Quantity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTemplateColumn Header="Enhed" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
