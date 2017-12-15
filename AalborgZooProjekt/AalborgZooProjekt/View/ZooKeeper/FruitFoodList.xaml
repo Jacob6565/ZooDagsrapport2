@@ -16,9 +16,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="SPAmountControl">
-                                <Button Content="+" Width="25" Command="{Binding Zoo.AddCommand}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
+                                <Button Content="+" Width="25" Command="{Binding Zoo.AddCommand,Source={StaticResource Locator}}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
                                 <TextBox Name="AmaountBox" PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="25"/>
-                                <Button Content="-" Width="25" Command="{Binding Zoo.SubtractCommand}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
+                                <Button Content="-" Width="25" Command="{Binding Zoo.SubtractCommand ,Source={StaticResource Locator}}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
