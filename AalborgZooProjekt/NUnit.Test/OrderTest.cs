@@ -254,8 +254,7 @@ namespace NUnit.Test
             //Assert
             Assert.IsTrue(result);
         }
-
-
+        
         [Test]
         public void CanOrderBeSend_WrongStatus_ExceptionThrown()
         {

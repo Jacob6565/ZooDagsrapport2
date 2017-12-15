@@ -40,29 +40,31 @@ namespace AalborgZooProjekt.Model
         /// <returns></returns>
         private ProductVersion MakeFirstProductVersion(string name, string supplier, List<Unit> units, bool active)
         {
-            ProductVersion firstProductVersion = new ProductVersion();
-
-            firstProductVersion.Name = name;
-            firstProductVersion.Product = this;
-            firstProductVersion.ProductId = this.Id;
-            firstProductVersion.IsActive = active;
-            firstProductVersion.Units = units;
-            firstProductVersion.Supplier = supplier;
+            ProductVersion firstProductVersion = new ProductVersion
+            {
+                Name = name,
+                Product = this,
+                ProductId = this.Id,
+                IsActive = active,
+                Units = units,
+                Supplier = supplier
+            };
 
             return firstProductVersion;
         }
         private ProductVersion DublicateProductVersion(ProductVersion productToCopy)
         {
-            ProductVersion Copy = new ProductVersion();
+            ProductVersion Copy = new ProductVersion
+            {
+                IsActive = productToCopy.IsActive,
+                Name = productToCopy.Name,
+                Product = productToCopy.Product,
+                Supplier = productToCopy.Supplier,
+                Units = productToCopy.Units.ToList(),
+                ProductId = productToCopy.ProductId,
+                OrderLines = productToCopy.OrderLines.ToList()
+            };
 
-            Copy.IsActive = productToCopy.IsActive;
-            Copy.Name = productToCopy.Name;
-            Copy.Product = productToCopy.Product;
-            Copy.Supplier = productToCopy.Supplier;
-            Copy.Units = productToCopy.Units.ToList();
-            Copy.ProductId = productToCopy.ProductId;
-            Copy.OrderLines = productToCopy.OrderLines.ToList();
-            
             return Copy;
         }
 

@@ -48,7 +48,7 @@ namespace AalborgZooProjekt.ViewModel
                 Department depAfrika = new Department()
                 {
                     DateCreated = DateTime.Today.AddMonths(-1),
-                    Name = "Sydamerika",
+                    Name = "Afrika",
                 };
                 db.DepartmentSet.Add(depAfrika);
 
