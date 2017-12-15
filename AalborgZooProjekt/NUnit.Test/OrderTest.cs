@@ -141,7 +141,7 @@ namespace NUnit.Test
                 }
             };
             
-            ProductVersion.Unit = units;
+            ProductVersion.Units = units;
             orderline.ProductVersion = ProductVersion;
             order.OrderLines.Add(orderline);           
 
@@ -188,10 +188,10 @@ namespace NUnit.Test
 
         }
 
-        [TestCase("Under Construction", ExpectedResult = true)]
-        [TestCase("Sent", ExpectedResult = true)]
-        [TestCase("", ExpectedResult = false)]
-        public bool CanOrderBeChanged_StatusIsString_IfValidReturnsTrueElseFalse(string status)
+        [TestCase(0, ExpectedResult = true)]
+        [TestCase(1, ExpectedResult = true)]
+        [TestCase(2, ExpectedResult = false)]
+        public bool CanOrderBeChanged_StatusIsString_IfValidReturnsTrueElseFalse(int status)
         {
             //Arrange
             Order order = MakeOrder();
@@ -243,7 +243,7 @@ namespace NUnit.Test
             //Arrange
             Order order = MakeOrder();
             order.OrderLines.Add(MakeOrderLine());
-            order.Status = "Under Construction";
+            order.Status = 0; //UnderContruktion
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
             order.OrderedByID = zookeeper.Id;
@@ -262,7 +262,7 @@ namespace NUnit.Test
             //Arrange
             Order order = MakeOrder();
             order.OrderLines.Add(MakeOrderLine());
-            order.Status = "Sent";
+            order.Status = 1; //Sent
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
             order.OrderedByID = zookeeper.Id;
@@ -278,7 +278,7 @@ namespace NUnit.Test
             //Arrange
             Order order = MakeOrder();
             order.OrderLines.Add(MakeOrderLine());
-            order.Status = "Under Construction";
+            order.Status = 0;
            
             //Act And Arrange
             Assert.Throws<OrderCanNotSendNoZookeeperException>(() => order.CanOrderBeSend());
@@ -289,7 +289,7 @@ namespace NUnit.Test
         {
             //Arrange
             Order order = MakeOrder();
-            order.Status = "Under Construction";
+            order.Status = 0;
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
             order.OrderedByID = zookeeper.Id;
@@ -299,23 +299,23 @@ namespace NUnit.Test
         }
 
         [Test]
-        public void SendOrder_CanBeSendWork_OrderCanBeSend()
+        public void SendOrder_CanBeSendWorks_OrderCanBeSend()
         {
             //Arrange
-
             Order order = MakeOrder();
             order.OrderLines.Add(MakeOrderLine());
-            order.Status = "Under Construction";
+            order.Status = 0;
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
             order.OrderedByID = zookeeper.Id;
             ShoppingList shoppingList = new ShoppingList();
             
             //Act
+            //Det er denne som giver fejl
             order.SendOrder(shoppingList);
 
             //Assert
-            Assert.AreEqual("Sent", order.Status);
+            Assert.AreEqual(1, order.Status);
             Assert.AreEqual(order, shoppingList.Orders.Last());
             MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
         }

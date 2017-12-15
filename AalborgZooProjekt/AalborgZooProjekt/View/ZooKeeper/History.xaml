@@ -22,7 +22,8 @@
                             <Button>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Name}"/>
-                                    <Image Source="/AalborgZooProjekt;component/Img/Banana icon.png" Width="15" Height="15"/>
+                                    <Image Name="BananaIcon" Source="/AalborgZooProjekt;component/Img/Banana icon.png" Width="15" Height="15"/>
+                                    <Image Name="WheatIcon" Source="/AalborgZooProjekt;component/Img/Wheat Icon 2.png" Width="15" Height="15"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
