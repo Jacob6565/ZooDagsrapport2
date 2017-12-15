@@ -7,6 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
     xmlns:view="clr-namespace:AalborgZooProjekt.View"
+    xmlns:local="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
     mc:Ignorable="d ignore"
         Height="768"
         Width="1024"
@@ -41,14 +42,14 @@
                 </Grid.RowDefinitions>
 
                 <!-- Watch / Clock -->
-                <TextBlock Margin="10" Text="{Binding Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
+                <TextBlock Margin="10" Text="{Binding  Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
                     <TextBlock.Style>
                         <Style>
                             <Setter Property="TextBlock.FontSize" Value="20"/>
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <view:History Grid.Row="1"/>
+                <local:History Grid.Row="1"/>
             </Grid>
 
             <GridSplitter Width="10"
@@ -100,7 +101,7 @@
                         </ControlTemplate>
                     </TabControl.Template>
                     <TabItem Header="Foderbestilling" Grid.Column="0" Margin="0,0,6.4,0.2">
-                        <view:FeedTab/>
+                        <local:FeedTab/>
                         <!--<ScrollViewer>
                             <Grid Background="#FFE5E5E5">
                                 <Grid.RowDefinitions>

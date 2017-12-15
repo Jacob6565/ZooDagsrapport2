@@ -98,11 +98,11 @@ namespace AalborgZooProjekt.ViewModel
             OrderLine ol = box.DataContext as OrderLine;
             if (sp.Children.OfType<Button>().First().IsFocused)
             {
-                ol.Quantity++;
+                ol.ChangeQuantity++; 
             }
             else
             {
-                ol.Quantity--;
+                ol.ChangeQuantity--;
             }
             ChangeOrderList(box);
         }
@@ -197,4 +197,3 @@ namespace AalborgZooProjekt.ViewModel
         }
     }
 }
-
