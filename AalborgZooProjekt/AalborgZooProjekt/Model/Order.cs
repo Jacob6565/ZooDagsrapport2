@@ -18,22 +18,10 @@ namespace AalborgZooProjekt.Model
 
 
         private int _underConstruction = 0;
-        public int UnderConstruction
-        {
-            get
-            {
-                return _underConstruction;
-            }
-        }
+        public int UnderConstruction { get { return _underConstruction; } }
 
         private int _sent = 1;
-        public int Sent
-        {
-            get
-            {
-                return _sent;
-            }
-        }
+        public int Sent{ get { return _sent; }}
 
         /// <summary>
         /// Simple function that returns the current date, using the DateTime.Today() function
