@@ -33,7 +33,7 @@
                                     HorizontalAlignment="Left">
                         <TextBlock Text="{Binding Department, StringFormat='{}{0}'}" />
                     </Viewbox>
-                    <local:FeedAndRawfeedTab  Grid.Row="1"></local:FeedAndRawfeedTab>
+                    <local:FeedAndRawfeedTab  Grid.Row="1"/>
                 </Grid>
                 <local:OrderList Grid.Column="2"/>
             </Grid>
