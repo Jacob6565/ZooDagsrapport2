@@ -241,19 +241,6 @@ namespace AalborgZooProjekt.ViewModel
             OrderInTheMaking.OrderedByID = tempZookeeper.Id;
         }
 
-        public bool CanSendOrder(object context)
-        {
-            RadioButton sp = context as RadioButton;
-            if (sp != null)
-            {
-                if (sp.IsChecked.Value)
-                    {
-                        return true;
-                    }
-            }            
-            return false;
-        }
-
         
         /// <summary>
         /// Functionality for actually sending an order, if it is legal it will be added to the database and added to
