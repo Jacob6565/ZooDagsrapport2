@@ -161,7 +161,9 @@ namespace AalborgZooProjekt.Model
                 shoppingList.AddOrder(this);
 
                 //Updates the order in database and adds it to shoppinglist in database
-                orderRep.AddOrder(this);
+                Order temp = orderRep.AddOrder(this);
+                Id = temp.Id;
+                OrderLines = temp.OrderLines;
 
                 //TODO temporarily adding a new shoppinglist instead of Updating
                 shoppingList.shoppingListRep.Add(shoppingList);

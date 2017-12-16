@@ -9,9 +9,10 @@ namespace AalborgZooProjekt.Model
 {
     public partial class ShoppingList : IShoppingList
     {
-        public ShoppingList(IShoppingListRepository repository)
+        public ShoppingList(IShoppingListRepository repository) : this()
         {
             shoppingListRep = repository;
+            DateCreated = DateTime.Now;
         }
         
         public IShoppingListRepository shoppingListRep { get; private set; }

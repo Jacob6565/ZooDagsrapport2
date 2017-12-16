@@ -14,18 +14,19 @@ namespace AalborgZooProjekt.Model
         /// Adds a not yet excisting order to the database
         /// </summary>
         /// <param name="order"></param>
-        public void AddOrder(Order order)
+        public Order AddOrder(Order order)
         {
             using (var _context = new AalborgZooContainer1())
             {
                 foreach (OrderLine orderLine in order.OrderLines)
                 {
-                    _context.OrderLineSet.Add(orderLine);
+                    orderLine.Id = _context.OrderLineSet.Add(orderLine).Id;
                 }
 
                 _context.OrderSet.Add(order);
                 
                 _context.SaveChanges();
+                return order;
             }
         }
 
