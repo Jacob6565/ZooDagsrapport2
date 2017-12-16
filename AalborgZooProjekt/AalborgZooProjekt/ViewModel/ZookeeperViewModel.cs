@@ -228,6 +228,33 @@ namespace AalborgZooProjekt.ViewModel
             private set { _canBeSend = value; }
         }
 
+        
+        /// <summary>
+        /// Assembles order by adding the orderLines and zookeeper chosen in view
+        /// </summary>
+        private void AssembleOrder()
+        {
+            //TODO temp before we can get a zookeeper from view
+            Zookeeper tempZookeeper = new Zookeeper() { Id = 1 };
+
+            OrderInTheMaking.OrderLines = DepOrderList;
+            OrderInTheMaking.OrderedByID = tempZookeeper.Id;
+        }
+
+        public bool CanSendOrder(object context)
+        {
+            RadioButton sp = context as RadioButton;
+            if (sp != null)
+            {
+                if (sp.IsChecked.Value)
+                    {
+                        return true;
+                    }
+            }            
+            return false;
+        }
+
+        
         /// <summary>
         /// Functionality for actually sending an order, if it is legal it will be added to the database and added to
         /// the current shoppinglist
@@ -240,21 +267,14 @@ namespace AalborgZooProjekt.ViewModel
                 //TODO Temp
                 AssembleOrder();
 
-                OrderInTheMaking.OrderedByID = 1;
-                OrderInTheMaking.AddOrderLine(new OrderLine());
-
                 CanBeSend = false;
                 OrderInTheMaking.SendOrder(new ShoppingList());
                 OrderInTheMaking = new Order(_department);
-                CanBeSend = true;
-                throw new Exception();
-            }
-        }
 
-        private void AssembleOrder()
-        {
-            OrderInTheMaking.OrderLines = DepOrderList;
-            OrderInTheMaking.OrderedByID = 1;
+                //TODO clear the chosen orderLines and zookeeper from view
+
+                CanBeSend = true;
+            }
         }
 
         public bool CanSendOrder(object context)

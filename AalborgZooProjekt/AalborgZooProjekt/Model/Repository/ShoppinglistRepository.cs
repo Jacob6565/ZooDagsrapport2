@@ -11,7 +11,12 @@ namespace AalborgZooProjekt.Model
     {
         public void Add(ShoppingList shoppingList)
         {
-            throw new NotImplementedException();
+            using (var context = new AalborgZooContainer1())
+            {
+                context.ShoppingListSet.Add(shoppingList);
+                context.SaveChanges();
+            }
+            
         }
 
         public ShoppingList GetActiveShoppingList()
