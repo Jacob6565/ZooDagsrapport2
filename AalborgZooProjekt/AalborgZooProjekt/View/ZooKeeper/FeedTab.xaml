@@ -46,37 +46,29 @@
                 <Expander x:Name="BemærkningerExpander" Header="Bemærkninger" 
                                               Margin="0,2">
                         <Grid>
-                            <TextBox x:Name="BemærkningerExpanderTextbox"
+                            <TextBox x:Name="BemærkningerExpanderTextbox" Text="{Binding OrderNote.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             TextWrapping="Wrap" 
                                             VerticalScrollBarVisibility="Auto" Height="50"/>
                         </Grid>
                     </Expander>
 
-                    <Expander x:Name="MedarbejderExpander" Header="Medarbejder" 
-                                              Margin="0,2" 
-                                              Grid.Row="1">
-
-                    <ListView ItemsSource="{Binding DepZookeeperList}"  >
+                <Expander x:Name="MedarbejderExpander" Header="Medarbejder" 
+                                Margin="0,2" Grid.Row="1">
+                    <ListView ItemsSource="{Binding DepZookeeperList}" Name="listZookeeper" >
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
-                            <ListView.ItemTemplate>
+                        <ListView.ItemTemplate>
                             <DataTemplate>
                                 <RadioButton GroupName="ZooKeepers" Name="btnZookeeper" Style="{StaticResource {x:Type ToggleButton}}" Content="{Binding Name}" Height="50" 
                                              Command="{Binding Zoo.ZookeeperChosen, Source={StaticResource Locator} ,UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}" 
                                              CommandParameter="{Binding}"/>
                             </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                            <!--<StackPanel Orientation="Horizontal">
-                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 1" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 3" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Medarbejder 4" Grid.Column="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10"/>
-                            </StackPanel>-->
-                    </Expander>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Expander>
             </StackPanel>
 
             <Grid Grid.Row="3">
@@ -84,7 +76,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <Button Command ="{Binding SendOrderCommand, UpdateSourceTrigger=PropertyChanged}" Content="Bestil" 
+                <Button Command ="{Binding SendOrderCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=listZookeeper}" Content="Bestil" 
                                         Margin="5,0" Padding="50,0" 
                                         Grid.Column="2"/>
             </Grid>
