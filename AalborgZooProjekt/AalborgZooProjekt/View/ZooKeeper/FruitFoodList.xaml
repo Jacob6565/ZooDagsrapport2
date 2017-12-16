@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <ScrollViewer>
-        <DataGrid ItemsSource="{Binding DepOrderLines}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding DepOrderLines, Mode=TwoWay}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vare" Binding="{Binding ProductVersion.Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">

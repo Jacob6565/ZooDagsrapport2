@@ -10,6 +10,7 @@ using AalborgZooProjekt.Model.Database;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -113,7 +114,10 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
+
         public Zookeeper ActiveZookeeper { get; private set; }
+
+        public TextBox OrderNote { get; set; } = new TextBox();
         /// <summary>
         /// Responsible for setting up the order, if a unfinished order exist it will be loaded, otherwise there will
         /// be created a new order.
@@ -235,10 +239,11 @@ namespace AalborgZooProjekt.ViewModel
         private void AssembleOrder()
         {
             //TODO temp before we can get a zookeeper from view
-            Zookeeper tempZookeeper = new Zookeeper() { Id = 1 };
 
             OrderInTheMaking.OrderLines = DepOrderList;
-            OrderInTheMaking.OrderedByID = tempZookeeper.Id;
+            OrderInTheMaking.AttachZookeeperToOrder(ActiveZookeeper);
+            OrderInTheMaking.Note = OrderNote.Text;
+
         }
 
         
@@ -260,6 +265,7 @@ namespace AalborgZooProjekt.ViewModel
 
                 //TODO clear the chosen orderLines and zookeeper from view
 
+                ClearOrders(context);
                 CanBeSend = true;
             }
         }
@@ -300,6 +306,17 @@ namespace AalborgZooProjekt.ViewModel
         public bool IsZookeeperChosen()
         {
             return ActiveZookeeper != null;
+        }
+
+        private void ClearOrders(object context)
+        {
+            foreach (OrderLine ol in DepOrderList)
+            {
+                ol.ChangeQuantity= 0;
+            }
+            DepOrderList.Clear();
+            OrderNote.Text = "";
+            ////TODO Clear Radiobuttons
         }
 
     }
