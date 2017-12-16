@@ -55,26 +55,6 @@ namespace AalborgZooProjekt.ViewModel
             return null;
         }
 
-
-        /// <summary>
-        /// Responsible for setting up the order, if a unfinished order exist it will be loaded, otherwise there will
-        /// be created a new order.
-        /// </summary>
-        private void SetupOrder()
-        {
-            Order unfinishedOrder = dbOrderRep.GetUnfinishedOrder(_department);
-
-            if (unfinishedOrder == null)
-            {
-                OrderInTheMaking = new Order(_department);
-            }
-            else if (unfinishedOrder != null)
-            {
-                OrderInTheMaking = unfinishedOrder;
-            }
-
-        }
-
         //Simulates a chosen departement with the needed information for the current implemented functionality
         private Department _department = new Department();
         public Department Department
@@ -132,6 +112,27 @@ namespace AalborgZooProjekt.ViewModel
                 _depZookeeperList = value;
             }
         }
+
+        public Zookeeper ActiveZookeeper { get; private set; }
+        /// <summary>
+        /// Responsible for setting up the order, if a unfinished order exist it will be loaded, otherwise there will
+        /// be created a new order.
+        /// </summary>
+        private void SetupOrder()
+        {
+            Order unfinishedOrder = dbOrderRep.GetUnfinishedOrder(_department);
+
+            if (unfinishedOrder == null)
+            {
+                OrderInTheMaking = new Order(_department);
+            }
+            else if (unfinishedOrder != null)
+            {
+                OrderInTheMaking = unfinishedOrder;
+            }
+
+        }
+
 
         /// <summary>
         /// Gets the department specific product for a given department, via the 
@@ -258,34 +259,12 @@ namespace AalborgZooProjekt.ViewModel
 
         public bool CanSendOrder(object context)
         {
-            RadioButton sp = context as RadioButton;
-            if (sp != null)
-            {
-                if (sp.IsChecked.Value)
-                    {
-                        return true;
-                    }
-            }            
+            if (IsZookeeperChosen() && DepOrderList.Count != 0)
+                {
+                    return true;
+                }
             return false;
-        }
-
-        ///// <summary>
-        ///// The button that sends an order in the view
-        ///// </summary>
-        //private RelayCommand _sendOrderCommand;
-        //public RelayCommand SendOrderCommand
-        //{
-        //    get
-        //    {
-        //        return _sendOrderCommand
-        //          ?? (_sendOrderCommand = new RelayCommand(
-        //            () =>
-        //            {
-        //                Sendorder(OrderInTheMaking);   
-        //            },
-        //            () => CanSendOrder));
-        //    }
-        //}
+        }    
 
         private RelayCommand<object> _sendOrderCommand;
         public RelayCommand<object> SendOrderCommand
@@ -296,5 +275,25 @@ namespace AalborgZooProjekt.ViewModel
                     ?? (_sendOrderCommand = new RelayCommand<object>(Sendorder, CanSendOrder));
             }
         }
+
+        private RelayCommand<Zookeeper> _zookeeperChosen;
+        public RelayCommand<Zookeeper> ZookeeperChosen
+        {
+            get
+            {
+                return _zookeeperChosen
+                    ?? (_zookeeperChosen = new RelayCommand<Zookeeper>(ZookeeperSelected));
+            }
+        }
+
+        public void ZookeeperSelected(Zookeeper zookeeper)
+        {
+            ActiveZookeeper = zookeeper;
+        }
+        public bool IsZookeeperChosen()
+        {
+            return ActiveZookeeper != null;
+        }
+
     }
 }
