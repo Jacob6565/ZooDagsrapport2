@@ -13,6 +13,7 @@ using System.Diagnostics;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using PdfSharp;
+using AalborgZooProjekt.Model.Repository;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -116,12 +117,15 @@ namespace AalborgZooProjekt.ViewModel
                 .Select(grp => grp.ToList())
                 .ToList();
 
-            
+            foreach (List<OrderLine> orderlinesForOneSupplier in OrderLinesBySupplier)
+            {
+                CreatePDF(orderlinesForOneSupplier);
+            }
         }
 
-        private void Foo()
+        private void CreatePDF(List<OrderLine> orders)
         {
-            string alphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
+            string danishAlphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
             PdfDocument pdf = new PdfDocument();
             PdfPage pdfPage = pdf.AddPage();
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
@@ -132,7 +136,7 @@ namespace AalborgZooProjekt.ViewModel
             int marginLeft = 50;
             int marginRight = 50;
 
-            double lineHeight = graph.MeasureString(alphabet, fontParagraph).Height + 5;
+            double lineHeight = graph.MeasureString(danishAlphabet, fontParagraph).Height + 5;
 
             //Draw the headlines.
             string nameString = "Produkt";
@@ -168,9 +172,6 @@ namespace AalborgZooProjekt.ViewModel
                 new XRect(unitX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
                 XStringFormats.TopLeft);
 
-            OrderRepository orderRep = new OrderRepository();
-            List<Order> orders = orderRep.GetOrdersWithNoShoppinglist().ToList();
-
             //Draw entries
             for (int i = 0; i < orders.Count; i++)
             {
@@ -183,26 +184,27 @@ namespace AalborgZooProjekt.ViewModel
 
                 }
 
-                //graph.DrawString(
-                //    orders[i].ProductVersion.Product.Name,
-                //    fontParagraph,
-                //    XBrushes.Black,
-                //    new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
-                //    XStringFormats.TopLeft);
+                graph.DrawString(
+                    orders[i].ProductVersion.Product.Name,
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
+                    XStringFormats.TopLeft);
 
-                //graph.DrawString(
-                //    orders[i].Quantity.ToString(),
-                //    fontParagraph,
-                //    XBrushes.Black,
-                //    new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
-                //    XStringFormats.TopLeft);
+                graph.DrawString(
+                    orders[i].Quantity.ToString(),
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
+                    XStringFormats.TopLeft);
 
-                //graph.DrawString(
-                //    "kg", //Selected unit value
-                //    fontParagraph,
-                //    XBrushes.Black,
-                //    new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
-                //    XStringFormats.TopLeft);
+                UnitRepository unitRepository = new UnitRepository();
+                graph.DrawString(
+                    unitRepository.GetUnitById(orders[i].UnitID).Name,
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
+                    XStringFormats.TopLeft);
             }
 
             pdf.Save("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");

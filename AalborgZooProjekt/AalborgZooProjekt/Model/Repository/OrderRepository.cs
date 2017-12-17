@@ -118,7 +118,7 @@ namespace AalborgZooProjekt.Model
         {
             using (var _context = new AalborgZooContainer1())
             {
-                return _context.OrderSet.Include("OrderLines").Where(x => x.ShoppingList == null);
+                return _context.OrderSet.Include("OrderLines").Include("OrderLines.ProductVersion.Unit").Where(x => x.ShoppingList == null);
             }
         }
     }

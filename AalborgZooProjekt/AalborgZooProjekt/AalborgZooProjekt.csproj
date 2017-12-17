@@ -222,10 +222,12 @@
     <Compile Include="Model\Repository\IProductRepository.cs" />
     <Compile Include="Model\Exception\OrderDoesNotExistInDatabaseException.cs" />
     <Compile Include="Model\Repository\IShoppingListRepository.cs" />
+    <Compile Include="Model\Repository\IUnitRepository.cs" />
     <Compile Include="Model\Repository\OrderRepository.cs" />
     <Compile Include="Model\Repository\ProductRepository.cs" />
     <Compile Include="Model\Exception\ProductDoNotExistInDatabaseException.cs" />
     <Compile Include="Model\Repository\ShoppinglistRepository.cs" />
+    <Compile Include="Model\Repository\UnitRepository.cs" />
     <Compile Include="Model\Shopper.cs" />
     <Compile Include="Model\ShoppingList.cs" />
     <Compile Include="Model\Unit.cs" />
