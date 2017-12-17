@@ -145,21 +145,15 @@ namespace AalborgZooProjekt.Model
         /// <summary>
         /// When the zookeepers send the order to the shopper, it changes the order state
         /// </summary>
-        public void SendOrder(ShoppingList shoppingList)
+        public void SendOrder()
         {
             if (CanOrderBeSend())
             {
                 Status = _sent;
                 DateOrdered = GetDate();
-                shoppingList.AddOrder(this);
 
-                //Updates the order in database and adds it to shoppinglist in database
+                //Adds the order to database
                 Order temp = orderRep.AddOrder(this);
-                Id = temp.Id;
-                OrderLines = temp.OrderLines;
-
-                //TODO temporarily adding a new shoppinglist instead of Updating an existing one
-                shoppingList.shoppingListRep.Add(shoppingList);
             }
         }
     }

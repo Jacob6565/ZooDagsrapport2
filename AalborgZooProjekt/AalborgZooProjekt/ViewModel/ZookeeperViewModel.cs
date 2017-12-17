@@ -258,7 +258,7 @@ namespace AalborgZooProjekt.ViewModel
                 AssembleOrder();
 
                 CanBeSend = false;
-                OrderInTheMaking.SendOrder(new ShoppingList(new ShoppinglistRepository()) {ShopperId = 1, CreatedByID = 1});
+                OrderInTheMaking.SendOrder();
 
                 //Clears the order and the view
                 OrderInTheMaking = new Order(_department);

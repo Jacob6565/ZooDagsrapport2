@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
-             DataContext="{Binding OfficeTester, Source={StaticResource Locator}}"
+             DataContext="{Binding Office, Source={StaticResource Locator}}"
              x:Name="OfficeViewOrderList">
         <TabControl x:Name="tabControl" Margin="5,5,5,10" VerticalAlignment="Top"> 
             <TabItem Header="Samlet" >
@@ -26,7 +26,7 @@
                                                             <TextBlock  Text="{Binding ProductVersion.ProductId}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                            <Button Content="Rediger" Command="{Binding OfficeTester.EditOrder, Source={StaticResource Locator}}" CommandParameter="{Binding Mode=OneWay}"/>
+                                                            <Button Content="Rediger" Command="{Binding Office.EditOrder, Source={StaticResource Locator}}" CommandParameter="{Binding Mode=OneWay}"/>
                                                             <Button>
                                                                 <StackPanel Orientation="Horizontal">
                                                                     <TextBlock Text="Godkend"/>

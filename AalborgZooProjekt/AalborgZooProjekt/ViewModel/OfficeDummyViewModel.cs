@@ -242,10 +242,10 @@ namespace AalborgZooProjekt.ViewModel
 
         public void EditOrderWindow(object context)
         {
-            //OrderLine ol = context as OrderLine;            
-            //OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
-            ////orders.dgFoodList. = ol;          
-            //orders.ShowDialog();
+            OrderLine ol = context as OrderLine;            
+            OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
+            orders.dgFoodList.DataContext = ol;          
+            orders.ShowDialog();
         }
 
     }
