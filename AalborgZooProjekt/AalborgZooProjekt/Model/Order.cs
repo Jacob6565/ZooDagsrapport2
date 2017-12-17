@@ -11,7 +11,7 @@ namespace AalborgZooProjekt.Model
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
-            Status = _underConstruction;
+            Status = UnderConstruction;
 
             orderRep = rep;            
         }
@@ -19,10 +19,10 @@ namespace AalborgZooProjekt.Model
         private IOrderRepository orderRep;
 
 
-        private int _underConstruction = 0;
+        private const int _underConstruction = 0;
         public int UnderConstruction { get { return _underConstruction; } }
 
-        private int _sent = 1;
+        private const int _sent = 1;
         public int Sent{ get { return _sent; }}
 
         /// <summary>

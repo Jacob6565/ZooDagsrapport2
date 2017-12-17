@@ -260,7 +260,7 @@ namespace AalborgZooProjekt.ViewModel
                 AssembleOrder();
 
                 CanBeSend = false;
-                OrderInTheMaking.SendOrder(new ShoppingList(new ShoppinglistRepository()) {ShopperId = 1, CreatedByID = 1,  Status = 0});
+                OrderInTheMaking.SendOrder(new ShoppingList(new ShoppinglistRepository()) {ShopperId = 1, CreatedByID = 1});
                 OrderInTheMaking = new Order(_department);
 
                 //TODO clear the chosen orderLines and zookeeper from view
