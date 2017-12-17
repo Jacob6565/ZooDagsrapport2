@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AalborgZooProjekt.View;
-using AalborgZooProjekt.Model;
+using AalborgZooProjekt.Model.Database;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using System.Diagnostics;
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
-using PdfSharp;
+//using PdfSharp.Pdf;
+//using PdfSharp.Drawing;
+//using PdfSharp;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -23,7 +23,7 @@ namespace AalborgZooProjekt.ViewModel
 
         string connectionString = "name=AalborgZooContainer1";
 
-        public List<Model.Database.OrderLine> OrderList { get; set; } = new List<Model.Database.OrderLine>();
+        public List<OrderLine> OrderList { get; set; } = new List<OrderLine>();
         //public List<DummyOrderDepartment> DepartmentListApples { get; set; } = new List<DummyOrderDepartment>();
 
         public OfficeDummyViewModel()
@@ -222,7 +222,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             OrderLine ol = context as OrderLine;            
             OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
-            //orders.dgFoodList. = ol;          
+            orders.dgFoodList.DataContext = ol;          
             orders.ShowDialog();
         }
 
