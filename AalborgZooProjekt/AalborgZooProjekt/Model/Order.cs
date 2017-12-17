@@ -151,13 +151,6 @@ namespace AalborgZooProjekt.Model
             {
                 Status = _sent;
                 DateOrdered = GetDate();
-
-                //TODO Temporary
-                if (shoppingList == null)
-                {
-                    shoppingList = new ShoppingList(new ShoppinglistRepository());
-                }
-
                 shoppingList.AddOrder(this);
 
                 //Updates the order in database and adds it to shoppinglist in database
@@ -165,7 +158,7 @@ namespace AalborgZooProjekt.Model
                 Id = temp.Id;
                 OrderLines = temp.OrderLines;
 
-                //TODO temporarily adding a new shoppinglist instead of Updating
+                //TODO temporarily adding a new shoppinglist instead of Updating an existing one
                 shoppingList.shoppingListRep.Add(shoppingList);
             }
         }
