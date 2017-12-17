@@ -11,7 +11,7 @@ namespace AalborgZooProjekt.Model
         {
             DepartmentID = department.Id;
             DateCreated = GetDate();
-            Status = _underConstruction;
+            Status = UnderConstruction;
 
             orderRep = rep;            
         }
@@ -19,10 +19,10 @@ namespace AalborgZooProjekt.Model
         private IOrderRepository orderRep;
 
 
-        private int _underConstruction = 0;
+        private const int _underConstruction = 0;
         public int UnderConstruction { get { return _underConstruction; } }
 
-        private int _sent = 1;
+        private const int _sent = 1;
         public int Sent{ get { return _sent; }}
 
         /// <summary>
@@ -145,28 +145,15 @@ namespace AalborgZooProjekt.Model
         /// <summary>
         /// When the zookeepers send the order to the shopper, it changes the order state
         /// </summary>
-        public void SendOrder(ShoppingList shoppingList)
+        public void SendOrder()
         {
             if (CanOrderBeSend())
             {
                 Status = _sent;
                 DateOrdered = GetDate();
 
-                //TODO Temporary
-                if (shoppingList == null)
-                {
-                    shoppingList = new ShoppingList(new ShoppinglistRepository());
-                }
-
-                shoppingList.AddOrder(this);
-
-                //Updates the order in database and adds it to shoppinglist in database
+                //Adds the order to database
                 Order temp = orderRep.AddOrder(this);
-                Id = temp.Id;
-                OrderLines = temp.OrderLines;
-
-                //TODO temporarily adding a new shoppinglist instead of Updating
-                shoppingList.shoppingListRep.Add(shoppingList);
             }
         }
     }

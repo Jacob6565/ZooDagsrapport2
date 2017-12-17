@@ -13,7 +13,10 @@ namespace AalborgZooProjekt.Model
         {
             shoppingListRep = repository;
             DateCreated = DateTime.Now;
+            Status = _underConstruction;
         }
+
+        private const int _underConstruction = 0;
         
         public IShoppingListRepository shoppingListRep { get; private set; }
 

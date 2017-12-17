@@ -238,8 +238,6 @@ namespace AalborgZooProjekt.ViewModel
         /// </summary>
         private void AssembleOrder()
         {
-            //TODO temp before we can get a zookeeper from view
-
             OrderInTheMaking.OrderLines = DepOrderList;
             OrderInTheMaking.AttachZookeeperToOrder(ActiveZookeeper);
             OrderInTheMaking.Note = OrderNote.Text;
@@ -256,15 +254,14 @@ namespace AalborgZooProjekt.ViewModel
         {
             if (CanBeSend)
             {
-                //TODO Temp
+                //Assembles order so it can be send
                 AssembleOrder();
 
                 CanBeSend = false;
-                OrderInTheMaking.SendOrder(new ShoppingList(new ShoppinglistRepository()) {ShopperId = 1, CreatedByID = 1,  Status = 0});
+                OrderInTheMaking.SendOrder();
+
+                //Clears the order and the view
                 OrderInTheMaking = new Order(_department);
-
-                //TODO clear the chosen orderLines and zookeeper from view
-
                 ClearOrders(context);
                 CanBeSend = true;
             }
