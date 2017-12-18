@@ -121,7 +121,6 @@ namespace AalborgZooProjekt.ViewModel
 
             foreach (List<OrderLine> orderlinesForOneSupplier in OrderLinesBySupplier)
             {
-                
                 CreatePDF(UniteOrderlines(orderlinesForOneSupplier));
             }
         }
@@ -132,8 +131,10 @@ namespace AalborgZooProjekt.ViewModel
 
             foreach (OrderLine orderLine in unSortedOrderlines)
             {
-                int index = uniter.QuantityPerProduct.First(x => x.Key == orderLine.ProductVersion);
-                if (uniter.QuantityPerProduct.ContainsKey(orderLine.ProductVersion) && uniter.QuantityPerProduct.)
+                ProductVersion key = uniter.QuantityPerProduct.FirstOrDefault(x => x.Key.Id == orderLine.ProductVersion.Id).Key;
+                QuantityAndUnit value = uniter.QuantityPerProduct.FirstOrDefault(x => x.Key.Id == orderLine.ProductVersion.Id).Value;
+
+                if (key != null && value.OrderedUnit == orderLine.Unit)
                 {
                     uniter.QuantityPerProduct[orderLine.ProductVersion].Quantity += orderLine.Quantity;
                 } else
@@ -214,14 +215,14 @@ namespace AalborgZooProjekt.ViewModel
                     XStringFormats.TopLeft);
 
                 graph.DrawString(
-                    orders.QuantityPerProduct.ElementAt(i).Value.ToString(),
+                    orders.QuantityPerProduct.ElementAt(i).Value.Quantity.ToString(),
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
                 graph.DrawString(
-                    orders.QuantityPerProduct.ElementAt(i).Key.ToString(),
+                    orders.QuantityPerProduct.ElementAt(i).Value.OrderedUnit.Name,
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),

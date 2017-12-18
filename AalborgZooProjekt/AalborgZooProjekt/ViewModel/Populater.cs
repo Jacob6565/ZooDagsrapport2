@@ -138,39 +138,6 @@ namespace AalborgZooProjekt.ViewModel
                 db.ProductSet.Add(prodTuttiFruttiMix);
 
                 db.SaveChanges();
-                /* Units */
-
-                ICollection<Unit> unitCollection = new List<Unit>();
-
-                if (db.UnitSet.Count() == 0)
-                {
-                    Unit unitKg = new Unit()
-                    {
-                        Name = "kg"
-                    };
-                    db.UnitSet.Add(unitKg);
-                    unitCollection.Add(unitKg);
-
-                    Unit unitKs = new Unit()
-                    {
-                        Name = "kasse(r)"
-                    };
-                    db.UnitSet.Add(unitKs);
-                    unitCollection.Add(unitKs);
-
-                    Unit unitStk = new Unit()
-                    {
-                        Name = "styks"
-                    };
-                    db.UnitSet.Add(unitStk);
-                    unitCollection.Add(unitStk);
-                }
-                else
-                {
-                    unitCollection = db.UnitSet.ToList();
-                }
-
-                db.SaveChanges();
                 /* Product versions */
 
                 ProductVersion prodvBanan = new ProductVersion()
@@ -179,7 +146,7 @@ namespace AalborgZooProjekt.ViewModel
                     Product = prodBanan,
                     IsActive = true,
                     Supplier = "FrugtKarl",
-                    Units = unitCollection,
+                    Units = db.UnitSet.ToList(),
                     DateCreated = DateTime.Today,
                     CreatedByID = shp.Id
                 };
@@ -191,7 +158,7 @@ namespace AalborgZooProjekt.ViewModel
                     Product = prodÆble,
                     IsActive = true,
                     Supplier = "FrugtKarl",
-                    Units = unitCollection,
+                    Units = db.UnitSet.ToList(),
                     DateCreated = DateTime.Today,
                     CreatedByID = shp.Id
                 };
@@ -204,7 +171,7 @@ namespace AalborgZooProjekt.ViewModel
                     IsActive = true,
                     Supplier = "FrugtKarl",
                     DateCreated = DateTime.Today,
-                    Units = unitCollection,
+                    Units = db.UnitSet.ToList(),
                     CreatedByID = shp.Id
                 };
                 db.ProductVersionSet.Add(prodvPære);
@@ -216,7 +183,7 @@ namespace AalborgZooProjekt.ViewModel
                     IsActive = true,
                     Supplier = "FrugtKarl",
                     DateCreated = DateTime.Today,
-                    Units = unitCollection,
+                    Units = db.UnitSet.ToList(),
                     CreatedByID = shp.Id
                 };
                 db.ProductVersionSet.Add(prodvAbrikos);
@@ -228,7 +195,7 @@ namespace AalborgZooProjekt.ViewModel
                     IsActive = true,
                     Supplier = "Tivoli",
                     DateCreated = DateTime.Today,
-                    Units = unitCollection,
+                    Units = db.UnitSet.ToList(),
                     CreatedByID = shp.Id
                 };
                 db.ProductVersionSet.Add(prodvTuttiFrutti);
