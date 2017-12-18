@@ -7,75 +7,78 @@
              mc:Ignorable="d" 
              DataContext="{Binding Office, Source={StaticResource Locator}}"
              x:Name="OfficeViewOrderList">
-        <TabControl x:Name="tabControl" Margin="5,5,5,10" VerticalAlignment="Top"> 
-            <TabItem Header="Samlet" >
-                <Grid>
-                    <Grid.RowDefinitions>   
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="25"/>
-                    </Grid.RowDefinitions>
-                    <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding OrderList}" HeadersVisibility="None" Grid.Row="0">
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Vare" Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Expander IsExpanded="True" Name="Product">
-                                                <Expander.Header>
-                                                    <Grid>
-                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                            <TextBlock  Text="{Binding ProductVersion.ProductId}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+    <TabControl x:Name="tabControl" Margin="5,5,5,10" VerticalAlignment="Top">
+        <TabItem Header="Samlet" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dataGrid_all" VerticalAlignment="Top" AutoGenerateColumns="False" ItemsSource="{Binding OrderList}" HeadersVisibility="None" Grid.Row="0" Grid.Column="0">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Vare" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Expander IsExpanded="True" Name="Product" HorizontalAlignment="Stretch" >
+                                        <Expander.Header>
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                                    <TextBlock  Text="{Binding ProductVersion.Name}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <Button Content="Rediger" Command="{Binding Office.EditOrder, Source={StaticResource Locator}}" CommandParameter="{Binding Mode=OneWay}"/>
+                                                    <Button>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Godkend"/>
+                                                            <CheckBox Margin="5,0,0,0"/>
                                                         </StackPanel>
-                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                            <Button Content="Rediger" Command="{Binding Office.EditOrder, Source={StaticResource Locator}}" CommandParameter="{Binding Mode=OneWay}"/>
-                                                            <Button>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <TextBlock Text="Godkend"/>
-                                                                    <CheckBox Margin="5,0,0,0"/>
-                                                                </StackPanel>
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </Expander.Header>
-                                                <DataGrid Margin="25,0,0,0" VerticalAlignment="Top" ItemsSource="{Binding}" 
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Expander.Header>
+                                        <DataGrid Margin="25,0,0,0" VerticalAlignment="Top" ItemsSource="{Binding ProductVersion.Units}" 
                                                             AutoGenerateColumns="True" ScrollViewer.CanContentScroll="False"
                                                             VerticalScrollBarVisibility="Disabled" CanUserResizeRows="False" MinRowHeight="18" />
-                                            </Expander>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                    </Expander>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Content="Udvid/Kollaps"  Width="100"/>
-                        <Button Content="Vælg alle" Width="100"/>
+                    <Button Content="Udvid/Kollaps"  Width="100" Command="{Binding CollapseExpanders}" CommandParameter="{Binding ElementName=dataGrid_all}"/>
+                    <Button Content="Vælg alle" Width="100"/>
                 </StackPanel>
             </Grid>
-            </TabItem>
+        </TabItem>
 
-            <TabItem Header="Frugt">
-                <Grid Background="White" Margin="5,0,5,5" VerticalAlignment="Top">
-                    <DataGrid x:Name="dataGrid_fruit" VerticalAlignment="Top" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
-                            <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
-                            <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
-                            <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
+        <TabItem Header="Frugt">
+            <Grid Background="White" Margin="5,0,5,5" VerticalAlignment="Top">
+                <DataGrid x:Name="dataGrid_fruit" VerticalAlignment="Top" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
+                        <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
+                        <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
+                        <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
 
-            <TabItem Header="Kraftfoder">
-                <Grid Background="White" Margin="5,0,5,5" Height="174" VerticalAlignment="Top">
-                    <DataGrid x:Name="dataGrid_compound_feed" VerticalAlignment="Top">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
-                            <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
-                            <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
-                            <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
-        </TabControl>
+        <TabItem Header="Kraftfoder">
+            <Grid Background="White" Margin="5,0,5,5" Height="174" VerticalAlignment="Top">
+                <DataGrid x:Name="dataGrid_compound_feed" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Vare" Binding="{Binding Ware}" Width="240*"/>
+                        <DataGridTextColumn Header="Antal" Binding="{Binding Quantity}" Width="50*"/>
+                        <DataGridTextColumn Header="Enhed" Binding="{Binding Unit}" Width="55*"/>
+                        <DataGridTextColumn Header="Bestilt" Binding="{Binding Ordered}" Width="60*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </UserControl>
