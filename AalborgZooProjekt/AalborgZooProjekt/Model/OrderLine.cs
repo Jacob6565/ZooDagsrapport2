@@ -24,7 +24,17 @@ namespace AalborgZooProjekt.Model
                     Quantity = 0;
                 }
             }
-        }    
+        }
+
+        public Unit ChangeUnit
+        {
+            get { return Unit; }
+            set
+            {
+                Unit = value;
+                OnPropertyChanged("Unit");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -26,7 +26,7 @@
                 <DataGridTemplateColumn Header="Enhed" MinWidth="77" MaxWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding ProductVersion.Unit, diag:PresentationTraceSources.TraceLevel=High}" SelectedIndex="1" SelectedValue="{Binding Unit/Id}" SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                            <ComboBox Name="FuckThisShit" ItemsSource="{Binding ProductVersion.Units, diag:PresentationTraceSources.TraceLevel=High}" SelectedValue="{Binding SelectedUnit}" DisplayMemberPath="Name"/> <!--SelectedValue="{Binding Unit}" SelectedValuePath="Id"-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -16,11 +16,11 @@ namespace AalborgZooProjekt.Model
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public int UnitID { get; set; }
         public int ProductVersionId { get; set; }
         public int OrderId { get; set; }
     
         public virtual ProductVersion ProductVersion { get; set; }
         public virtual Order Order { get; set; }
+        public virtual Unit Unit { get; set; }
     }
 }

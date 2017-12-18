@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using AalborgZooProjekt.Model;
-using AalborgZooProjekt.Model.Database;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Controls;
@@ -18,6 +17,12 @@ namespace AalborgZooProjekt.ViewModel
     {
         public ZookeeperViewModel()
         {
+            if (false)
+                Populater.DeleteDatabase();
+
+            if ((new AalborgZooContainer1().ProductSet.Count() == 0))
+                Populater.PopulateDatabase();
+
             //Load departments from database
             Departments = new BindingList<Department>(dbDepartmentRep.GetDepartments());
 
@@ -27,10 +32,28 @@ namespace AalborgZooProjekt.ViewModel
             //Load zookeepers from department
             DepZookeeperList = new BindingList<Zookeeper>(GetDepartmentZookeepers(_department));
 
-            
             SetupOrder();
 
-            DepOrderLines = GetDepProductListFromDb();            
+            DepOrderLines = GetDepProductListFromDb();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private string _selectedUnit;
+        public string SelectedUnit
+        {
+            get { return _selectedUnit; }
+            set { _selectedUnit = value; OnPropertyChanged("Unit"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         //The order that are being created/edited in the Zookeeper view
@@ -114,7 +137,6 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
-
         public Zookeeper ActiveZookeeper { get; private set; }
 
         public TextBox OrderNote { get; set; } = new TextBox();
@@ -136,7 +158,6 @@ namespace AalborgZooProjekt.ViewModel
             }
 
         }
-
 
         /// <summary>
         /// Gets the department specific product for a given department, via the 

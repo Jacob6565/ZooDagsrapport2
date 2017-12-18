@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="AalborgZoo.Employee" Width="1.5" PointX="10.875" PointY="0.875" />
         <EntityTypeShape EntityType="AalborgZoo.Shopper" Width="1.5" PointX="11.75" PointY="3.75" />
         <EntityTypeShape EntityType="AalborgZoo.PasswordChanged" Width="1.5" PointX="11.75" PointY="6.375" />
-        <EntityTypeShape EntityType="AalborgZoo.Unit" Width="1.5" PointX="2" PointY="9.875" />
+        <EntityTypeShape EntityType="AalborgZoo.Unit" Width="1.5" PointX="2" PointY="10.125" />
         <AssociationConnector Association="AalborgZoo.DepartmentSpecifikProductProduct" />
         <AssociationConnector Association="AalborgZoo.ProductProductVersion" />
         <AssociationConnector Association="AalborgZoo.ProductVersionOrderLine" />
@@ -31,6 +31,7 @@
         <InheritanceConnector EntityType="AalborgZoo.Shopper" />
         <AssociationConnector Association="AalborgZoo.ShopperShoppingList" />
         <AssociationConnector Association="AalborgZoo.PasswordChangedShopper" />
+        <AssociationConnector Association="AalborgZoo.OrderLineUnit" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

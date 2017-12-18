@@ -1,6 +1,5 @@
 ﻿using AalborgZooProjekt.Interfaces;
 using AalborgZooProjekt.Model;
-using AalborgZooProjekt.Model.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;

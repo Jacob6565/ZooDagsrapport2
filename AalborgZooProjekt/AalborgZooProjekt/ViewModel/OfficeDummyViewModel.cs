@@ -33,7 +33,7 @@ namespace AalborgZooProjekt.ViewModel
             //string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             //foreach (string product in lines)
             //{
-            using (var db = new Model.Database.AalborgZooContainer1())
+            using (var db = new Model.AalborgZooContainer1())
             {
                 //foreach (OrderLine ol in db.OrderLineSet)
                 //{
@@ -198,10 +198,8 @@ namespace AalborgZooProjekt.ViewModel
                     new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
-                UnitRepository unitRepository = new UnitRepository();
-                Unit unit = unitRepository.GetUnitById(orders[i].UnitID);
                 graph.DrawString(
-                    unitRepository.GetUnitById(orders[i].UnitID).Name,
+                    orders[i].Unit.Name,
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),

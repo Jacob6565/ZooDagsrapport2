@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2017 12:19:52
+-- Date Created: 12/18/2017 11:09:55
 -- Generated from EDMX file: C:\Users\Tobias\Source\Repos\ZooDagsrapport2\AalborgZooProjekt\AalborgZooProjekt\Model\Database\AalborgZoo.edmx
 -- --------------------------------------------------
 
@@ -52,6 +52,9 @@ IF OBJECT_ID(N'[dbo].[FK_ShopperShoppingList]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_PasswordChangedShopper]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PasswordChangedSet] DROP CONSTRAINT [FK_PasswordChangedShopper];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderLineUnit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderLineSet] DROP CONSTRAINT [FK_OrderLineUnit];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Zookeeper_inherits_Employee]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EmployeeSet_Zookeeper] DROP CONSTRAINT [FK_Zookeeper_inherits_Employee];
@@ -171,9 +174,9 @@ GO
 CREATE TABLE [dbo].[OrderLineSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Quantity] int  NOT NULL,
-    [UnitID] int  NOT NULL,
     [ProductVersionId] int  NOT NULL,
-    [OrderId] int  NOT NULL
+    [OrderId] int  NOT NULL,
+    [Unit_Id] int  NULL
 );
 GO
 
@@ -505,6 +508,21 @@ GO
 CREATE INDEX [IX_FK_PasswordChangedShopper]
 ON [dbo].[PasswordChangedSet]
     ([ShopperId]);
+GO
+
+-- Creating foreign key on [Unit_Id] in table 'OrderLineSet'
+ALTER TABLE [dbo].[OrderLineSet]
+ADD CONSTRAINT [FK_OrderLineUnit]
+    FOREIGN KEY ([Unit_Id])
+    REFERENCES [dbo].[UnitSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OrderLineUnit'
+CREATE INDEX [IX_FK_OrderLineUnit]
+ON [dbo].[OrderLineSet]
+    ([Unit_Id]);
 GO
 
 -- Creating foreign key on [Id] in table 'EmployeeSet_Zookeeper'

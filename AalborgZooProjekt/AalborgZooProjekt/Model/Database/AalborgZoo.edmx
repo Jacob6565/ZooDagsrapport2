@@ -68,6 +68,10 @@
       <End Role="PasswordChanged" EntitySet="PasswordChangedSet" />
       <End Role="Shopper" EntitySet="EmployeeSet_Shopper" />
     </AssociationSet>
+    <AssociationSet Name="OrderLineUnit" Association="AalborgZoo.Store.OrderLineUnit">
+      <End Role="Unit" EntitySet="UnitSet" />
+      <End Role="OrderLine" EntitySet="OrderLineSet" />
+    </AssociationSet>
     <AssociationSet Name="FK_Zookeeper_inherits_Employee" Association="AalborgZoo.Store.FK_Zookeeper_inherits_Employee">
       <End Role="Employee" EntitySet="EmployeeSet" />
       <End Role="Zookeeper" EntitySet="EmployeeSet_Zookeeper" />
@@ -139,9 +143,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="UnitID" Type="int" Nullable="false" />
     <Property Name="ProductVersionId" Type="int" Nullable="false" />
     <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="Unit_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="DepartmentSet">
     <Key>
@@ -328,6 +332,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="OrderLineUnit">
+    <End Role="Unit" Type="AalborgZoo.Store.UnitSet" Multiplicity="0..1" />
+    <End Role="OrderLine" Type="AalborgZoo.Store.OrderLineSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderLine">
+        <PropertyRef Name="Unit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UnitProductVersion_Unit">
     <End Role="Unit" Type="AalborgZoo.Store.UnitSet" Multiplicity="1" />
     <End Role="UnitProductVersion" Type="AalborgZoo.Store.UnitProductVersion" Multiplicity="*" />
@@ -440,6 +456,10 @@
             <End Role="PasswordChanged" EntitySet="PasswordChangedSet" />
             <End Role="Shopper" EntitySet="EmployeeSet" />
           </AssociationSet>
+          <AssociationSet Name="OrderLineUnit" Association="AalborgZoo.OrderLineUnit">
+            <End Role="Unit" EntitySet="UnitSet" />
+            <End Role="OrderLine" EntitySet="OrderLineSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DepartmentSpecificProduct">
           <Key>
@@ -514,11 +534,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="UnitID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductVersion" Relationship="AalborgZoo.ProductVersionOrderLine" FromRole="OrderLine" ToRole="ProductVersion" />
           <Property Name="ProductVersionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="AalborgZoo.OrderLineOrder" FromRole="OrderLine" ToRole="Order" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Unit" Relationship="AalborgZoo.OrderLineUnit" FromRole="OrderLine" ToRole="Unit" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -702,6 +722,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="OrderLineUnit">
+          <End Type="AalborgZoo.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="AalborgZoo.OrderLine" Role="OrderLine" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -774,7 +798,6 @@
         <MappingFragment StoreEntitySet="OrderLineSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
           <ScalarProperty Name="ProductVersionId" ColumnName="ProductVersionId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
         </MappingFragment>
@@ -847,6 +870,15 @@
       <EndProperty Name="ProductVersion">
         <ScalarProperty Name="Id" ColumnName="ProductVersions_Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OrderLineUnit" TypeName="AalborgZoo.OrderLineUnit" StoreEntitySet="OrderLineSet">
+      <EndProperty Name="Unit">
+        <ScalarProperty Name="Id" ColumnName="Unit_Id" />
+      </EndProperty>
+      <EndProperty Name="OrderLine">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Unit_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

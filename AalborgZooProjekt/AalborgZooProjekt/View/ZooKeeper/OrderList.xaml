@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
@@ -23,11 +24,12 @@
                      Grid.Row="1" ItemsSource="{Binding DepOrderList, Mode=TwoWay}" Name="dgOrderList" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding ProductVersion.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Antal"  Binding="{Binding Quantity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Antal" Binding="{Binding Quantity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Enhed" Binding="{Binding SelectedUnit.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTemplateColumn Header="Enhed" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding ProductVersion.Unit}" SelectedIndex="1" SelectedValue="{Binding Unit/Id}" SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                            <TextBlock Text="{Binding ElementName=FuckThisShit, Path=SelectedItem.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, diag:PresentationTraceSources.TraceLevel=High}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

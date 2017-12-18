@@ -5,7 +5,6 @@ using System.Text;
 using System.Linq;
 using System.Collections.ObjectModel;
 using AalborgZooProjekt.Model;
-using AalborgZooProjekt.Model.Database;
 using AalborgZooProjekt.ViewModel;
 
 namespace AalborgZooProjekt

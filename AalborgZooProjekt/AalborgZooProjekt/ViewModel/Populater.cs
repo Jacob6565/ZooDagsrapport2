@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AalborgZooProjekt.Model;
-using AalborgZooProjekt.Model.Database;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -143,26 +142,33 @@ namespace AalborgZooProjekt.ViewModel
 
                 ICollection<Unit> unitCollection = new List<Unit>();
 
-                Unit unitKg = new Unit()
+                if (db.UnitSet.Count() == 0)
                 {
-                    Name = "kg"
-                };
-                db.UnitSet.Add(unitKg);
-                unitCollection.Add(unitKg);
+                    Unit unitKg = new Unit()
+                    {
+                        Name = "kg"
+                    };
+                    db.UnitSet.Add(unitKg);
+                    unitCollection.Add(unitKg);
 
-                Unit unitKs = new Unit()
-                {
-                    Name = "kasse(r)"
-                };
-                db.UnitSet.Add(unitKs);
-                unitCollection.Add(unitKs);
+                    Unit unitKs = new Unit()
+                    {
+                        Name = "kasse(r)"
+                    };
+                    db.UnitSet.Add(unitKs);
+                    unitCollection.Add(unitKs);
 
-                Unit unitStk = new Unit()
+                    Unit unitStk = new Unit()
+                    {
+                        Name = "styks"
+                    };
+                    db.UnitSet.Add(unitStk);
+                    unitCollection.Add(unitStk);
+                }
+                else
                 {
-                    Name = "styks"
-                };
-                db.UnitSet.Add(unitStk);
-                unitCollection.Add(unitStk);
+                    unitCollection = db.UnitSet.ToList();
+                }
 
                 db.SaveChanges();
                 /* Product versions */
@@ -300,43 +306,47 @@ namespace AalborgZooProjekt.ViewModel
                     Order = order,
                     ProductVersion = prodvBanan,
                     Quantity = 15,
-                    UnitID = unitKg.Id
+                    Unit = db.UnitSet.First()
                 };
                 db.OrderLineSet.Add(orderLineBanan);
+                db.SaveChanges();
 
                 OrderLine orderLineÆble = new OrderLine()
                 {
                     Order = order,
                     ProductVersion = prodvÆble,
                     Quantity = 15,
-                    UnitID = unitKg.Id
+                    Unit = db.UnitSet.First()
                 };
                 db.OrderLineSet.Add(orderLineÆble);
+                db.SaveChanges();
 
                 OrderLine orderLinePære = new OrderLine()
                 {
                     Order = order,
                     ProductVersion = prodvPære,
                     Quantity = 15,
-                    UnitID = unitKg.Id
+                    Unit = db.UnitSet.First()
                 };
                 db.OrderLineSet.Add(orderLinePære);
+                db.SaveChanges();
 
                 OrderLine orderLineAbrikos = new OrderLine()
                 {
                     Order = order,
                     ProductVersion = prodvAbrikos,
                     Quantity = 15,
-                    UnitID = unitKg.Id
+                    Unit = db.UnitSet.First()
                 };
                 db.OrderLineSet.Add(orderLineAbrikos);
+                db.SaveChanges();
 
                 OrderLine orderLineTuttiFruttiMix = new OrderLine()
                 {
                     Order = order,
                     ProductVersion = prodvTuttiFrutti,
                     Quantity = 15,
-                    UnitID = unitKg.Id
+                    Unit = db.UnitSet.First()
                 };
                 db.OrderLineSet.Add(orderLineTuttiFruttiMix);
 
@@ -348,20 +358,20 @@ namespace AalborgZooProjekt.ViewModel
         {
             using (db = new AalborgZooContainer1())
             {
+                db.Database.ExecuteSqlCommand("DELETE FROM [UnitProductVersion]");
+                db.Database.ExecuteSqlCommand("DELETE FROM [OrderLineSet] DBCC CHECKIDENT ([OrderLineSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [ProductVersionSet] DBCC CHECKIDENT ([ProductVersionSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [DepartmentSpecificProductSet] DBCC CHECKIDENT ([DepartmentSpecificProductSet], RESEED, 0)");
                 db.Database.ExecuteSqlCommand("DELETE FROM [DepartmentChangeSet] DBCC CHECKIDENT ([DepartmentChangeSet], RESEED, 0)");
                 db.Database.ExecuteSqlCommand("DELETE FROM [PasswordChangedSet] DBCC CHECKIDENT ([PasswordChangedSet], RESEED, 0)");
-                db.Database.ExecuteSqlCommand("DELETE FROM [DepartmentSpecificProductSet] DBCC CHECKIDENT ([DepartmentSpecificProductSet], RESEED, 0)");
-                db.Database.ExecuteSqlCommand("DELETE FROM [OrderLineSet] DBCC CHECKIDENT ([OrderLineSet], RESEED, 0)");
-                db.Database.ExecuteSqlCommand("DELETE FROM [EmployeeSet] DBCC CHECKIDENT ([EmployeeSet], RESEED, 0)");
-                db.Database.ExecuteSqlCommand("DELETE FROM [ShoppingListSet] DBCC CHECKIDENT ([ShoppingListSet], RESEED, 0)");
                 db.Database.ExecuteSqlCommand("DELETE FROM [OrderSet] DBCC CHECKIDENT ([OrderSet], RESEED, 0)");
-                db.Database.ExecuteSqlCommand("DELETE FROM [UnitProductVersion]");
-                db.Database.ExecuteSqlCommand("DELETE FROM [ProductVersionSet] DBCC CHECKIDENT ([ProductVersionSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [ShoppingListSet] DBCC CHECKIDENT ([ShoppingListSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [EmployeeSet] DBCC CHECKIDENT ([EmployeeSet], RESEED, 0)");
                 db.Database.ExecuteSqlCommand("DELETE FROM [DepartmentSet] DBCC CHECKIDENT ([DepartmentSet], RESEED, 0)");
                 //db..RemoveRange(db.DepartmentChangeSet.Where(x => true));
                 //db.DepartmentChangeSet.RemoveRange(db.DepartmentChangeSet.Where(x => true));
-                db.Database.ExecuteSqlCommand("DELETE FROM [ProductSet] DBCC CHECKIDENT ([ProductSet], RESEED, 0)");
                 db.Database.ExecuteSqlCommand("DELETE FROM [UnitSet] DBCC CHECKIDENT ([UnitSet], RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DELETE FROM [ProductSet] DBCC CHECKIDENT ([ProductSet], RESEED, 0)");
             }
         }
     }
