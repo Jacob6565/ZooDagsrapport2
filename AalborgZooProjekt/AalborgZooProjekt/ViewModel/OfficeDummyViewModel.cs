@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AalborgZooProjekt.View;
-using AalborgZooProjekt.Model.Database;
+using AalborgZooProjekt.Model;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using System.Diagnostics;
-//using PdfSharp.Pdf;
-//using PdfSharp.Drawing;
-//using PdfSharp;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using PdfSharp;
+using AalborgZooProjekt.Model.Repository;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -23,7 +24,7 @@ namespace AalborgZooProjekt.ViewModel
 
         string connectionString = "name=AalborgZooContainer1";
 
-        public List<OrderLine> OrderList { get; set; } = new List<OrderLine>();
+        public List<Model.OrderLine> OrderList { get; set; } = new List<Model.OrderLine>();
         //public List<DummyOrderDepartment> DepartmentListApples { get; set; } = new List<DummyOrderDepartment>();
 
         public OfficeDummyViewModel()
@@ -95,96 +96,121 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return _newCommand ?? (_newCommand = new RelayCommand(
-                    async () => Foo()
+                    async () => Bar()
                     ));
             }
         }
 
-        private void Foo()
+        private void Bar()
         {
-            //string alphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
-            //PdfDocument pdf = new PdfDocument();
-            //PdfPage pdfPage = pdf.AddPage();
-            //XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-            //XFont fontHeader = new XFont("Verdana", 13, XFontStyle.Bold);
-            //XFont fontParagraph = new XFont("Verdana", 13, XFontStyle.Regular);
-            //XSize size = PageSizeConverter.ToSize(PdfSharp.PageSize.A4);
-            //int marginTop = 20;
-            //int marginLeft = 50;
-            //int marginRight = 50;
+            OrderRepository orderRepository = new OrderRepository();
+            List<Order> AllOrders = orderRepository.GetOrdersWithNoShoppinglist();
+            List<OrderLine> AllOrderLines = new List<OrderLine>();
 
-            //double lineHeight = graph.MeasureString(alphabet, fontParagraph).Height + 5;
+            foreach (Order order in AllOrders)
+            {
+                AllOrderLines.AddRange(order.OrderLines);
+            }
 
-            ////Draw the headlines.
-            //string nameString = "Produkt";
-            //string quantityString = "Antal";
-            //string unitString = "Enhed";
+            List<List<OrderLine>> OrderLinesBySupplier = AllOrderLines
+                .GroupBy(x => x.ProductVersion.Supplier)
+                .Select(grp => grp.ToList())
+                .ToList();
 
-            //double nameLength = graph.MeasureString(nameString, fontHeader).Width;
-            //double quantityLength = graph.MeasureString(quantityString, fontHeader).Width;
-            //double unitLength = graph.MeasureString(unitString, fontHeader).Width;
+            foreach (List<OrderLine> orderlinesForOneSupplier in OrderLinesBySupplier)
+            {
+                CreatePDF(orderlinesForOneSupplier);
+            }
+        }
 
-            //double nameX = marginLeft;
-            //double quantityX = size.Width - nameLength - unitLength - marginRight;
-            //double unitX = size.Width - unitLength - marginRight;
+        private void CreatePDF(List<OrderLine> orders)
+        {
+            string danishAlphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
+            PdfDocument pdf = new PdfDocument();
+            PdfPage pdfPage = pdf.AddPage();
+            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+            XFont fontHeader = new XFont("Verdana", 13, XFontStyle.Bold);
+            XFont fontParagraph = new XFont("Verdana", 13, XFontStyle.Regular);
+            XSize size = PageSizeConverter.ToSize(PdfSharp.PageSize.A4);
+            int marginTop = 20;
+            int marginLeft = 50;
+            int marginRight = 50;
 
-            //graph.DrawString(
-            //    nameString,
-            //    fontHeader,
-            //    XBrushes.Black,
-            //    new XRect(nameX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
-            //    XStringFormats.TopLeft);
+            double lineHeight = graph.MeasureString(danishAlphabet, fontParagraph).Height + 5;
 
-            //graph.DrawString(
-            //    quantityString,
-            //    fontHeader,
-            //    XBrushes.Black,
-            //    new XRect(quantityX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
-            //    XStringFormats.TopLeft);
+            //Draw the headlines.
+            string nameString = "Produkt";
+            string quantityString = "Antal";
+            string unitString = "Enhed";
 
-            //graph.DrawString(
-            //    unitString,
-            //    fontHeader,
-            //    XBrushes.Black,
-            //    new XRect(unitX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
-            //    XStringFormats.TopLeft);
+            double nameLength = graph.MeasureString(nameString, fontHeader).Width;
+            double quantityLength = graph.MeasureString(quantityString, fontHeader).Width;
+            double unitLength = graph.MeasureString(unitString, fontHeader).Width;
 
-            ////Draw entries
-            //for (int i = 0; i < OrderList.Count; i++)
-            //{
-            //    double lineY = lineHeight * (i + 1);
-            //    if (i % 2 == 1)
-            //    {
-            //        XSolidBrush brush = new XSolidBrush(XColors.LightGray);
-                    
-            //        graph.DrawRectangle(brush, marginLeft, lineY + marginTop, size.Width - marginLeft - marginRight, lineHeight - 2);
+            double nameX = marginLeft;
+            double quantityX = size.Width - nameLength - unitLength - marginRight;
+            double unitX = size.Width - unitLength - marginRight;
 
-            //    }
-                
-            //    graph.DrawString(
-            //        OrderList[i].ProductVersion.Product.Name,
-            //        fontParagraph,
-            //        XBrushes.Black,
-            //        new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
-            //        XStringFormats.TopLeft);
-                
-            //    graph.DrawString(
-            //        OrderList[i].Quantity.ToString(),
-            //        fontParagraph,
-            //        XBrushes.Black,
-            //        new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
-            //        XStringFormats.TopLeft);
-                
-            //    graph.DrawString(
-            //        "kg", //Selected unit value
-            //        fontParagraph,
-            //        XBrushes.Black,
-            //        new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
-            //        XStringFormats.TopLeft);
-            //}
-            
-            //pdf.Save("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
-            //Process.Start("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
+            graph.DrawString(
+                nameString,
+                fontHeader,
+                XBrushes.Black,
+                new XRect(nameX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
+                XStringFormats.TopLeft);
+
+            graph.DrawString(
+                quantityString,
+                fontHeader,
+                XBrushes.Black,
+                new XRect(quantityX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
+                XStringFormats.TopLeft);
+
+            graph.DrawString(
+                unitString,
+                fontHeader,
+                XBrushes.Black,
+                new XRect(unitX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
+                XStringFormats.TopLeft);
+
+            //Draw entries
+            for (int i = 0; i < orders.Count; i++)
+            {
+                double lineY = lineHeight * (i + 1);
+                if (i % 2 == 1)
+                {
+                    XSolidBrush brush = new XSolidBrush(XColors.LightGray);
+
+                    graph.DrawRectangle(brush, marginLeft, lineY + marginTop, size.Width - marginLeft - marginRight, lineHeight - 2);
+
+                }
+
+                graph.DrawString(
+                    orders[i].ProductVersion.Product.Name,
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
+                    XStringFormats.TopLeft);
+
+                graph.DrawString(
+                    orders[i].Quantity.ToString(),
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
+                    XStringFormats.TopLeft);
+
+                UnitRepository unitRepository = new UnitRepository();
+                Unit unit = unitRepository.GetUnitById(orders[i].UnitID);
+                graph.DrawString(
+                    unitRepository.GetUnitById(orders[i].UnitID).Name,
+                    fontParagraph,
+                    XBrushes.Black,
+                    new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
+                    XStringFormats.TopLeft);
+            }
+
+            Directory.CreateDirectory("C:\\Users\\Tobias\\Desktop\\Bestillinger");
+            pdf.Save($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.First().ProductVersion.Supplier}.pdf");
+            Process.Start($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.First().ProductVersion.Supplier}.pdf");
         }
 
         private RelayCommand<object> _editOrder;

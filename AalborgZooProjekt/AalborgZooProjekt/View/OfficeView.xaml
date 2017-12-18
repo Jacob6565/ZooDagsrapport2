@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AalborgZooProjekt.View"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"        
-        DataContext="{Binding OfficeTester, Source={StaticResource Locator}}"
+        DataContext="{Binding Office, Source={StaticResource Locator}}"
         mc:Ignorable="d"
         Height="768"
         Width="1024"
@@ -44,7 +44,7 @@
 
                         <local:OfficeOrderList Grid.Column="1" Grid.ColumnSpan="2"/>
                     </Grid>
-                        <Button  Content="Konverter til PDF" Width="150" Command="{Binding NewCommand}" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,70,0"/>
+                        <Button  Content="Konverter til PDF" Width="150" Command="{Binding NewCommand, Mode=OneWay}" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,70,0"/>
                 </Grid>
             </Controls:MetroTabItem>
             <TabItem Header="Foderbestilling">
