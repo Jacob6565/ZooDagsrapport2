@@ -104,7 +104,7 @@ namespace AalborgZooProjekt.ViewModel
         private void Bar()
         {
             OrderRepository orderRepository = new OrderRepository();
-            List<Order> AllOrders = orderRepository.GetOrdersWithNoShoppinglist().ToList();
+            List<Order> AllOrders = orderRepository.GetOrdersWithNoShoppinglist();
             List<OrderLine> AllOrderLines = new List<OrderLine>();
 
             foreach (Order order in AllOrders)
@@ -199,6 +199,7 @@ namespace AalborgZooProjekt.ViewModel
                     XStringFormats.TopLeft);
 
                 UnitRepository unitRepository = new UnitRepository();
+                Unit unit = unitRepository.GetUnitById(orders[i].UnitID);
                 graph.DrawString(
                     unitRepository.GetUnitById(orders[i].UnitID).Name,
                     fontParagraph,
@@ -207,8 +208,9 @@ namespace AalborgZooProjekt.ViewModel
                     XStringFormats.TopLeft);
             }
 
-            pdf.Save("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
-            Process.Start("C:\\Users\\Tobias\\Desktop\\firstpage.pdf");
+            Directory.CreateDirectory("C:\\Users\\Tobias\\Desktop\\Bestillinger");
+            pdf.Save($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.First().ProductVersion.Supplier}.pdf");
+            Process.Start($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.First().ProductVersion.Supplier}.pdf");
         }
 
         private RelayCommand<object> _editOrder;

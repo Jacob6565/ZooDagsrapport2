@@ -14,6 +14,7 @@ namespace AalborgZooProjekt.Model.Repository
             using (var db = new AalborgZooContainer1())
             {
                 Unit unit = db.UnitSet.FirstOrDefault(x => x.Id == id);
+                return unit;
             }
         }
     }

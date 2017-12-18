@@ -114,11 +114,17 @@ namespace AalborgZooProjekt.Model
             }
         }
 
-        public IEnumerable<Order> GetOrdersWithNoShoppinglist()
+        public List<Order> GetOrdersWithNoShoppinglist()
         {
             using (var _context = new AalborgZooContainer1())
             {
-                return _context.OrderSet.Include("OrderLines").Include("OrderLines.ProductVersion.Unit").Where(x => x.ShoppingList == null);
+                return _context.OrderSet
+                    .Include("OrderLines")
+                    .Include("Orderlines.ProductVersion")
+                    .Include("OrderLines.ProductVersion.Units")
+                    .Include("Orderlines.ProductVersion.Product")
+                    .Where(x => x.ShoppingList == null)
+                    .ToList();
             }
         }
     }

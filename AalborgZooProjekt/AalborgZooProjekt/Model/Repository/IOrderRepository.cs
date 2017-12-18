@@ -12,6 +12,6 @@ namespace AalborgZooProjekt.Model
         Order GetOrder(int orderID);
         void UpdateOrder(Order order);
         Order GetUnfinishedOrder(Department department);
-        IEnumerable<Order> GetOrdersWithNoShoppinglist();
+        List<Order> GetOrdersWithNoShoppinglist();
     }
 }
