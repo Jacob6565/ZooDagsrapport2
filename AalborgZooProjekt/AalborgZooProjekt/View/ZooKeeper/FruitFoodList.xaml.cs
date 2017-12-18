@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AalborgZooProjekt.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,6 +62,11 @@ namespace AalborgZooProjekt.View.ZooKeeper
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
+        }
+
+        private void Unit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ZookeeperViewModel.UnitChanged(sender, e.AddedItems[0]);
         }
     }
 }

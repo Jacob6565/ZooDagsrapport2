@@ -37,9 +37,12 @@ namespace AalborgZooProjekt.ViewModel
             DepOrderLines = GetDepProductListFromDb();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public static void UnitChanged(object sender, object newUnit)
         {
+            ComboBox comboBoxItem = (ComboBox) sender;
+            OrderLine parent = (OrderLine) comboBoxItem.DataContext;
 
+            parent.ChangeUnit = (Unit) newUnit;
         }
 
         private string _selectedUnit;

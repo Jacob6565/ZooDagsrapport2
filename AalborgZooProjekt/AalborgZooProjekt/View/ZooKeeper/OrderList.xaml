@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
              xmlns:local="clr-namespace:AalborgZooProjekt.View"
+             xmlns:fruit="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Zoo, Source={StaticResource Locator}}">
@@ -25,11 +26,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Navn" Binding="{Binding ProductVersion.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Antal" Binding="{Binding Quantity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Enhed" Binding="{Binding SelectedUnit.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Enhed" Binding="{Binding Unit.Name, UpdateSourceTrigger=PropertyChanged, diag:PresentationTraceSources.TraceLevel=High}"/>
                 <DataGridTemplateColumn Header="Enhed" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding ElementName=FuckThisShit, Path=SelectedItem.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, diag:PresentationTraceSources.TraceLevel=High}"/>
+                            <TextBlock Text="{Binding ElementName, Source={StaticResource Locator}, diag:PresentationTraceSources.TraceLevel=High}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

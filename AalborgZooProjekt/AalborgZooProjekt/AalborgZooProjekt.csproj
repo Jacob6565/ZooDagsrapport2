@@ -207,6 +207,7 @@
     <Compile Include="Model\Exception\OrderIsNotUnderAnSendableStateException.cs" />
     <Compile Include="Model\Exception\OrderCanNotSendNoZookeeperException.cs" />
     <Compile Include="Model\OrderLine.cs" />
+    <Compile Include="Model\OrderlineUniter.cs" />
     <Compile Include="Model\PasswordChanged.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Exception\ProductAlreadyActivatedException.cs" />

@@ -117,13 +117,35 @@ namespace AalborgZooProjekt.ViewModel
                 .Select(grp => grp.ToList())
                 .ToList();
 
+
+
             foreach (List<OrderLine> orderlinesForOneSupplier in OrderLinesBySupplier)
             {
-                CreatePDF(orderlinesForOneSupplier);
+                
+                CreatePDF(UniteOrderlines(orderlinesForOneSupplier));
             }
         }
 
-        private void CreatePDF(List<OrderLine> orders)
+        private OrderlineUniter UniteOrderlines(List<OrderLine> unSortedOrderlines)
+        {
+            OrderlineUniter uniter = new OrderlineUniter();
+
+            foreach (OrderLine orderLine in unSortedOrderlines)
+            {
+                int index = uniter.QuantityPerProduct.First(x => x.Key == orderLine.ProductVersion);
+                if (uniter.QuantityPerProduct.ContainsKey(orderLine.ProductVersion) && uniter.QuantityPerProduct.)
+                {
+                    uniter.QuantityPerProduct[orderLine.ProductVersion].Quantity += orderLine.Quantity;
+                } else
+                {
+                    uniter.QuantityPerProduct.Add(orderLine.ProductVersion, new QuantityAndUnit(orderLine.Quantity, orderLine.Unit));
+                }
+            }
+
+            return uniter;
+        }
+
+        private void CreatePDF(OrderlineUniter orders)
         {
             string danishAlphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
             PdfDocument pdf = new PdfDocument();
@@ -173,7 +195,7 @@ namespace AalborgZooProjekt.ViewModel
                 XStringFormats.TopLeft);
 
             //Draw entries
-            for (int i = 0; i < orders.Count; i++)
+            for (int i = 0; i < orders.QuantityPerProduct.Count; i++)
             {
                 double lineY = lineHeight * (i + 1);
                 if (i % 2 == 1)
@@ -185,21 +207,21 @@ namespace AalborgZooProjekt.ViewModel
                 }
 
                 graph.DrawString(
-                    orders[i].ProductVersion.Product.Name,
+                    orders.QuantityPerProduct.ElementAt(i).Key.Product.Name,
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
                 graph.DrawString(
-                    orders[i].Quantity.ToString(),
+                    orders.QuantityPerProduct.ElementAt(i).Value.ToString(),
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
                 graph.DrawString(
-                    orders[i].Unit.Name,
+                    orders.QuantityPerProduct.ElementAt(i).Key.ToString(),
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
@@ -207,8 +229,8 @@ namespace AalborgZooProjekt.ViewModel
             }
 
             Directory.CreateDirectory("C:\\Users\\Tobias\\Desktop\\Bestillinger");
-            pdf.Save($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.First().ProductVersion.Supplier}.pdf");
-            Process.Start($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.First().ProductVersion.Supplier}.pdf");
+            pdf.Save($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.QuantityPerProduct.ElementAt(0).Key.Supplier}.pdf");
+            Process.Start($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.QuantityPerProduct.ElementAt(0).Key.Supplier}.pdf");
         }
 
         private RelayCommand<object> _editOrder;

@@ -9,28 +9,32 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <ScrollViewer>
-        <DataGrid ItemsSource="{Binding DepOrderLines, Mode=TwoWay}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Vare" Binding="{Binding ProductVersion.Name}" Width="*"/>
-                <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="SPAmountControl">
-                                <Button Content="+" Width="25" Command="{Binding Zoo.AddCommand,Source={StaticResource Locator}}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
-                                <TextBox Name="AmaountBox" PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="25"/>
-                                <Button Content="-" Width="25" Command="{Binding Zoo.SubtractCommand ,Source={StaticResource Locator}}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Enhed" MinWidth="77" MaxWidth="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox Name="FuckThisShit" ItemsSource="{Binding ProductVersion.Units, diag:PresentationTraceSources.TraceLevel=High}" SelectedValue="{Binding SelectedUnit}" DisplayMemberPath="Name"/> <!--SelectedValue="{Binding Unit}" SelectedValuePath="Id"-->
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding ElementName=FuckThisShit, Path=SelectedItem.Name, diag:PresentationTraceSources.TraceLevel=High}"></TextBlock>
+            <DataGrid ItemsSource="{Binding DepOrderLines, Mode=TwoWay}" IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Vare" Binding="{Binding ProductVersion.Name}" Width="*"/>
+                    <DataGridTemplateColumn Header="Antal" MinWidth="77" MaxWidth="77">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="SPAmountControl">
+                                    <Button Content="+" Width="25" Command="{Binding Zoo.AddCommand,Source={StaticResource Locator}}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
+                                    <TextBox Name="AmaountBox" PreviewTextInput="PreviewTextInput" PreviewKeyDown="PreviewKeyDown" DataObject.Pasting="Pasting" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="25"/>
+                                    <Button Content="-" Width="25" Command="{Binding Zoo.SubtractCommand ,Source={StaticResource Locator}}" CommandParameter="{Binding ElementName=SPAmountControl}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Enhed" MinWidth="77" MaxWidth="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding ProductVersion.Units, diag:PresentationTraceSources.TraceLevel=High}" SelectedIndex="0" DisplayMemberPath="Name" SelectionChanged="Unit_SelectionChanged"/>
+                                <!--SelectedValue="{Binding Unit}" SelectedValuePath="Id"-->
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </ScrollViewer>
 </UserControl>
