@@ -13,7 +13,7 @@ namespace AalborgZooProjekt.Model
         public bool CheckIfProductExist(Product product)
         {
             //Burde sådan noget har ikke være i et repository.
-            var db = new AalborgZooContainer1();
+            var db = new AalborgZooContainer();
 
             if (db.ProductSet.Where(x => x.Id == product.Id).First().Id == product.Id)
             {
@@ -27,7 +27,7 @@ namespace AalborgZooProjekt.Model
 
         public void DeleteOrder(Order order)
         {
-            var db = new AalborgZooContainer1();
+            var db = new AalborgZooContainer();
 
             order = db.OrderSet.Where(x => x.Id == order.Id).First();
             db.OrderSet.Remove(order);
@@ -35,7 +35,7 @@ namespace AalborgZooProjekt.Model
 
         public void DeleteProduct(Product product)
         {
-            var db = new AalborgZooContainer1();
+            var db = new AalborgZooContainer();
 
             product = db.ProductSet.Where(x => x.Id == product.Id).First();
             db.ProductSet.Remove(product);
@@ -51,7 +51,7 @@ namespace AalborgZooProjekt.Model
         public void MakeProduct(int employeeID, string name)
         {
             //Burde sådan noget har ikke være i et repository.
-            var db = new AalborgZooContainer1();
+            var db = new AalborgZooContainer();
 
             Product newProduct = new Product()
             {

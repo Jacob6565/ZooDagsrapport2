@@ -20,7 +20,7 @@ namespace AalborgZooProjekt.Model
 
         public Product AddProduct(Product product)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 Product productWithKey = _context.ProductSet.Add(product);
                 _context.SaveChanges();
@@ -38,7 +38,7 @@ namespace AalborgZooProjekt.Model
         public List<Product> GetDepartmentProducts(Department department)
         {
             List<Product> departmentProductList = new List<Product>();
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet)
                 {
@@ -53,7 +53,7 @@ namespace AalborgZooProjekt.Model
         public List<Product> GetDepartmentProductsWithUnits(Department department)
         {
             List<Product> departmentProductList = new List<Product>();
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 foreach (DepartmentSpecificProduct depProduct in _context.DepartmentSpecificProductSet.Include("Product.ProductVersions.Units"))
                 {
@@ -67,7 +67,7 @@ namespace AalborgZooProjekt.Model
 
         public ICollection<Unit> GetProductUnits(Product product)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 return _context.ProductSet.FirstOrDefault(x => x.Id == product.Id).ProductVersions.Last().Units;
             }
@@ -79,7 +79,7 @@ namespace AalborgZooProjekt.Model
         /// <param name="product"></param>
         public void UpdateProductVersionList(Product product)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 //Finds the current product in the database.
                 Product Outdated = _context.ProductSet.SingleOrDefault(x => x.Id == product.Id);

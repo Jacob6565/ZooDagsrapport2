@@ -52,14 +52,14 @@ namespace AalborgZooProjekt
         {
             get
             {
-                using (var db = new AalborgZooContainer1())
+                using (var db = new AalborgZooContainer())
                 {
                     return db.EmployeeSet.Select(x => x).ToList();                    
                 }
             }
             set
             {
-                using (var db = new AalborgZooContainer1())
+                using (var db = new AalborgZooContainer())
                 {
                     Employee emp = db.EmployeeSet.Where(x => x.Name == "Hans").First();
                     emp.Name = value.ToString();
@@ -77,7 +77,7 @@ namespace AalborgZooProjekt
             if (false)
                 Populater.DeleteDatabase();
 
-            if ((new AalborgZooContainer1().ProductSet.Count() == 0))
+            if ((new AalborgZooContainer().ProductSet.Count() == 0))
                 Populater.PopulateDatabase();
 
             string[] lines = File.ReadAllLines("../../Model/DummyStuff/DummyFruit.txt", Encoding.UTF7);

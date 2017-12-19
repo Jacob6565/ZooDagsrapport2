@@ -13,9 +13,9 @@ namespace AalborgZooProjekt.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AalborgZooContainer1 : DbContext
+    public partial class AalborgZooContainer : DbContext
     {
-        public AalborgZooContainer1()
+        public AalborgZooContainer()
             : base("name=AalborgZooContainer1")
         {
         }

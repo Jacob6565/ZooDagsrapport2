@@ -33,7 +33,7 @@ namespace AalborgZooProjekt.ViewModel
             //string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             //foreach (string product in lines)
             //{
-            using (var db = new Model.AalborgZooContainer1())
+            using (var db = new Model.AalborgZooContainer())
             {
                 //foreach (OrderLine ol in db.OrderLineSet)
                 //{

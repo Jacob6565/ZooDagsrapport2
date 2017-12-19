@@ -10,7 +10,7 @@ namespace AalborgZooProjekt.Model
     {
         public void Add(ShoppingList shoppingList)
         {
-            using (var context = new AalborgZooContainer1())
+            using (var context = new AalborgZooContainer())
             {
                 context.ShoppingListSet.Add(shoppingList);
                 context.SaveChanges();
@@ -20,7 +20,7 @@ namespace AalborgZooProjekt.Model
 
         public ShoppingList GetActiveShoppingList()
         {
-            using(var context = new AalborgZooContainer1())
+            using(var context = new AalborgZooContainer())
             {
                 ShoppingList shopList = context.ShoppingListSet.Include("Orders.OrderLines").Last();
                 if (shopList != null && shopList.Status == 0)
