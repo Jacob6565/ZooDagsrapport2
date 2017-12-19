@@ -20,7 +20,7 @@ namespace AalborgZooProjekt.ViewModel
             if (false)
                 Populater.DeleteDatabase();
 
-            if ((new AalborgZooContainer1().ProductSet.Count() == 0))
+            if (false)
                 Populater.PopulateDatabase();
 
             //Load departments from database

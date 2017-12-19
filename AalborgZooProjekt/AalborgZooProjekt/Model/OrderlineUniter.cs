@@ -8,7 +8,12 @@ namespace AalborgZooProjekt.Model
 {
     class OrderlineUniter
     {
-        public Dictionary<ProductVersion, QuantityAndUnit> QuantityPerProduct = new Dictionary<ProductVersion, QuantityAndUnit>();
+        public SortedDictionary<ProductVersion, QuantityAndUnit> QuantityPerProduct = new SortedDictionary<ProductVersion, QuantityAndUnit>();
+
+        public void Sort()
+        {
+            QuantityPerProduct = (SortedDictionary<ProductVersion, QuantityAndUnit>) QuantityPerProduct.OrderBy(x => x.Key);
+        }
     }
 
     class QuantityAndUnit
