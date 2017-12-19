@@ -239,15 +239,14 @@ namespace AalborgZooProjekt.ViewModel
             saveFileDialog.Filter = "PDF (*.pdf)|*.pdf|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 2;
             saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.FileName = orders.QuantityPerProduct.ElementAt(0).Key.Supplier;
+            saveFileDialog.FileName = orders.QuantityPerProduct.ElementAt(0).ProdV.Supplier;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 pdf.Save(saveFileDialog.FileName);
             }
 
-            pdf.Save($"{path}{orders.QuantityPerProduct.ElementAt(0).Key.Supplier}.pdf");
-            Process.Start($"{path}{orders.QuantityPerProduct.ElementAt(0).Key.Supplier}.pdf");
+            Process.Start(saveFileDialog.FileName);
         }
 
         private RelayCommand<object> _editOrder;
