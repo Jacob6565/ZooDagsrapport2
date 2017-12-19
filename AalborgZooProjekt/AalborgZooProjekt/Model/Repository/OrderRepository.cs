@@ -1,6 +1,7 @@
 ﻿using AalborgZooProjekt.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,15 +18,35 @@ namespace AalborgZooProjekt.Model
         {
             using (var _context = new AalborgZooContainer1())
             {
-                foreach (OrderLine orderLine in order.OrderLines)
+                var temp1 = order.OrderLines.First().ProductVersion.Id;
+                Order tempOrder = new Order()
                 {
-                    orderLine.Id = _context.OrderLineSet.Add(orderLine).Id;
+                    OrderedByID = order.OrderedByID,
+                    DateCreated = order.DateCreated,
+                    DepartmentID = order.DepartmentID,
+                    Status = order.Status,
+                    Note = order.Note,
+                    DateOrdered = order.DateOrdered,
+                    Id = order.Id,
+                    DateCancelled = order.DateCancelled,
+                    DeletedByID = order.DeletedByID,
+                    OrderLines = new Collection<OrderLine>(),
+                    ShoppingList = null,
+                    ShoppingListId = null
+                };
+
+                List<OrderLine> tempOrderLines = new List<OrderLine>();
+                foreach (OrderLine item in order.OrderLines)
+                {
+                    _context.ProductVersionSet.Attach(item.ProductVersion);
+                    _context.OrderLineSet.Add(item);
+                    tempOrder.OrderLines.Add(item);
                 }
 
-                _context.OrderSet.Add(order);
-                
+                _context.OrderSet.Add(tempOrder);
+
                 _context.SaveChanges();
-                return order;
+                return tempOrder;
             }
         }
 
