@@ -340,11 +340,11 @@ namespace AalborgZooProjekt.ViewModel
             ////TODO Clear Radiobuttons
         }
 
-        private ObservableCollection<Order> historyOrders;
+        private ObservableCollection<OrderHistoryWrapper> historyOrders;
 
-        public ObservableCollection<Order> HistoryOrders
+        public ObservableCollection<OrderHistoryWrapper> HistoryOrders
         {
-            get { return new ObservableCollection<Order>(new OrderRepository().GetOrdersFromDepartment(1)); }
+            get { return new ObservableCollection<OrderHistoryWrapper>(new OrderRepository().GetOrdersFromDepartment(1)); }
         }
     }
 }

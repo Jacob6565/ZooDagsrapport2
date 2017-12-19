@@ -136,9 +136,9 @@ namespace AalborgZooProjekt.Model
 
         public List<Order> GetOrdersWithNoShoppinglist()
         {
-            using (_context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer1())
             {
-                return _contextForOffice.OrderSet
+                return _context.OrderSet
                 .Include("OrderLines")
                 .Include("Orderlines.ProductVersion")
                 .Include("OrderLines.ProductVersion.Units")
@@ -150,7 +150,7 @@ namespace AalborgZooProjekt.Model
 
         public ShoppingList AddToShoppingList(List<Order> orders, int shopperId)
         {
-            using (_context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer1())
             {
                 ShoppingList shoppingList = new ShoppingList();
                 shoppingList.CreatedByID = shopperId;
@@ -172,11 +172,21 @@ namespace AalborgZooProjekt.Model
             }
         }
 
-        public List<Order> GetOrdersFromDepartment(int departmentID)
+        public List<OrderHistoryWrapper> GetOrdersFromDepartment(int departmentID)
         {
-            using (_context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer1())
             {
-                return _context.OrderSet.Where(x => x.DepartmentID == departmentID).ToList();
+                List<Order> allOrders = _context.OrderSet.Where(x => x.DepartmentID == departmentID).ToList();
+                List<OrderHistoryWrapper> wrappers = new List<OrderHistoryWrapper>();
+
+                foreach (Order order in allOrders)
+                {
+                    bool hasFruit = order.OrderLines.Any(x => x.ProductVersion.Supplier == "FrugtKarl");
+                    bool hasOther = order.OrderLines.Any(x => x.ProductVersion.Supplier != "FrugtKarl");
+                    wrappers.Add(new OrderHistoryWrapper(order, hasFruit, hasOther));
+                }
+
+                return wrappers;
             }
         }
     }

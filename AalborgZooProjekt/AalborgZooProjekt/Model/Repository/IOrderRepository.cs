@@ -14,6 +14,6 @@ namespace AalborgZooProjekt.Model
         Order GetUnfinishedOrder(Department department);
         List<Order> GetOrdersWithNoShoppinglist();
         ShoppingList AddToShoppingList(List<Order> orders, int shopperId);
-        List<Order> GetOrdersFromDepartment(int departmentID);
+        List<OrderHistoryWrapper> GetOrdersFromDepartment(int departmentID);
     }
 }

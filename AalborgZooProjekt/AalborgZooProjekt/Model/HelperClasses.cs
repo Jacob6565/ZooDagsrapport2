@@ -29,4 +29,28 @@ namespace AalborgZooProjekt.Model
         public int Quantity;
         public Unit OrderedUnit;
     }
+
+    public class OrderHistoryWrapper
+    {
+        public OrderHistoryWrapper(Order order, bool hasFruit, bool hasOther)
+        {
+            OrderHistory = order;
+            HasFruit = hasFruit;
+            HasOther = hasOther;
+        }
+
+        public OrderHistoryWrapper(Order order) : this(order, false, false)
+        {
+
+        }
+
+        private Order _order;
+        public Order OrderHistory { get => _order; set { _order = value; } }
+
+        private bool _hasFruit;
+        public bool HasFruit { get => _hasFruit; set { _hasFruit = value; } }
+
+        private bool _hasOther;
+        public bool HasOther { get => _hasOther; set { _hasOther = value; } }
+    }
 }
