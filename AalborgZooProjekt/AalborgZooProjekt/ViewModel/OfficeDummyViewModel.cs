@@ -14,6 +14,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using PdfSharp;
 using AalborgZooProjekt.Model.Repository;
+using System.Windows.Forms;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -21,8 +22,6 @@ namespace AalborgZooProjekt.ViewModel
     {
         //TODO Vareliste som popup
         //TODO Når der trykkes bestilt collapser menuen
-
-        string connectionString = "name=AalborgZooContainer1";
 
         public List<Model.OrderLine> OrderList { get; set; } = new List<Model.OrderLine>();
         //public List<DummyOrderDepartment> DepartmentListApples { get; set; } = new List<DummyOrderDepartment>();
@@ -230,9 +229,25 @@ namespace AalborgZooProjekt.ViewModel
                     XStringFormats.TopLeft);
             }
 
-            Directory.CreateDirectory("C:\\Users\\Tobias\\Desktop\\Bestillinger");
-            pdf.Save($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.QuantityPerProduct.ElementAt(0).ProdV.Supplier}.pdf");
-            Process.Start($"C:\\Users\\Tobias\\Desktop\\Bestillinger\\{orders.QuantityPerProduct.ElementAt(0).ProdV.Supplier}.pdf");
+
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = @"C:\";
+            saveFileDialog.Title = "Save PDF";
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.DefaultExt = "pdf";
+            saveFileDialog.Filter = "PDF (*.pdf)|*.pdf|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.FileName = orders.QuantityPerProduct.ElementAt(0).Key.Supplier;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pdf.Save(saveFileDialog.FileName);
+            }
+
+            pdf.Save($"{path}{orders.QuantityPerProduct.ElementAt(0).Key.Supplier}.pdf");
+            Process.Start($"{path}{orders.QuantityPerProduct.ElementAt(0).Key.Supplier}.pdf");
         }
 
         private RelayCommand<object> _editOrder;
