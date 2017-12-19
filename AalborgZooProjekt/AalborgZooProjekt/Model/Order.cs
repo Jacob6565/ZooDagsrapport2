@@ -153,7 +153,7 @@ namespace AalborgZooProjekt.Model
                 DateOrdered = GetDate();
 
                 //Adds the order to database
-                Order temp = orderRep.AddOrder(this);
+                orderRep.AddOrder(this);
             }
         }
     }

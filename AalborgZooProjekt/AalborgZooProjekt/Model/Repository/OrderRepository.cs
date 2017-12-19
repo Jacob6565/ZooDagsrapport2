@@ -1,6 +1,7 @@
 ﻿using AalborgZooProjekt.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,24 +10,44 @@ namespace AalborgZooProjekt.Model
 {
     public class OrderRepository : IOrderRepository
     {
-        public AalborgZooContainer1 _context;
-
-        private AalborgZooContainer1 _contextForOffice;
         /// <summary>
         /// Adds a not yet excisting order to the database
         /// </summary>
         /// <param name="order"></param>
         public Order AddOrder(Order order)
         {
-            foreach (OrderLine orderLine in order.OrderLines)
+            using (var _context = new AalborgZooContainer1())
             {
-                orderLine.Id = _context.OrderLineSet.Add(orderLine).Id;
-            }
+                var temp1 = order.OrderLines.First().ProductVersion.Id;
+                Order tempOrder = new Order()
+                {
+                    OrderedByID = order.OrderedByID,
+                    DateCreated = order.DateCreated,
+                    DepartmentID = order.DepartmentID,
+                    Status = order.Status,
+                    Note = order.Note,
+                    DateOrdered = order.DateOrdered,
+                    Id = order.Id,
+                    DateCancelled = order.DateCancelled,
+                    DeletedByID = order.DeletedByID,
+                    OrderLines = new Collection<OrderLine>(),
+                    ShoppingList = null,
+                    ShoppingListId = null
+                };
 
-            _context.OrderSet.Add(order);
-                
-            _context.SaveChanges();
-            return order;
+                List<OrderLine> tempOrderLines = new List<OrderLine>();
+                foreach (OrderLine item in order.OrderLines)
+                {
+                    _context.ProductVersionSet.Attach(item.ProductVersion);
+                    _context.OrderLineSet.Add(item);
+                    tempOrder.OrderLines.Add(item);
+                }
+
+                _context.OrderSet.Add(tempOrder);
+
+                _context.SaveChanges();
+                return tempOrder;
+            }
         }
 
         //public void AddOrderLine(OrderLine orderLine, Order order)
