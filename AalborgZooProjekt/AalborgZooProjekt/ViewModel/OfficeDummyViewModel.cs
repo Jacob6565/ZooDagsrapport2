@@ -32,7 +32,7 @@ namespace AalborgZooProjekt.ViewModel
             //string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
             //foreach (string product in lines)
             //{
-            using (var db = new Model.AalborgZooContainer1())
+            using (var db = new Model.AalborgZooContainer())
             {
                 //foreach (OrderLine ol in db.OrderLineSet)
                 //{
@@ -104,6 +104,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             OrderRepository orderRepository = new OrderRepository();
             List<Order> AllOrders = orderRepository.GetOrdersWithNoShoppinglist();
+            ShoppingList list = orderRepository.AddToShoppingList(AllOrders, 1);
             List<OrderLine> AllOrderLines = new List<OrderLine>();
 
             foreach (Order order in AllOrders)
@@ -115,8 +116,6 @@ namespace AalborgZooProjekt.ViewModel
                 .GroupBy(x => x.ProductVersion.Supplier)
                 .Select(grp => grp.ToList())
                 .ToList();
-
-
 
             foreach (List<OrderLine> orderlinesForOneSupplier in OrderLinesBySupplier)
             {
@@ -130,15 +129,17 @@ namespace AalborgZooProjekt.ViewModel
 
             foreach (OrderLine orderLine in unSortedOrderlines)
             {
-                ProductVersion key = uniter.QuantityPerProduct.FirstOrDefault(x => x.Key.Id == orderLine.ProductVersion.Id).Key;
-                QuantityAndUnit value = uniter.QuantityPerProduct.FirstOrDefault(x => x.Key.Id == orderLine.ProductVersion.Id).Value;
+                OrderWrapper key = uniter.QuantityPerProduct.FirstOrDefault(x => x.ProdV.Id == orderLine.ProductVersion.Id);
+                
 
-                if (key != null && value.OrderedUnit == orderLine.Unit)
+                uniter.Sort();
+
+                if (key != null && key.OrderedUnit == orderLine.Unit)
                 {
-                    uniter.QuantityPerProduct[orderLine.ProductVersion].Quantity += orderLine.Quantity;
+                    key.Quantity += orderLine.Quantity;
                 } else
                 {
-                    uniter.QuantityPerProduct.Add(orderLine.ProductVersion, new QuantityAndUnit(orderLine.Quantity, orderLine.Unit));
+                    uniter.QuantityPerProduct.Add(new OrderWrapper(orderLine.Quantity, orderLine.Unit, orderLine.ProductVersion));
                 }
             }
 
@@ -207,21 +208,21 @@ namespace AalborgZooProjekt.ViewModel
                 }
 
                 graph.DrawString(
-                    orders.QuantityPerProduct.ElementAt(i).Key.Product.Name,
+                    orders.QuantityPerProduct.ElementAt(i).ProdV.Product.Name,
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
                 graph.DrawString(
-                    orders.QuantityPerProduct.ElementAt(i).Value.Quantity.ToString(),
+                    orders.QuantityPerProduct.ElementAt(i).Quantity.ToString(),
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
                 graph.DrawString(
-                    orders.QuantityPerProduct.ElementAt(i).Value.OrderedUnit.Name,
+                    orders.QuantityPerProduct.ElementAt(i).OrderedUnit.Name,
                     fontParagraph,
                     XBrushes.Black,
                     new XRect(unitX, marginTop + lineY, pdfPage.Width, pdfPage.Height),

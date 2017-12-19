@@ -13,5 +13,7 @@ namespace AalborgZooProjekt.Model
         void UpdateOrder(Order order);
         Order GetUnfinishedOrder(Department department);
         List<Order> GetOrdersWithNoShoppinglist();
+        ShoppingList AddToShoppingList(List<Order> orders, int shopperId);
+        List<OrderHistoryWrapper> GetOrdersFromDepartment(int departmentID);
     }
 }

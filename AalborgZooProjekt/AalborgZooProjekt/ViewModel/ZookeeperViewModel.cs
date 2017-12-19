@@ -20,7 +20,7 @@ namespace AalborgZooProjekt.ViewModel
             if (false)
                 Populater.DeleteDatabase();
 
-            if ((new AalborgZooContainer1().ProductSet.Count() == 0))
+            if (false)
                 Populater.PopulateDatabase();
 
             //Load departments from database
@@ -340,5 +340,11 @@ namespace AalborgZooProjekt.ViewModel
             ////TODO Clear Radiobuttons
         }
 
+        private ObservableCollection<OrderHistoryWrapper> historyOrders;
+
+        public ObservableCollection<OrderHistoryWrapper> HistoryOrders
+        {
+            get { return new ObservableCollection<OrderHistoryWrapper>(new OrderRepository().GetOrdersFromDepartment(1)); }
+        }
     }
 }
