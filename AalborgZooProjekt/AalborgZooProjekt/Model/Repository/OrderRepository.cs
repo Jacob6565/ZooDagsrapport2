@@ -50,22 +50,6 @@ namespace AalborgZooProjekt.Model
             }
         }
 
-        //public void AddOrderLine(OrderLine orderLine, Order order)
-        //{
-        //    using (var _context = new AalborgZooContainer1())
-        //    {
-        //        //Adds the orderline to orderlineset in database and updates the local version, so it also contains
-        //        //the orderline key, that the database created
-        //        OrderLine orderLineWithKey = _context.OrderLineSet.Add(orderLine);
-
-        //        //Updates the Order to contain the orderLine
-        //        _context.OrderSet.Find(order.Id).OrderLines.Add(orderLineWithKey);
-
-
-        //        _context.SaveChanges();
-        //    }
-        //}
-
 
         /// <summary>
         /// Gets an order from orderID in the database
