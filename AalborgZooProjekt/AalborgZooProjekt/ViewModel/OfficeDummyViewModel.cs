@@ -95,18 +95,28 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return _newCommand ?? (_newCommand = new RelayCommand(
-                    async () => Bar()
+                    async () => Bar() 
                     ));
             }
-        }
+        }        
 
         private void Bar()
         {
             OrderRepository orderRepository = new OrderRepository();
             List<Order> AllOrders = orderRepository.GetOrdersWithNoShoppinglist();
+
+            if (AllOrders.Count == 0)
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("There is no new orders?", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (result == MessageBoxResult.Yes)
+                {                    
+                    return;
+                }
+            }
+
             ShoppingList list = orderRepository.AddToShoppingList(AllOrders, 1);
             List<OrderLine> AllOrderLines = new List<OrderLine>();
-
+            
             foreach (Order order in AllOrders)
             {
                 AllOrderLines.AddRange(order.OrderLines);
