@@ -8,22 +8,24 @@ namespace AalborgZooProjekt.Model
 {
     class OrderlineUniter
     {
-        public SortedDictionary<ProductVersion, QuantityAndUnit> QuantityPerProduct = new SortedDictionary<ProductVersion, QuantityAndUnit>();
+        public List<OrderWrapper> QuantityPerProduct = new List<OrderWrapper>();
 
         public void Sort()
         {
-            QuantityPerProduct = (SortedDictionary<ProductVersion, QuantityAndUnit>) QuantityPerProduct.OrderBy(x => x.Key);
+            QuantityPerProduct = QuantityPerProduct.OrderBy(x => x.ProdV.Name).ToList();
         }
     }
 
-    class QuantityAndUnit
+    class OrderWrapper
     {
-        public QuantityAndUnit(int quantity, Unit unit)
+        public OrderWrapper(int quantity, Unit unit, ProductVersion prodV)
         {
             Quantity = quantity;
             OrderedUnit = unit;
+            ProdV = prodV;
         }
 
+        public ProductVersion ProdV;
         public int Quantity;
         public Unit OrderedUnit;
     }

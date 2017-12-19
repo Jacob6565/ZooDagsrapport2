@@ -10,6 +10,8 @@ namespace AalborgZooProjekt.Model
     public class OrderRepository : IOrderRepository
     {
         public AalborgZooContainer1 _context;
+
+        private AalborgZooContainer1 _contextForOffice;
         /// <summary>
         /// Adds a not yet excisting order to the database
         /// </summary>
@@ -113,15 +115,47 @@ namespace AalborgZooProjekt.Model
 
         public List<Order> GetOrdersWithNoShoppinglist()
         {
-            using (var _context = new AalborgZooContainer1())
+            using (_context = new AalborgZooContainer1())
             {
-                return _context.OrderSet
-                    .Include("OrderLines")
-                    .Include("Orderlines.ProductVersion")
-                    .Include("OrderLines.ProductVersion.Units")
-                    .Include("Orderlines.ProductVersion.Product")
-                    .Where(x => x.ShoppingList == null)
-                    .ToList();
+                return _contextForOffice.OrderSet
+                .Include("OrderLines")
+                .Include("Orderlines.ProductVersion")
+                .Include("OrderLines.ProductVersion.Units")
+                .Include("Orderlines.ProductVersion.Product")
+                .Where(x => x.ShoppingList == null)
+                .ToList();
+            }
+        }
+
+        public ShoppingList AddToShoppingList(List<Order> orders, int shopperId)
+        {
+            using (_context = new AalborgZooContainer1())
+            {
+                ShoppingList shoppingList = new ShoppingList();
+                shoppingList.CreatedByID = shopperId;
+                shoppingList.Shopper = (Shopper)_context.EmployeeSet.FirstOrDefault(x => x is Shopper && x.Id == shopperId);
+                shoppingList.DateCreated = DateTime.Now;
+
+                shoppingList.Orders = orders;
+
+                foreach (Order order in orders)
+                {
+                    order.ShoppingList = shoppingList;
+                    _context.Entry(order).State = System.Data.Entity.EntityState.Modified;
+                }
+
+                _context.SaveChanges();
+
+                _context.ShoppingListSet.Add(shoppingList);
+                return shoppingList;
+            }
+        }
+
+        public List<Order> GetOrdersFromDepartment(int departmentID)
+        {
+            using (_context = new AalborgZooContainer1())
+            {
+                return _context.OrderSet.Where(x => x.DepartmentID == departmentID).ToList();
             }
         }
     }
