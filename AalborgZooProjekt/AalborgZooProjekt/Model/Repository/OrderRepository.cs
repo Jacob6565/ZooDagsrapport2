@@ -9,24 +9,22 @@ namespace AalborgZooProjekt.Model
 {
     public class OrderRepository : IOrderRepository
     {
+        public AalborgZooContainer1 _context;
         /// <summary>
         /// Adds a not yet excisting order to the database
         /// </summary>
         /// <param name="order"></param>
         public Order AddOrder(Order order)
         {
-            using (var _context = new AalborgZooContainer1())
+            foreach (OrderLine orderLine in order.OrderLines)
             {
-                foreach (OrderLine orderLine in order.OrderLines)
-                {
-                    orderLine.Id = _context.OrderLineSet.Add(orderLine).Id;
-                }
-
-                _context.OrderSet.Add(order);
-                
-                _context.SaveChanges();
-                return order;
+                orderLine.Id = _context.OrderLineSet.Add(orderLine).Id;
             }
+
+            _context.OrderSet.Add(order);
+                
+            _context.SaveChanges();
+            return order;
         }
 
         //public void AddOrderLine(OrderLine orderLine, Order order)

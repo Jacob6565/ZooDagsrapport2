@@ -134,6 +134,8 @@ namespace AalborgZooProjekt.ViewModel
                 ProductVersion key = uniter.QuantityPerProduct.FirstOrDefault(x => x.Key.Id == orderLine.ProductVersion.Id).Key;
                 QuantityAndUnit value = uniter.QuantityPerProduct.FirstOrDefault(x => x.Key.Id == orderLine.ProductVersion.Id).Value;
 
+                uniter.Sort();
+
                 if (key != null && value.OrderedUnit == orderLine.Unit)
                 {
                     uniter.QuantityPerProduct[orderLine.ProductVersion].Quantity += orderLine.Quantity;
