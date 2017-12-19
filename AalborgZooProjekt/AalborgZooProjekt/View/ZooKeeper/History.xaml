@@ -23,10 +23,17 @@
                     <DataTemplate>
                         <StackPanel>
                             <Button>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding OrderHistory.DateOrdered, StringFormat=dd-MM-yyyy}"/>
-                                    <Image Name="BananaIcon" Visibility="{Binding Path=HasFruit, Converter={StaticResource BoolToVis}}" Source="/AalborgZooProjekt;component/Img/Banana icon.png" Width="15" Height="15"/>
-                                    <Image Name="WheatIcon" Visibility="{Binding Path=HasOther, Converter={StaticResource BoolToVis}}" Source="/AalborgZooProjekt;component/Img/Wheat Icon 2.png" Width="15" Height="15"/>
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="15"/>
+                                            <ColumnDefinition Width="15"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding OrderHistory.DateOrdered, StringFormat=dd-MM-yyyy}" Grid.Column="0" HorizontalAlignment="Center"/>
+                                        <Image Name="BananaIcon" Visibility="{Binding Path=HasFruit, Converter={StaticResource BoolToVis}}" Source="/AalborgZooProjekt;component/Img/Banana icon.png" Width="15" Height="15" Grid.Column="1"/>
+                                        <Image Name="WheatIcon" Visibility="{Binding Path=HasOther, Converter={StaticResource BoolToVis}}" Source="/AalborgZooProjekt;component/Img/Wheat Icon 2.png" Width="15" Height="15" Grid.Column="2"/>
+                                    </Grid>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
