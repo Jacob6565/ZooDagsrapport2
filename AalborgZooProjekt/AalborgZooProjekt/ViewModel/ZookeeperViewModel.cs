@@ -183,6 +183,12 @@ namespace AalborgZooProjekt.ViewModel
             return orderlines;
         }
 
+        public ObservableCollection<OrderHistoryWrapper> HistoryOrders
+        {
+            get { return new ObservableCollection<OrderHistoryWrapper>(new OrderRepository().GetOrdersFromDepartment(1)); }
+        }
+
+
         public void ChangeAmount(object context)
         {
             StackPanel sp = context as StackPanel;
@@ -337,14 +343,8 @@ namespace AalborgZooProjekt.ViewModel
             }
             DepOrderList.Clear();
             OrderNote.Text = "";
-            ////TODO Clear Radiobuttons
+            ////TODO Clear Radiobuttons properly
         }
 
-        private ObservableCollection<OrderHistoryWrapper> historyOrders;
-
-        public ObservableCollection<OrderHistoryWrapper> HistoryOrders
-        {
-            get { return new ObservableCollection<OrderHistoryWrapper>(new OrderRepository().GetOrdersFromDepartment(1)); }
-        }
     }
 }

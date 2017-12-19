@@ -13,8 +13,6 @@
                 <Expander x:Name="expander"  Margin="15,5,15,10" Padding="5" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Height="95" VerticalContentAlignment="Top" VerticalAlignment="Top">
                     <Expander.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
-                            <!--<TextBlock Margin="5,0" VerticalAlignment="Top"><Run Text="Afrika"/></TextBlock> -->
-                            <!--<TextBlock Text="Afrika" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}},Path=ActualWidth}" Margin="0" ></TextBlock> -->
                             <TextBlock Text="Afrika" Width="{Binding Path=ActualWidth, ElementName=expander}" Margin="0,0,-50,0" ></TextBlock>
                             <CheckBox VerticalAlignment="Top" Margin="0" HorizontalContentAlignment="Right" HorizontalAlignment="Right"/>
                         </StackPanel>

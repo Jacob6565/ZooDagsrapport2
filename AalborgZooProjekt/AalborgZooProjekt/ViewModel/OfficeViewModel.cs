@@ -1,106 +1,41 @@
 ﻿using AalborgZooProjekt.Model;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AalborgZooProjekt.View;
-using AalborgZooProjekt.Model;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using System.Diagnostics;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using PdfSharp;
-using AalborgZooProjekt.Model.Repository;
 using System.Windows.Forms;
 
 namespace AalborgZooProjekt.ViewModel
 {
-    public class OfficeDummyViewModel
+    public class OfficeViewModel
     {
-        //TODO Vareliste som popup
-        //TODO Når der trykkes bestilt collapser menuen
-
         public List<Model.OrderLine> OrderList { get; set; } = new List<Model.OrderLine>();
-        //public List<DummyOrderDepartment> DepartmentListApples { get; set; } = new List<DummyOrderDepartment>();
 
-        public OfficeDummyViewModel()
+        public OfficeViewModel()
         {
-            //string fileAndPath = "../../DummyOrders.txt";
-            //string[] lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
-            //foreach (string product in lines)
-            //{
             using (var db = new Model.AalborgZooContainer())
             {
-                //foreach (OrderLine ol in db.OrderLineSet)
-                //{
-                ////ol.Quantity
-                //OrderList.Add(new OrderLine()
-                //{
-                //    Order = ol.Order,                        
-                //    OrderId = ol.OrderId,
-                //    ProductVersion = ol.ProductVersion,
-                //    ProductVersionId = ol.ProductVersionId,
-                //    Quantity = ol.Quantity,
-                //    UnitID = ol.UnitID                                                   
-                //    });
                 OrderList = db.OrderLineSet.Include("ProductVersion.Product").ToList();
-
             }
-            //  string[] words = product.Split(' ');
-            //Queue<string> wordQueue = new Queue<string>(words);
+        }
 
-            //string word1 = wordQueue.Dequeue();
-
-            //OrderList.Add(new OrderLine() { Order = new Order() { Note =  } });
-
-            //while (wordQueue.Count > 1)
-            //{
-            //word1 = wordQueue.Dequeue();
-            //string word2 = wordQueue.Dequeue();
-
-            // OrderList.Last().OrderLines.Add(new OrderLine() {ProductVersion = new ProductVersion() { Product = new Product() { Name = word2 } } word2, Quantity = word1});
-            //}            
-
-            //fileAndPath = "../../DummyOrdersDepartment.txt";
-            //lines = File.ReadAllLines(fileAndPath, Encoding.UTF7);
-            //foreach (string order in lines)
-            //{
-            //string[] words = order.Split(' ');
-            //Queue<string> wordQueue = new Queue<string>(words);
-            //string department = wordQueue.Dequeue();
-            //string good = wordQueue.Dequeue();
-
-            //DummyOrderDepartment DepartmentOrder = new DummyOrderDepartment(department, good);
-
-            //while(wordQueue.Count > 1)
-            //{
-            //string word1 = wordQueue.Dequeue();
-            //string word2 = wordQueue.Dequeue();
-            //  DepartmentOrder.Orders.Add(new OrderLine(word2, Double.Parse(word1)));
-            //}
-            //DepartmentListApples.Add(DepartmentOrder);
-
-            EditOrder = new RelayCommand<object>(EditOrderWindow);
-            //}
-
-    }
-
-        private RelayCommand _newCommand;
-
-        public RelayCommand NewCommand
+        private RelayCommand _makePdfCommand;
+        public RelayCommand MakePdfCommand
         {
             get
             {
-                return _newCommand ?? (_newCommand = new RelayCommand(
-                    async () => Bar() 
+                return _makePdfCommand ?? (_makePdfCommand = new RelayCommand(
+                    async () => PDFGenerator() 
                     ));
             }
         }        
 
-        private void Bar()
+        private void PDFGenerator()
         {
             OrderRepository orderRepository = new OrderRepository();
             List<Order> AllOrders = orderRepository.GetOrdersWithNoShoppinglist();
@@ -239,8 +174,6 @@ namespace AalborgZooProjekt.ViewModel
                     XStringFormats.TopLeft);
             }
 
-
-
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = @"C:\";
             saveFileDialog.Title = "Save PDF";
@@ -255,41 +188,22 @@ namespace AalborgZooProjekt.ViewModel
             {
                 pdf.Save(saveFileDialog.FileName);
             }
-
             Process.Start(saveFileDialog.FileName);
         }
 
-        private RelayCommand<object> _editOrder;
-        /// <summary>
-        /// Gets the MyCommand.
-        /// </summary>
+        private RelayCommand<object> _editOrder;    
         public RelayCommand<object> EditOrder
         {
             get
             {
-                return _editOrder;
-                    //?? (_editOrder = new RelayCommand<object>
-                    //(
-                    //    () =>
-                    //    {
-                    //        EditOrderWindow();
-                    //    }
-                    //)
-                    //);
-            }
+                return _editOrder ?? (_editOrder= new RelayCommand<object>(EditOrderWindow));
+                }
             set
             {
                 _editOrder = value;
             }
         }
-        public bool yas(object wee)
-        {
-            return 5 == 5;
-        }
-            
-        public void Yas()
-        { }
-
+        
         public void EditOrderWindow(object context)
         {
             OrderLine ol = context as OrderLine;            
@@ -297,6 +211,5 @@ namespace AalborgZooProjekt.ViewModel
             orders.dgFoodList.DataContext = ol;          
             orders.ShowDialog();
         }
-
     }
 }
