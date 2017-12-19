@@ -10,7 +10,7 @@ namespace AalborgZooProjekt.Model.Repository
     {
         public Unit GetUnitById(int id)
         {
-            using (var db = new AalborgZooContainer1())
+            using (var db = new AalborgZooContainer())
             {
                 Unit unit = db.UnitSet.FirstOrDefault(x => x.Id == id);
                 return unit;

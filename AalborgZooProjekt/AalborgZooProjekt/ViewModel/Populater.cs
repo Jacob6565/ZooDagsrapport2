@@ -9,10 +9,10 @@ namespace AalborgZooProjekt.ViewModel
 {
     public static class Populater
     {
-        public static AalborgZooContainer1 db = new AalborgZooContainer1();
+        public static AalborgZooContainer db = new AalborgZooContainer();
         static public void PopulateDatabase()
         {
-            using (db = new AalborgZooContainer1())
+            using (db = new AalborgZooContainer())
             {
                 /* Shopper */
 
@@ -323,7 +323,7 @@ namespace AalborgZooProjekt.ViewModel
 
         static public void DeleteDatabase()
         {
-            using (db = new AalborgZooContainer1())
+            using (db = new AalborgZooContainer())
             {
                 db.Database.ExecuteSqlCommand("DELETE FROM [UnitProductVersion]");
                 db.Database.ExecuteSqlCommand("DELETE FROM [OrderLineSet] DBCC CHECKIDENT ([OrderLineSet], RESEED, 0)");

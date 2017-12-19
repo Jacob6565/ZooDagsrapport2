@@ -11,7 +11,7 @@ namespace AalborgZooProjekt.Model
         public List<Department> GetDepartments()
         {
             List<Department> _depList = new List<Department>();
-            using (var db = new AalborgZooContainer1())
+            using (var db = new AalborgZooContainer())
             {
                 foreach (Department dep in db.DepartmentSet.Include("ZooKeepers"))
                 {
