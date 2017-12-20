@@ -42,7 +42,7 @@ namespace AalborgZooProjekt.ViewModel
 
             if (AllOrders.Count == 0)
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("There is no new orders?", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult result = System.Windows.MessageBox.Show("Der er ingen nye ordrer.", "Bekræftelse", MessageBoxButton.OK, MessageBoxImage.Information);
                 if (result == MessageBoxResult.Yes)
                 {                    
                     return;
@@ -75,9 +75,6 @@ namespace AalborgZooProjekt.ViewModel
             foreach (OrderLine orderLine in unSortedOrderlines)
             {
                 OrderWrapper key = uniter.QuantityPerProduct.FirstOrDefault(x => x.ProdV.Id == orderLine.ProductVersion.Id);
-                
-
-                uniter.Sort();
 
                 if (key != null && key.OrderedUnit == orderLine.Unit)
                 {
@@ -87,6 +84,7 @@ namespace AalborgZooProjekt.ViewModel
                     uniter.QuantityPerProduct.Add(new OrderWrapper(orderLine.Quantity, orderLine.Unit, orderLine.ProductVersion));
                 }
             }
+            uniter.Sort();
 
             return uniter;
         }
