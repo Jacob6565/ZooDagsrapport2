@@ -29,7 +29,6 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox ItemsSource="{Binding ProductVersion.Units, diag:PresentationTraceSources.TraceLevel=High}" SelectedIndex="0" DisplayMemberPath="Name" SelectionChanged="Unit_SelectionChanged"/>
-                                <!--SelectedValue="{Binding Unit}" SelectedValuePath="Id"-->
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

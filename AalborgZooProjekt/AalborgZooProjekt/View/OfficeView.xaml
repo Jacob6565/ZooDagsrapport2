@@ -44,7 +44,7 @@
 
                         <local:OfficeOrderList Grid.Column="1" Grid.ColumnSpan="2"/>
                     </Grid>
-                        <Button  Content="Konverter til PDF" Width="150" Command="{Binding NewCommand, Mode=OneWay}" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,70,0"/>
+                        <Button  Content="Konverter til PDF" Width="150" Command="{Binding MakePdfCommand, Mode=OneWay}" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,70,0"/>
                 </Grid>
             </Controls:MetroTabItem>
             <TabItem Header="Foderbestilling">
@@ -62,7 +62,6 @@
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
                                                             <TextBlock Text="{Binding Unit}" Width="60"/>
-                                                            <!--<xcdg:ButtonSpinner Content="{Binding Amount}" Width="50"/>-->
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>

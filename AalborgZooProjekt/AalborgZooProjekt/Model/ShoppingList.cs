@@ -11,14 +11,14 @@ namespace AalborgZooProjekt.Model
     {
         public ShoppingList(IShoppingListRepository repository) : this()
         {
-            shoppingListRep = repository;
+            ShoppingListRep = repository;
             DateCreated = DateTime.Now;
             Status = _underConstruction;
         }
 
         private const int _underConstruction = 0;
         
-        public IShoppingListRepository shoppingListRep { get; private set; }
+        public IShoppingListRepository ShoppingListRep { get; private set; }
 
         public void AddOrder(Order order)
         {

@@ -192,17 +192,11 @@
     <Compile Include="Model\Database\Zookeeper.cs">
       <DependentUpon>AalborgZoo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Model\Exception\DepartmentAlreadyDepartmentSpecificProductException.cs" />
     <Compile Include="Model\Exception\DepartmentNotDepartmentSpecificProductException.cs" />
-    <Compile Include="Model\DummyStuff\DataItem.cs" />
-    <Compile Include="Model\DummyStuff\DataService.cs" />
     <Compile Include="Model\Department.cs" />
     <Compile Include="Model\DepartmentChange.cs" />
     <Compile Include="Model\DepartmentSpecificProduct.cs" />
-    <Compile Include="Model\DummyStuff\DummyOrder.cs" />
-    <Compile Include="Model\DummyStuff\DummyProduct.cs" />
-    <Compile Include="Model\DummyStuff\IDataService.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Exception\OrderIsNotUnderAnSendableStateException.cs" />
     <Compile Include="Model\Exception\OrderCanNotSendNoZookeeperException.cs" />
@@ -235,11 +229,7 @@
     <Compile Include="Model\Exception\UnitAlreadyRemovedException.cs" />
     <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="Model\Exception\ZookeeperAllReadyAddedException.cs" />
-    <Compile Include="ViewModel\DummyViewModel.cs">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\OfficeDummyViewModel.cs" />
+    <Compile Include="ViewModel\OfficeViewModel.cs" />
     <Compile Include="ViewModel\Populater.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ZookeeperViewModel.cs" />
@@ -272,9 +262,6 @@
     </Compile>
     <Compile Include="View\Remarks.xaml.cs">
       <DependentUpon>Remarks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Page Include="View\OfficeFeedTypeOrders.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -332,10 +319,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -383,9 +366,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\Database\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -398,12 +379,6 @@
       <LastGenOutput>AalborgZoo.cs</LastGenOutput>
       <DependentUpon>AalborgZoo.edmx</DependentUpon>
     </Content>
-    <Resource Include="Model\DummyStuff\DummyOtherFood.txt" />
-    <Resource Include="Model\DummyStuff\DummyHistoryEntries.txt" />
-    <Resource Include="Model\DummyStuff\DummyOrders.txt" />
-    <Resource Include="Model\DummyStuff\DummyOrdersDepartment.txt" />
-    <Resource Include="Model\DummyStuff\DummyFruit.txt" />
-    <Resource Include="Model\DummyStuff\DummyUnits.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

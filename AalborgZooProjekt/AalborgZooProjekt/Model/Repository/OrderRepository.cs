@@ -16,7 +16,7 @@ namespace AalborgZooProjekt.Model
         /// <param name="order"></param>
         public Order AddOrder(Order order)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 var temp1 = order.OrderLines.First().ProductVersion.Id;
                 Order tempOrder = new Order()
@@ -50,22 +50,6 @@ namespace AalborgZooProjekt.Model
             }
         }
 
-        //public void AddOrderLine(OrderLine orderLine, Order order)
-        //{
-        //    using (var _context = new AalborgZooContainer1())
-        //    {
-        //        //Adds the orderline to orderlineset in database and updates the local version, so it also contains
-        //        //the orderline key, that the database created
-        //        OrderLine orderLineWithKey = _context.OrderLineSet.Add(orderLine);
-
-        //        //Updates the Order to contain the orderLine
-        //        _context.OrderSet.Find(order.Id).OrderLines.Add(orderLineWithKey);
-
-
-        //        _context.SaveChanges();
-        //    }
-        //}
-
 
         /// <summary>
         /// Gets an order from orderID in the database
@@ -74,7 +58,7 @@ namespace AalborgZooProjekt.Model
         /// <returns></returns>
         public Order GetOrder(int orderID)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 Order order = _context.OrderSet.Find(orderID);
 
@@ -92,7 +76,7 @@ namespace AalborgZooProjekt.Model
         /// <param name="order"></param>
         public void UpdateOrder(Order order)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 var result = _context.OrderSet.SingleOrDefault(b => b.Id == order.Id);
                 if (result != null)
@@ -124,7 +108,7 @@ namespace AalborgZooProjekt.Model
         /// <returns></returns>
         public Order GetUnfinishedOrder(Department department)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 foreach (Order order in _context.OrderSet)
                 {
@@ -135,47 +119,45 @@ namespace AalborgZooProjekt.Model
             }
         }
 
+        public AalborgZooContainer _contextForShopper;
+
         public List<Order> GetOrdersWithNoShoppinglist()
         {
-            using (var _context = new AalborgZooContainer1())
-            {
-                return _context.OrderSet
-                .Include("OrderLines")
-                .Include("Orderlines.ProductVersion")
-                .Include("OrderLines.ProductVersion.Units")
-                .Include("Orderlines.ProductVersion.Product")
-                .Where(x => x.ShoppingList == null)
-                .ToList();
-            }
+            _contextForShopper = new AalborgZooContainer();
+            return _contextForShopper.OrderSet
+            .Include("OrderLines")
+            .Include("Orderlines.ProductVersion")
+            .Include("OrderLines.ProductVersion.Units")
+            .Include("Orderlines.ProductVersion.Product")
+            .Where(x => x.ShoppingList == null)
+            .ToList();
         }
 
         public ShoppingList AddToShoppingList(List<Order> orders, int shopperId)
         {
-            using (var _context = new AalborgZooContainer1())
+            ShoppingList shoppingList = new ShoppingList();
+            shoppingList.CreatedByID = shopperId;
+            shoppingList.Shopper = (Shopper)_contextForShopper.EmployeeSet.FirstOrDefault(x => x is Shopper && x.Id == shopperId);
+            shoppingList.DateCreated = DateTime.Now;
+
+            shoppingList.Orders = orders;
+
+            foreach (Order order in orders)
             {
-                ShoppingList shoppingList = new ShoppingList();
-                shoppingList.CreatedByID = shopperId;
-                shoppingList.Shopper = (Shopper)_context.EmployeeSet.FirstOrDefault(x => x is Shopper && x.Id == shopperId);
-                shoppingList.DateCreated = DateTime.Now;
-
-                shoppingList.Orders = orders;
-
-                foreach (Order order in orders)
-                {
-                    order.ShoppingList = shoppingList;
-                    _context.Entry(order).State = System.Data.Entity.EntityState.Modified;
-                }
-
-                _context.SaveChanges();
-
-                _context.ShoppingListSet.Add(shoppingList);
-                return shoppingList;
+                order.ShoppingList = shoppingList;
+                _contextForShopper.Entry(order).State = System.Data.Entity.EntityState.Modified;
             }
+
+            _contextForShopper.SaveChanges();
+
+            _contextForShopper.ShoppingListSet.Add(shoppingList);
+            _contextForShopper.Dispose();
+            return shoppingList;
         }
 
         public List<OrderHistoryWrapper> GetOrdersFromDepartment(int departmentID)
         {
-            using (var _context = new AalborgZooContainer1())
+            using (var _context = new AalborgZooContainer())
             {
                 List<Order> allOrders = _context.OrderSet.Where(x => x.DepartmentID == departmentID).ToList();
                 List<OrderHistoryWrapper> wrappers = new List<OrderHistoryWrapper>();
