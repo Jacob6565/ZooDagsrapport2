@@ -79,8 +79,9 @@ namespace AalborgZooProjekt.Model
                 Order order = _context.OrderSet.Find(orderID);
 
                 if (order == null)
+                {
                     throw new OrderDoesNotExistInDatabaseException();
-
+                }
                 return order;
             }
         }
