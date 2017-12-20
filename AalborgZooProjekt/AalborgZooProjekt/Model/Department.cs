@@ -53,7 +53,7 @@ namespace AalborgZooProjekt.Model
         /// </summary>
         public Order MakeOrder()
         {
-            Order order = new Order();
+            Order order = new Order(this);
 
             return order;
         }

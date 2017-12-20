@@ -10,7 +10,10 @@ namespace NUnit.Test
     [TestFixture]
     public class ProductTest
     {
+        #region Common
+
         Mock<IProductRepository> MockRep;
+
         /// <summary>
         /// Creates a product and returns it.
         /// </summary>
@@ -34,6 +37,7 @@ namespace NUnit.Test
             
             return product;
         }
+        #endregion
 
         [Test]
         public void ActivateProduct_ProductIsDeactivated_GetsActivated()
@@ -53,15 +57,13 @@ namespace NUnit.Test
         public void ActivateProduct_ProductIsActivated_ThrowsException()
         {
             //Arrange
-            Product product = InitializeProduct();
+            Product product = InitializeProduct(true);
 
-            //Act
-            product.ActivateProduct();
-
-            //Assert
+            //Act and Assert
             Assert.Throws<ProductAlreadyActivatedException>(() => product.ActivateProduct());
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Never());
         }
-        
+
         [Test]
         public void DeactivateProduct_ProductIsActivated_GetsDeactivated()
         {
@@ -73,6 +75,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.AreEqual(false, product.ProductVersions.Last().IsActive);
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
         }
 
         [Test]
@@ -83,6 +86,8 @@ namespace NUnit.Test
 
             //Act and Assert
             Assert.Throws<ProductAlreadyDeactivatedException>(() => product.DeactivateProduct());
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Never());
+
         }
 
         [Test]
@@ -101,6 +106,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.IsTrue(product.ProductVersions.Last().Units.Contains(UnitToAdd));
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
         }
 
         [Test]
@@ -119,7 +125,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.Throws<ProductAlreadyHaveUnitException>(() => product.AddProductUnit(UnitToAdd));
-
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
         }
 
         [Test]
@@ -146,6 +152,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.IsTrue(!product.ProductVersions.Last().Units.Contains(kg));
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
         }
 
         [Test]
@@ -169,6 +176,7 @@ namespace NUnit.Test
             //Act and Assert
             product.RemoveProductUnit(UnitToRemove);
             Assert.Throws<UnitAlreadyRemovedException>(() => product.RemoveProductUnit(UnitToRemove));
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
 
         }
 
@@ -184,6 +192,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.AreEqual(newName, product.ProductVersions.Last().Name);
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
         }
 
         [Test]
@@ -191,10 +200,12 @@ namespace NUnit.Test
         {
             //Arrange
             Product product = InitializeProduct(true);
+            product.Name = "ProductName";
             string newName = "ProductName";
            
             //Act and Assert
             Assert.Throws<ProductAlreadyHaveThatNameException>(() => product.ChangeProductName(newName));
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Never());
 
         }
 
@@ -210,6 +221,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.AreEqual(newSupplier, product.ProductVersions.Last().Supplier);
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Once());
         }
 
         [Test]
@@ -221,6 +233,7 @@ namespace NUnit.Test
 
             //Act And Assert
             Assert.Throws<AlreadyExistingSupplierException>(() => product.ChangeProductSupplier(newSupplierButSame));
+            MockRep.Verify(x => x.UpdateProductVersionList(product), Times.Never());
 
         }
     }    

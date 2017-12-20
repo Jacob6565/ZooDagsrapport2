@@ -9,6 +9,7 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Unit
     {
+
     }
 }
  

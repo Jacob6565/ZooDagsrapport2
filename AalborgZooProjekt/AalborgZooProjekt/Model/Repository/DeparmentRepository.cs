@@ -20,6 +20,5 @@ namespace AalborgZooProjekt.Model
             }
             return _depList;
         }
-
     }
 }
