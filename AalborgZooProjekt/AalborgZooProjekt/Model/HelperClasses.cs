@@ -12,11 +12,11 @@ namespace AalborgZooProjekt.Model
 
         public void Sort()
         {
-            QuantityPerProduct = QuantityPerProduct.OrderBy(x => x.ProdV.Name).ToList();
+            QuantityPerProduct.Sort();
         }
     }
 
-    class OrderWrapper
+    class OrderWrapper : IComparable
     {
         public OrderWrapper(int quantity, Unit unit, ProductVersion prodV)
         {
@@ -28,6 +28,16 @@ namespace AalborgZooProjekt.Model
         public ProductVersion ProdV;
         public int Quantity;
         public Unit OrderedUnit;
+
+        public int CompareTo(object obj)
+        {
+            return ProdV.Name.CompareTo(obj.ToString());
+        }
+
+        public override string ToString()
+        {
+            return ProdV.Name;
+        }
     }
 
     public class OrderHistoryWrapper

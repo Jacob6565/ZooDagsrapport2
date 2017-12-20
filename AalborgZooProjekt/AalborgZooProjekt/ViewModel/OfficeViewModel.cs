@@ -30,38 +30,42 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return _makePdfCommand ?? (_makePdfCommand = new RelayCommand(
-                    async () => PDFGenerator() 
+                    () => PDFGenerator() 
                     ));
             }
         }        
 
         private void PDFGenerator()
         {
+            //Gets all relevant orders, i.e. orders without a linked shoppinglist.
             OrderRepository orderRepository = new OrderRepository();
             List<Order> AllOrders = orderRepository.GetOrdersWithNoShoppinglist();
 
+            //In case of no orders we notify the user and return.
             if (AllOrders.Count == 0)
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("There is no new orders?", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
-                if (result == MessageBoxResult.Yes)
-                {                    
-                    return;
-                }
+                System.Windows.MessageBox.Show("Der er ingen nye ordrer.", "Bekræftelse", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                return;
             }
 
+            //Adds all orders to a new shoppinglist.
             ShoppingList list = orderRepository.AddToShoppingList(AllOrders, 1);
             List<OrderLine> AllOrderLines = new List<OrderLine>();
             
+            //Adds all orderlines from all orders to one list of orderlines - this makes it easier to sum up the orderlines and sort the list.
             foreach (Order order in AllOrders)
             {
                 AllOrderLines.AddRange(order.OrderLines);
             }
 
+            //Groups the orderlines by supplier, so every supplier gets their own PDF of orders.
             List<List<OrderLine>> OrderLinesBySupplier = AllOrderLines
                 .GroupBy(x => x.ProductVersion.Supplier)
                 .Select(grp => grp.ToList())
                 .ToList();
 
+            //Makes a PDF for every supplier.
             foreach (List<OrderLine> orderlinesForOneSupplier in OrderLinesBySupplier)
             {
                 CreatePDF(UniteOrderlines(orderlinesForOneSupplier));
@@ -75,50 +79,57 @@ namespace AalborgZooProjekt.ViewModel
             foreach (OrderLine orderLine in unSortedOrderlines)
             {
                 OrderWrapper key = uniter.QuantityPerProduct.FirstOrDefault(x => x.ProdV.Id == orderLine.ProductVersion.Id);
+
                 
-
-                uniter.Sort();
-
                 if (key != null && key.OrderedUnit == orderLine.Unit)
                 {
+                    //The orderline already exists in the list, so we simply add the quantity of the current orderline.
                     key.Quantity += orderLine.Quantity;
                 } else
                 {
+                    //The orderlines does not exsist, so we add a new one to the list.
                     uniter.QuantityPerProduct.Add(new OrderWrapper(orderLine.Quantity, orderLine.Unit, orderLine.ProductVersion));
                 }
             }
+            //Sorts the orderlines by name. Orderlines with the same name but different units will be two different entries, but grouped together.
+            uniter.Sort();
 
             return uniter;
         }
 
         private void CreatePDF(OrderlineUniter orders)
         {
-            string danishAlphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
+            string danishAlphabet = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ"; //Used to get the height ratio.
+            //PDF Sharp initializations.
             PdfDocument pdf = new PdfDocument();
             PdfPage pdfPage = pdf.AddPage();
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
             XFont fontHeader = new XFont("Verdana", 13, XFontStyle.Bold);
             XFont fontParagraph = new XFont("Verdana", 13, XFontStyle.Regular);
             XSize size = PageSizeConverter.ToSize(PdfSharp.PageSize.A4);
+
+            //Margins
             int marginTop = 20;
             int marginLeft = 50;
             int marginRight = 50;
 
+            //Line height
             double lineHeight = graph.MeasureString(danishAlphabet, fontParagraph).Height + 5;
 
-            //Draw the headlines.
+            //Calculates the headline positions.
             string nameString = "Produkt";
-            string quantityString = "Antal";
-            string unitString = "Enhed";
-
             double nameLength = graph.MeasureString(nameString, fontHeader).Width;
-            double quantityLength = graph.MeasureString(quantityString, fontHeader).Width;
-            double unitLength = graph.MeasureString(unitString, fontHeader).Width;
-
             double nameX = marginLeft;
-            double quantityX = size.Width - nameLength - unitLength - marginRight;
+
+            string unitString = "Enhed";
+            double unitLength = graph.MeasureString(unitString, fontHeader).Width;
             double unitX = size.Width - unitLength - marginRight;
 
+            string quantityString = "Antal";
+            double quantityLength = graph.MeasureString(quantityString, fontHeader).Width;
+            double quantityX = size.Width - nameLength - unitLength - marginRight;
+
+            //Draws the product name headline.
             graph.DrawString(
                 nameString,
                 fontHeader,
@@ -126,6 +137,7 @@ namespace AalborgZooProjekt.ViewModel
                 new XRect(nameX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
                 XStringFormats.TopLeft);
 
+            //Draws the quantity headline.
             graph.DrawString(
                 quantityString,
                 fontHeader,
@@ -133,6 +145,7 @@ namespace AalborgZooProjekt.ViewModel
                 new XRect(quantityX, marginTop, pdfPage.Width.Point, pdfPage.Height.Point),
                 XStringFormats.TopLeft);
 
+            //Draws the unit headline.
             graph.DrawString(
                 unitString,
                 fontHeader,
@@ -143,7 +156,10 @@ namespace AalborgZooProjekt.ViewModel
             //Draw entries
             for (int i = 0; i < orders.QuantityPerProduct.Count; i++)
             {
+                //Calculates the position of the current line.
                 double lineY = lineHeight * (i + 1);
+
+                //Gives every second line a light gray background color.
                 if (i % 2 == 1)
                 {
                     XSolidBrush brush = new XSolidBrush(XColors.LightGray);
@@ -152,6 +168,7 @@ namespace AalborgZooProjekt.ViewModel
 
                 }
 
+                //Draws the product name.
                 graph.DrawString(
                     orders.QuantityPerProduct.ElementAt(i).ProdV.Product.Name,
                     fontParagraph,
@@ -159,6 +176,7 @@ namespace AalborgZooProjekt.ViewModel
                     new XRect(nameX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
+                //Draws the quantity.
                 graph.DrawString(
                     orders.QuantityPerProduct.ElementAt(i).Quantity.ToString(),
                     fontParagraph,
@@ -166,6 +184,7 @@ namespace AalborgZooProjekt.ViewModel
                     new XRect(quantityX, marginTop + lineY, pdfPage.Width, pdfPage.Height),
                     XStringFormats.TopLeft);
 
+                //Draws the unit.
                 graph.DrawString(
                     orders.QuantityPerProduct.ElementAt(i).OrderedUnit.Name,
                     fontParagraph,
@@ -174,20 +193,23 @@ namespace AalborgZooProjekt.ViewModel
                     XStringFormats.TopLeft);
             }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = @"C:\";
+            //Code used to setup the save file dialog.
+            SaveFileDialog saveFileDialog = new SaveFileDialog(); //Asks the user for the position of the code.
             saveFileDialog.Title = "Save PDF";
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.DefaultExt = "pdf";
             saveFileDialog.Filter = "PDF (*.pdf)|*.pdf|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 2;
             saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.FileName = orders.QuantityPerProduct.ElementAt(0).ProdV.Supplier;
+            saveFileDialog.FileName = orders.QuantityPerProduct.ElementAt(0).ProdV.Supplier; //File name corresponds to name of the supplier by default.
 
+            //Shows the save file dialog.
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 pdf.Save(saveFileDialog.FileName);
             }
+
+            //Opens the newly generated pdf.
             Process.Start(saveFileDialog.FileName);
         }
 
