@@ -11,17 +11,17 @@ namespace NUnit.Test
     [TestFixture]
     public class OrderCanBeConstructedTest
     {
-        #region Commom Actions
+        #region Commom
 
         Mock<IOrderRepository> MockRep;
-        private Order MakeOrder()
+        private Order InitializeOrder()
         {
             MockRep = new Mock<IOrderRepository>();
             Department dep = new Department();
             Order order = new Order(MockRep.Object, dep);
             return order;
         }
-
+        
         private OrderLine MakeOrderLine()
         {
             return new OrderLine();
@@ -38,42 +38,21 @@ namespace NUnit.Test
         #endregion
         
         [Test]
-        public void CreateDepartmentTest()
+        public void CreateOrder_ValidInput_OrderIsCreated()
         {
+            Mock<IOrderRepository> MockRep = new Mock<IOrderRepository>();
             Department dep = new Department();
-
-            Assert.IsNotNull(dep);
-        }
-
-        [Test]
-        public void CreateOrderTest()
-        {
-            Order order = new Order();
+            Order order = new Order(MockRep.Object, dep);
 
             Assert.IsNotNull(order);
-        }
-
-        [Test]
-        public void CreateOrder_NotDefaultConstructor_GetsCreated()
-        {
-            Order order = MakeOrder();
-            Assert.IsNotNull(order);
-        }
-
-        [Test]
-        public void OrderLineCanBeConstructedTest()
-        {
-            OrderLine orderLine = new OrderLine();
-
-            Assert.IsNotNull(orderLine);
-        }
-       
+            Assert.AreEqual(dep.Id, order.DepartmentID);            
+        }        
 
         [Test]
         public void AddOrderLine_ValidOrderLine_CanBeAdded()
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             OrderLine firstOrderLine = MakeOrderLine();
             firstOrderLine.Quantity = 20;
             OrderLine secondOrderLine = MakeOrderLine();
@@ -94,7 +73,7 @@ namespace NUnit.Test
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
 
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
 
             //Act
             order.AttachZookeeperToOrder(zookeeper);
@@ -110,7 +89,7 @@ namespace NUnit.Test
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
 
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
 
             //Act
             order.AttachZookeeperToOrder(zookeeper);
@@ -127,7 +106,7 @@ namespace NUnit.Test
         public bool CanOrderBeChanged_StatusIsString_IfValidReturnsTrueElseFalse(int status)
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             order.Status = status;
 
             //Act
@@ -142,7 +121,7 @@ namespace NUnit.Test
         public void CanOrderBeSend_None_CanBeSend()
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             order.OrderLines.Add(MakeOrderLine());
             order.Status = 0; //UnderContruktion
             Zookeeper zookeeper = MakeZookeeper();
@@ -160,7 +139,7 @@ namespace NUnit.Test
         public void CanOrderBeSend_WrongStatus_ExceptionThrown()
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             order.OrderLines.Add(MakeOrderLine());
             order.Status = 1; //Sent
             Zookeeper zookeeper = MakeZookeeper();
@@ -176,7 +155,7 @@ namespace NUnit.Test
         public void CanOrderBeSend_NoZookeeperAttached_ExceptionThrown()
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             order.OrderLines.Add(MakeOrderLine());
             order.Status = 0;
            
@@ -188,7 +167,7 @@ namespace NUnit.Test
         public void CanOrderBeSend_NoOrderlines_ExceptionThrown()
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             order.Status = 0;
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
@@ -202,7 +181,7 @@ namespace NUnit.Test
         public void SendOrder_CanBeSendWorks_OrderCanBeSend()
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             order.OrderLines.Add(MakeOrderLine());
             order.Status = 0;
             Zookeeper zookeeper = MakeZookeeper();
@@ -221,7 +200,7 @@ namespace NUnit.Test
         public void RemoveOrderLine_ValidOrderLine_CanBeRemoved()
         {
             //Arrange
-            Order order = MakeOrder();
+            Order order = InitializeOrder();
             OrderLine orderline = MakeOrderLine();
             order.OrderLines.Add(orderline);
 

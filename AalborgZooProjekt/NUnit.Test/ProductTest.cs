@@ -40,6 +40,25 @@ namespace NUnit.Test
         #endregion
 
         [Test]
+        public void CreateProduct_ValidInput_ProductIsCreated()
+        {
+            Mock<IProductRepository> MockRep = new Mock<IProductRepository>();
+            string name = "ProductName";
+            Shopper shopper = new Shopper();
+            string supplier = "Supplier";
+            List<Unit> Units = new List<Unit>();
+            bool active = true;
+            Product product = new Product(MockRep.Object, shopper, name, supplier, Units, active);
+
+            Assert.IsNotNull(product);
+            Assert.AreEqual(name, product.Name);
+            Assert.AreEqual(name, product.ProductVersions.Last().Name);
+            Assert.AreEqual(shopper.Id, product.ProductVersions.Last().CreatedByID);
+            Assert.IsTrue(Units.SequenceEqual(product.ProductVersions.Last().Units));
+            Assert.AreEqual(active, product.ProductVersions.Last().IsActive);
+        }
+
+        [Test]
         public void ActivateProduct_ProductIsDeactivated_GetsActivated()
         {
             //Arrange
