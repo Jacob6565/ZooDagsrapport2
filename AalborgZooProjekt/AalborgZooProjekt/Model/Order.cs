@@ -17,8 +17,7 @@ namespace AalborgZooProjekt.Model
         }
         
         private IOrderRepository orderRep;
-
-
+        
         private const int _underConstruction = 0;
         public int UnderConstruction { get { return _underConstruction; } }
 

@@ -58,8 +58,6 @@ namespace NUnit.Test
         {
             Order order = MakeOrder();
             Assert.IsNotNull(order);
-            MockRep.Verify(x => x.AddOrder(order), Times.Once());
-
         }
 
         [Test]
@@ -87,70 +85,6 @@ namespace NUnit.Test
 
             //Assert
             Assert.AreEqual(order.OrderLines.Last(), secondOrderLine);
-
-            //Asserting whether the functions on the mocked object gets called.
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(2));
-        }
-
-        [Test]
-        public void ChangeAmount_ValidAmount_CanBeChanged()
-        {
-            //Arrange
-            Order order = MakeOrder();
-            OrderLine orderLine = MakeOrderLine();
-            orderLine.Quantity = 20;
-
-            //Act
-            order.ChangeAmount(orderLine, 15);
-            
-            //Assert
-            Assert.AreEqual(15, orderLine.Quantity);
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
-        }
-
-        [TestCase(-10)]
-        [TestCase(-1)]
-        [TestCase(0)]
-        public void ChangeAmount_InvalidAmount_ExceptionThrown(int amount)
-        {
-            //Arrange
-            Order order = MakeOrder();
-            OrderLine orderLine = MakeOrderLine();
-            orderLine.Quantity = 20;
-            order.OrderLines.Add(orderLine);
-
-            //Act and Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => order.ChangeAmount(orderLine, amount));
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(0));
-        }
-
-        [Test]
-        public void ChangeUnit_ValidInput_UnitChanged()
-        {
-            //Arrange
-            Order order = MakeOrder();
-            OrderLine orderline = MakeOrderLine();
-
-            ProductVersion ProductVersion = MakeProductVersion();
-            List<Unit> units = new List<Unit>()
-            {
-                new Unit()
-                {
-                    Name = "kg",
-                    Id = 2
-                }
-            };
-            
-            ProductVersion.Units = units;
-            orderline.ProductVersion = ProductVersion;
-            order.OrderLines.Add(orderline);           
-
-            //Act
-            order.ChangeUnit(orderline, units.Last());
-
-            //Assert
-            Assert.AreEqual(units.Last().Id, order.OrderLines.Last().UnitID);
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
         }
 
         [Test]
@@ -167,7 +101,6 @@ namespace NUnit.Test
 
             //Assert
             Assert.AreEqual(zookeeper.Id, order.OrderedByID);
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
         }
 
         [Test]
@@ -184,7 +117,7 @@ namespace NUnit.Test
 
             //Assert
             Assert.Throws<ZookeeperAllReadyAddedException>(() => order.AttachZookeeperToOrder(zookeeper));
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(1));
+            
 
         }
 
@@ -204,39 +137,7 @@ namespace NUnit.Test
             return returnValue;
         }
 
-        [Test]
-        public void ChangeProduct_ActiveProductVersion_ProductChanged()
-        {
-            //Arrange   
-            ProductVersion ProductVersion = MakeProductVersion();
-            ProductVersion.IsActive = true;
-            Order order = MakeOrder();
-            OrderLine orderline = MakeOrderLine();
-
-            //Act
-            order.ChangeProduct(orderline, ProductVersion);
-
-            //Arrange
-            Assert.AreEqual(ProductVersion, orderline.ProductVersion);
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
-
-        }
-
-        [Test]
-        public void ChangeProduct_DeactivatedProductVersion_ExceptionThrown()
-        {
-            //Arrange   
-            ProductVersion productVersion = MakeProductVersion();
-            productVersion.IsActive = false;
-            Order order = MakeOrder();
-            OrderLine orderline = MakeOrderLine();
-
-            //Act and Assert
-            Assert.Throws<ProductVersionIsNotActiveException>(() => order.ChangeProduct(orderline, productVersion));
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Exactly(0));
-
-        }
-
+           
         [Test]
         public void CanOrderBeSend_None_CanBeSend()
         {
@@ -307,16 +208,13 @@ namespace NUnit.Test
             Zookeeper zookeeper = MakeZookeeper();
             zookeeper.Id = 2;
             order.OrderedByID = zookeeper.Id;
-            ShoppingList shoppingList = new ShoppingList();
-            
+                        
             //Act
-            //Det er denne som giver fejl
-            order.SendOrder(shoppingList);
+            order.SendOrder();
 
             //Assert
-            Assert.AreEqual(1, order.Status);
-            Assert.AreEqual(order, shoppingList.Orders.Last());
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
+            Assert.AreEqual(1, order.Status);           
+            MockRep.Verify(x => x.AddOrder(order), Times.Once());
         }
 
         [Test]
@@ -331,11 +229,9 @@ namespace NUnit.Test
             order.RemoveOrderLine(orderline);
 
             //Assert
-            Assert.IsTrue(!order.OrderLines.Contains(orderline));
-            MockRep.Verify(x => x.UpdateOrder(order), Times.Once());
+            Assert.IsTrue(!order.OrderLines.Contains(orderline));         
 
         }
-
     }
 }
 

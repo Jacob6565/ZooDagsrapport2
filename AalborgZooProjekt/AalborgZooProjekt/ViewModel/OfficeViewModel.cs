@@ -193,7 +193,7 @@ namespace AalborgZooProjekt.ViewModel
 
         private RelayCommand<object> _editOrder;    
         public RelayCommand<object> EditOrder
-        {
+        { 
             get
             {
                 return _editOrder ?? (_editOrder= new RelayCommand<object>(EditOrderWindow));
