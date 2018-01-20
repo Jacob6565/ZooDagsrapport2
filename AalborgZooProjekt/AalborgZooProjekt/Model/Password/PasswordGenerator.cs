@@ -20,7 +20,7 @@ namespace AalborgZooProjekt.Model
             var keyBytes = Encoding.UTF8.GetBytes(password);
             
             // The following code-block is just an assumption - might need tweaking.
-            var cost = 262144;
+            var cost = 131072;
             var blockSize = 8;
             var parallel = 1;
             var maxThreads = (int?)null;
