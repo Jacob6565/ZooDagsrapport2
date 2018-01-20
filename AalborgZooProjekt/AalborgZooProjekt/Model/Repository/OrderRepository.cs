@@ -159,7 +159,11 @@ namespace AalborgZooProjekt.Model
         {
             using (var _context = new AalborgZooContainer())
             {
-                List<Order> allOrders = _context.OrderSet.Where(x => x.DepartmentID == departmentID).Take(10).ToList();
+                List<Order> allOrders = _context.OrderSet
+                    .Where(x => x.DepartmentID == departmentID)
+                    .OrderByDescending(x => x.DateOrdered)
+                    .Take(10)
+                    .ToList();
                 List<OrderHistoryWrapper> wrappers = new List<OrderHistoryWrapper>();
 
                 foreach (Order order in allOrders)
