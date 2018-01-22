@@ -1,4 +1,4 @@
-﻿<Window x:Class="AalborgZooProjekt.View.ZooKeeper.HistoryWindow"
+﻿<UserControl x:Class="AalborgZooProjekt.View.ZooKeeper.HistoryWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         d:DesignHeight="600"
         d:DesignWidth="700">
-    <Window.Resources>
+    <UserControl.Resources>
         <converters:EmployeeIDToEmployeeNameConverter x:Key="converter" />
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*" />
@@ -151,4 +151,4 @@
                 HorizontalAlignment="Right"
                 Margin="0,0,10,0" />
     </Grid>
-</Window>
+</UserControl>
