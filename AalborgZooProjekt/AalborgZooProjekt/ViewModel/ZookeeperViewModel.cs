@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using AalborgZooProjekt.View.ZooKeeper;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -346,5 +347,22 @@ namespace AalborgZooProjekt.ViewModel
             ////TODO Clear Radiobuttons properly
         }
 
+        private RelayCommand<OrderHistoryWrapper> _historyEntryChosen;
+        public RelayCommand<OrderHistoryWrapper> HistoryEntryChosen
+        {
+            get
+            {
+                return _historyEntryChosen
+                    ?? (_historyEntryChosen = new RelayCommand<OrderHistoryWrapper>(ShowHistoryEntry));
+            }
+        }
+
+        public void ShowHistoryEntry(OrderHistoryWrapper entrySelected)
+        {
+            HistoryWindow historyWindow = new HistoryWindow();
+            historyWindow.DataContext = entrySelected;
+            historyWindow.ShowDialog();
+
+        }
     }
 }

@@ -18,12 +18,11 @@ namespace AalborgZooProjekt.View.ZooKeeper
     /// <summary>
     /// Interaction logic for FeedTab.xaml
     /// </summary>
-    public partial class FeedTab : UserControl
+    public partial class HistoryWindow : Window
     {
-        public FeedTab()
+        public HistoryWindow()
         {
             InitializeComponent();
         }
-
     }
 }
