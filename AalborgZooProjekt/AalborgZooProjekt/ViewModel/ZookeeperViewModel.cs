@@ -59,6 +59,31 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
+        internal void SetNewContent(UserControl _content)
+        {
+            ContentWindow = _content;
+        }
+        
+        private UserControl _content;
+        public UserControl ContentWindow
+        {
+            get
+            {
+                if (_content == null)
+                {
+                    FeedTab ft = new FeedTab();
+                    ft.DataContext = this;
+                    SetNewContent(ft);
+                }
+                return _content;
+            }
+            set
+            {
+                _content = value;
+                OnPropertyChanged("ContentWindow");
+            }
+        }
+
         private BindingList<OrderLine> SortDepOrderLines(string sortstring)
         {
             //AllOrderLines contains the original list, and will therefore
@@ -396,8 +421,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             HistoryWindow historyWindow = new HistoryWindow();
             historyWindow.DataContext = entrySelected;
-            historyWindow.ShowDialog();
-
+            SetNewContent(historyWindow);
         }
     }
 }

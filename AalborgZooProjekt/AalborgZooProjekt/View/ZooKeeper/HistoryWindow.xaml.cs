@@ -18,7 +18,7 @@ namespace AalborgZooProjekt.View.ZooKeeper
     /// <summary>
     /// Interaction logic for FeedTab.xaml
     /// </summary>
-    public partial class HistoryWindow : Window
+    public partial class HistoryWindow : UserControl    
     {
         public HistoryWindow()
         {
