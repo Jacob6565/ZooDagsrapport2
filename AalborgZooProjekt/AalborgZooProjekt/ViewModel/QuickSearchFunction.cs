@@ -55,14 +55,12 @@ namespace AalborgZooProjekt.ViewModel
             return new BindingList<OrderLine>(temporaryList);            
         }
 
-        public BindingList<OrderLine> Sorting (string searchString, BindingList<OrderLine> products)
+        public static BindingList<OrderLine>Sorting(string searchString, BindingList<OrderLine> products)
         {
             List<OrderLine> temp = new List<OrderLine>();
             searchString = searchString.ToLower();
 
             temp = products.ToList().Where(x => x.ProductVersion.Name.ToLower().StartsWith(searchString)).Select(x=> x).ToList();
-
-            temp.OrderBy(x => x.ProductVersion.Name);
 
             temp.AddRange(products.ToList().Where(x => x.ProductVersion.Name.ToLower().Contains(searchString) && !x.ProductVersion.Name.ToLower().StartsWith(searchString)).ToList());
 

@@ -34,7 +34,12 @@ namespace AalborgZooProjekt.ViewModel
 
             SetupOrder();
 
-            DepOrderLines = GetDepProductListFromDb();
+            //AllOrderLines is used to contain the original orderlines.
+            AllOrderLines = GetDepProductListFromDb().ToList();
+
+            //DepOrderLines is the used to represent orderlines in the view.
+            //And will be modified upon using QuickSearch.
+            DepOrderLines = new BindingList<OrderLine>(AllOrderLines);
         }
 
         //I setter så gøre sådan at en funktion som opdatere DepOrderlines bliver kaldt.
@@ -55,9 +60,11 @@ namespace AalborgZooProjekt.ViewModel
 
         private BindingList<OrderLine> SortDepOrderLines(string sortstring)
         {
-            BindingList<OrderLine> temp = new BindingList<OrderLine>(DepOrderLines);
-            QuickSearchFunction searchFunction = new QuickSearchFunction();
-            temp = searchFunction.Sorting(sortstring, temp);
+            //AllOrderLines contains the original list, and will therefore
+            //provide the same starting point for the sort each time.
+            BindingList<OrderLine> temp = new BindingList<OrderLine>(AllOrderLines);
+            
+            temp = QuickSearchFunction.Sorting(sortstring, temp);
             
             return temp;
         }
@@ -129,6 +136,9 @@ namespace AalborgZooProjekt.ViewModel
 
         //Department repository which is used as a data access layer to access Department in database
         private IDepartmentRepository dbDepartmentRep = new DeparmentRepository();
+
+        //This is used to store all the OrderLines.
+        public List<OrderLine> AllOrderLines { get; set; } = new List<OrderLine>();
 
         /*This bindinglist is used in view to illustrate the departmentspecific products for the chosen department*/
         public BindingList<OrderLine> DepOrderLines { get; set; } = new BindingList<OrderLine>();
