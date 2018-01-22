@@ -51,6 +51,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CryptSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
@@ -240,6 +243,7 @@
     <Compile Include="ViewModel\Converters\EmployeeIDToEmployeeNameConverter.cs" />
     <Compile Include="ViewModel\OfficeViewModel.cs" />
     <Compile Include="ViewModel\Populater.cs" />
+    <Compile Include="ViewModel\QuickSearchFunction.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ZookeeperViewModel.cs" />
     <Compile Include="View\OfficeFeedTypeOrders.xaml.cs">
