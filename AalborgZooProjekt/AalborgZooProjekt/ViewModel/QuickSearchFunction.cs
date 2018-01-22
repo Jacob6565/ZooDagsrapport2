@@ -58,14 +58,13 @@ namespace AalborgZooProjekt.ViewModel
         public BindingList<OrderLine> Sorting (string searchString, BindingList<OrderLine> products)
         {
             List<OrderLine> temp = new List<OrderLine>();
-            if (searchString == null)
-            {
-                temp = products.OrderByDescending(x=> x.ProductVersion.Name).ToList();
-            }
-            else
-            {
-                temp = products.OrderByDescending(x => x.ProductVersion.Name.Contains(searchString)).Select(x=> x).ToList();
-            }
+            searchString = searchString.ToLower();
+
+            temp = products.ToList().Where(x => x.ProductVersion.Name.ToLower().StartsWith(searchString)).Select(x=> x).ToList();
+
+            temp.OrderBy(x => x.ProductVersion.Name);
+
+            temp.AddRange(products.ToList().Where(x => x.ProductVersion.Name.ToLower().Contains(searchString) && !x.ProductVersion.Name.ToLower().StartsWith(searchString)).ToList());
 
             return new BindingList<OrderLine>(temp);
         }

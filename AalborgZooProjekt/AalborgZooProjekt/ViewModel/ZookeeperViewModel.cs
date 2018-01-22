@@ -58,7 +58,7 @@ namespace AalborgZooProjekt.ViewModel
             BindingList<OrderLine> temp = new BindingList<OrderLine>(DepOrderLines);
             QuickSearchFunction searchFunction = new QuickSearchFunction();
             temp = searchFunction.Sorting(sortstring, temp);
-            //temp = searchFunction.SortProducts(sortstring, temp);
+            
             return temp;
         }
 
