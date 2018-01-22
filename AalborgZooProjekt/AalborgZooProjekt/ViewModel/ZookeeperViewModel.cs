@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using AalborgZooProjekt.View.ZooKeeper;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -34,7 +35,39 @@ namespace AalborgZooProjekt.ViewModel
 
             SetupOrder();
 
-            DepOrderLines = GetDepProductListFromDb();
+            //AllOrderLines is used to contain the original orderlines.
+            AllOrderLines = GetDepProductListFromDb().ToList();
+
+            //DepOrderLines is the used to represent orderlines in the view.
+            //And will be modified upon using QuickSearch.
+            DepOrderLines = new BindingList<OrderLine>(AllOrderLines);
+        }
+
+        //I setter så gøre sådan at en funktion som opdatere DepOrderlines bliver kaldt.
+        private string searchString;
+        public string SearchString {
+            get
+            {
+                return searchString;
+            }
+
+            set
+            {
+                searchString = value;
+                DepOrderLines = SortDepOrderLines(searchString);
+                OnPropertyChanged("DepOrderLines");
+            }
+        }
+
+        private BindingList<OrderLine> SortDepOrderLines(string sortstring)
+        {
+            //AllOrderLines contains the original list, and will therefore
+            //provide the same starting point for the sort each time.
+            BindingList<OrderLine> temp = new BindingList<OrderLine>(AllOrderLines);
+            
+            temp = QuickSearchFunction.Sorting(sortstring, temp);
+            
+            return temp;
         }
 
         public static void UnitChanged(object sender, object newUnit)
@@ -104,6 +137,9 @@ namespace AalborgZooProjekt.ViewModel
 
         //Department repository which is used as a data access layer to access Department in database
         private IDepartmentRepository dbDepartmentRep = new DeparmentRepository();
+
+        //This is used to store all the OrderLines.
+        public List<OrderLine> AllOrderLines { get; set; } = new List<OrderLine>();
 
         /*This bindinglist is used in view to illustrate the departmentspecific products for the chosen department*/
         public BindingList<OrderLine> DepOrderLines { get; set; } = new BindingList<OrderLine>();
@@ -346,5 +382,22 @@ namespace AalborgZooProjekt.ViewModel
             ////TODO Clear Radiobuttons properly
         }
 
+        private RelayCommand<OrderHistoryWrapper> _historyEntryChosen;
+        public RelayCommand<OrderHistoryWrapper> HistoryEntryChosen
+        {
+            get
+            {
+                return _historyEntryChosen
+                    ?? (_historyEntryChosen = new RelayCommand<OrderHistoryWrapper>(ShowHistoryEntry));
+            }
+        }
+
+        public void ShowHistoryEntry(OrderHistoryWrapper entrySelected)
+        {
+            HistoryWindow historyWindow = new HistoryWindow();
+            historyWindow.DataContext = entrySelected;
+            historyWindow.ShowDialog();
+
+        }
     }
 }

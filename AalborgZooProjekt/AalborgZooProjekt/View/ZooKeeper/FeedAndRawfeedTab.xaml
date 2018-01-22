@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="400">
+             d:DesignHeight="500" d:DesignWidth="400"
+             DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <ScrollViewer>
         <TabControl Margin="10,0,0,0">
             <TabItem Header="Frugt og grønt" MinWidth="120" Margin="1,0,0,0">
@@ -15,13 +16,13 @@
                     </Style>
                 </TabItem.Style>
                 <StackPanel>
-                    <TextBox>
+                    <TextBox Name="QuickSearch" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.Style>
                             <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                 <Style.Resources>
                                     <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                         <VisualBrush.Visual>
-                                            <Label Content="Hurtigsøgning..." Foreground="Gray" FontStyle="Italic" Padding="5,0,0,0" />
+                                            <Label Content="Hurtig søgning..." Foreground="Gray" FontStyle="Italic" Padding="5,0,0,0"/>
                                         </VisualBrush.Visual>
                                     </VisualBrush>
                                 </Style.Resources>

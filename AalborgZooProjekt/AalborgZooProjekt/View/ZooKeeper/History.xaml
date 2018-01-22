@@ -22,7 +22,8 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Button>
+                            <Button Command="{Binding Zoo.HistoryEntryChosen, Source={StaticResource Locator}}"
+                                    CommandParameter="{Binding Mode=OneWay}">
                                 <StackPanel HorizontalAlignment="Stretch">
                                     <Grid>
                                         <Grid.ColumnDefinitions>

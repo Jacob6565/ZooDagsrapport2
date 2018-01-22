@@ -51,6 +51,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CryptSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
@@ -139,6 +142,8 @@
     <Compile Include="Interfaces\IShoppingList.cs" />
     <Compile Include="Interfaces\IZookeeper.cs" />
     <Compile Include="Interfaces\IZookeeperView.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Repository\EmployeeRepository.cs" />
     <Compile Include="Model\Exception\AlreadyExistingSupplierException.cs" />
     <Compile Include="Model\Exception\CanNotSendEmptyOrderException.cs" />
     <Compile Include="Model\Database\AalborgZoo.Context.cs">
@@ -218,6 +223,7 @@
     <Compile Include="Model\Exception\ProductVersionDoesNotContainGivenUnitException.cs" />
     <Compile Include="Model\Repository\DeparmentRepository.cs" />
     <Compile Include="Model\Repository\IDepartmentRepository.cs" />
+    <Compile Include="Model\Repository\IEmployeeRepository.cs" />
     <Compile Include="Model\Repository\IOrderRepository.cs" />
     <Compile Include="Model\Repository\IProductRepository.cs" />
     <Compile Include="Model\Exception\OrderDoesNotExistInDatabaseException.cs" />
@@ -234,9 +240,10 @@
     <Compile Include="Model\Exception\UnitAlreadyRemovedException.cs" />
     <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="Model\Exception\ZookeeperAllReadyAddedException.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\Converters\EmployeeIDToEmployeeNameConverter.cs" />
     <Compile Include="ViewModel\OfficeViewModel.cs" />
     <Compile Include="ViewModel\Populater.cs" />
+    <Compile Include="ViewModel\QuickSearchFunction.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ZookeeperViewModel.cs" />
     <Compile Include="View\LoginView.xaml.cs">
@@ -244,6 +251,9 @@
     </Compile>
     <Compile Include="View\OfficeFeedTypeOrders.xaml.cs">
       <DependentUpon>OfficeFeedTypeOrders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZooKeeper\HistoryWindow.xaml.cs">
+      <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZooKeeper\FruitFoodList.xaml.cs">
       <DependentUpon>FruitFoodList.xaml</DependentUpon>
@@ -277,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OfficeFeedTypeOrders.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZooKeeper\HistoryWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
