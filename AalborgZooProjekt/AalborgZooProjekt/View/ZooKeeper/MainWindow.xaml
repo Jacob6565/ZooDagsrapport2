@@ -112,7 +112,7 @@
                         <Grid Background="#FFE5E5E5"/>
                     </TabItem>
 
-                    <TabItem Header="{Binding Afdeling, FallbackValue=Aalborg}" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                    <TabItem Header="{Binding Department.Name, FallbackValue=Aalborg}" HorizontalAlignment="Right"/>
                 </TabControl>
             </Grid>
         </Grid>

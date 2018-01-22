@@ -234,10 +234,14 @@
     <Compile Include="Model\Exception\UnitAlreadyRemovedException.cs" />
     <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="Model\Exception\ZookeeperAllReadyAddedException.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\OfficeViewModel.cs" />
     <Compile Include="ViewModel\Populater.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ZookeeperViewModel.cs" />
+    <Compile Include="View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OfficeFeedTypeOrders.xaml.cs">
       <DependentUpon>OfficeFeedTypeOrders.xaml</DependentUpon>
     </Compile>
@@ -268,6 +272,10 @@
     <Compile Include="View\Remarks.xaml.cs">
       <DependentUpon>Remarks.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\OfficeFeedTypeOrders.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

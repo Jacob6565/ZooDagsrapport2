@@ -21,12 +21,19 @@ namespace AalborgZooProjekt.View.ZooKeeper
             set { SetValue(TimeProperty, value); }
         }
 
-        private string department = "Afrika";
+        //private string department = "Afrika";
 
-        public string Department
-        {
-            get { return department; }
-        }
+        //public string Department
+        //{
+        //    get { return department; }
+        //    set
+        //    {
+        //        if (value.Length > 0)
+        //        {
+        //            department = value;
+        //        }
+        //    }
+        //}
 
         public static readonly DependencyProperty TimeProperty =
             DependencyProperty.Register("Time", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(DateTime.Now));

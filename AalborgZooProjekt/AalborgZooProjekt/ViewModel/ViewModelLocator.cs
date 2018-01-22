@@ -12,6 +12,7 @@ namespace AalborgZooProjekt.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<ZookeeperViewModel>();
             SimpleIoc.Default.Register<OfficeViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
         }
 
         public ZookeeperViewModel Zoo
@@ -27,6 +28,14 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<OfficeViewModel>();
+            }
+        }
+
+        public LoginViewModel Login
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginViewModel>();
             }
         }
 
