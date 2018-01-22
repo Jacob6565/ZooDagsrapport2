@@ -241,7 +241,6 @@
     <Compile Include="Model\Zookeeper.cs" />
     <Compile Include="Model\Exception\ZookeeperAllReadyAddedException.cs" />
     <Compile Include="ViewModel\Converters\EmployeeIDToEmployeeNameConverter.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\OfficeViewModel.cs" />
     <Compile Include="ViewModel\Populater.cs" />
     <Compile Include="ViewModel\QuickSearchFunction.cs" />

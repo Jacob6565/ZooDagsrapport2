@@ -101,7 +101,7 @@
                         </ControlTemplate>
                     </TabControl.Template>
                     <TabItem Header="Foderbestilling" Grid.Column="0" Margin="0,0,6.4,0.2">
-                        <ContentControl Content="{Binding ContentWindow, Mode=TwoWay, NotifyOnSourceUpdated=True}"/>
+                        <local:FeedTab/>
                     </TabItem>
 
                     <TabItem Header="Dyr">
