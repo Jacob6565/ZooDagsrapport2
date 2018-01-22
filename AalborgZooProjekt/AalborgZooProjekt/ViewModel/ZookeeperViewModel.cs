@@ -37,6 +37,32 @@ namespace AalborgZooProjekt.ViewModel
             DepOrderLines = GetDepProductListFromDb();
         }
 
+        //I setter så gøre sådan at en funktion som opdatere DepOrderlines bliver kaldt.
+        private string searchString;
+        public string SearchString {
+            get
+            {
+                return searchString;
+            }
+            set
+            {
+                searchString = value;
+                SortDepOrderLines(searchString);
+                OnPropertyChanged(searchString);
+            }
+        }
+
+        private BindingList<OrderLine> SortDepOrderLines(string sort)
+        {
+            BindingList<OrderLine> temp = new BindingList<OrderLine>(DepOrderLines);
+
+            foreach (OrderLine ol in temp)
+            {
+                //Skal lige have fundet den søgefunktion fra branchen "SøgeFunktion"
+            }
+            return temp;
+        }
+
         public static void UnitChanged(object sender, object newUnit)
         {
             ComboBox comboBoxItem = (ComboBox) sender;
