@@ -10,20 +10,50 @@ namespace AalborgZooProjekt.ViewModel
 {
     class QuickSearchFunction
     {
-        public BindingList<OrderLine> FindPossibleProducts(string searchString, List<Product> products)
+        /// <summary>
+        /// Used to link a variable called distance to a product.
+        /// </summary>
+        class TempProduct
         {
-            //Initialization methods.
-            //FetchProductsFromDB();
-            /*MakeTempProducts(products);
+            public OrderLine orderline;
+            public int distance;
+        }
 
-            //Calculates the Levenshtein distance for each products name            
-            foreach (TempProduct b in tempProducts)
+        /// <summary>
+        /// Contains all the products with .
+        /// </summary>
+        private List<TempProduct> tempOrderlines = new List<TempProduct>();
+
+        /// <summary>
+        /// Fills data into the list of TempProducts.
+        /// </summary>
+        private void MakeTempProducts(BindingList<OrderLine> orderline)
+        {
+            for (int i = 0; i < orderline.Count; i++)
             {
-                b.distance = LevenshteinDistance(searchString, b.product.Name);
+                tempOrderlines.Add(new TempProduct
+                {
+                    orderline = orderline[i],
+                    distance = 0
+                });
             }
+        }
+
+
+        public BindingList<OrderLine> SortProducts(string searchString, BindingList<OrderLine> products)
+        {
+            //Initialization method.
+            MakeTempProducts(products);
+
+            //Calculates the Levenshtein distance for each product          
+            foreach (TempProduct b in tempOrderlines)
+            {
+                b.distance = LevenshteinDistance(searchString, b.orderline.ProductVersion.Name);
+            }
+
             //Return the list of products sorted by the Levenshtein distance.
-            return tempProducts.OrderBy(x => x.distance).Select(x => x.product).ToList();*/
-            return null;
+            List<OrderLine> temporaryList = tempOrderlines.OrderBy(x => x.distance).Select(x => x.orderline).ToList();
+            return new BindingList<OrderLine>(temporaryList);            
         }
 
         /// <summary>

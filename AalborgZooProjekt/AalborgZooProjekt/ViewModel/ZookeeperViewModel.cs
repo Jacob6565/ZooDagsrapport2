@@ -44,22 +44,20 @@ namespace AalborgZooProjekt.ViewModel
             {
                 return searchString;
             }
+
             set
             {
                 searchString = value;
-                SortDepOrderLines(searchString);
-                OnPropertyChanged(searchString);
+                DepOrderLines = SortDepOrderLines(searchString);
+                OnPropertyChanged("DepOrderLines");
             }
         }
-
-        private BindingList<OrderLine> SortDepOrderLines(string sort)
+        private BindingList<OrderLine> SortDepOrderLines(string sortstring)
         {
             BindingList<OrderLine> temp = new BindingList<OrderLine>(DepOrderLines);
+            QuickSearchFunction searchFunction = new QuickSearchFunction();
 
-            foreach (OrderLine ol in temp)
-            {
-                //Skal lige have fundet den søgefunktion fra branchen "SøgeFunktion"
-            }
+            temp = searchFunction.SortProducts(sortstring, temp);
             return temp;
         }
 
