@@ -38,8 +38,7 @@ namespace AalborgZooProjekt.ViewModel
                 });
             }
         }
-
-
+        
         public BindingList<OrderLine> SortProducts(string searchString, BindingList<OrderLine> products)
         {
             //Initialization method.
@@ -54,6 +53,21 @@ namespace AalborgZooProjekt.ViewModel
             //Return the list of products sorted by the Levenshtein distance.
             List<OrderLine> temporaryList = tempOrderlines.OrderBy(x => x.distance).Select(x => x.orderline).ToList();
             return new BindingList<OrderLine>(temporaryList);            
+        }
+
+        public BindingList<OrderLine> Sorting (string searchString, BindingList<OrderLine> products)
+        {
+            List<OrderLine> temp = new List<OrderLine>();
+            if (searchString == null)
+            {
+                temp = products.OrderByDescending(x=> x.ProductVersion.Name).ToList();
+            }
+            else
+            {
+                temp = products.OrderByDescending(x => x.ProductVersion.Name.Contains(searchString)).Select(x=> x).ToList();
+            }
+
+            return new BindingList<OrderLine>(temp);
         }
 
         /// <summary>

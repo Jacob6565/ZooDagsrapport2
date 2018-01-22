@@ -52,12 +52,13 @@ namespace AalborgZooProjekt.ViewModel
                 OnPropertyChanged("DepOrderLines");
             }
         }
+
         private BindingList<OrderLine> SortDepOrderLines(string sortstring)
         {
             BindingList<OrderLine> temp = new BindingList<OrderLine>(DepOrderLines);
             QuickSearchFunction searchFunction = new QuickSearchFunction();
-
-            temp = searchFunction.SortProducts(sortstring, temp);
+            temp = searchFunction.Sorting(sortstring, temp);
+            //temp = searchFunction.SortProducts(sortstring, temp);
             return temp;
         }
 
