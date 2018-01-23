@@ -396,6 +396,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Img\Progress.png" />
     <Content Include="Model\Database\AalborgZoo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AalborgZoo.Context.cs</LastGenOutput>

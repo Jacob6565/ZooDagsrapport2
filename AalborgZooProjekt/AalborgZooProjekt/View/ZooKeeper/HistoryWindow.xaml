@@ -72,6 +72,17 @@
                                    Padding="5" />
                     </StackPanel>
                 </Border>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Frugt og grønt"
+                               Margin="10,0,0,0"/>
+                    <Image HorizontalAlignment="Left"
+                           Height="66"
+                           Margin="10,9.6,0,0"
+                           Grid.Row="1"
+                           VerticalAlignment="Top"
+                           Width="258"
+                           Source="/AalborgZooProjekt;component/Img/Progress.png" />
+                </StackPanel>
 
             </Grid>
             <Grid Margin="0,0,0,10"
@@ -97,7 +108,7 @@
                 <DataGrid Name="FruitOrderList"
                           Grid.Row="1"
                           Margin="0,0,10,0"
-                          ItemsSource="{Binding DepOrderList, Mode=TwoWay}"
+                          ItemsSource="{Binding OrderHistory.OrderLines, Mode=TwoWay}"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False">
 
@@ -125,7 +136,6 @@
                 <DataGrid Name="dgOrderList2"
                           Grid.Row="3"
                           Margin="0,0,10,0"
-                          ItemsSource="{Binding DepOrderList, Mode=TwoWay}"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False">
                     <DataGrid.Columns>

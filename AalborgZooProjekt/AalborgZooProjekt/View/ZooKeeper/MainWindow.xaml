@@ -1,18 +1,20 @@
-﻿<Controls:MetroWindow  
-        x:Class="AalborgZooProjekt.View.ZooKeeper.MainWindow"
-        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-    xmlns:view="clr-namespace:AalborgZooProjekt.View"
-    xmlns:local="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
-    mc:Ignorable="d ignore"
-        Height="768"
-        Width="1024"
-        Title="Aalborg Zoo Rapporteringssystem" MinWidth="1024" MinHeight="768"
-        DataContext="{Binding Zoo, Source={StaticResource Locator}}">
+﻿<Controls:MetroWindow x:Class="AalborgZooProjekt.View.ZooKeeper.MainWindow"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:ignore="http://www.galasoft.ch/ignore"
+                      xmlns:view="clr-namespace:AalborgZooProjekt.View"
+                      xmlns:local="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
+                      mc:Ignorable="d ignore"
+                      Height="768"
+                      Width="1024"
+                      Title="Aalborg Zoo Rapporteringssystem"
+                      MinWidth="1024"
+                      MinHeight="768"
+                      DataContext="{Binding Zoo, Source={StaticResource Locator}}"
+                      WindowState="Maximized">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -24,101 +26,112 @@
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" MinWidth="150" MaxWidth="300"/>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="200"
+                                  MinWidth="150"
+                                  MaxWidth="300" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <!-- Watch / Clock -->
-                <TextBlock Margin="10" Text="{Binding  Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
+                <TextBlock Margin="10"
+                           Text="{Binding  Time, StringFormat='{}{0: d/MM-yyyy HH:mm}'}">
                     <TextBlock.Style>
                         <Style>
-                            <Setter Property="TextBlock.FontSize" Value="20"/>
+                            <Setter Property="TextBlock.FontSize"
+                                    Value="20" />
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <local:History Grid.Row="1"/>
+                <local:History Grid.Row="1" />
             </Grid>
 
             <GridSplitter Width="10"
-                      Grid.Column="1"
-                      HorizontalAlignment="Stretch"/>
+                          Grid.Column="1"
+                          HorizontalAlignment="Stretch" />
 
-            <Grid Grid.Column="2" Height="704">
+            <Grid Grid.Column="2"
+                  Height="704">
                 <!-- Tab / Menu -->
                 <TabControl Margin="0,10,10,0">
                     <TabControl.Template>
                         <ControlTemplate TargetType="{x:Type TabControl}">
-                            <Grid ClipToBounds="True" KeyboardNavigation.TabNavigation="Local" SnapsToDevicePixels="True">
+                            <Grid ClipToBounds="True"
+                                  KeyboardNavigation.TabNavigation="Local"
+                                  SnapsToDevicePixels="True">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Name="ColumnDefinition0" Width="*"/>
-                                    <ColumnDefinition Name="ColumnDefinition2" Width="0"/>
+                                    <ColumnDefinition Name="ColumnDefinition0"
+                                                      Width="*" />
+                                    <ColumnDefinition Name="ColumnDefinition2"
+                                                      Width="0" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Name="RowDefinition0" Height="Auto"/>
-                                    <RowDefinition Name="RowDefinition1" Height="*"/>
+                                    <RowDefinition Name="RowDefinition0"
+                                                   Height="Auto" />
+                                    <RowDefinition Name="RowDefinition1"
+                                                   Height="*" />
                                 </Grid.RowDefinitions>
-                                <DockPanel
-                  Name="HeaderPanel"
-                  Grid.Column="0"
-                  Grid.Row="0"
-                  Margin="2,2,2,0"
-                  Panel.ZIndex="1"
-                  IsItemsHost="True"
-                  KeyboardNavigation.TabIndex="1"/>
-                                <Border
-                  Name="ContentPanel"
-                  Grid.Column="0"
-                  Grid.Row="1"
-                  Background="{TemplateBinding Panel.Background}"
-                  BorderBrush="{TemplateBinding Border.BorderBrush}"
-                  BorderThickness="{TemplateBinding Border.BorderThickness}"
-                  KeyboardNavigation.DirectionalNavigation="Contained"
-                  KeyboardNavigation.TabIndex="2"
-                  KeyboardNavigation.TabNavigation="Local">
-                                    <ContentPresenter
-                     Name="PART_SelectedContentHost"
-                     Margin="{TemplateBinding Control.Padding}"
-                     Content="{TemplateBinding TabControl.SelectedContent}"
-                     ContentSource="SelectedContent"
-                     ContentStringFormat="{TemplateBinding TabControl.SelectedContentStringFormat}"
-                     ContentTemplate="{TemplateBinding TabControl.SelectedContentTemplate}"
-                     SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                                <DockPanel Name="HeaderPanel"
+                                           Grid.Column="0"
+                                           Grid.Row="0"
+                                           Margin="2,2,2,0"
+                                           Panel.ZIndex="1"
+                                           IsItemsHost="True"
+                                           KeyboardNavigation.TabIndex="1" />
+                                <Border Name="ContentPanel"
+                                        Grid.Column="0"
+                                        Grid.Row="1"
+                                        Background="{TemplateBinding Panel.Background}"
+                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                        BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                        KeyboardNavigation.DirectionalNavigation="Contained"
+                                        KeyboardNavigation.TabIndex="2"
+                                        KeyboardNavigation.TabNavigation="Local">
+                                    <ContentPresenter Name="PART_SelectedContentHost"
+                                                      Margin="{TemplateBinding Control.Padding}"
+                                                      Content="{TemplateBinding TabControl.SelectedContent}"
+                                                      ContentSource="SelectedContent"
+                                                      ContentStringFormat="{TemplateBinding TabControl.SelectedContentStringFormat}"
+                                                      ContentTemplate="{TemplateBinding TabControl.SelectedContentTemplate}"
+                                                      SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
                                 </Border>
                             </Grid>
                         </ControlTemplate>
                     </TabControl.Template>
-                    <TabItem Header="Foderbestilling" Grid.Column="0" Margin="0,0,6.4,0.2">
-                        <ContentControl Content="{Binding ContentWindow, Mode=TwoWay, NotifyOnSourceUpdated=True}"/>
+                    <TabItem Header="Foderbestilling"
+                             Grid.Column="0"
+                             Margin="0,0,6.4,0.2">
+                        <ContentControl Content="{Binding ContentWindow, Mode=TwoWay, NotifyOnSourceUpdated=True}" />
                     </TabItem>
 
                     <TabItem Header="Dyr">
-                        <Grid Background="#FFE5E5E5"/>
+                        <Grid Background="#FFE5E5E5" />
                     </TabItem>
 
                     <TabItem Header="Praktiske Opgaver">
-                        <Grid Background="#FFE5E5E5"/>
+                        <Grid Background="#FFE5E5E5" />
                     </TabItem>
 
-                    <TabItem Header="{Binding Department.Name, FallbackValue=Aalborg}" HorizontalAlignment="Right"/>
+                    <TabItem Header="{Binding Department.Name, FallbackValue=Aalborg}"
+                             HorizontalAlignment="Right" />
                 </TabControl>
             </Grid>
         </Grid>
-        <StatusBar x:Name="BottomStatusBar" 
-                                       Grid.Row="1">
-            <TextBlock Name="StatusbarText"/>
+        <StatusBar x:Name="BottomStatusBar"
+                   Grid.Row="1">
+            <TextBlock Name="StatusbarText" />
         </StatusBar>
     </Grid>
 
