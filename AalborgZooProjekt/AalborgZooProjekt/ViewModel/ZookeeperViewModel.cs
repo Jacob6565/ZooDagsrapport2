@@ -421,7 +421,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             HistoryWindow historyWindow = new HistoryWindow();
             historyWindow.DataContext = entrySelected;
-            SetNewContent(historyWindow);
+            historyWindow.ShowDialog();
         }
     }
 }
