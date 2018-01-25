@@ -244,9 +244,24 @@ namespace AalborgZooProjekt.ViewModel
             return orderlines;
         }
 
+        private ObservableCollection<OrderHistoryWrapper> _historyOrders;
         public ObservableCollection<OrderHistoryWrapper> HistoryOrders
         {
-            get { return new ObservableCollection<OrderHistoryWrapper>(new OrderRepository().GetOrdersFromDepartment(1)); }
+            get
+            {
+                return _historyOrders ?? new ObservableCollection<OrderHistoryWrapper>(new OrderRepository().GetOrdersFromDepartment(1));
+            }
+
+            set
+            {
+                _historyOrders = value;
+                OnPropertyChanged("HistoryOrders");
+            }
+        }
+
+        private ObservableCollection<OrderHistoryWrapper> UpdateHistoryOrders(int departmentID)
+        {
+            return new ObservableCollection<OrderHistoryWrapper>(new OrderRepository().GetOrdersFromDepartment(1));
         }
 
 
@@ -341,7 +356,7 @@ namespace AalborgZooProjekt.ViewModel
         /// the current shoppinglist
         /// </summary>
         /// <param name="order"></param>
-        public void Sendorder(object context)
+        public async void Sendorder(object context)
         {
             if (CanBeSend)
             {
@@ -349,12 +364,13 @@ namespace AalborgZooProjekt.ViewModel
                 AssembleOrder();
 
                 CanBeSend = false;
-                OrderInTheMaking.SendOrder();
+                await Task.Run(() => OrderInTheMaking.SendOrder());
 
                 //Clears the order and the view
                 OrderInTheMaking = new Order(_department);
                 ClearOrders(context);
                 CanBeSend = true;
+                await Task.Run(() => HistoryOrders = UpdateHistoryOrders(1));
             }
         }
 

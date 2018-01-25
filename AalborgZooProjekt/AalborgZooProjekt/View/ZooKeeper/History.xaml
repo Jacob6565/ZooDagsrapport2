@@ -18,7 +18,7 @@
                         Grid.Row="1" 
                         VerticalAlignment="Top"/>
 
-            <ListBox Margin="5,0,5,10" ItemsSource="{Binding HistoryOrders}">
+            <ListBox Margin="5,0,5,10" ItemsSource="{Binding HistoryOrders, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
