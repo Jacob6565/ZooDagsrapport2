@@ -17,7 +17,7 @@
                 </TabItem.Style>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                    <TextBox Name="QuickSearch" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Width="343">
+                    <TextBox Name="QuickSearch" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" MinWidth="350" TextWrapping="WrapWithOverflow"  BorderThickness="0">
                         <TextBox.Style>
                             <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                 <Style.Resources>
@@ -41,9 +41,7 @@
                             </Style>
                         </TextBox.Style>
                        </TextBox>
-                        <Button Command="{Binding Zoo.DeleteSearchCommand, UpdateSourceTrigger=PropertyChanged}" Background="White">
-                            <Image Name="BananaIcon" Source="/AalborgZooProjekt;component/Img/Banana icon.png" Width="15" Height="15" Grid.Column="1"/>
-                        </Button>
+                        <Button Command="{Binding DeleteSearchCommand}" BorderThickness="0" Background="White" Content="X" FontSize="10" Foreground="Red"/>
                     </StackPanel>
                     <Grid>
                         <local:FruitFoodList/>

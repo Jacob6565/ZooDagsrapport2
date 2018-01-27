@@ -56,6 +56,7 @@ namespace AalborgZooProjekt.ViewModel
                 searchString = value;
                 DepOrderLines = SortDepOrderLines(searchString);
                 OnPropertyChanged("DepOrderLines");
+                OnPropertyChanged("SearchString");
             }
         }
 
