@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace AalborgZooProjekt.Model
         }
     }
 
-    public class OrderHistoryWrapper
+    public class OrderHistoryWrapper : INotifyPropertyChanged
     {
         public OrderHistoryWrapper(Order order, bool hasFruit, bool hasOther)
         {
@@ -55,12 +56,38 @@ namespace AalborgZooProjekt.Model
         }
 
         private Order _order;
-        public Order OrderHistory { get => _order; set { _order = value; } }
+        public Order OrderHistory
+        {
+            get => _order;
+            set
+            {
+                _order = value;
+                OnPropertyChanged("HistoryOrders");
+            }
+        }
 
         private bool _hasFruit;
         public bool HasFruit { get => _hasFruit; set { _hasFruit = value; } }
 
         private bool _hasOther;
         public bool HasOther { get => _hasOther; set { _hasOther = value; } }
+
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
     }
 }

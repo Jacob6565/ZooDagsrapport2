@@ -113,7 +113,8 @@
                     <TabItem Header="Foderbestilling"
                              Grid.Column="0"
                              Margin="0,0,6.4,0.2">
-                        <local:FeedTab />
+                        
+                        <local:FeedTab/>
                     </TabItem>
 
                     <TabItem Header="Dyr">
