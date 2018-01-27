@@ -267,6 +267,10 @@ namespace AalborgZooProjekt.ViewModel
             ChangeOrderList(box);
         }
 
+        public void DeleteSearch(object context) => SearchString = "";
+                
+        public bool CanBeDeleted(object context) => String.IsNullOrEmpty(searchString) ? false : true;
+        
         private RelayCommand<object> _addCommand;
         public RelayCommand<object> AddCommand
         {
@@ -287,6 +291,15 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
+        private RelayCommand<object> _deleteSearchCommand;
+        public RelayCommand<object> DeleteSearchCommand
+        {
+            get
+            {
+                return _deleteSearchCommand
+                    ?? (_deleteSearchCommand = new RelayCommand<object>(DeleteSearch, CanBeDeleted));
+            }
+        }
 
         public bool CanChangeAmount(object context)
         {
