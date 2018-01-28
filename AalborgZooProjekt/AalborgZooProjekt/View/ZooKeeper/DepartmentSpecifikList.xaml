@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AalborgZooProjekt.View.ZooKeeper"
         mc:Ignorable="d"
-        Title="Redigering af afdelingsspecifik liste" Height="768" Width="1024">
+        Title="Redigering af afdelingsspecifik liste" Height="768" Width="1024"
+        DataContext="{Binding Zoo, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -15,12 +16,13 @@
             <!--First Column-->
         <StackPanel Grid.Column="0" HorizontalAlignment='Center'>
             <TextBlock Text="Afdelingsnavn - Vareliste" FontSize="30" FontFamily="Helvetica" HorizontalAlignment="Center" Margin="0,20,0,20"/>
-        <ScrollViewer>
+        <ScrollViewer Margin="10,10,10,10">
             <DataGrid ItemsSource="{Binding DepOrderLines, Mode=TwoWay}"
                       IsReadOnly="True"
+                      Name="DepartmentSpecificProducts"
                       AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Vare" Width="*"/>
+                    <DataGridTextColumn Header="Vare" Width="*" Binding="{Binding ProductVersion.Name}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>
@@ -29,11 +31,22 @@
         <!--Anden Column-->
         <StackPanel VerticalAlignment="Center" Grid.Column="1" Orientation="Vertical">
             <Button Content= "(Pil) Tilføj" Margin="0,0,0,10"/>
-            <Button Content="Fjern (Pil)" Margin="0,10,0,0"/>
+            <Button Content="Fjern (Pil)" Margin="0,10,0,0" Command="{Binding RemoveProductFromDepartmentSpecificList}"
+                    CommandParameter="{Binding ElementName=DepartmentSpecificProducts, Path=SelectedItems}"/>
         </StackPanel>
         <!--TredjeColumn-->
-        <StackPanel>
-            
+        <StackPanel Grid.Column="2" HorizontalAlignment='Center'>
+            <TextBlock Text="Alle vare" FontSize="30" FontFamily="Helvetica" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+            <ScrollViewer Margin="10,10,10,10">
+                <!--Skal lige finde listen med alle vare-->
+                <DataGrid ItemsSource="{Binding TargetNullValue, Mode=TwoWay}"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Vare" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Window>

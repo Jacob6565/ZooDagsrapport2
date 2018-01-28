@@ -437,6 +437,11 @@ namespace AalborgZooProjekt.ViewModel
             ////TODO Clear Radiobuttons properly
         }
 
+        private RelayCommand<object> _changeDepSpecificProducts;
+        public RelayCommand<object> ChangeDepSpecificProducts => _changeDepSpecificProducts
+            //Jeg ved godt at dette ikke er den rigtige måde, men det var bare lige en midlertidlig løsning :D
+                    ?? (_changeDepSpecificProducts = new RelayCommand<object>((x) => new DepartmentSpecifikList().Show()));
+
         private RelayCommand<OrderHistoryWrapper> _historyEntryChosen;
         public RelayCommand<OrderHistoryWrapper> HistoryEntryChosen
         {
@@ -447,6 +452,22 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
+
+        private void RemoveProductFromDepartmentSpecificList(object context)
+        {
+            var selectedItems = context as List<ProductVersion>;
+            
+        }
+        private bool CanRemoveProductFromDepartmentSpecificList(object context)
+        {
+            return true;
+        }
+
+        private RelayCommand<object> _removeProductFromDepartmentSpecificListCommand;
+        public RelayCommand<object> RemoveProductFromDepartmentSpecificListCommand =>
+            _removeProductFromDepartmentSpecificListCommand ??
+            (_removeProductFromDepartmentSpecificListCommand = 
+            new RelayCommand<object>(RemoveProductFromDepartmentSpecificList, CanRemoveProductFromDepartmentSpecificList));
         public void ShowHistoryEntry(OrderHistoryWrapper entrySelected)
         {
             HistoryWindow historyWindow = new HistoryWindow();

@@ -35,6 +35,7 @@
                              HorizontalAlignment="Left">
                         <TextBlock Text="{Binding Department/Name, StringFormat='{}{0}'}" />
                     </Viewbox>
+                    <Button Content="Afdelingsspecifik liste" Command="{Binding ChangeDepSpecificProducts}"/>
                     <local:FeedAndRawfeedTab  Grid.Row="1" />
                 </Grid>
                 <local:OrderList Grid.Column="2" />
