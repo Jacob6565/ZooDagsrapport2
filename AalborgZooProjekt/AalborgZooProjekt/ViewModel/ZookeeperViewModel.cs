@@ -381,7 +381,7 @@ namespace AalborgZooProjekt.ViewModel
                     return true;
                 }
             return false;
-        }    
+        }
 
         private RelayCommand<object> _sendOrderCommand;
         public RelayCommand<object> SendOrderCommand
