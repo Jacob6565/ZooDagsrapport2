@@ -160,6 +160,7 @@ namespace AalborgZooProjekt.Model
             using (var _context = new AalborgZooContainer())
             {
                 List<Order> allOrders = _context.OrderSet
+                    .Include("Orderlines.Unit")
                     .Where(x => x.DepartmentID == departmentID)
                     .OrderByDescending(x => x.DateOrdered)
                     .Take(10)
@@ -168,8 +169,12 @@ namespace AalborgZooProjekt.Model
 
                 foreach (Order order in allOrders)
                 {
-                    bool hasFruit = order.OrderLines.Any(x => x.ProductVersion.Supplier == "FrugtKarl");
-                    bool hasOther = order.OrderLines.Any(x => x.ProductVersion.Supplier != "FrugtKarl");
+                    bool hasFruit = order
+                        .OrderLines
+                        .Any(x => x.ProductVersion.Supplier == "FrugtKarl");
+                    bool hasOther = order
+                        .OrderLines
+                        .Any(x => x.ProductVersion.Supplier != "FrugtKarl");
                     wrappers.Add(new OrderHistoryWrapper(order, hasFruit, hasOther));
                 }
 
