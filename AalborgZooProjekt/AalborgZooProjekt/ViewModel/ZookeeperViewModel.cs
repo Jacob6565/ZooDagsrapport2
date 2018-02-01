@@ -56,6 +56,7 @@ namespace AalborgZooProjekt.ViewModel
                 searchString = value;
                 DepOrderLines = SortDepOrderLines(searchString);
                 OnPropertyChanged("DepOrderLines");
+                OnPropertyChanged("SearchString");
             }
         }
 
@@ -282,6 +283,10 @@ namespace AalborgZooProjekt.ViewModel
             ChangeOrderList(box);
         }
 
+        public void DeleteSearch(object context) => SearchString = "";
+                
+        public bool CanBeDeleted(object context) => String.IsNullOrEmpty(searchString) ? false : true;
+        
         private RelayCommand<object> _addCommand;
         public RelayCommand<object> AddCommand
         {
@@ -302,6 +307,15 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
+        private RelayCommand<object> _deleteSearchCommand;
+        public RelayCommand<object> DeleteSearchCommand
+        {
+            get
+            {
+                return _deleteSearchCommand
+                    ?? (_deleteSearchCommand = new RelayCommand<object>(DeleteSearch, CanBeDeleted));
+            }
+        }
 
         public bool CanChangeAmount(object context)
         {
@@ -423,6 +437,11 @@ namespace AalborgZooProjekt.ViewModel
             ////TODO Clear Radiobuttons properly
         }
 
+        private RelayCommand<object> _changeDepSpecificProducts;
+        public RelayCommand<object> ChangeDepSpecificProducts => _changeDepSpecificProducts
+            //Jeg ved godt at dette ikke er den rigtige måde, men det var bare lige en midlertidlig løsning :D
+                    ?? (_changeDepSpecificProducts = new RelayCommand<object>((x) => new DepartmentSpecifikList().Show()));
+
         private RelayCommand<OrderHistoryWrapper> _historyEntryChosen;
         public RelayCommand<OrderHistoryWrapper> HistoryEntryChosen
         {
@@ -433,6 +452,22 @@ namespace AalborgZooProjekt.ViewModel
             }
         }
 
+
+        private void RemoveProductFromDepartmentSpecificList(object context)
+        {
+            var selectedItems = context as List<ProductVersion>;
+            
+        }
+        private bool CanRemoveProductFromDepartmentSpecificList(object context)
+        {
+            return true;
+        }
+
+        private RelayCommand<object> _removeProductFromDepartmentSpecificListCommand;
+        public RelayCommand<object> RemoveProductFromDepartmentSpecificListCommand =>
+            _removeProductFromDepartmentSpecificListCommand ??
+            (_removeProductFromDepartmentSpecificListCommand = 
+            new RelayCommand<object>(RemoveProductFromDepartmentSpecificList, CanRemoveProductFromDepartmentSpecificList));
         public void ShowHistoryEntry(OrderHistoryWrapper entrySelected)
         {
             HistoryWindow historyWindow = new HistoryWindow();

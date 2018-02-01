@@ -16,7 +16,8 @@
                     </Style>
                 </TabItem.Style>
                 <StackPanel>
-                    <TextBox Name="QuickSearch" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}">
+                    <StackPanel Orientation="Horizontal">
+                    <TextBox Name="QuickSearch" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" MinWidth="350" TextWrapping="WrapWithOverflow"  BorderThickness="0">
                         <TextBox.Style>
                             <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                 <Style.Resources>
@@ -39,7 +40,9 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBox.Style>
-                    </TextBox>
+                       </TextBox>
+                        <Button Command="{Binding DeleteSearchCommand}" BorderThickness="0" Background="White" Content="X" FontSize="10" Foreground="Red"/>
+                    </StackPanel>
                     <Grid>
                         <local:FruitFoodList/>
                     </Grid>
