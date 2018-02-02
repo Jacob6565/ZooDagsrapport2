@@ -72,6 +72,10 @@ namespace AalborgZooProjekt.ViewModel
        
 
         public List<Product> AllProducts = new List<Product>();
+
+        /// <summary>
+        /// Loads in an excelfile and reads the products contained in it.
+        /// </summary>
         private void ReadProductsFromExcelFile()
         {
             //Opens the dialog

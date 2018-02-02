@@ -14,6 +14,10 @@ namespace AalborgZooProjekt.Model
     /// </summary>
     public class ProductRepository : IProductRepository
     {
+        /// <summary>
+        /// Gets all products from the database.
+        /// </summary>
+        /// <returns></returns>
         public List<Product> GetAllProducts()
         {
             List<Product> product = new List<Product>();
@@ -25,6 +29,7 @@ namespace AalborgZooProjekt.Model
 
             return product;
         }
+
 
         public Product AddProduct(Product product)
         {

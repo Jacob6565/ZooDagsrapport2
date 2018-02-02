@@ -20,5 +20,16 @@ namespace AalborgZooProjekt.Model
             }
             return _depList;
         }
+
+        public Department AddDepartment(Department department)
+        {
+            using (var db = new AalborgZooContainer())
+            {
+                Department departmentWithID = db.DepartmentSet.Add(department);
+                db.SaveChanges();
+
+                return departmentWithID;
+            }
+        }
     }
 }
