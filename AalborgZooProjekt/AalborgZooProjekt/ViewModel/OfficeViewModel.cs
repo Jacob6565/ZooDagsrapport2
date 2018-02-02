@@ -32,16 +32,6 @@ namespace AalborgZooProjekt.ViewModel
             AllProducts = productRepository.GetAllProducts();
         }
 
-        private RelayCommand _makePdfCommand;
-        public RelayCommand MakePdfCommand
-        {
-            get
-            {
-                return _makePdfCommand ?? (_makePdfCommand = new RelayCommand(
-                    () => PDFGenerator()
-                    ));
-            }
-        }
 
         private RelayCommand _readProductsCommand;
         public RelayCommand ReadProductsCommand
@@ -52,6 +42,38 @@ namespace AalborgZooProjekt.ViewModel
                     () => ReadProductsFromExcelFile()
                     ));
             }
+        }
+
+        public List<Product> AllProducts = new List<Product>();
+
+        /// <summary>
+        /// Loads in an excelfile and reads the products contained in it
+        /// and saves them to database and then to the list called "AllProducts"
+        /// </summary>
+        private void ReadProductsFromExcelFile()
+        {
+            //Opens the dialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.Filter = "csv files (*.csv)|*.csv";
+            string path = "";
+
+            //Gets the path from where the file was located
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = openFileDialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+
+
+            //Calls the read function
+            var products = readFromExcelFile.GetProductsFromExcelIntoDatabase(path);
+
+            //Assigns the result to a list, so we can acces the instances of them.
+            AllProducts = products;
         }
 
         private RelayCommand _editProductsCommand;
@@ -69,39 +91,18 @@ namespace AalborgZooProjekt.ViewModel
         {
             throw new System.NotImplementedException();
         }
-       
 
-        public List<Product> AllProducts = new List<Product>();
 
-        /// <summary>
-        /// Loads in an excelfile and reads the products contained in it.
-        /// </summary>
-        private void ReadProductsFromExcelFile()
+        private RelayCommand _makePdfCommand;
+        public RelayCommand MakePdfCommand
         {
-            //Opens the dialog
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.CheckFileExists = true;
-            openFileDialog.Filter = "csv files (*.csv)|*.csv";
-            string path = "";
-
-            //Gets the path from where the file was located
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            get
             {
-               path = openFileDialog.FileName;
+                return _makePdfCommand ?? (_makePdfCommand = new RelayCommand(
+                    () => PDFGenerator()
+                    ));
             }
-            else
-            {
-                return;
-            }
-
-
-            //Calls the read function
-            var products = readFromExcelFile.GetProductsFromExcelIntoDatabase(path);
-
-            //Assigns the result to a list, so we can acces the instances of them.
-            AllProducts = products;
         }
-
 
         private void PDFGenerator()
         {
@@ -302,5 +303,49 @@ namespace AalborgZooProjekt.ViewModel
             orders.dgFoodList.DataContext = ol;
             orders.ShowDialog();
         }
+
+        private RelayCommand _readDepartmentsCommand;
+        public RelayCommand ReadDepartmentsCommand
+        {
+            get
+            {
+                return _readDepartmentsCommand ?? (_readDepartmentsCommand = new RelayCommand(() => ReadDepartmentsFromExcelFile()));
+            }
+        }
+
+
+
+        List<Department> AllDepartments = new List<Department>();
+
+        /// <summary>
+        /// Loads in an excelfile and reads the departments contained in it
+        /// and saves them to database and then to the list called "AllDepartments"
+        /// </summary>
+        private void ReadDepartmentsFromExcelFile()
+        {
+            //Opens the dialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.Filter = "csv files (*.csv)|*.csv";
+            string path = "";
+
+            //Gets the path from where the file was located
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = openFileDialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+            
+            //Calls the read function
+            var departments = readFromExcelFile.GetDepartmentsFromExcelIntoDatabase(path);
+
+            //Assigns the result to a list, so we can acces the instances of them.
+            AllDepartments = departments;
+        }
     }
+
 }
+

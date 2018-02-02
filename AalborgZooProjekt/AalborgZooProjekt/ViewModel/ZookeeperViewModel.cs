@@ -443,10 +443,10 @@ namespace AalborgZooProjekt.ViewModel
             ////TODO Clear Radiobuttons properly
         }
 
-        private RelayCommand<object> _changeDepSpecificProducts;
-        public RelayCommand<object> ChangeDepSpecificProducts => _changeDepSpecificProducts
+        private RelayCommand _changeDepSpecificProducts;
+        public RelayCommand ChangeDepSpecificProducts => _changeDepSpecificProducts
                     //Jeg ved godt at dette ikke er den rigtige måde, men det var bare lige en midlertidlig løsning :D
-                    ?? (_changeDepSpecificProducts = new RelayCommand<object>((x) => new DepartmentSpecifikList().Show()));
+                    ?? (_changeDepSpecificProducts = new RelayCommand(() => new DepartmentSpecifikList().Show()));
 
         private RelayCommand<OrderHistoryWrapper> _historyEntryChosen;
         public RelayCommand<OrderHistoryWrapper> HistoryEntryChosen

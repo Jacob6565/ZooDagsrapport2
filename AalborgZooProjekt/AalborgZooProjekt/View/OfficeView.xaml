@@ -5,67 +5,103 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AalborgZooProjekt.View"
-        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"        
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         DataContext="{Binding Office, Source={StaticResource Locator}}"
         mc:Ignorable="d"
         Height="768"
         Width="1024"
-        Title="OfficeView"  MinWidth="1024" MinHeight="768">
+        Title="OfficeView"
+        MinWidth="1024"
+        MinHeight="768">
 
 
     <Grid>
         <Controls:MetroTabControl>
             <Controls:MetroTabItem Header="Oversigt">
-                
+
                 <Grid>
-                    <Grid.RowDefinitions>                       
-                        <RowDefinition Height="200"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid Grid.Row="0"
+                          Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="75"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="75" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="75" />
                         </Grid.ColumnDefinitions>
-                        
-                        <local:Remarks Grid.Column="1"/>
+
+                        <local:Remarks Grid.Column="1" />
                     </Grid>
 
                     <Grid Grid.Row="1">
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="75"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="75" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="75" />
                         </Grid.ColumnDefinitions>
 
-                        <local:OfficeOrderList Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <local:OfficeOrderList Grid.Column="1"
+                                               Grid.ColumnSpan="2" />
                     </Grid>
-                    <Button  Content="Konverter til PDF" Width="150" Command="{Binding MakePdfCommand, Mode=OneWay}" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,70,0"/>
+                    <Button  Content="Konverter til PDF"
+                             Width="150"
+                             Command="{Binding MakePdfCommand, Mode=OneWay}"
+                             HorizontalAlignment="Right"
+                             Grid.Row="3"
+                             Margin="0,0,50,0" />
                     <!--Dette burde ligge i en toolbox øverst, men havde problemer, så startede med denne knap-->
-                    <Button  IsEnabled ="False" Content="Indlæs produkter" Width="150" Margin="0,0,800,0" Command="{Binding ReadProductsCommand}" HorizontalAlignment="Right" Grid.Row="3" />
-                    <Button  IsEnabled ="False" Content="Rediger produkter" Width="150" Margin="0,0,600,0" Command="{Binding EditProductsCommand}" HorizontalAlignment="Right" Grid.Row="3" />
+                    <Button  IsEnabled="False"
+                             Content="Indlæs produkter"
+                             Width="150"
+                             Margin="0,0,825,0"
+                             Command="{Binding ReadProductsCommand}"
+                             HorizontalAlignment="Right"
+                             Grid.Row="3" />
+                    <Button  IsEnabled="False"
+                             Content="Rediger produkter"
+                             Width="150"
+                             Margin="0,0,650,0"
+                             Command="{Binding EditProductsCommand}"
+                             HorizontalAlignment="Right"
+                             Grid.Row="3" />
+                    <Button  IsEnabled="False"
+                             Content="Indlæs afdelinger"
+                             Width="150"
+                             Margin="0,0,475,0"
+                             Command="{Binding ReadDepartmentsCommand}"
+                             HorizontalAlignment="Right"
+                             Grid.Row="3" />
                 </Grid>
             </Controls:MetroTabItem>
             <TabItem Header="Foderbestilling">
-                <DataGrid ItemsSource="{Binding DepartmentListApples}"  IsReadOnly="True" Name="dgFoodList" AutoGenerateColumns="False">
+                <DataGrid ItemsSource="{Binding DepartmentListApples}"
+                          IsReadOnly="True"
+                          Name="dgFoodList"
+                          AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Afdeling" Binding="{Binding Department}"/>
-                        <DataGridTextColumn Header="Vare" Binding="{Binding Good}"/>
+                        <DataGridTextColumn Header="Afdeling"
+                                            Binding="{Binding Department}" />
+                        <DataGridTextColumn Header="Vare"
+                                            Binding="{Binding Good}" />
                         <DataGridTemplateColumn Header="Enhed og Antal">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DataGrid ItemsSource="{Binding Orders}" HeadersVisibility="None" AutoGenerateColumns="False">
+                                    <DataGrid ItemsSource="{Binding Orders}"
+                                              HeadersVisibility="None"
+                                              AutoGenerateColumns="False">
                                         <DataGrid.Columns>
                                             <DataGridTemplateColumn>
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Unit}" Width="60"/>
+                                                            <TextBlock Text="{Binding Unit}"
+                                                                       Width="60" />
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>

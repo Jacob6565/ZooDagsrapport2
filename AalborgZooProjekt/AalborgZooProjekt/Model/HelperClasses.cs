@@ -148,5 +148,28 @@ namespace AalborgZooProjekt.Model
             }
             return products;
         }
+
+        public List<Department> GetDepartmentsFromExcelIntoDatabase(string FilePath)
+        {
+            List<Department> departments = new List<Department>();
+
+            //Variables we need to store information in.
+         
+            //Reading all the lines from the excel file.
+            List<string> values = ReadExcelFile(FilePath);
+
+            //This is what we do for each of the lines in the excel file.
+            foreach (string s in values)
+            {
+                string[] entries = s.Split(';');
+
+                string name = entries[0];
+
+                Department department = new Department(name);
+                departments.Add(department);
+            }
+
+            return departments;
+        }
     }
 }

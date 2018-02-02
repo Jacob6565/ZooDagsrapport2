@@ -9,5 +9,6 @@ namespace AalborgZooProjekt.Model
     public interface IDepartmentRepository
     {
         List<Department> GetDepartments();
+        Department AddDepartment(Department department);
     }
 }

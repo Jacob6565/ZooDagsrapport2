@@ -6,6 +6,33 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Department : IDepartment
     {
+
+        private IDepartmentRepository repository;
+
+        
+
+        public Department(string name)
+            : this(new DeparmentRepository(), name) { }
+
+        public Department(IDepartmentRepository repository, string name) : this()
+        { 
+            this.Name = name;
+            
+            //Disse burde nok laves.
+            //-1 indicating it is null.
+            /*this.DeletedByID = -1;
+            this.CreatedByID = shopper.GetID();*/
+            this.DateCreated = DateTime.Now;           
+            this.DateDeleted = null;                      
+
+            //Contains the methods needed to update the database
+            this.repository = repository;
+
+            //Adds the department to the database.
+            this.repository.AddDepartment(this);
+        }
+
+
         /// <summary>
         /// Adds the product under the department thus making it a department specific product.
         /// If the product already can be found under the department it will throw an exception.
