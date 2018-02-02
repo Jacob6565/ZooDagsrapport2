@@ -41,6 +41,9 @@ namespace AalborgZooProjekt.ViewModel
             //DepOrderLines is the used to represent orderlines in the view.
             //And will be modified upon using QuickSearch.
             DepOrderLines = new BindingList<OrderLine>(AllOrderLines);
+
+            //Gets all the products that exist.
+            AllProductsInCatalog = dbProductRep.GetAllProducts();
         }
 
         public List<Product> AllProductsInCatalog = new List<Product>();

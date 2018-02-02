@@ -16,12 +16,20 @@ namespace AalborgZooProjekt.ViewModel
     {
         public List<Model.OrderLine> OrderList { get; set; } = new List<Model.OrderLine>();
 
+        private IProductRepository productRepository;
+        ReadFromExcelFile readFromExcelFile;
         public OfficeViewModel()
         {
+            //So it can load in all the products from the database.
+            productRepository = new ProductRepository();
+
             using (var db = new Model.AalborgZooContainer())
             {
                 OrderList = db.OrderLineSet.Include("ProductVersion.Product").ToList();
             }
+            readFromExcelFile = new ReadFromExcelFile();
+
+            AllProducts = productRepository.GetAllProducts();
         }
 
         private RelayCommand _makePdfCommand;
@@ -30,10 +38,66 @@ namespace AalborgZooProjekt.ViewModel
             get
             {
                 return _makePdfCommand ?? (_makePdfCommand = new RelayCommand(
-                    () => PDFGenerator() 
+                    () => PDFGenerator()
                     ));
             }
-        }        
+        }
+
+        private RelayCommand _readProductsCommand;
+        public RelayCommand ReadProductsCommand
+        {
+            get
+            {
+                return _readProductsCommand ?? (_readProductsCommand = new RelayCommand(
+                    () => ReadProductsFromExcelFile()
+                    ));
+            }
+        }
+
+        private RelayCommand _editProductsCommand;
+        public RelayCommand EditProductsCommand
+        {
+            get
+            {
+                return _editProductsCommand ?? (_editProductsCommand = new RelayCommand(
+                    () => EditProduct()
+                    ));
+            }
+        }
+
+        public void EditProduct()
+        {
+            throw new System.NotImplementedException();
+        }
+       
+
+        public List<Product> AllProducts = new List<Product>();
+        private void ReadProductsFromExcelFile()
+        {
+            //Opens the dialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.Filter = "csv files (*.csv)|*.csv";
+            string path = "";
+
+            //Gets the path from where the file was located
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+               path = openFileDialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+
+
+            //Calls the read function
+            var products = readFromExcelFile.GetProductsFromExcelIntoDatabase(path);
+
+            //Assigns the result to a list, so we can acces the instances of them.
+            AllProducts = products;
+        }
+
 
         private void PDFGenerator()
         {
@@ -52,7 +116,7 @@ namespace AalborgZooProjekt.ViewModel
             //Adds all orders to a new shoppinglist.
             ShoppingList list = orderRepository.AddToShoppingList(AllOrders, 1);
             List<OrderLine> AllOrderLines = new List<OrderLine>();
-            
+
             //Adds all orderlines from all orders to one list of orderlines - this makes it easier to sum up the orderlines and sort the list.
             foreach (Order order in AllOrders)
             {
@@ -80,12 +144,13 @@ namespace AalborgZooProjekt.ViewModel
             {
                 OrderWrapper key = uniter.QuantityPerProduct.FirstOrDefault(x => x.ProdV.Id == orderLine.ProductVersion.Id);
 
-                
+
                 if (key != null && key.OrderedUnit == orderLine.Unit)
                 {
                     //The orderline already exists in the list, so we simply add the quantity of the current orderline.
                     key.Quantity += orderLine.Quantity;
-                } else
+                }
+                else
                 {
                     //The orderlines does not exsist, so we add a new one to the list.
                     uniter.QuantityPerProduct.Add(new OrderWrapper(orderLine.Quantity, orderLine.Unit, orderLine.ProductVersion));
@@ -213,24 +278,24 @@ namespace AalborgZooProjekt.ViewModel
             Process.Start(saveFileDialog.FileName);
         }
 
-        private RelayCommand<object> _editOrder;    
+        private RelayCommand<object> _editOrder;
         public RelayCommand<object> EditOrder
-        { 
+        {
             get
             {
-                return _editOrder ?? (_editOrder= new RelayCommand<object>(EditOrderWindow));
-                }
+                return _editOrder ?? (_editOrder = new RelayCommand<object>(EditOrderWindow));
+            }
             set
             {
                 _editOrder = value;
             }
         }
-        
+
         public void EditOrderWindow(object context)
         {
-            OrderLine ol = context as OrderLine;            
+            OrderLine ol = context as OrderLine;
             OfficeFeedTypeOrders orders = new OfficeFeedTypeOrders();
-            orders.dgFoodList.DataContext = ol;          
+            orders.dgFoodList.DataContext = ol;
             orders.ShowDialog();
         }
     }

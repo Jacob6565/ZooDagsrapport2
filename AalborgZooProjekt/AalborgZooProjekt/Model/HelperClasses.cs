@@ -93,7 +93,7 @@ namespace AalborgZooProjekt.Model
     }
     public class ReadFromExcelFile
     {
-        private List<string> Read(string path)
+        private List<string> ReadExcelFile(string path)
         {
             List<string> StringsInExcelFile = new List<string>();
             using (var reader = new StreamReader(path, Encoding.UTF7))
@@ -107,7 +107,7 @@ namespace AalborgZooProjekt.Model
             return StringsInExcelFile;
         }
 
-        public List<Product> GetProductsFromExcel(string FilePath)
+        public List<Product> GetProductsFromExcelIntoDatabase(string FilePath)
         {
             //Variables we need to store information in.
             List<Product> products = new List<Product>();
@@ -115,7 +115,7 @@ namespace AalborgZooProjekt.Model
             List<Unit> units = new List<Unit>();
 
             //Reading all the lines from the excel file.
-            List<string> values = Read(FilePath);
+            List<string> values = ReadExcelFile(FilePath);            
 
             //This is what we do for each of the lines in the excel file.
             foreach (string s in values)

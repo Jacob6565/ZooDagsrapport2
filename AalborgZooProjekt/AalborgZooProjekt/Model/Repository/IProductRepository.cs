@@ -14,5 +14,6 @@ namespace AalborgZooProjekt.Model
         List<Product> GetDepartmentProducts(Department department);
         List<Product> GetDepartmentProductsWithUnits(Department department);
         ICollection<Unit> GetProductUnits(Product product);
+        List<Product> GetAllProducts();
     }
 }

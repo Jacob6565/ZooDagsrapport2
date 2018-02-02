@@ -14,8 +14,16 @@ namespace AalborgZooProjekt.Model
     /// </summary>
     public class ProductRepository : IProductRepository
     {
-        public ProductRepository()
+        public List<Product> GetAllProducts()
         {
+            List<Product> product = new List<Product>();
+
+            using (var _context = new AalborgZooContainer())
+            {
+                product = _context.ProductSet.ToList();
+            }
+
+            return product;
         }
 
         public Product AddProduct(Product product)
