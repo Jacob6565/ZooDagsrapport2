@@ -10,6 +10,7 @@ namespace AalborgZooProjekt.Model
         //Used when accessing the database.
         private IProductRepository repository;
 
+
         public Product(Shopper shopper, string name, string supplier, List<Unit> units, bool active = true)
             : this(new ProductRepository(), shopper, name, supplier, units, active) { }
 

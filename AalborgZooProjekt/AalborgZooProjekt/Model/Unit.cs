@@ -9,7 +9,10 @@ namespace AalborgZooProjekt.Model
 {
     public partial class Unit
     {
-
+        public Unit (string name)
+        {
+            this.Name = name;
+        }      
     }
 }
  

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,5 +90,63 @@ namespace AalborgZooProjekt.Model
 
         #endregion
 
+    }
+    public class ReadFromExcelFile
+    {
+        private List<string> Read(string path)
+        {
+            List<string> StringsInExcelFile = new List<string>();
+            using (var reader = new StreamReader(path, Encoding.UTF7))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    StringsInExcelFile.Add(line);
+                }
+            }
+            return StringsInExcelFile;
+        }
+
+        public List<Product> GetProductsFromExcel(string FilePath)
+        {
+            //Variables we need to store information in.
+            List<Product> products = new List<Product>();
+            string category = "";
+            List<Unit> units = new List<Unit>();
+
+            //Reading all the lines from the excel file.
+            List<string> values = Read(FilePath);
+
+            //This is what we do for each of the lines in the excel file.
+            foreach (string s in values)
+            {
+                //Since the excelfile is .csv we split with ';'.
+                string[] entries = s.Split(';');
+
+                //If the second entry in the excel file is null or whitespace it's not a product
+                //but the line that contains the category aswell as the units for the following products.
+                if (!String.IsNullOrWhiteSpace(entries[1]))
+                {
+                    category = entries[0];
+                    units = new List<Unit>();
+                    for (int i = 1; i < entries.Length; i++)
+                    {
+                        units.Add(new Unit(entries[i]));
+                    }
+                }
+                else
+                {
+                    string name = entries[0];
+
+                    //The products gets added to the database in the constructor.
+
+                    //Jeg ved ikke helt med constructoren, da jeg ikke ved hvilken Shopper jeg skal sende med.
+                    //Product temp = new Product("Shopper missing", name, "Not defined", units);
+
+                    //products.Add(temp);
+                }
+            }
+            return products;
+        }
     }
 }

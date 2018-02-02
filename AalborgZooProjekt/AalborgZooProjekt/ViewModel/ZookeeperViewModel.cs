@@ -43,9 +43,12 @@ namespace AalborgZooProjekt.ViewModel
             DepOrderLines = new BindingList<OrderLine>(AllOrderLines);
         }
 
+        public List<Product> AllProductsInCatalog = new List<Product>();
+
         //I setter så gøre sådan at en funktion som opdatere DepOrderlines bliver kaldt.
         private string searchString;
-        public string SearchString {
+        public string SearchString
+        {
             get
             {
                 return searchString;
@@ -64,7 +67,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             ContentWindow = _content;
         }
-        
+
         private UserControl _content;
         public UserControl ContentWindow
         {
@@ -90,18 +93,18 @@ namespace AalborgZooProjekt.ViewModel
             //AllOrderLines contains the original list, and will therefore
             //provide the same starting point for the sort each time.
             BindingList<OrderLine> temp = new BindingList<OrderLine>(AllOrderLines);
-            
+
             temp = QuickSearchFunction.Sorting(sortstring, temp);
-            
+
             return temp;
         }
 
         public static void UnitChanged(object sender, object newUnit)
         {
-            ComboBox comboBoxItem = (ComboBox) sender;
-            OrderLine parent = (OrderLine) comboBoxItem.DataContext;
+            ComboBox comboBoxItem = (ComboBox)sender;
+            OrderLine parent = (OrderLine)comboBoxItem.DataContext;
 
-            parent.ChangeUnit = (Unit) newUnit;
+            parent.ChangeUnit = (Unit)newUnit;
         }
 
         private string _selectedUnit;
@@ -232,7 +235,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             BindingList<OrderLine> orderlines = new BindingList<OrderLine>();
             var prodList = dbProductRep.GetDepartmentProductsWithUnits(_department);
-            
+
             foreach (Product product in prodList)
             {
                 OrderLine tempOrderLine = new OrderLine();
@@ -274,7 +277,7 @@ namespace AalborgZooProjekt.ViewModel
             OrderLine ol = box.DataContext as OrderLine;
             if (sp.Children.OfType<Button>().First().IsFocused)
             {
-                ol.ChangeQuantity++; 
+                ol.ChangeQuantity++;
             }
             else
             {
@@ -284,9 +287,9 @@ namespace AalborgZooProjekt.ViewModel
         }
 
         public void DeleteSearch(object context) => SearchString = "";
-                
+
         public bool CanBeDeleted(object context) => String.IsNullOrEmpty(searchString) ? false : true;
-        
+
         private RelayCommand<object> _addCommand;
         public RelayCommand<object> AddCommand
         {
@@ -352,7 +355,7 @@ namespace AalborgZooProjekt.ViewModel
             private set { _canBeSend = value; }
         }
 
-        
+
         /// <summary>
         /// Assembles order by adding the orderLines and zookeeper chosen in view
         /// </summary>
@@ -364,7 +367,7 @@ namespace AalborgZooProjekt.ViewModel
 
         }
 
-        
+
         /// <summary>
         /// Functionality for actually sending an order, if it is legal it will be added to the database and added to
         /// the current shoppinglist
@@ -391,11 +394,11 @@ namespace AalborgZooProjekt.ViewModel
         public bool CanSendOrder(object context)
         {
             if (IsZookeeperChosen() && DepOrderList.Count != 0)
-                {
-                    return true;
-                }
+            {
+                return true;
+            }
             return false;
-        }    
+        }
 
         private RelayCommand<object> _sendOrderCommand;
         public RelayCommand<object> SendOrderCommand
@@ -430,7 +433,7 @@ namespace AalborgZooProjekt.ViewModel
         {
             foreach (OrderLine ol in DepOrderList)
             {
-                ol.ChangeQuantity= 0;
+                ol.ChangeQuantity = 0;
             }
             DepOrderList.Clear();
             OrderNote.Text = "";
@@ -439,7 +442,7 @@ namespace AalborgZooProjekt.ViewModel
 
         private RelayCommand<object> _changeDepSpecificProducts;
         public RelayCommand<object> ChangeDepSpecificProducts => _changeDepSpecificProducts
-            //Jeg ved godt at dette ikke er den rigtige måde, men det var bare lige en midlertidlig løsning :D
+                    //Jeg ved godt at dette ikke er den rigtige måde, men det var bare lige en midlertidlig løsning :D
                     ?? (_changeDepSpecificProducts = new RelayCommand<object>((x) => new DepartmentSpecifikList().Show()));
 
         private RelayCommand<OrderHistoryWrapper> _historyEntryChosen;
@@ -456,7 +459,7 @@ namespace AalborgZooProjekt.ViewModel
         private void RemoveProductFromDepartmentSpecificList(object context)
         {
             var selectedItems = context as List<ProductVersion>;
-            
+
         }
         private bool CanRemoveProductFromDepartmentSpecificList(object context)
         {
@@ -466,7 +469,7 @@ namespace AalborgZooProjekt.ViewModel
         private RelayCommand<object> _removeProductFromDepartmentSpecificListCommand;
         public RelayCommand<object> RemoveProductFromDepartmentSpecificListCommand =>
             _removeProductFromDepartmentSpecificListCommand ??
-            (_removeProductFromDepartmentSpecificListCommand = 
+            (_removeProductFromDepartmentSpecificListCommand =
             new RelayCommand<object>(RemoveProductFromDepartmentSpecificList, CanRemoveProductFromDepartmentSpecificList));
         public void ShowHistoryEntry(OrderHistoryWrapper entrySelected)
         {
