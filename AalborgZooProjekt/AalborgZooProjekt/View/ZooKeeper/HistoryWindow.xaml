@@ -68,7 +68,7 @@
                             <TextBlock Text="Bestillingsansvarlig medarbejder"
                                        Padding="5,0,0,0" />
                         </Border>
-                        <TextBlock Text="{Binding something, FallbackValue='Ingen kommentarer tilføjet...'}"
+                        <TextBlock Text="{Binding OrderHistory.Note, FallbackValue='Ingen kommentarer tilføjet...'}"
                                    Padding="5" />
                     </StackPanel>
                 </Border>

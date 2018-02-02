@@ -30,7 +30,7 @@ namespace AalborgZooProjekt.Model
         /// <returns></returns>W
         private DateTime GetDate()
         {
-            return DateTime.Today;
+            return DateTime.Now;
         }
 
         /// <summary>
