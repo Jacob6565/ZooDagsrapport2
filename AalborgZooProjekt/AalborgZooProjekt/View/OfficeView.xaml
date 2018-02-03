@@ -77,6 +77,13 @@
                              Command="{Binding ReadDepartmentsCommand}"
                              HorizontalAlignment="Right"
                              Grid.Row="3" />
+                    <Button  IsEnabled="False"
+                             Content="Indlæs dyrepassere"
+                             Width="150"
+                             Margin="0,0,300,0"
+                             Command="{Binding ReadZookeepersCommand}"
+                             HorizontalAlignment="Right"
+                             Grid.Row="3" />
                 </Grid>
             </Controls:MetroTabItem>
             <TabItem Header="Foderbestilling">

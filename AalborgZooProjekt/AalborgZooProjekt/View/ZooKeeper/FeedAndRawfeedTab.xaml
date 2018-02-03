@@ -22,7 +22,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <!--Used To Contain Another Textbox Together With A Button-->
-                        <TextBox>
+                        <TextBox HorizontalAlignment="Stretch" BorderThickness="2">
                             <TextBox.Template>
                                 <ControlTemplate>
                                     <StackPanel Orientation="Horizontal">

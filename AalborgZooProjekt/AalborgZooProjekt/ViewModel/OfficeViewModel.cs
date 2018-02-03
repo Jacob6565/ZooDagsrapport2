@@ -9,6 +9,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using PdfSharp;
 using System.Windows.Forms;
+using AalborgZooProjekt.Model.Repository;
 
 namespace AalborgZooProjekt.ViewModel
 {
@@ -17,11 +18,17 @@ namespace AalborgZooProjekt.ViewModel
         public List<Model.OrderLine> OrderList { get; set; } = new List<Model.OrderLine>();
 
         private IProductRepository productRepository;
+        private IDepartmentRepository departmentRepository;
+        private IEmployeeRepository employeeRepository;
+
         ReadFromExcelFile readFromExcelFile;
         public OfficeViewModel()
         {
             //So it can load in all the products from the database.
             productRepository = new ProductRepository();
+            departmentRepository = new DeparmentRepository();
+            employeeRepository = new EmployeeRepository();
+
 
             using (var db = new Model.AalborgZooContainer())
             {
@@ -29,7 +36,17 @@ namespace AalborgZooProjekt.ViewModel
             }
             readFromExcelFile = new ReadFromExcelFile();
 
+
+            //To load in the products from the database.
             AllProducts = productRepository.GetAllProducts();
+
+
+            //To load in the departments from the database.
+            AllDepartments = departmentRepository.GetDepartments();
+
+            //To load in the zookeepers from the database.
+            AllZookeepers = employeeRepository.GetAllZookeepers();
+
         }
 
 
@@ -344,6 +361,45 @@ namespace AalborgZooProjekt.ViewModel
 
             //Assigns the result to a list, so we can acces the instances of them.
             AllDepartments = departments;
+        }
+
+
+
+        private RelayCommand _readZookeepersCommand;
+        public RelayCommand ReadZookeepersCommand
+        {
+            get
+            {
+                return _readZookeepersCommand ?? (_readZookeepersCommand = new RelayCommand(
+                    () => ReadZookeepersFromExcelFile()
+                    ));
+            }
+        }
+
+        List<Zookeeper> AllZookeepers = new List<Zookeeper>();
+        private void ReadZookeepersFromExcelFile()
+        {
+            //Opens the dialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.Filter = "csv files (*.csv)|*.csv";
+            string path = "";
+
+            //Gets the path from where the file was located
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = openFileDialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+
+            //Calls the read function
+            var zookeepers = readFromExcelFile.GetZookeepersFromExcelIntoDatabase(path);
+
+            //Assigns the result to a list, so we can acces the instances of them.
+            AllZookeepers = zookeepers;
         }
     }
 

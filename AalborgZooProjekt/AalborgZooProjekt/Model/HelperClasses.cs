@@ -171,5 +171,34 @@ namespace AalborgZooProjekt.Model
 
             return departments;
         }
+
+        /// <summary>
+        /// Reads the zookeepers from the excelfile and loads them into the database
+        /// </summary>
+        /// <param name="FilePath"></param>
+        /// <returns></returns>
+        public List<Zookeeper> GetZookeepersFromExcelIntoDatabase(string FilePath)
+        {
+            List<Zookeeper> Zookeepers = new List<Zookeeper>();
+
+            //Variables we need to store information in.
+
+            //Reading all the lines from the excel file.
+            List<string> values = ReadExcelFile(FilePath);
+
+            //This is what we do for each of the lines in the excel file.
+            foreach (string s in values)
+            {
+                string[] entries = s.Split(';');
+
+                string name = entries[0];
+                string department = entries[1];
+
+                Zookeeper zookeeper = new Zookeeper(name);
+                Zookeepers.Add(zookeeper);
+            }
+
+            return Zookeepers;
+        }
     }
 }

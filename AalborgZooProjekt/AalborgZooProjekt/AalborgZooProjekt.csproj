@@ -221,7 +221,7 @@
     <Compile Include="Model\ProductVersion.cs" />
     <Compile Include="Model\Exception\ProductVersionIsNotActiveException.cs" />
     <Compile Include="Model\Exception\ProductVersionDoesNotContainGivenUnitException.cs" />
-    <Compile Include="Model\Repository\DeparmentRepository.cs" />
+    <Compile Include="Model\Repository\DepartmentRepository.cs" />
     <Compile Include="Model\Repository\IDepartmentRepository.cs" />
     <Compile Include="Model\Repository\IEmployeeRepository.cs" />
     <Compile Include="Model\Repository\IOrderRepository.cs" />
